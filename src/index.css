@@ -18,7 +18,7 @@
   @apply w-full min-h-screen bg-primary px-[5%]
 }	
 .header {
-  @apply  px-[2%] py-5 flex justify-between items-center gap-7  bg-secondary w-[750px] m-auto max-w-full md:rounded-full
+  @apply  px-[2%] py-5 flex justify-between items-center gap-7  md:bg-secondary w-[750px] m-auto max-w-full md:rounded-full
 }
 .header .logo {
   @apply w-[150px]
@@ -27,7 +27,7 @@ footer {
   @apply p-4 text-white text-center text-xl
 }
 .navbar {
-  @apply hidden sm:block
+  @apply hidden md:block
 }
 .navbar ul {
   @apply flex items-center gap-4 
@@ -66,6 +66,19 @@ footer {
   @apply border-b-2 border-b-[#ededed]
 }
 
+
+.matches {
+  @apply w-full bg-white rounded-md overflow-hidden h-[max-content]
+}
+
+
+.match {
+  @apply p-3 rounded-md border-2 border-[#ededed] flex items-center justify-between
+}
+
+.match:not(:last-child){
+  @apply mb-1
+}
 .standing .top-team {
   border-left: 5px solid #00af60; 
 }

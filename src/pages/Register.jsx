@@ -1,8 +1,8 @@
 const Register = ()=> {
     return (
-        <div className="p-5 flex justify-center items-center  min-h-[90vh] flex-col gap-4 text-center">
+        <div className="py-5 flex justify-center items-center  min-h-[90vh] flex-col gap-4 text-center">
             <div className="register-form">
-                <form action="https://getform.io/f/axowrodb" method="POST">
+                <form action="https://formspree.io/f/xwplpbdo" method="POST">
                     <h3 className="text-third font-bold text-2xl mb-2">
                         Register Now
                     </h3>

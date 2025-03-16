@@ -1,25 +1,40 @@
 import matches from '../admin/matches'
+import {ArrowForwardIos , ArrowBackIosNew} from '@mui/icons-material';
+import { useState } from 'react'
+const Matches = ()=>{4
+    const [currentGw , setCurrentGw] = useState(0)
+    const HandlPrevGw = ()=>{
+        if (currentGw > 0){
+            setCurrentGw(c => c - 1)
+        }
+        
+    }
 
-const Matches=()=>{
-  return (
-        <div className="mt-3">
-            {matches.map((gameweek, index) => (
-                <div key={index}>
-                    <h3>Gameweek {index + 1}</h3>
-                    {gameweek.map((match, matchIndex) => (
-                        <div key={matchIndex} className="card mb-2">
-          <div className="card-header">
-                                {match.teamA} vs {match.teamB}
-          </div>
-          <div className="card-body">
-            <p className="card-text">Score: {match.score}</p>
-          </div>
+
+    const HandlNextGw = ()=>{
+        if (currentGw < matches.length - 1){
+            setCurrentGw(c => c + 1)
+        }
+        
+    }
+    return <>
+        <div className='matches'>
+            <h1 className='bg-fourth p-4 text-white text-xl text-center'>Matches</h1>
+            <div className='flex justify-between items-center p-2'>
+                <button className='w-[30px] bg-primary text-white rounded h-[30px] cursor-pointer' onClick={HandlPrevGw}><ArrowBackIosNew fontSize='small'/></button>
+                <h3>Gameweak {currentGw + 1}</h3>
+                <button className='w-[30px] bg-primary text-white rounded h-[30px] cursor-pointer' onClick={HandlNextGw}><ArrowForwardIos fontSize='small'/></button>
+            </div>
+            <div className="p-2">
+                {matches[currentGw].map((match , index) => <div key={index} className="match">
+                    <span className='flex-1 text-center'>{match.teamA}</span>
+                    <span className='mx-4 font-bold'>{match.score}</span>
+                    <span className='flex-1 text-center'>{match.teamB}</span>
+                </div> )}
+                
+            </div>
         </div>
-      ))}
-    </div>
-            ))}
-        </div>
-  );
+    </>
 }
 
-export default Matches;
+export default Matches

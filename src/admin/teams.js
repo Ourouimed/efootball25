@@ -19,7 +19,7 @@ const Teams = [
     },
     {
         teamName : 'KAIDO_MORRI',
-        teamId : 'KAIDO_MORRI',
+        teamId : 'F PES ANA SULTAN',
         GF : 0 ,
         GA : 0,
         wins : 0,
@@ -28,7 +28,7 @@ const Teams = [
     },
     {
         teamName : 'Ross county FC',
-        teamId : 'ASNQ-057-715-599',
+        teamId : '',
         GF : 0 ,
         GA : 0,
         wins : 0,
@@ -38,6 +38,24 @@ const Teams = [
     {
         teamName : 'Nottingham Forest',
         teamId : 'ernesto_lll',
+        GF : 10 ,
+        GA : 3,
+        wins : 3,
+        draws : 0,
+        losses : 0
+    },
+    {
+        teamName : 'sn3',
+        teamId : '',
+        GF : 5 ,
+        GA : 5,
+        wins : 0,
+        draws : 0,
+        losses : 1
+    },
+    {
+        teamName : 'Deateam',
+        teamId : 'asr_dealoo',
         GF : 0 ,
         GA : 0,
         wins : 0,
@@ -45,8 +63,8 @@ const Teams = [
         losses : 0
     },
     {
-        teamName : 'sn3',
-        teamId : '',
+        teamName : 'Ac milan',
+        teamId : 'Ostora9',
         GF : 0 ,
         GA : 0,
         wins : 0,

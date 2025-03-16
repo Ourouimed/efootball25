@@ -13,13 +13,13 @@ const Header = () => {
     };
 
     return (
-        <div className='fixed top-0 w-full left-0 md:top-5'>
+        <div className='md:fixed top-0 w-full left-0 md:top-5'>
             <header className='header'>
                 <img src={Logo} className='w-[50px]' alt='Logo' />
                 <select
                     value={selectedValue}
                     onChange={handleSelectChange}
-                    className='outline-0 p-2 sm:hidden bg-fourth rounded text-white'
+                    className='outline-0 p-2 md:hidden bg-fourth rounded text-white'
                 >
                     <option value="/">Home</option>
                     <option value="/stats">Stats</option>

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 const Home = ()=> {
     return (
-        <div className="p-5 flex justify-center items-center  min-h-[90vh] flex-col gap-4 text-center">
+        <div className="py-5 flex justify-center items-center  min-h-[90vh] flex-col gap-4 text-center">
             <h3 className='text-third text-2xl md:text-3xl font-bold'>Welcome Everyone to</h3>
             <h1 className='text-white text-3xl md:text-5xl font-bold'><span className="text-fourth">Ourouidev</span> Efootball25 League Cup</h1>
             <p className='text-white text-xl md:text-2xl'>Register Now and Join the compition</p>
