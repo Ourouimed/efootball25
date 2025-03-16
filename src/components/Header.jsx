@@ -19,7 +19,7 @@ const Header = () => {
                 <select
                     value={selectedValue}
                     onChange={handleSelectChange}
-                    className='outline-0 p-2 sm:hidden bg-[var(--fourth-color)] rounded text-white'
+                    className='outline-0 p-2 sm:hidden bg-fourth rounded text-white'
                 >
                     <option value="/">Home</option>
                     <option value="/stats">Stats</option>
@@ -34,7 +34,7 @@ const Header = () => {
                             <Link to='/stats'>Tournaments Stats</Link>
                         </li>
                         <li>
-                            <Link to='/register' className='font-bold bg-[var(--fourth-color)] rounded-full py-2 px-4'>
+                            <Link to='/register' className='font-bold bg-fourth rounded-full py-2 px-4'>
                                 Register
                             </Link>
                         </li>

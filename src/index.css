@@ -1,16 +1,24 @@
 @import "tailwindcss";
-:root {
-  --main-color : #000096;
-  --secondary-color : #3132fe;
-  --third-color : #ffff01;
-  --fourth-color : #ff0082;
+@theme {
+  --color-primary : #000096;
+  --color-secondary : #3132fe;
+  --color-third: #ffff01;
+  --color-fourth: #ff0082;
 }
+
+::-webkit-scrollbar {
+  @apply w-[5px] h-[5px]
+}
+::-webkit-scrollbar-thumb {
+  @apply  bg-third rounded
+}
+
 #root {
   font-family: 'DIN Next Stencil' , sans-serif;
-  @apply w-full min-h-screen bg-[var(--main-color)] px-[5%]
+  @apply w-full min-h-screen bg-primary px-[5%]
 }	
 .header {
-  @apply  px-[2%] py-5 flex justify-between items-center gap-7  bg-[var(--secondary-color)] w-[750px] m-auto max-w-full md:rounded-full
+  @apply  px-[2%] py-5 flex justify-between items-center gap-7  bg-secondary w-[750px] m-auto max-w-full md:rounded-full
 }
 .header .logo {
   @apply w-[150px]
@@ -25,7 +33,7 @@ footer {
   @apply flex items-center gap-4 
 }
 .navbar ul li a {
-  @apply text-white text-[18px] transition duration-300 ease-in-out hover:text-[var(--third-color)]
+  @apply text-white text-[18px] transition duration-300 ease-in-out hover:text-third
 }
 
 .register-form {
@@ -40,4 +48,24 @@ footer {
 
 .register-form .input-fields input:not(:last-child){
   @apply border-b-2 border-white
+}
+
+.standing {
+  @apply w-full bg-white border-collapse rounded-md overflow-hidden text-left
+}
+
+.standing th ,.standing td {
+  @apply p-2
+}
+
+.standing thead tr {
+  @apply bg-fourth text-white
+}
+
+.standing tbody tr:not(:last-child){
+  @apply border-b-2 border-b-[#ededed]
+}
+
+.standing .top-team {
+  border-left: 5px solid #00af60; 
 }
