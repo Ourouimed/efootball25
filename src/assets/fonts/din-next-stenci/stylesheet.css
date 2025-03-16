@@ -1,0 +1,84 @@
+@font-face {
+    font-family: 'DIN Next Stencil';
+    src: url('DINNextStencil-Light.eot');
+    src: local('DIN Next Stencil Light'), local('DINNextStencil-Light'),
+        url('DINNextStencil-Light.eot?#iefix') format('embedded-opentype'),
+        url('DINNextStencil-Light.woff2') format('woff2'),
+        url('DINNextStencil-Light.woff') format('woff'),
+        url('DINNextStencil-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'DIN Next Stencil';
+    src: url('DINNextStencil-Bold.eot');
+    src: local('DIN Next Stencil Bold'), local('DINNextStencil-Bold'),
+        url('DINNextStencil-Bold.eot?#iefix') format('embedded-opentype'),
+        url('DINNextStencil-Bold.woff2') format('woff2'),
+        url('DINNextStencil-Bold.woff') format('woff'),
+        url('DINNextStencil-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'DIN Next Stencil';
+    src: url('DINNextStencil-Regular.eot');
+    src: local('DIN Next Stencil'), local('DINNextStencil-Regular'),
+        url('DINNextStencil-Regular.eot?#iefix') format('embedded-opentype'),
+        url('DINNextStencil-Regular.woff2') format('woff2'),
+        url('DINNextStencil-Regular.woff') format('woff'),
+        url('DINNextStencil-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'DIN Next Stencil';
+    src: url('DINNextStencil-UltraLight.eot');
+    src: local('DIN Next Stencil UltraLight'), local('DINNextStencil-UltraLight'),
+        url('DINNextStencil-UltraLight.eot?#iefix') format('embedded-opentype'),
+        url('DINNextStencil-UltraLight.woff2') format('woff2'),
+        url('DINNextStencil-UltraLight.woff') format('woff'),
+        url('DINNextStencil-UltraLight.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'DIN Next Stencil';
+    src: url('DINNextStencil-Heavy.eot');
+    src: local('DIN Next Stencil Heavy'), local('DINNextStencil-Heavy'),
+        url('DINNextStencil-Heavy.eot?#iefix') format('embedded-opentype'),
+        url('DINNextStencil-Heavy.woff2') format('woff2'),
+        url('DINNextStencil-Heavy.woff') format('woff'),
+        url('DINNextStencil-Heavy.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'DIN Next Stencil';
+    src: url('DINNextStencil-Black.eot');
+    src: local('DIN Next Stencil Black'), local('DINNextStencil-Black'),
+        url('DINNextStencil-Black.eot?#iefix') format('embedded-opentype'),
+        url('DINNextStencil-Black.woff2') format('woff2'),
+        url('DINNextStencil-Black.woff') format('woff'),
+        url('DINNextStencil-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'DIN Next Stencil';
+    src: url('DINNextStencil-Medium.eot');
+    src: local('DIN Next Stencil Medium'), local('DINNextStencil-Medium'),
+        url('DINNextStencil-Medium.eot?#iefix') format('embedded-opentype'),
+        url('DINNextStencil-Medium.woff2') format('woff2'),
+        url('DINNextStencil-Medium.woff') format('woff'),
+        url('DINNextStencil-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
