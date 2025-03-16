@@ -2,8 +2,8 @@ import { Route , Routes } from "react-router-dom"
 import Home from "./pages/Home"
 import Stats from "./pages/Stats"
 import Register from "./pages/Register"
-import Header from "./componements/Header"
-import Footer from "./componements/Footer"
+import Header from "./components/Header"
+import Footer from "./components/Footer"
 const App = ()=>{
     return <>
     <Header />
