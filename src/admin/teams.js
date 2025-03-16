@@ -38,20 +38,20 @@ const Teams = [
     {
         teamName : 'Nottingham Forest',
         teamId : 'ernesto_lll',
-        GF : 10 ,
-        GA : 3,
-        wins : 3,
+        GF : 0,
+        GA : 0,
+        wins : 0,
         draws : 0,
         losses : 0
     },
     {
         teamName : 'sn3',
         teamId : '',
-        GF : 5 ,
-        GA : 5,
+        GF : 0 ,
+        GA : 0,
         wins : 0,
         draws : 0,
-        losses : 1
+        losses : 0
     },
     {
         teamName : 'Deateam',
@@ -65,6 +65,78 @@ const Teams = [
     {
         teamName : 'Ac milan',
         teamId : 'Ostora9',
+        GF : 0 ,
+        GA : 0,
+        wins : 0,
+        draws : 0,
+        losses : 0
+    },
+    {
+        teamName : 'BARÇA',
+        teamId : 'azzedine',
+        GF : 0 ,
+        GA : 0,
+        wins : 0,
+        draws : 0,
+        losses : 0
+    },
+    {
+        teamName : 'Everton',
+        teamId : 'Reda',
+        GF : 0 ,
+        GA : 0,
+        wins : 0,
+        draws : 0,
+        losses : 0
+    },
+    {
+        teamName : 'Raja atheltic club',
+        teamId : 'lmtiri',
+        GF : 0 ,
+        GA : 0,
+        wins : 0,
+        draws : 0,
+        losses : 0
+    },
+    {
+        teamName : 'Inter milan',
+        teamId : 'Laamirchi_05',
+        GF : 0 ,
+        GA : 0,
+        wins : 0,
+        draws : 0,
+        losses : 0
+    },
+    {
+        teamName : 'jamaica 🇯🇲',
+        teamId : 'to9os_ifri9ya',
+        GF : 0 ,
+        GA : 0,
+        wins : 0,
+        draws : 0,
+        losses : 0
+    },
+    {
+        teamName : 'Maroc',
+        teamId : 'hamzaelalmi',
+        GF : 0 ,
+        GA : 0,
+        wins : 0,
+        draws : 0,
+        losses : 0
+    },
+    {
+        teamName : 'Tauhid',
+        teamId : 'Yahya05',
+        GF : 0 ,
+        GA : 0,
+        wins : 0,
+        draws : 0,
+        losses : 0
+    },
+    {
+        teamName : 'M3ayzo',
+        teamId : '_moncef_',
         GF : 0 ,
         GA : 0,
         wins : 0,
