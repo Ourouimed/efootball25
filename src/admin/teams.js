@@ -18,8 +18,8 @@ const teams = [
         losses : 0
     },
     {
-        teamName : 'KAIDO_MORRI',
-        teamId : 'F PES ANA SULTAN',
+        teamName : 'F PES ANA SULTAN',
+        teamId : 'KAIDO_MORRI',
         GF : 0 ,
         GA : 0,
         wins : 0,
@@ -135,7 +135,7 @@ const teams = [
         losses : 0
     },
     {
-        teamName : 'M3ayzo',
+        teamName : 'L9irch',
         teamId : '_moncef_',
         GF : 0 ,
         GA : 0,
@@ -180,8 +180,8 @@ const teams = [
         losses : 0
     },
     {
-        teamName : 'Medamine FC',
-        teamId : 'Medox24',
+        teamName : 'Wydad Ac',
+        teamId : 'Amine_L7ya',
         GF : 0 ,
         GA : 0,
         wins : 0,
@@ -189,9 +189,27 @@ const teams = [
         losses : 0
     },
     {
-        teamName : 'Wydad Ac',
-        teamId : 'Amine_L7ya',
+        teamName : 'T9aba',
+        teamId : 'Fost3er',
         GF : 0 ,
+        GA : 0,
+        wins : 0,
+        draws : 0,
+        losses : 0
+    },
+    {
+        teamName : 'Aquile06',
+        teamId : 'Aquile06',
+        GF : 0 ,
+        GA : 0,
+        wins : 0,
+        draws : 0,
+        losses : 0
+    },
+    {
+        teamName : 'Real betis',
+        teamId : 'العريق بيتيس',
+        GF : 0,
         GA : 0,
         wins : 0,
         draws : 0,
