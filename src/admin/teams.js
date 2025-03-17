@@ -1,4 +1,4 @@
-const Teams = [
+const teams = [
     {
         teamName : 'Zlala',
         teamId : 'Tammarxa',
@@ -28,7 +28,7 @@ const Teams = [
     },
     {
         teamName : 'Ross county FC',
-        teamId : '',
+        teamId : 'Hichamn Jerando',
         GF : 0 ,
         GA : 0,
         wins : 0,
@@ -143,8 +143,35 @@ const Teams = [
         draws : 0,
         losses : 0
     },
+    {
+        teamName : 'Bayern munchin',
+        teamId : 'Svgasfuck',
+        GF : 0 ,
+        GA : 0,
+        wins : 0,
+        draws : 0,
+        losses : 0
+    },
+    {
+        teamName : 'FAR',
+        teamId : 'Tareeq_uar',
+        GF : 0 ,
+        GA : 0,
+        wins : 0,
+        draws : 0,
+        losses : 0
+    },
+    {
+        teamName : '5yearsjail',
+        teamId : '5yearsjail',
+        GF : 0 ,
+        GA : 0,
+        wins : 0,
+        draws : 0,
+        losses : 0
+    },
     
     
 ]
 
-export default Teams
+export default teams

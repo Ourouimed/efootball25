@@ -82,3 +82,7 @@ footer {
 .standing .top-team {
   border-left: 5px solid #00af60; 
 }
+
+.standing .play-off {
+  border-left: 5px solid  #ff6600; 
+}
