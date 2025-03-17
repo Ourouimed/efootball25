@@ -170,8 +170,33 @@ const teams = [
         draws : 0,
         losses : 0
     },
-    
-    
+    {
+        teamName : 'العداب اخويا العداب',
+        teamId : 'Mehdi-Rhou',
+        GF : 0 ,
+        GA : 0,
+        wins : 0,
+        draws : 0,
+        losses : 0
+    },
+    {
+        teamName : 'Medamine FC',
+        teamId : 'Medox24',
+        GF : 0 ,
+        GA : 0,
+        wins : 0,
+        draws : 0,
+        losses : 0
+    },
+    {
+        teamName : 'Wydad Ac',
+        teamId : 'Amine_L7ya',
+        GF : 0 ,
+        GA : 0,
+        wins : 0,
+        draws : 0,
+        losses : 0
+    }
 ]
 
 export default teams
