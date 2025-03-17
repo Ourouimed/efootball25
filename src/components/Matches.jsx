@@ -20,7 +20,8 @@ const Matches = ()=>{4
     return <>
         <div className='matches'>
             <h1 className='bg-fourth p-4 text-white text-xl text-center'>Matches</h1>
-            <div className='flex justify-between items-center p-2'>
+            {matches.length > 0 ? <>
+                <div className='flex justify-between items-center p-2'>
                 <button className='w-[30px] bg-primary text-white rounded h-[30px] cursor-pointer' onClick={HandlPrevGw}><ArrowBackIosNew fontSize='small'/></button>
                 <h3>Gameweak {currentGw + 1}</h3>
                 <button className='w-[30px] bg-primary text-white rounded h-[30px] cursor-pointer' onClick={HandlNextGw}><ArrowForwardIos fontSize='small'/></button>
@@ -33,6 +34,8 @@ const Matches = ()=>{4
                 </div> )}
                 
             </div>
+            </> : <h1 className='text-center font-bold text-xl p-3'>Ser Tan3yto lk hhhhh</h1>}
+           
         </div>
     </>
 }
