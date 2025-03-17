@@ -66,4 +66,4 @@ const teams = [
 
 ## Live Demo
 
-For live Preview Visit : [eFootball 25 Live Demo]('https://ourouimed.github.io/efootball25/')
+For live Preview Visit : [eFootball 25 Live Demo](https://ourouimed.github.io/efootball25/)
