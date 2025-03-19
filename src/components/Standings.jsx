@@ -11,11 +11,11 @@ const Standings = ()=>{
                 <th>Team Name</th>
                 <th>Username</th>
                 <th className='text-center'>GP</th>
-                <th className='text-center hidden md:block'>+/-</th>
-                <th className='text-center hidden md:block'>GD</th>
-                <th className='text-center hidden md:block'>W</th>
-                <th className='text-center hidden md:block'>D</th>
-                <th className='text-center hidden md:block'>L</th>
+                <th className='text-center'>+/-</th>
+                <th className='text-center'>GD</th>
+                <th className='text-center'>W</th>
+                <th className='text-center'>D</th>
+                <th className='text-center'>L</th>
                 <th className='text-center'>Points</th>
             </tr>
         </thead>
@@ -27,12 +27,12 @@ const Standings = ()=>{
                     <td>{team.teamName}</td>
                     <td>{team.teamId}</td>
                     <td className='text-center'>{team.wins + team.losses + team.draws}</td>
-                    <td className='text-center hidden md:block'>{team.GF}-{team.GA}</td>
-                    <td className='text-center hidden md:block'>{team.GF - team.GA > 0 ?'+' + (team.GF - team.GA) : team.GF - team.GA}</td>
-                    <td className='text-center hidden md:block'>{team.wins}</td>
-                    <td className='text-center hidden md:block'>{team.draws}</td>
-                    <td className='text-center hidden md:block'>{team.losses}</td>
-                    <td className='text-center'>{team.points}</td>
+                    <td className='text-center'>{team.GF}-{team.GA}</td>
+                    <td className='text-center'>{team.GF - team.GA > 0 ?'+' + (team.GF - team.GA) : team.GF - team.GA}</td>
+                    <td className='text-center'>{team.wins}</td>
+                    <td className='text-center'>{team.draws}</td>
+                    <td className='text-center'>{team.losses}</td>
+                    <td className='text-center font-bold'>{team.points}</td>
                 </tr>
             ))}
         </tbody>
