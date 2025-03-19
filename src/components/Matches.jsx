@@ -23,15 +23,15 @@ const Matches = ()=>{4
             {matches.length > 0 ? <>
                 <div className='flex justify-between items-center p-2'>
                 <button className='w-[30px] bg-primary text-white rounded h-[30px] cursor-pointer' onClick={HandlPrevGw}><ArrowBackIosNew fontSize='small'/></button>
-                <h3>Gameweak {currentGw + 1}</h3>
+                <h3 className='font-bold'>{currentGw == 8 ? 'playOffs' : currentGw == 9 ? 'Quarter Final' : currentGw == 10 ? 'Semi Final' : currentGw == 11 ? 'Final' : `Gameweak ${currentGw + 1}`}</h3>
                 <button className='w-[30px] bg-primary text-white rounded h-[30px] cursor-pointer' onClick={HandlNextGw}><ArrowForwardIos fontSize='small'/></button>
             </div>
             <div className="p-2">
-                {matches[currentGw].map((match , index) => <div key={index} className="match">
+                {matches[currentGw].length > 0 ? matches[currentGw].map((match , index) => <div key={index} className="match">
                     <span className='flex-1 text-center'>{match.teamA}</span>
-                    <span className='mx-4 font-bold'>{match.score}</span>
+                    <span className={`mx-4 font-bold py-1 px-4 rounded ${match.score !== 'Vs'  && match.score !== 'PP' ? 'bg-fourth text-white' : null}`}>{match.score}</span>
                     <span className='flex-1 text-center'>{match.teamB}</span>
-                </div> )}
+                </div> ) : <h1 className='text-center text-xl'>No Availible matches</h1>}
                 
             </div>
             </> : <h1 className='text-center font-bold text-xl p-3'>Ser Tan3yto lk hhhhh</h1>}
