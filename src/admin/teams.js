@@ -3,26 +3,26 @@ const teams = [
         teamName : 'Zlala',
         teamId : 'Tammarxa',
         GF : 0 ,
-        GA : 0,
+        GA : 1,
         wins : 0,
         draws : 0,
-        losses : 0
+        losses : 1
     },
     {
         teamName : 'Madrid',
         teamId : 'anaspop',
-        GF : 0 ,
-        GA : 0,
-        wins : 0,
+        GF : 3 ,
+        GA : 1,
+        wins : 1,
         draws : 0,
         losses : 0
     },
     {
         teamName : 'F PES ANA SULTAN',
         teamId : 'KAIDO_MORRI',
-        GF : 0 ,
-        GA : 0,
-        wins : 0,
+        GF : 5,
+        GA : 4,
+        wins :1,
         draws : 0,
         losses : 0
     },
@@ -38,20 +38,20 @@ const teams = [
     {
         teamName : 'Nottingham Forest',
         teamId : 'ernesto_lll',
-        GF : 0,
-        GA : 0,
-        wins : 0,
+        GF : 3,
+        GA : 1,
+        wins : 1,
         draws : 0,
         losses : 0
     },
     {
         teamName : 'sn3',
-        teamId : '',
-        GF : 0 ,
-        GA : 0,
+        teamId : 'sn3',
+        GF : 1,
+        GA : 3,
         wins : 0,
         draws : 0,
-        losses : 0
+        losses : 1
     },
     {
         teamName : 'Deateam',
@@ -65,23 +65,23 @@ const teams = [
     {
         teamName : 'Ac milan',
         teamId : 'Ostora9',
-        GF : 0 ,
-        GA : 0,
+        GF : 1 ,
+        GA : 9,
         wins : 0,
         draws : 0,
-        losses : 0
+        losses : 1
     },
     {
         teamName : 'BARÇA',
         teamId : 'azzedine',
-        GF : 0 ,
-        GA : 0,
+        GF : 2 ,
+        GA : 3,
         wins : 0,
         draws : 0,
-        losses : 0
+        losses : 1
     },
     {
-        teamName : 'Everton',
+        teamName : 'stuntman',
         teamId : 'Reda',
         GF : 0 ,
         GA : 0,
@@ -92,38 +92,38 @@ const teams = [
     {
         teamName : 'Raja atheltic club',
         teamId : 'lmtiri',
-        GF : 0 ,
-        GA : 0,
+        GF : 2,
+        GA : 4,
         wins : 0,
         draws : 0,
-        losses : 0
+        losses : 1
     },
     {
         teamName : 'Inter milan',
         teamId : 'Laamirchi_05',
-        GF : 0 ,
-        GA : 0,
-        wins : 0,
+        GF : 9 ,
+        GA : 1,
+        wins : 1,
         draws : 0,
         losses : 0
     },
     {
         teamName : 'jamaica 🇯🇲',
         teamId : 'to9os_ifri9ya',
-        GF : 0 ,
-        GA : 0,
-        wins : 0,
+        GF : 4 ,
+        GA : 2,
+        wins : 1,
         draws : 0,
         losses : 0
     },
     {
         teamName : 'Maroc',
         teamId : 'hamzaelalmi',
-        GF : 0 ,
-        GA : 0,
+        GF : 1 ,
+        GA : 3,
         wins : 0,
         draws : 0,
-        losses : 0
+        losses : 1
     },
     {
         teamName : 'Tauhid',
@@ -137,81 +137,81 @@ const teams = [
     {
         teamName : 'L9irch',
         teamId : '_moncef_',
-        GF : 0 ,
-        GA : 0,
+        GF : 1 ,
+        GA : 1,
         wins : 0,
-        draws : 0,
+        draws : 1,
         losses : 0
     },
     {
         teamName : 'Bayern munchin',
         teamId : 'Svgasfuck',
-        GF : 0 ,
-        GA : 0,
-        wins : 0,
+        GF : 3 ,
+        GA : 1,
+        wins : 1,
         draws : 0,
         losses : 0
     },
     {
         teamName : 'FAR',
         teamId : 'Tareeq_uar',
-        GF : 0 ,
-        GA : 0,
+        GF : 2 ,
+        GA : 5,
         wins : 0,
         draws : 0,
-        losses : 0
+        losses : 10
     },
     {
         teamName : '5yearsjail',
         teamId : '5yearsjail',
-        GF : 0 ,
-        GA : 0,
+        GF : 1 ,
+        GA : 1,
         wins : 0,
-        draws : 0,
+        draws : 1,
         losses : 0
     },
     {
         teamName : 'العداب اخويا العداب',
         teamId : 'Mehdi-Rhou',
-        GF : 0 ,
+        GF : 1 ,
         GA : 0,
-        wins : 0,
+        wins : 1,
         draws : 0,
         losses : 0
     },
     {
         teamName : 'Wydad Ac',
         teamId : 'Amine_L7ya',
-        GF : 0 ,
-        GA : 0,
-        wins : 0,
+        GF : 3 ,
+        GA : 2,
+        wins : 1,
         draws : 0,
         losses : 0
     },
     {
         teamName : 'T9aba',
         teamId : 'Fost3er',
-        GF : 0 ,
-        GA : 0,
+        GF : 1 ,
+        GA : 3,
         wins : 0,
         draws : 0,
-        losses : 0
+        losses : 1
     },
     {
         teamName : 'Aquile06',
         teamId : 'Aquile06',
-        GF : 0 ,
-        GA : 0,
+        GF : 4 ,
+        GA : 5,
         wins : 0,
         draws : 0,
-        losses : 0
+        losses : 1
     },
     {
         teamName : 'Real betis',
         teamId : 'العريق بيتيس',
-        GF : 0,
-        GA : 0,
-        wins : 0,
+        GF : 5,
+        GA : 2,
+        wins : 1,
         draws : 0,
         losses : 0
     }
