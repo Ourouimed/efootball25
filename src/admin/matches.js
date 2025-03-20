@@ -9,7 +9,7 @@ const matches = [
       {
         "teamA": "Deateam",
         "teamB": "stuntman",
-        "score": "PP"
+        "score": "0-3"
       },
       {
         "teamA": "Nottingham Forest",
@@ -122,7 +122,7 @@ const matches = [
       {
         "teamA": "F PES ANA SULTAN",
         "teamB": "Bayern munchin",
-        "score": "Vs"
+        "score": "3-4"
       }
     ],
   // gw 3
@@ -170,17 +170,17 @@ const matches = [
       {
         "teamA": "F PES ANA SULTAN",
         "teamB": "Ac milan",
-        "score": "Vs"
+        "score": "0-3"
       },
       {
         "teamA": "sn3",
         "teamB": "L9irch",
-        "score": "Vs"
+        "score": "0-4"
       },
       {
         "teamA": "Raja atheltic club",
         "teamB": "الحصان الاسود",
-        "score": "Vs"
+        "score": "2-5"
       },
       {
         "teamA": "Inter milan",
@@ -198,7 +198,7 @@ const matches = [
       {
         "teamA": "Wydad Ac",
         "teamB": "T9aba",
-        "score": "Vs"
+        "score": "1-3"
       },
       {
         "teamA": "Inter milan",
@@ -266,7 +266,7 @@ const matches = [
       {
         "teamA": "BARÇA",
         "teamB": "T9aba",
-        "score": "Vs"
+        "score": "2-5"
       },
       {
         "teamA": "Ac milan",
@@ -311,7 +311,7 @@ const matches = [
       {
         "teamA": "Madrid",
         "teamB": "L9irch",
-        "score": "Vs"
+        "score": "1-1"
       }
     ],
   // gw 6
@@ -319,7 +319,7 @@ const matches = [
       {
         "teamA": "Maroc",
         "teamB": "T9aba",
-        "score": "Vs"
+        "score": "0-2"
       },
       {
         "teamA": "Ac milan",
@@ -364,7 +364,7 @@ const matches = [
       {
         "teamA": "الحصان الاسود",
         "teamB": "العداب اخويا العداب",
-        "score": "Vs"
+        "score": "2-3"
       },
       {
         "teamA": "Ross county FC",
@@ -374,7 +374,7 @@ const matches = [
       {
         "teamA": "Nottingham Forest",
         "teamB": "L9irch",
-        "score": "Vs"
+        "score": "0-3"
       }
     ],
   // gw 7
@@ -382,7 +382,7 @@ const matches = [
       {
         "teamA": "Madrid",
         "teamB": "T9aba",
-        "score": "Vs"
+        "score": "1-4"
       },
       {
         "teamA": "sn3",
@@ -392,7 +392,7 @@ const matches = [
       {
         "teamA": "stuntman",
         "teamB": "L9irch",
-        "score": "Vs"
+        "score": "1-3"
       },
       {
         "teamA": "Zlala",
@@ -470,7 +470,7 @@ const matches = [
     {
       "teamA": "Raja atheltic club",
       "teamB": "L9irch",
-      "score": "Vs"
+      "score": "1-8"
     },
     {
       "teamA": "sn3",
