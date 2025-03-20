@@ -1,6 +1,7 @@
 import Matches from "../components/Matches"
 import Standings from "../components/Standings"
 import teams from '../admin/teams'
+import TopScorer from "../components/TopScorer";
 import Knockout from "../components/Knockout";
 import {SportsSoccer} from '@mui/icons-material';
 import { useState } from "react";
@@ -26,6 +27,7 @@ const Stats = ()=> {
                         <h3 className="text-xl text-gray-200">{teams.reduce((acc , team)=> acc + team.GF , 0)}</h3>
                     </div>
                 </div>
+                <TopScorer />
                 <Matches />
             </div>
         </div>  

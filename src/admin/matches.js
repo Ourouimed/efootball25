@@ -145,7 +145,7 @@ const matches = [
       {
         "teamA": "العداب اخويا العداب",
         "teamB": "Aquile06",
-        "score": "Vs"
+        "score": "0-2"
       },
       {
         "teamA": "BARÇA",
@@ -165,7 +165,7 @@ const matches = [
       {
         "teamA": "jamaica 🇯🇲",
         "teamB": "5yearsjail",
-        "score": "Vs"
+        "score": "4-0"
       },
       {
         "teamA": "F PES ANA SULTAN",
@@ -243,7 +243,7 @@ const matches = [
       {
         "teamA": "Ross county FC",
         "teamB": "Raja atheltic club",
-        "score": "Vs"
+        "score": "4-1"
       },
       {
         "teamA": "Madrid",
@@ -261,7 +261,7 @@ const matches = [
       {
         "teamA": "Maroc",
         "teamB": "Wydad Ac",
-        "score": "Vs"
+        "score": "3-0"
       },
       {
         "teamA": "BARÇA",
@@ -271,7 +271,7 @@ const matches = [
       {
         "teamA": "Ac milan",
         "teamB": "Aquile06",
-        "score": "Vs"
+        "score": "0-8"
       },
       {
         "teamA": "Zlala",
@@ -281,7 +281,7 @@ const matches = [
       {
         "teamA": "sn3",
         "teamB": "jamaica 🇯🇲",
-        "score": "Vs"
+        "score": "0-3"
       },
       {
         "teamA": "Nottingham Forest",
@@ -344,12 +344,12 @@ const matches = [
       {
         "teamA": "Zlala",
         "teamB": "Aquile06",
-        "score": "Vs"
+        "score": "4-2"
       },
       {
         "teamA": "Madrid",
         "teamB": "5yearsjail",
-        "score": "Vs"
+        "score": "1-0"
       },
       {
         "teamA": "sn3",
@@ -359,7 +359,7 @@ const matches = [
       {
         "teamA": "jamaica 🇯🇲",
         "teamB": "Real betis",
-        "score": "Vs"
+        "score": "3-2"
       },
       {
         "teamA": "الحصان الاسود",
@@ -427,7 +427,7 @@ const matches = [
       {
         "teamA": "jamaica 🇯🇲",
         "teamB": "FAR",
-        "score": "Vs"
+        "score": "2-1"
       },
       {
         "teamA": "Ac milan",
@@ -437,7 +437,7 @@ const matches = [
       {
         "teamA": "Ross county FC",
         "teamB": "Wydad Ac",
-        "score": "Vs"
+        "score": "0-2"
       }
     ],
   // gw 8
@@ -445,7 +445,7 @@ const matches = [
     {
       "teamA": "Ross county FC",
       "teamB": "T9aba",
-      "score": "Vs"
+      "score": "3-2"
     },
     {
       "teamA": "Maroc",
@@ -485,7 +485,7 @@ const matches = [
     {
       "teamA": "F PES ANA SULTAN",
       "teamB": "jamaica 🇯🇲",
-      "score": "Vs"
+      "score": "10-0"
     },
     {
       "teamA": "Madrid",
@@ -495,7 +495,7 @@ const matches = [
     {
       "teamA": "الحصان الاسود",
       "teamB": "Wydad Ac",
-      "score": "Vs"
+      "score": "2-6"
     },
     {
       "teamA": "FAR",
