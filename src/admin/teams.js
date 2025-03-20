@@ -20,9 +20,9 @@ const teams = [
     {
         teamName : 'F PES ANA SULTAN',
         teamId : 'KAIDO_MORRI',
-        GF : 20,
+        GF : 10,
         GA : 13,
-        wins :2,
+        wins :1,
         draws : 1,
         losses : 2,
     },
@@ -111,10 +111,10 @@ const teams = [
         teamName : 'jamaica 🇯🇲',
         teamId : 'to9os_ifri9ya',
         GF : 23 ,
-        GA : 11,
+        GA : 1,
         wins : 7,
         draws : 0,
-        losses : 1
+        losses : 0
     },
     {
         teamName : 'Maroc',
