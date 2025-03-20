@@ -485,7 +485,7 @@ const matches = [
     {
       "teamA": "F PES ANA SULTAN",
       "teamB": "jamaica 🇯🇲",
-      "score": "10-0"
+      "score": "Vs"
     },
     {
       "teamA": "Madrid",
