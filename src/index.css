@@ -10,7 +10,7 @@
   @apply w-[5px] h-[5px]
 }
 ::-webkit-scrollbar-thumb {
-  @apply  bg-third rounded
+  @apply  bg-fourth rounded
 }
 
 #root {
