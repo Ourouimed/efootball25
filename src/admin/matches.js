@@ -506,19 +506,69 @@ const matches = [
   ,
   // playoffs
   [
-      
+      {
+        "teamA": "TeamC",
+        "teamB": "teamB",
+        "score": "Vs"
+      },
+      {
+        "teamA": "teamA",
+        "teamB": "TeamG",
+        "score": "Vs"
+      },
+      {
+        "teamA": "TeamH",
+        "teamB": "TeamE",
+        "score": "Vs"
+      },
+      {
+        "teamA": "TeamD",
+        "teamB": "TeamF",
+        "score": "Vs"
+      }
   ],
   // quarter 
   [
-      
+    {
+      "teamA": "po2",
+      "teamB": "top2",
+      "score": "Vs"
+    },
+    {
+      "teamA": "po3",
+      "teamB": "top1",
+      "score": "Vs"
+    },
+    {
+      "teamA": "po1",
+      "teamB": "top3",
+      "score": "Vs"
+    },
+    {
+      "teamA": "po4",
+      "teamB": "top4",
+      "score": "Vs"
+    }
   ],
   // semi final
   [
-      
+      {
+        "teamA": "QF 3",
+        "teamB": "QF 4",
+        "score": "Vs"
+      },
+      {
+        "teamA": "QF 1",
+        "teamB": "QF 2",
+        "score": "Vs"
+      }
+    
   ],
   // final
-  [
-      
-  ]
+      {
+        "teamA": "SF 1",
+        "teamB": "SF 2",
+        "score": "Vs"
+      },
   ]
 export default matches
