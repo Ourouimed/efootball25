@@ -140,7 +140,7 @@ const matches = [
       {
         "teamA": "stuntman",
         "teamB": "Wydad Ac",
-        "score": "Vs"
+        "score": "3-2"
       },
       {
         "teamA": "العداب اخويا العداب",
@@ -407,7 +407,7 @@ const matches = [
       {
         "teamA": "Inter milan",
         "teamB": "العداب اخويا العداب",
-        "score": "Vs"
+        "score": "2-2"
       },
       {
         "teamA": "Deateam",

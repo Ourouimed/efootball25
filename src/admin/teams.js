@@ -83,9 +83,9 @@ const teams = [
     {
         teamName : 'stuntman',
         teamId : 'Reda',
-        GF : 5 ,
-        GA : 7,
-        wins : 1,
+        GF : 8 ,
+        GA : 9,
+        wins : 2,
         draws : 0,
         losses : 2
     },
@@ -101,10 +101,10 @@ const teams = [
     {
         teamName : 'Inter milan',
         teamId : 'Laamirchi_05',
-        GF : 13 ,
-        GA : 2,
+        GF : 15 ,
+        GA : 4,
         wins : 2,
-        draws : 0,
+        draws : 1,
         losses : 0
     },
     {
@@ -173,20 +173,20 @@ const teams = [
     {
         teamName : 'العداب اخويا العداب',
         teamId : 'Mehdi-Rhou',
-        GF : 7,
-        GA : 7,
+        GF : 9,
+        GA : 9,
         wins : 3,
-        draws : 0,
+        draws : 1,
         losses : 2
     },
     {
         teamName : 'Wydad Ac',
         teamId : 'Amine_L7ya',
-        GF : 15 ,
-        GA : 13,
+        GF : 17 ,
+        GA : 15,
         wins : 3,
         draws : 1,
-        losses : 2
+        losses : 3
     },
     {
         teamName : 'T9aba',
