@@ -552,8 +552,16 @@ const matches = [
   ],
   // semi final
   [
-      
-    
+    {
+      "teamA": "Maroc/Stuntman",
+      "teamB": "Aquile/Bayern",
+      "score": "Vs"
+    },
+    {
+      "teamA": "T9aba/Jamaica",
+      "teamB": "Zlala/L9irch",
+      "score": "Vs"
+    }
   ],
   // final
       {
