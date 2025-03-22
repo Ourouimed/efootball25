@@ -2,7 +2,7 @@ import matches from '../admin/matches'
 import {ArrowForwardIos , ArrowBackIosNew} from '@mui/icons-material';
 import { useState } from 'react'
 const Matches = ()=>{4
-    const [currentGw , setCurrentGw] = useState(0)
+    const [currentGw , setCurrentGw] = useState(1)
     const HandlPrevGw = ()=>{
         if (currentGw > 0){
             setCurrentGw(c => c - 1)
@@ -27,11 +27,15 @@ const Matches = ()=>{4
                 <button className='w-[30px] bg-primary text-white rounded h-[30px] cursor-pointer' onClick={HandlNextGw}><ArrowForwardIos fontSize='small'/></button>
             </div>
             <div className="p-2">
-                {matches[currentGw].length > 0 ? matches[currentGw].map((match , index) => <div key={index} className="match">
+                {currentGw !== 11 ? matches[currentGw].length > 0 ? matches[currentGw].map((match , index) => <div key={index} className="match">
                     <span className='flex-1 text-center'>{match.teamA}</span>
                     <span className={`mx-4 font-bold py-1 px-4 rounded ${match.score !== 'Vs'  && match.score !== 'PP' ? 'bg-fourth text-white' : null}`}>{match.score}</span>
                     <span className='flex-1 text-center'>{match.teamB}</span>
-                </div> ) : <h1 className='text-center text-xl'>No Availible matches</h1>}
+                </div> ) : <h1 className='text-center text-xl'>No Availible matches</h1> :<div className="match">
+                    <span className='flex-1 text-center'>{matches[11].teamA}</span>
+                    <span className={`mx-4 font-bold py-1 px-4 rounded ${matches[11].score !== 'Vs'  && matches[11].score !== 'PP' ? 'bg-fourth text-white' : null}`}>{matches[11].score}</span>
+                    <span className='flex-1 text-center'>{matches[11].teamB}</span>
+                </div> }
                 
             </div>
             </> : <h1 className='text-center font-bold text-xl p-3'>Ser Tan3yto lk hhhhh</h1>}

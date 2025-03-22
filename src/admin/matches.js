@@ -67,7 +67,7 @@ const matches = [
       {
         "teamA": "Nottingham Forest",
         "teamB": "BARÇA",
-        "score": "Vs"
+        "score": "3-0"
       },
       {
         "teamA": "Madrid",
@@ -112,7 +112,7 @@ const matches = [
       {
         "teamA": "Raja atheltic club",
         "teamB": "5yearsjail",
-        "score": "Vs"
+        "score": "0-0"
       },
       {
         "teamA": "الحصان الاسود",
@@ -150,12 +150,12 @@ const matches = [
       {
         "teamA": "BARÇA",
         "teamB": "Real betis",
-        "score": "Vs"
+        "score": "0-0"
       },
       {
         "teamA": "Ross county FC",
         "teamB": "Nottingham Forest",
-        "score": "Vs"
+        "score": "3-0"
       },
       {
         "teamA": "Zlala",
@@ -185,7 +185,7 @@ const matches = [
       {
         "teamA": "Inter milan",
         "teamB": "FAR",
-        "score": "Vs"
+        "score": "0-0"
       }
     ],
   // gw 4
@@ -193,7 +193,7 @@ const matches = [
       {
         "teamA": "BARÇA",
         "teamB": "stuntman",
-        "score": "Vs"
+        "score": "0-3"
       },
       {
         "teamA": "Wydad Ac",
@@ -203,12 +203,12 @@ const matches = [
       {
         "teamA": "Inter milan",
         "teamB": "Aquile06",
-        "score": "Vs"
+        "score": "2-3"
       },
       {
         "teamA": "Maroc",
         "teamB": "5yearsjail",
-        "score": "Vs"
+        "score": "3-0"
       },
       {
         "teamA": "Zlala",
@@ -223,17 +223,17 @@ const matches = [
       {
         "teamA": "Ac milan",
         "teamB": "FAR",
-        "score": "Vs"
+        "score": "3-0"
       },
       {
         "teamA": "Deateam",
         "teamB": "L9irch",
-        "score": "Vs"
+        "score": "4-9"
       },
       {
         "teamA": "F PES ANA SULTAN",
         "teamB": "Real betis",
-        "score": "Vs"
+        "score": "3-0"
       },
       {
         "teamA": "jamaica 🇯🇲",
@@ -256,7 +256,7 @@ const matches = [
       {
         "teamA": "stuntman",
         "teamB": "Inter milan",
-        "score": "Vs"
+        "score": "3-0"
       },
       {
         "teamA": "Maroc",
@@ -286,27 +286,27 @@ const matches = [
       {
         "teamA": "Nottingham Forest",
         "teamB": "Deateam",
-        "score": "Vs"
+        "score": "6-3"
       },
       {
         "teamA": "Raja atheltic club",
         "teamB": "العداب اخويا العداب",
-        "score": "Vs"
+        "score": "0-3"
       },
       {
         "teamA": "F PES ANA SULTAN",
         "teamB": "Ross county FC",
-        "score": "Vs"
+        "score": "0-2"
       },
       {
         "teamA": "Bayern munchin",
         "teamB": "Real betis",
-        "score": "Vs"
+        "score": "3-0"
       },
       {
         "teamA": "الحصان الاسود",
         "teamB": "FAR",
-        "score": "Vs"
+        "score": "6-0"
       },
       {
         "teamA": "Madrid",
@@ -324,22 +324,22 @@ const matches = [
       {
         "teamA": "Ac milan",
         "teamB": "stuntman",
-        "score": "Vs"
+        "score": "3-8"
       },
       {
         "teamA": "Raja atheltic club",
         "teamB": "Wydad Ac",
-        "score": "Vs"
+        "score": "0-3"
       },
       {
         "teamA": "Inter milan",
         "teamB": "Bayern munchin",
-        "score": "Vs"
+        "score": "0-3"
       },
       {
         "teamA": "F PES ANA SULTAN",
         "teamB": "BARÇA",
-        "score": "Vs"
+        "score": "3-0"
       },
       {
         "teamA": "Zlala",
@@ -354,7 +354,7 @@ const matches = [
       {
         "teamA": "sn3",
         "teamB": "FAR",
-        "score": "Vs"
+        "score": "0-0"
       },
       {
         "teamA": "jamaica 🇯🇲",
@@ -369,7 +369,7 @@ const matches = [
       {
         "teamA": "Ross county FC",
         "teamB": "Deateam",
-        "score": "Vs"
+        "score": "3-0"
       },
       {
         "teamA": "Nottingham Forest",
@@ -387,7 +387,7 @@ const matches = [
       {
         "teamA": "sn3",
         "teamB": "Maroc",
-        "score": "Vs"
+        "score": "1-2"
       },
       {
         "teamA": "stuntman",
@@ -397,12 +397,12 @@ const matches = [
       {
         "teamA": "Zlala",
         "teamB": "F PES ANA SULTAN",
-        "score": "Vs"
+        "score": "2-2"
       },
       {
         "teamA": "Nottingham Forest",
         "teamB": "Aquile06",
-        "score": "Vs"
+        "score": "0-6"
       },
       {
         "teamA": "Inter milan",
@@ -412,17 +412,17 @@ const matches = [
       {
         "teamA": "Deateam",
         "teamB": "Bayern munchin",
-        "score": "Vs"
+        "score": "0-3"
       },
       {
         "teamA": "الحصان الاسود",
         "teamB": "5yearsjail",
-        "score": "Vs"
+        "score": "7-1"
       },
       {
         "teamA": "BARÇA",
         "teamB": "Raja atheltic club",
-        "score": "Vs"
+        "score": "0-0"
       },
       {
         "teamA": "jamaica 🇯🇲",
@@ -432,7 +432,7 @@ const matches = [
       {
         "teamA": "Ac milan",
         "teamB": "Real betis",
-        "score": "Vs"
+        "score": "3-0"
       },
       {
         "teamA": "Ross county FC",
@@ -450,22 +450,22 @@ const matches = [
     {
       "teamA": "Maroc",
       "teamB": "Real betis",
-      "score": "Vs"
+      "score": "3-0"
     },
     {
       "teamA": "stuntman",
       "teamB": "5yearsjail",
-      "score": "Vs"
+      "score": "3-0"
     },
     {
       "teamA": "Zlala",
       "teamB": "BARÇA",
-      "score": "Vs"
+      "score": "3-0"
     },
     {
       "teamA": "Nottingham Forest",
       "teamB": "Bayern munchin",
-      "score": "Vs"
+      "score": "2-6"
     },
     {
       "teamA": "Raja atheltic club",
@@ -475,22 +475,22 @@ const matches = [
     {
       "teamA": "sn3",
       "teamB": "Aquile06",
-      "score": "Vs"
+      "score": "0-3"
     },
     {
       "teamA": "Deateam",
       "teamB": "Ac milan",
-      "score": "Vs"
+      "score": "6-3"
     },
     {
       "teamA": "F PES ANA SULTAN",
       "teamB": "jamaica 🇯🇲",
-      "score": "Vs"
+      "score": "3-0"
     },
     {
       "teamA": "Madrid",
       "teamB": "Inter milan",
-      "score": "Vs"
+      "score": "3-0"
     },
     {
       "teamA": "الحصان الاسود",
@@ -500,68 +500,21 @@ const matches = [
     {
       "teamA": "FAR",
       "teamB": "العداب اخويا العداب",
-      "score": "Vs"
+      "score": "0-3"
     }
   ]
   ,
   // playoffs
   [
-      {
-        "teamA": "TeamC",
-        "teamB": "teamB",
-        "score": "Vs"
-      },
-      {
-        "teamA": "teamA",
-        "teamB": "TeamG",
-        "score": "Vs"
-      },
-      {
-        "teamA": "TeamH",
-        "teamB": "TeamE",
-        "score": "Vs"
-      },
-      {
-        "teamA": "TeamD",
-        "teamB": "TeamF",
-        "score": "Vs"
-      }
+ 
   ],
   // quarter 
   [
-    {
-      "teamA": "po2",
-      "teamB": "top2",
-      "score": "Vs"
-    },
-    {
-      "teamA": "po3",
-      "teamB": "top1",
-      "score": "Vs"
-    },
-    {
-      "teamA": "po1",
-      "teamB": "top3",
-      "score": "Vs"
-    },
-    {
-      "teamA": "po4",
-      "teamB": "top4",
-      "score": "Vs"
-    }
+  
   ],
   // semi final
   [
-      {
-        "teamA": "QF 3",
-        "teamB": "QF 4",
-        "score": "Vs"
-      },
-      {
-        "teamA": "QF 1",
-        "teamB": "QF 2",
-        "score": "Vs"
-      }
+      
     
   ],
   // final

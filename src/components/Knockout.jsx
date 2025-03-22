@@ -38,7 +38,7 @@ const Knockout = () => {
             </div>
             <h3 className="text-center font-bold">Final</h3>
             <div className="flex items-center gap-1 justify-center">
-                <div className="match !mb-0">
+                <div className="match !mb-0 w-full md:w-auto">
                                     <span className='flex-1 text-center'>{Final.teamA}</span>
                                     <span className={`mx-4 font-bold py-1 px-4 rounded ${Final.score !== 'Vs'  && Final.score !== 'PP' ? 'bg-fourth text-white' : null}`}>{Final.score}</span>
                                     <span className='flex-1 text-center'>{Final.teamB}</span>
