@@ -529,7 +529,26 @@ const matches = [
   ],
   // quarter 
   [
-  
+    {
+      "teamA": "Maroc",
+      "teamB": "stuntman",
+      "score": "Vs"
+    },
+    {
+      "teamA": "T9aba",
+      "teamB": "jamaica 🇯🇲",
+      "score": "Vs"
+    },
+    {
+      "teamA": "Aquile",
+      "teamB": "Bayern munchin",
+      "score": "Vs"
+    },
+    {
+      "teamA": "Zlala",
+      "teamB": "L9irch",
+      "score": "Vs"
+    }
   ],
   // semi final
   [
