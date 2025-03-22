@@ -509,22 +509,22 @@ const matches = [
     {
       "teamA": "العداب اخويا العداب",
       "teamB": "Aquile06",
-      "score": "Vs"
+      "score": "4-4 (p)"
     },
     {
       "teamA": "F PES ANA SULTAN",
       "teamB": "Maroc",
-      "score": "Vs"
+      "score": "3-4"
     },
     {
       "teamA": "Wydad Ac",
       "teamB": "Zlala",
-      "score": "Vs"
+      "score": "4-8"
     },
     {
       "teamA": "T9aba",
       "teamB": "Ross county FC",
-      "score": "Vs"
+      "score": "9-2"
     }
   ],
   // quarter 

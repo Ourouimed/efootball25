@@ -24,7 +24,7 @@ const Stats = ()=> {
                     </div>
                     <div className="flex-1 ml-4">
                         <h1 className="text-2xl font-semibold text-third">Total Goals</h1>
-                        <h3 className="text-xl text-gray-200">{teams.reduce((acc , team)=> acc + team.GF , 0)}</h3>
+                        <h3 className="text-xl text-gray-200">{teams.reduce((acc , team)=> acc + (team.GF + team.KG) , 0)}</h3>
                     </div>
                 </div>
                 <TopScorer />

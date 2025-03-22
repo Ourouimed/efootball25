@@ -10,7 +10,6 @@ const Matches = ()=>{4
         
     }
 
-
     const HandlNextGw = ()=>{
         if (currentGw < matches.length - 1){
             setCurrentGw(c => c + 1)
