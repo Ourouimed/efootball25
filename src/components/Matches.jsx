@@ -1,8 +1,8 @@
 import matches from '../admin/matches'
 import {ArrowForwardIos , ArrowBackIosNew} from '@mui/icons-material';
 import { useState } from 'react'
-const Matches = ()=>{4
-    const [currentGw , setCurrentGw] = useState(8)
+const Matches = ()=>{
+    const [currentGw , setCurrentGw] = useState(9)
     const HandlPrevGw = ()=>{
         if (currentGw > 0){
             setCurrentGw(c => c - 1)
