@@ -532,40 +532,40 @@ const matches = [
     {
       "teamA": "Maroc",
       "teamB": "stuntman",
-      "score": "Vs"
+      "score": "5-4"
     },
     {
       "teamA": "T9aba",
       "teamB": "jamaica 🇯🇲",
-      "score": "Vs"
+      "score": "2-4"
     },
     {
       "teamA": "Aquile",
       "teamB": "Bayern munchin",
-      "score": "Vs"
+      "score": "7-4"
     },
     {
       "teamA": "Zlala",
       "teamB": "L9irch",
-      "score": "Vs"
+      "score": "2-5"
     }
   ],
   // semi final
   [
     {
-      "teamA": "Maroc/Stuntman",
-      "teamB": "Aquile/Bayern",
+      "teamA": "Maroc",
+      "teamB": "Bayern",
       "score": "Vs"
     },
     {
-      "teamA": "T9aba/Jamaica",
-      "teamB": "Zlala/L9irch",
-      "score": "Vs"
+      "teamA": "Jamaica",
+      "teamB": "L9irch",
+      "score": "6-2"
     }
   ],
   // final
       {
-        "teamA": "SF 1",
+        "teamA": "Jamaica",
         "teamB": "SF 2",
         "score": "Vs"
       },
