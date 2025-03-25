@@ -127,7 +127,7 @@ const teams = [
         wins: 7,
         draws: 0,
         losses: 1,
-        KG: 10
+        KG: 12
     },
     {
         teamName: 'Maroc',
@@ -137,7 +137,7 @@ const teams = [
         wins: 6,
         draws: 0,
         losses: 2,
-        KG: 9
+        KG: 15
     },
     {
         teamName: 'الحصان الاسود',
@@ -167,7 +167,7 @@ const teams = [
         wins: 7,
         draws: 0,
         losses: 1,
-        KG: 0
+        KG: 10
     },
     {
         teamName: 'FAR',
@@ -227,7 +227,7 @@ const teams = [
         wins: 5,
         draws: 1,
         losses: 2,
-        KG: 8
+        KG: 12
     },
     {
         teamName: 'Real betis',

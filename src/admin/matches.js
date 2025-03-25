@@ -555,7 +555,7 @@ const matches = [
     {
       "teamA": "Maroc",
       "teamB": "Bayern",
-      "score": "Vs"
+      "score": "3-2"
     },
     {
       "teamA": "Jamaica",
@@ -566,8 +566,8 @@ const matches = [
   // final
       {
         "teamA": "Jamaica",
-        "teamB": "SF 2",
-        "score": "Vs"
+        "teamB": "Maroc",
+        "score": "2-3"
       },
   ]
 export default matches
