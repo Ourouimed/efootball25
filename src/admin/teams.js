@@ -308,6 +308,61 @@ const teams = [
         losses: 0,
         KOGF : 0 ,
         KOGA : 0
+    },
+    {
+        teamName: `007's`,
+        teamId: 'ilyess',
+        GF: 0,
+        GA: 0,
+        wins: 0,
+        draws: 0,
+        losses: 0,
+        KOGF : 0 ,
+        KOGA : 0
+    },
+    {
+        teamName: 'RTLGK',
+        teamId: 'Mskrtah',
+        GF: 0,
+        GA: 0,
+        wins: 0,
+        draws: 0,
+        losses: 0,
+        KOGF : 0 ,
+        KOGA : 0
+    },
+    {
+        teamName: 'Manchester United',
+        teamId: 'n4diiir',
+        GF: 0,
+        GA: 0,
+        wins: 0,
+        draws: 0,
+        losses: 0,
+        KOGF : 0 ,
+        KOGA : 0
+    },
+    {
+        teamName: 'CR flamengo',
+        teamId: 'M_47',
+        GF: 0,
+        GA: 0,
+        wins: 0,
+        draws: 0,
+        losses: 0,
+        KOGF : 0 ,
+        KOGA : 0
+    },
+    {
+        teamName: 'Marseille',
+        teamId: 'M.B',
+        GF: 0,
+        GA: 0,
+        wins: 0,
+        draws: 0,
+        losses: 0,
+        KOGF : 0 ,
+        KOGA : 0
     }
 ];
 

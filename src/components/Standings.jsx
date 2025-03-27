@@ -22,7 +22,7 @@ const Standings = ()=>{
 
         <tbody>
             {standings.map((team, index) => (
-                <tr key={index} className={`hover:bg-slate-100 ${index < 4 ? 'top-team' : index < 12  ? 'play-off': ''}`}>
+                <tr key={index} className={`hover:bg-slate-100 ${index < 8 ? 'top-team' : index < 24  ? 'play-off': ''}`}>
                     <td>{index + 1}</td>
                     <td>{team.teamName}</td>
                     <td>{team.teamId}</td>
