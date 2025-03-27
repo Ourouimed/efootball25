@@ -228,6 +228,86 @@ const teams = [
         losses: 0,
         KOGF : 0 ,
         KOGA : 0
+    },
+    ,
+    {
+        teamName: '7O7O',
+        teamId: 'Imad',
+        GF: 0,
+        GA: 0,
+        wins: 0,
+        draws: 0,
+        losses: 0,
+        KOGF : 0 ,
+        KOGA : 0
+    },
+    {
+        teamName: 'Arsenal',
+        teamId: 'ernesto_III',
+        GF: 0,
+        GA: 0,
+        wins: 0,
+        draws: 0,
+        losses: 0,
+        KOGF : 0 ,
+        KOGA : 0
+    },
+    {
+        teamName: 'habiboff',
+        teamId: 'habiboff',
+        GF: 0,
+        GA: 0,
+        wins: 0,
+        draws: 0,
+        losses: 0,
+        KOGF : 0 ,
+        KOGA : 0
+    }
+    ,
+    {
+        teamName: 'Adamlb',
+        teamId: 'Adamlb',
+        GF: 0,
+        GA: 0,
+        wins: 0,
+        draws: 0,
+        losses: 0,
+        KOGF : 0 ,
+        KOGA : 0
+    }
+    ,
+    {
+        teamName: 'Hatiem',
+        teamId: 'Cactushtiem',
+        GF: 0,
+        GA: 0,
+        wins: 0,
+        draws: 0,
+        losses: 0,
+        KOGF : 0 ,
+        KOGA : 0
+    },
+    {
+        teamName: 'FAR',
+        teamId: 'Tareeq_uar',
+        GF: 0,
+        GA: 0,
+        wins: 0,
+        draws: 0,
+        losses: 0,
+        KOGF : 0 ,
+        KOGA : 0
+    },
+    {
+        teamName: 'Marseille',
+        teamId: 'M.B',
+        GF: 0,
+        GA: 0,
+        wins: 0,
+        draws: 0,
+        losses: 0,
+        KOGF : 0 ,
+        KOGA : 0
     }
 ];
 
