@@ -364,6 +364,30 @@ const teams = [
         KOGF : 0 ,
         KOGA : 0
     }
+    ,
+    {
+        teamName: 'Real Madrid',
+        teamId: 'Adam',
+        GF: 0,
+        GA: 0,
+        wins: 0,
+        draws: 0,
+        losses: 0,
+        KOGF : 0 ,
+        KOGA : 0
+    }
+    ,
+    {
+        teamName: 'PSG',
+        teamId: 'R_A_Y_A-NE',
+        GF: 0,
+        GA: 0,
+        wins: 0,
+        draws: 0,
+        losses: 0,
+        KOGF : 0 ,
+        KOGA : 0
+    }
 ];
 
 export default teams;
