@@ -310,8 +310,8 @@ const teams = [
         KOGA : 0
     },
     {
-        teamName: `007's`,
-        teamId: 'ilyess',
+        teamName: `Lbeldi`,
+        teamId: 'M_rwn_',
         GF: 0,
         GA: 0,
         wins: 0,
