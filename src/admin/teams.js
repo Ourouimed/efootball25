@@ -69,7 +69,7 @@ const teams = [
     }
     ,
     {
-        teamName: '....',
+        teamName: 'Mamsalich',
         teamId: 'Mamsalich',
         GF: 0,
         GA: 0,
@@ -228,7 +228,7 @@ const teams = [
         losses: 0,
         KOGF : 0 ,
         KOGA : 0
-    },
+    }
     ,
     {
         teamName: '7O7O',
@@ -354,18 +354,6 @@ const teams = [
         KOGA : 0
     },
     {
-        teamName: 'Marseille',
-        teamId: 'M.B',
-        GF: 0,
-        GA: 0,
-        wins: 0,
-        draws: 0,
-        losses: 0,
-        KOGF : 0 ,
-        KOGA : 0
-    }
-    ,
-    {
         teamName: 'Real Madrid',
         teamId: 'Adam',
         GF: 0,
@@ -380,6 +368,17 @@ const teams = [
     {
         teamName: 'PSG',
         teamId: 'R_A_Y_A-NE',
+        GF: 0,
+        GA: 0,
+        wins: 0,
+        draws: 0,
+        losses: 0,
+        KOGF : 0 ,
+        KOGA : 0
+    },
+    {
+        teamName: 'Pala',
+        teamId: 'PMKaymeen',
         GF: 0,
         GA: 0,
         wins: 0,
