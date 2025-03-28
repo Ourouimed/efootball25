@@ -4,23 +4,24 @@ const matches = [
       {"teamA": "Saudi arabia", "teamB": "LOS REYES1!", "score": "Vs"},
       {"teamA": "Ross country FC", "teamB": "Ac milan", "score": "Vs"},
       {"teamA": "zlala", "teamB": "Bayern Munich", "score": "Vs"},
-      {"teamA": "Zizozazi", "teamB": "Adamlb", "score": "Vs"},
+      {"teamA": "Zizozazi", "teamB": "Adamlb", "score": "3-3"},
       {"teamA": "RTLGK", "teamB": "المدمر 33", "score": "Vs"},
       {"teamA": "Arsenal", "teamB": "FAR", "score": "0-3"},
       {"teamA": "L9irch", "teamB": "Lbeldi", "score": "Vs"},
       {"teamA": "Raja atheltic club", "teamB": "L3zawa", "score": "Vs"},
       {"teamA": "Maroc", "teamB": "Pala", "score": "Vs"},
       {"teamA": "Wydad Ac", "teamB": "Ro3b🫣", "score": "Vs"},
-      {"teamA": "Real Madrid", "teamB": "F PES ANA SULTAN", "score": "Vs"},
+      {"teamA": "Real Madrid", "teamB": "Manchester United", "score": "3-1"},
       {"teamA": "kolchi dyal Allah", "teamB": "PSG", "score": "Vs"},
       {"teamA": "FC BARCELONA", "teamB": "Marseille", "score": "Vs"},
       {"teamA": "habiboff", "teamB": "Itihad zaghalghal", "score": "Vs"},
-      {"teamA": "Stutman", "teamB": "Manchester United", "score": "Vs"},
+      {"teamA": "Stutman", "teamB": "F PES ANA SULTAN", "score": "Vs"},
       {"teamA": "7O7O", "teamB": "Hatiem", "score": "Vs"},
       {"teamA": "Aquile06", "teamB": "CR flamengo", "score": "Vs"},
       {"teamA": "River Plate", "teamB": "Inter", "score": "Vs"},
       {"teamA": "T9aba", "teamB": "5yearsjail", "score": "Vs"},
-      {"teamA": "العذاب اخويا العذاب", "teamB": "Mamsalich", "score": "Vs"}
+      {"teamA": "العذاب اخويا العذاب", "teamB": "Mamsalich", "score": "Vs"},
+      {"teamA": "Japan", "teamB": "Kolchitach", "score": "Vs"}
     ],
   
     // GW2
@@ -30,10 +31,10 @@ const matches = [
       {"teamA": "PSG", "teamB": "zlala", "score": "3-2"},
       {"teamA": "F PES ANA SULTAN", "teamB": "Bayern Munich", "score": "Vs"},
       {"teamA": "Arsenal", "teamB": "Maroc", "score": "Vs"},
-      {"teamA": "Wydad Ac", "teamB": "Pala", "score": "Vs"},
+      {"teamA": "Wydad Ac", "teamB": "Pala", "score": "5-2"},
       {"teamA": "Zizozazi", "teamB": "Raja atheltic club", "score": "Vs"},
       {"teamA": "Lbeldi", "teamB": "RTLGK", "score": "Vs"},
-      {"teamA": "Hatiem", "teamB": "FAR", "score": "Vs"},
+      {"teamA": "Kolchitach", "teamB": "FAR", "score": "Vs"},
       {"teamA": "Aquile06", "teamB": "kolchi dyal Allah", "score": "Vs"},
       {"teamA": "Ac milan", "teamB": "Adamlb", "score": "Vs"},
       {"teamA": "Itihad zaghalghal", "teamB": "Marseille", "score": "Vs"},
@@ -44,14 +45,15 @@ const matches = [
       {"teamA": "LOS REYES1!", "teamB": "5yearsjail", "score": "Vs"},
       {"teamA": "Stutman", "teamB": "Saudi arabia", "score": "Vs"},
       {"teamA": "Real Madrid", "teamB": "River Plate", "score": "Vs"},
-      {"teamA": "Inter", "teamB": "Ross country FC", "score": "Vs"}
+      {"teamA": "Inter", "teamB": "Ross country FC", "score": "Vs"},
+      {"teamA": "Hatiem", "teamB": "Japan", "score": "Vs"}
     ],
   
     // GW3
     [
       {"teamA": "Maroc", "teamB": "Saudi arabia", "score": "Vs"},
       {"teamA": "River Plate", "teamB": "FAR", "score": "Vs"},
-      {"teamA": "LOS REYES1!", "teamB": "Ross country FC", "score": "Vs"},
+      {"teamA": "LOS REYES1!", "teamB": "Mamsalich", "score": "Vs"}, // Fixed duplicate
       {"teamA": "L3zawa", "teamB": "CR flamengo", "score": "Vs"},
       {"teamA": "Inter", "teamB": "Bayern Munich", "score": "Vs"},
       {"teamA": "Itihad zaghalghal", "teamB": "Pala", "score": "Vs"},
@@ -68,7 +70,8 @@ const matches = [
       {"teamA": "Aquile06", "teamB": "المدمر 33", "score": "Vs"},
       {"teamA": "Marseille", "teamB": "T9aba", "score": "Vs"},
       {"teamA": "FC BARCELONA", "teamB": "Ac milan", "score": "Vs"},
-      {"teamA": "Manchester United", "teamB": "العذاب اخويا العذاب", "score": "Vs"}
+      {"teamA": "Kolchitach", "teamB": "العذاب اخويا العذاب", "score": "Vs"},
+      {"teamA": "Japan", "teamB": "Manchester United", "score": "Vs"}
     ],
   
     // GW4
@@ -88,11 +91,12 @@ const matches = [
       {"teamA": "kolchi dyal Allah", "teamB": "F PES ANA SULTAN", "score": "Vs"},
       {"teamA": "المدمر 33", "teamB": "Arsenal", "score": "7-1"},
       {"teamA": "L3zawa", "teamB": "Pala", "score": "Vs"},
-      {"teamA": "Aquile06", "teamB": "River Plate", "score": "Vs"},
+      {"teamA": "Kolchitach", "teamB": "River Plate", "score": "Vs"},
       {"teamA": "Zizozazi", "teamB": "Stutman", "score": "Vs"},
       {"teamA": "Wydad Ac", "teamB": "Maroc", "score": "Vs"},
       {"teamA": "Ac milan", "teamB": "Raja atheltic club", "score": "Vs"},
-      {"teamA": "CR flamengo", "teamB": "Hatiem", "score": "Vs"}
+      {"teamA": "CR flamengo", "teamB": "Hatiem", "score": "Vs"},
+      {"teamA": "Japan", "teamB": "Aquile06", "score": "Vs"}
     ],
   
     // GW5
@@ -101,14 +105,14 @@ const matches = [
       {"teamA": "L9irch", "teamB": "Marseille", "score": "Vs"},
       {"teamA": "L3zawa", "teamB": "LOS REYES1!", "score": "Vs"},
       {"teamA": "Maroc", "teamB": "CR flamengo", "score": "Vs"},
-      {"teamA": "T9aba", "teamB": "Hatiem", "score": "7-0"},
+      {"teamA": "T9aba", "teamB": "Hatiem", "score": "7-0"}, // Kept (played)
       {"teamA": "العذاب اخويا العذاب", "teamB": "Pala", "score": "Vs"},
       {"teamA": "Itihad zaghalghal", "teamB": "Arsenal", "score": "Vs"},
       {"teamA": "Saudi arabia", "teamB": "Inter", "score": "Vs"},
       {"teamA": "River Plate", "teamB": "Ro3b🫣", "score": "Vs"},
       {"teamA": "Raja atheltic club", "teamB": "Ross country FC", "score": "Vs"},
       {"teamA": "Lbeldi", "teamB": "Adamlb", "score": "Vs"},
-      {"teamA": "FC BARCELONA", "teamB": "Zizozazi", "score": "Vs"},
+      {"teamA": "FC BARCELONA", "teamB": "Kolchitach", "score": "Vs"},
       {"teamA": "Mamsalich", "teamB": "Ac milan", "score": "Vs"},
       {"teamA": "Wydad Ac", "teamB": "Bayern Munich", "score": "Vs"},
       {"teamA": "FAR", "teamB": "المدمر 33", "score": "2-5"},
@@ -116,7 +120,8 @@ const matches = [
       {"teamA": "Real Madrid", "teamB": "Aquile06", "score": "Vs"},
       {"teamA": "Manchester United", "teamB": "habiboff", "score": "Vs"},
       {"teamA": "7O7O", "teamB": "RTLGK", "score": "Vs"},
-      {"teamA": "zlala", "teamB": "T9aba", "score": "Vs"}  // New unique match
+      {"teamA": "zlala", "teamB": "Mamsalich", "score": "Vs"}, // Replaced duplicate
+      {"teamA": "Japan", "teamB": "Zizozazi", "score": "Vs"}
     ],
   
     // GW6
@@ -136,17 +141,18 @@ const matches = [
       {"teamA": "العذاب اخويا العذاب", "teamB": "FAR", "score": "Vs"},
       {"teamA": "Saudi arabia", "teamB": "Ac milan", "score": "Vs"},
       {"teamA": "Itihad zaghalghal", "teamB": "Stutman", "score": "Vs"},
-      {"teamA": "L9irch", "teamB": "Mamsalich", "score": "Vs"},
+      {"teamA": "L9irch", "teamB": "Kolchitach", "score": "Vs"},
       {"teamA": "Marseille", "teamB": "Inter", "score": "Vs"},
       {"teamA": "Ross country FC", "teamB": "Real Madrid", "score": "Vs"},
       {"teamA": "Arsenal", "teamB": "T9aba", "score": "Vs"},
-      {"teamA": "Pala", "teamB": "zlala", "score": "1-3"}
+      {"teamA": "Pala", "teamB": "zlala", "score": "1-3"},
+      {"teamA": "Japan", "teamB": "Mamsalich", "score": "Vs"}
     ],
   
     // GW7
     [
       {"teamA": "Marseille", "teamB": "Raja atheltic club", "score": "Vs"},
-      {"teamA": "Lbeldi", "teamB": "PSG", "score": "Vs"},
+      {"teamA": "Kolchitach", "teamB": "PSG", "score": "Vs"},
       {"teamA": "L3zawa", "teamB": "Manchester United", "score": "Vs"},
       {"teamA": "Real Madrid", "teamB": "Wydad Ac", "score": "Vs"},
       {"teamA": "Mamsalich", "teamB": "Pala", "score": "Vs"},
@@ -164,7 +170,8 @@ const matches = [
       {"teamA": "Zizozazi", "teamB": "Stutman", "score": "Vs"},
       {"teamA": "kolchi dyal Allah", "teamB": "Maroc", "score": "Vs"},
       {"teamA": "5yearsjail", "teamB": "RTLGK", "score": "Vs"},
-      {"teamA": "LOS REYES1!", "teamB": "Ross country FC", "score": "Vs"}
+      {"teamA": "LOS REYES1!", "teamB": "Ross country FC", "score": "Vs"},
+      {"teamA": "Japan", "teamB": "Lbeldi", "score": "Vs"}
     ],
   
     // GW8
@@ -180,7 +187,7 @@ const matches = [
       {"teamA": "kolchi dyal Allah", "teamB": "7O7O", "score": "Vs"},
       {"teamA": "Aquile06", "teamB": "zlala", "score": "Vs"},
       {"teamA": "CR flamengo", "teamB": "Wydad Ac", "score": "Vs"},
-      {"teamA": "Ross country FC", "teamB": "Zizozazi", "score": "Vs"},
+      {"teamA": "Japan", "teamB": "Stutman", "score": "Vs"}, // Fixed duplicate
       {"teamA": "River Plate", "teamB": "Marseille", "score": "Vs"},
       {"teamA": "Itihad zaghalghal", "teamB": "المدمر 33", "score": "Vs"},
       {"teamA": "L3zawa", "teamB": "Maroc", "score": "Vs"},
@@ -188,22 +195,23 @@ const matches = [
       {"teamA": "T9aba", "teamB": "Stutman", "score": "Vs"},
       {"teamA": "Hatiem", "teamB": "5yearsjail", "score": "Vs"},
       {"teamA": "العذاب اخويا العذاب", "teamB": "Inter", "score": "Vs"},
-      {"teamA": "RTLGK", "teamB": "L9irch", "score": "Vs"}
+      {"teamA": "RTLGK", "teamB": "L9irch", "score": "Vs"},
+      {"teamA": "Ross country FC", "teamB": "Kolchitach", "score": "Vs"}
     ],
   // Play offs
-  []
-  ,
+  [],
   // Round of 16
+  [], 
+  // Quarter
   [],
-  // Quarter 
+  // Semi
   [],
-  // Semi 
-  [],
-  // final 
+  // final (keep as is)
   {
-    teamA : 'SF1',
-    teamB : 'SF2',
-    score : 'Vs'
+    teamA: 'SF1',
+    teamB: 'SF2',
+    score: 'Vs'
   }
-]
-export default matches
+];
+
+export default matches;

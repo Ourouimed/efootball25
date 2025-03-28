@@ -267,10 +267,10 @@ const teams = [
     {
         teamName: 'Adamlb',
         teamId: 'Adamlb',
-        GF: 0,
-        GA: 0,
+        GF: 3,
+        GA: 3,
         wins: 0,
-        draws: 0,
+        draws: 1,
         losses: 0,
         KOGF : 0 ,
         KOGA : 0
@@ -334,11 +334,11 @@ const teams = [
     {
         teamName: 'Manchester United',
         teamId: 'n4diiir',
-        GF: 0,
-        GA: 0,
+        GF: 1,
+        GA: 3,
         wins: 0,
         draws: 0,
-        losses: 0,
+        losses: 1,
         KOGF : 0 ,
         KOGA : 0
     },
@@ -356,9 +356,9 @@ const teams = [
     {
         teamName: 'Real Madrid',
         teamId: 'Adam',
-        GF: 0,
-        GA: 0,
-        wins: 0,
+        GF: 3,
+        GA: 1,
+        wins: 1,
         draws: 0,
         losses: 0,
         KOGF : 0 ,
@@ -379,11 +379,11 @@ const teams = [
     {
         teamName: 'Pala',
         teamId: 'PMKaymeen',
-        GF: 1,
-        GA: 3,
+        GF: 3,
+        GA: 8,
         wins: 0,
         draws: 0,
-        losses: 1,
+        losses: 2,
         KOGF : 0 ,
         KOGA : 0
     }
@@ -414,9 +414,9 @@ const teams = [
     {
         teamName: 'Wydad Ac',
         teamId: 'GhdaGhda',
-        GF: 0,
-        GA: 0,
-        wins: 0,
+        GF: 5,
+        GA: 2,
+        wins: 1,
         draws: 0,
         losses: 0,
         KOGF : 0 ,
@@ -448,6 +448,28 @@ const teams = [
     {
         teamName: 'Zizozazi',
         teamId: 'Zizo',
+        GF: 3,
+        GA: 3,
+        wins: 0,
+        draws: 1,
+        losses: 0,
+        KOGF : 0 ,
+        KOGA : 0
+    },
+    {
+        teamName: 'Kolchitach',
+        teamId: 'Kolchitach',
+        GF: 0,
+        GA: 0,
+        wins: 0,
+        draws: 0,
+        losses: 0,
+        KOGF : 0 ,
+        KOGA : 0
+    },
+    {
+        teamName: 'JAPAN',
+        teamId: 'BYAKUYA_BY',
         GF: 0,
         GA: 0,
         wins: 0,
