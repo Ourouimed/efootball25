@@ -59,9 +59,9 @@ const teams = [
     {
         teamName: 'المدمر 33',
         teamId: 'NO9TA',
-        GF: 0,
-        GA: 0,
-        wins: 0,
+        GF: 12,
+        GA: 3,
+        wins: 2,
         draws: 0,
         losses: 0,
         KOGF : 0 ,
@@ -95,9 +95,9 @@ const teams = [
     {
         teamName: 'Ro3b🫣',
         teamId: 'To9os ifri9ya',
-        GF: 0,
-        GA: 0,
-        wins: 0,
+        GF: 2,
+        GA: 1,
+        wins: 1,
         draws: 0,
         losses: 0,
         KOGF : 0 ,
@@ -119,11 +119,11 @@ const teams = [
     {
         teamName: 'Itihad zaghalghal',
         teamId: 'Aymen oudich',
-        GF: 0,
-        GA: 0,
+        GF: 2,
+        GA: 5,
         wins: 0,
         draws: 0,
-        losses: 0,
+        losses: 1,
         KOGF : 0 ,
         KOGA : 0
     }
@@ -143,11 +143,11 @@ const teams = [
     {
         teamName: 'zlala',
         teamId: 'Tammar',
-        GF: 0,
-        GA: 0,
-        wins: 0,
+        GF: 11,
+        GA: 8,
+        wins: 2,
         draws: 0,
-        losses: 0,
+        losses: 2,
         KOGF : 0 ,
         KOGA : 0
     },
@@ -174,7 +174,7 @@ const teams = [
         KOGA : 0
     } ,
     {
-        teamName: 'Madrid',
+        teamName: 'L3zawa',
         teamId: 'pop',
         GF: 0,
         GA: 0,
@@ -187,9 +187,9 @@ const teams = [
     {
         teamName: 'T9aba',
         teamId: 'Fost3er',
-        GF: 0,
+        GF: 7,
         GA: 0,
-        wins: 0,
+        wins: 1,
         draws: 0,
         losses: 0,
         KOGF : 0 ,
@@ -244,11 +244,11 @@ const teams = [
     {
         teamName: 'Arsenal',
         teamId: 'ernesto_III',
-        GF: 0,
-        GA: 0,
+        GF: 1,
+        GA: 10,
         wins: 0,
         draws: 0,
-        losses: 0,
+        losses: 2,
         KOGF : 0 ,
         KOGA : 0
     },
@@ -280,21 +280,21 @@ const teams = [
         teamName: 'Hatiem',
         teamId: 'Cactushtiem',
         GF: 0,
-        GA: 0,
+        GA: 7,
         wins: 0,
         draws: 0,
-        losses: 0,
+        losses: 1,
         KOGF : 0 ,
         KOGA : 0
     },
     {
         teamName: 'FAR',
         teamId: 'Tareeq_uar',
-        GF: 0,
-        GA: 0,
-        wins: 0,
+        GF: 5,
+        GA: 5,
+        wins: 1,
         draws: 0,
-        losses: 0,
+        losses: 1,
         KOGF : 0 ,
         KOGA : 0
     },
@@ -368,6 +368,41 @@ const teams = [
     {
         teamName: 'PSG',
         teamId: 'R_A_Y_A-NE',
+        GF: 3,
+        GA: 2,
+        wins: 1,
+        draws: 0,
+        losses: 0,
+        KOGF : 0 ,
+        KOGA : 0
+    },
+    {
+        teamName: 'Pala',
+        teamId: 'PMKaymeen',
+        GF: 1,
+        GA: 3,
+        wins: 0,
+        draws: 0,
+        losses: 1,
+        KOGF : 0 ,
+        KOGA : 0
+    }
+    ,
+    {
+        teamName: 'Saudi arabia',
+        teamId: 'Yahya05',
+        GF: 0,
+        GA: 0,
+        wins: 0,
+        draws: 0,
+        losses: 0,
+        KOGF : 0 ,
+        KOGA : 0
+    }
+    ,
+    {
+        teamName: 'Inter',
+        teamId: 'TheLegend',
         GF: 0,
         GA: 0,
         wins: 0,
@@ -377,8 +412,42 @@ const teams = [
         KOGA : 0
     },
     {
-        teamName: 'Pala',
-        teamId: 'PMKaymeen',
+        teamName: 'Wydad Ac',
+        teamId: 'GhdaGhda',
+        GF: 0,
+        GA: 0,
+        wins: 0,
+        draws: 0,
+        losses: 0,
+        KOGF : 0 ,
+        KOGA : 0
+    }
+    ,
+    {
+        teamName: 'kolchi dyal Allah',
+        teamId: 'saadNotnice',
+        GF: 0,
+        GA: 0,
+        wins: 0,
+        draws: 0,
+        losses: 0,
+        KOGF : 0 ,
+        KOGA : 0
+    } , 
+    {
+        teamName: '5yearsjail',
+        teamId: 'S.C',
+        GF: 0,
+        GA: 0,
+        wins: 0,
+        draws: 0,
+        losses: 0,
+        KOGF : 0 ,
+        KOGA : 0
+    },
+    {
+        teamName: 'Zizozazi',
+        teamId: 'Zizo',
         GF: 0,
         GA: 0,
         wins: 0,
