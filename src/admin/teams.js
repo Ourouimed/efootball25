@@ -24,9 +24,9 @@ const teams = [
     {
         teamName: 'Raja atheltic club',
         teamId: 'Lamtiri',
-        GF: 0,
-        GA: 4,
-        wins: 0,
+        GF: 2,
+        GA: 5,
+        wins: 1,
         draws: 0,
         losses: 1,
         KOGF : 0 ,
@@ -72,10 +72,10 @@ const teams = [
         teamName: 'Mamsalich',
         teamId: 'Mamsalich',
         GF: 0,
-        GA: 0,
+        GA: 6,
         wins: 0,
         draws: 0,
-        losses: 0,
+        losses: 1,
         KOGF : 0 ,
         KOGA : 0
     }
@@ -143,9 +143,9 @@ const teams = [
     {
         teamName: 'abdo tiger',
         teamId: 'Tammar',
-        GF: 11,
-        GA: 12,
-        wins: 2,
+        GF: 14,
+        GA: 14,
+        wins: 3,
         draws: 0,
         losses: 3,
         KOGF : 0 ,
@@ -198,11 +198,11 @@ const teams = [
     {
         teamName: 'Bayern Munich',
         teamId: 'SVG AS FUCK',
-        GF: 9,
-        GA: 5,
+        GF: 11,
+        GA: 8,
         wins: 2,
         draws: 0,
-        losses: 0,
+        losses: 1,
         KOGF : 0 ,
         KOGA : 0
     },
