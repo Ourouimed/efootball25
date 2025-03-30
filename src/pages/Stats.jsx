@@ -4,6 +4,7 @@ import teams from '../admin/teams'
 import TopScorer from "../components/TopScorer";
 import Knockout from "../components/Knockout";
 import {SportsSoccer} from '@mui/icons-material';
+import Timer from '../components/Timer'
 import { useState } from "react";
 const Stats = ()=> {
     const [ViewMode , setViewMode] = useState('standing')
@@ -18,7 +19,9 @@ const Stats = ()=> {
                 {ViewMode == 'standing' ? <Standings /> :<Knockout /> }
             </div>
             <div>
+                <Timer />
                 <div className="bg-fourth mb-4 p-4 rounded-lg shadow-lg flex justify-between items-center">
+                   
                     <div className="bg-primary rounded-full p-3 flex items-center justify-center">
                         <SportsSoccer className="text-white text-3xl" />
                     </div>

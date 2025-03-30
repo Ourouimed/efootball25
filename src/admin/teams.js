@@ -2,22 +2,11 @@ const teams = [
     {
         teamName: 'FC BARCELONA',
         teamId: 'RAPHAA',
-        GF: 4,
-        GA: 8,
+        GF: 5,
+        GA: 12,
         wins: 1,
         draws: 0,
-        losses: 1,
-        KOGF : 0 ,
-        KOGA : 0
-    },
-    {
-        teamName: 'BYE4',
-        teamId: 'BYE4',
-        GF: 1,
-        GA: 5,
-        wins: 0,
-        draws: 0,
-        losses: 1,
+        losses: 2,
         KOGF : 0 ,
         KOGA : 0
     },
@@ -31,25 +20,14 @@ const teams = [
         losses: 1,
         KOGF : 0 ,
         KOGA : 0
-    },
-    {
-        teamName: 'Ross country FC',
-        teamId: 'Hicham jerando',
-        GF: 0,
-        GA: 0,
-        wins: 0,
-        draws: 0,
-        losses: 0,
-        KOGF : 0 ,
-        KOGA : 0
     }
     ,
     {
         teamName: 'F PES ANA SULTAN',
         teamId: 'KAIDO_MORRI',
-        GF: 13,
-        GA: 6,
-        wins: 2,
+        GF: 19,
+        GA: 8,
+        wins: 3,
         draws: 0,
         losses: 1,
         KOGF : 0 ,
@@ -59,11 +37,11 @@ const teams = [
     {
         teamName: 'المدمر 33',
         teamId: 'NO9TA',
-        GF: 30,
-        GA: 11,
-        wins: 5,
+        GF: 39,
+        GA: 14,
+        wins: 6,
         draws: 0,
-        losses: 1,
+        losses: 2,
         KOGF : 0 ,
         KOGA : 0
     }
@@ -76,18 +54,6 @@ const teams = [
         wins: 0,
         draws: 0,
         losses: 1,
-        KOGF : 0 ,
-        KOGA : 0
-    }
-    ,
-    {
-        teamName: 'Ac milan',
-        teamId: '3mek_d',
-        GF: 0,
-        GA: 0,
-        wins: 0,
-        draws: 0,
-        losses: 0,
         KOGF : 0 ,
         KOGA : 0
     }
@@ -119,11 +85,11 @@ const teams = [
     {
         teamName: 'Med Fc',
         teamId: 'Medox24',
-        GF: 4,
-        GA: 14,
+        GF: 5,
+        GA: 26,
         wins: 0,
         draws: 0,
-        losses: 4,
+        losses: 6,
         KOGF : 0 ,
         KOGA : 0
     }
@@ -139,8 +105,7 @@ const teams = [
         KOGF : 0 ,
         KOGA : 0
     }
-    ,
-    {
+    ,{
         teamName: 'abdo tiger',
         teamId: 'Tammar',
         GF: 14,
@@ -154,9 +119,9 @@ const teams = [
     {
         teamName: 'Maroc',
         teamId: 'Hamza El almi',
-        GF: 3,
-        GA: 1,
-        wins: 1,
+        GF: 9,
+        GA: 3,
+        wins: 2,
         draws: 0,
         losses: 0,
         KOGF : 0 ,
@@ -187,9 +152,9 @@ const teams = [
     {
         teamName: 'T9aba',
         teamId: 'Fost3er',
-        GF: 25,
-        GA: 16,
-        wins: 5,
+        GF: 32,
+        GA: 19,
+        wins: 7,
         draws: 0,
         losses: 1,
         KOGF : 0 ,
@@ -221,9 +186,9 @@ const teams = [
     {
         teamName: 'River Plate',
         teamId: 'Ostora9',
-        GF: 6,
-        GA: 14,
-        wins: 1,
+        GF: 9,
+        GA: 16,
+        wins: 2,
         draws: 0,
         losses: 2,
         KOGF : 0 ,
@@ -244,9 +209,9 @@ const teams = [
     {
         teamName: 'Arsenal',
         teamId: 'ernesto_III',
-        GF: 3,
-        GA: 10,
-        wins: 1,
+        GF: 8,
+        GA: 13,
+        wins: 2,
         draws: 0,
         losses: 2,
         KOGF : 0 ,
@@ -255,9 +220,9 @@ const teams = [
     {
         teamName: 'habiboff',
         teamId: 'habiboff',
-        GF: 10,
+        GF: 15,
         GA: 9,
-        wins: 1,
+        wins: 2,
         draws: 0,
         losses: 2,
         KOGF : 0 ,
@@ -267,11 +232,11 @@ const teams = [
     {
         teamName: 'Adamlb',
         teamId: 'Adamlb',
-        GF: 3,
-        GA: 5,
+        GF: 8,
+        GA: 8,
         wins: 0,
         draws: 1,
-        losses: 1,
+        losses: 2,
         KOGF : 0 ,
         KOGA : 0
     }
@@ -279,11 +244,11 @@ const teams = [
     {
         teamName: 'Hatiem',
         teamId: 'Cactushtiem',
-        GF: 0,
-        GA: 11,
+        GF: 2,
+        GA: 18,
         wins: 0,
         draws: 0,
-        losses: 2,
+        losses: 3,
         KOGF : 0 ,
         KOGA : 0
     },
@@ -304,39 +269,6 @@ const teams = [
         GF: 5,
         GA: 5,
         wins: 1,
-        draws: 0,
-        losses: 1,
-        KOGF : 0 ,
-        KOGA : 0
-    },
-    {
-        teamName: `Lbeldi`,
-        teamId: 'M_rwn_',
-        GF: 0,
-        GA: 0,
-        wins: 0,
-        draws: 0,
-        losses: 0,
-        KOGF : 0 ,
-        KOGA : 0
-    },
-    {
-        teamName: 'BYE3',
-        teamId: 'BYE3',
-        GF: 0,
-        GA: 0,
-        wins: 0,
-        draws: 0,
-        losses: 0,
-        KOGF : 0 ,
-        KOGA : 0
-    },
-    {
-        teamName: 'BYE1',
-        teamId: 'BYE2',
-        GF: 1,
-        GA: 3,
-        wins: 0,
         draws: 0,
         losses: 1,
         KOGF : 0 ,
@@ -366,24 +298,13 @@ const teams = [
     }
     ,
     {
-        teamName: 'BYE2',
-        teamId: 'BYE2',
-        GF: 3,
-        GA: 2,
-        wins: 1,
-        draws: 0,
-        losses: 0,
-        KOGF : 0 ,
-        KOGA : 0
-    },
-    {
         teamName: 'Pala',
         teamId: 'PMKaymeen',
-        GF: 13,
-        GA: 14,
-        wins: 2,
+        GF: 19,
+        GA: 21,
+        wins: 3,
         draws: 0,
-        losses: 3,
+        losses: 4,
         KOGF : 0 ,
         KOGA : 0
     }
@@ -424,43 +345,10 @@ const teams = [
     }
     ,
     {
-        teamName: 'kolchi dyal Allah',
-        teamId: 'saadNotnice',
-        GF: 0,
-        GA: 0,
-        wins: 0,
-        draws: 0,
-        losses: 0,
-        KOGF : 0 ,
-        KOGA : 0
-    } , 
-    {
         teamName: '5yearsjail',
         teamId: 'S.C',
-        GF: 0,
-        GA: 0,
-        wins: 0,
-        draws: 0,
-        losses: 0,
-        KOGF : 0 ,
-        KOGA : 0
-    },
-    {
-        teamName: 'Zizozazi',
-        teamId: 'Zizo',
-        GF: 3,
-        GA: 3,
-        wins: 0,
-        draws: 1,
-        losses: 0,
-        KOGF : 0 ,
-        KOGA : 0
-    },
-    {
-        teamName: 'Kolchitach',
-        teamId: 'Kolchitach',
-        GF: 0,
-        GA: 8,
+        GF: 1,
+        GA: 5,
         wins: 0,
         draws: 0,
         losses: 1,
@@ -468,11 +356,33 @@ const teams = [
         KOGA : 0
     },
     {
-        teamName: 'JAPAN',
-        teamId: 'BYAKUYA_BY',
-        GF: 0,
-        GA: 0,
+        teamName: 'Zizozazi',
+        teamId: 'Zizo',
+        GF: 4,
+        GA: 5,
         wins: 0,
+        draws: 1,
+        losses: 1,
+        KOGF : 0 ,
+        KOGA : 0
+    },
+    {
+        teamName: 'Kolchitach',
+        teamId: 'Kolchitach',
+        GF: 6,
+        GA: 16,
+        wins: 1,
+        draws: 0,
+        losses: 3,
+        KOGF : 0 ,
+        KOGA : 0
+    },
+    {
+        teamName: 'Japan',
+        teamId: 'BYAKUYA_BY',
+        GF: 13,
+        GA: 4,
+        wins: 3,
         draws: 0,
         losses: 0,
         KOGF : 0 ,
