@@ -162,7 +162,7 @@ const matches = [
       {"teamA": "Ac milan", "teamB": "Arsenal", "score": "Vs"},
       {"teamA": "abdo tiger", "teamB": "Med FC", "score": "5-2"},
       {"teamA": "Bayern Munich", "teamB": "7O7O", "score": "Vs"},
-      {"teamA": "T9aba", "teamB": "F PES ANA SULTAN", "score": "5-0"},
+      {"teamA": "T9aba", "teamB": "F PES ANA SULTAN", "score": "0-5"},
       {"teamA": "CR flamengo", "teamB": "Saudi arabia", "score": "Vs"},
       {"teamA": "habiboff", "teamB": "Hatiem", "score": "Vs"},
       {"teamA": "River Plate", "teamB": "العذاب اخويا العذاب", "score": "Vs"},
