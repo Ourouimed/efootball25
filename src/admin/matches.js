@@ -94,8 +94,7 @@ const matches = [
       {"teamA": "العذاب اخويا العذاب", "teamB": "Pala", "score": "4-3"},
       {"teamA": "Med FC", "teamB": "Arsenal", "score": "0-2"},
       {"teamA": "Saudi arabia", "teamB": "Inter", "score": "Vs"},
-      {"teamA": "River Plate", "teamB": "
-        🫣", "score": "Vs"},
+      {"teamA": "River Plate", "teamB": "Ro3b🫣", "score": "Vs"},
       {"teamA": "Raja atheltic club", "teamB": "Adamlb", "score": "Vs"},
       {"teamA": "FC BARCELONA", "teamB": "Kolchitach", "score": "1-4"},
       {"teamA": "Wydad Ac", "teamB": "Bayern Munich", "score": "Vs"},
@@ -110,7 +109,7 @@ const matches = [
     [
       {"teamA": "River Plate", "teamB": "LOS REYES1!", "score": "Vs"},
       {"teamA": "Wydad Ac", "teamB": "L3zwa", "score": "1-3"},
-      {"teamA": "Raja atheltic club", "teamB": "Ro3b🫣", "score": "1-2"},
+      {"teamA": "Raja atheltic club", "teamB": "Ro3b🫣", "score": ""},
       {"teamA": "Hatiem", "teamB": "Zizozazi", "score": "Vs"},
       {"teamA": "Adamlb", "teamB": "CR flamengo", "score": "3-0"},
       {"teamA": "7O7O", "teamB": "habiboff", "score": "Vs"},
@@ -154,7 +153,7 @@ const matches = [
       {"teamA": "FAR", "teamB": "LOS REYES1!", "score": "Vs"},
       {"teamA": "Bayern Munich", "teamB": "Mamsalich", "score": "Vs"},
       {"teamA": "F PES ANA SULTAN", "teamB": "7O7O", "score": "Vs"},
-      {"teamA": "Ro3b🫣", "teamB": "Raja atheltic club", "score": "1-2"},
+      {"teamA": "Ro3b🫣", "teamB": "Raja atheltic club", "score": "Vs"},
       {"teamA": "Arsenal", "teamB": "habiboff", "score": "Vs"},
       {"teamA": "Adamlb", "teamB": "Saudi arabia", "score": "Vs"},
       {"teamA": "L9irch", "teamB": "abdo tiger", "score": "Vs"},
