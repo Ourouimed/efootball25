@@ -13,11 +13,11 @@ const teams = [
     {
         teamName: 'Raja atheltic club',
         teamId: 'Lamtiri',
-        GF: 2,
-        GA: 5,
+        GF: 3,
+        GA: 7,
         wins: 1,
         draws: 0,
-        losses: 1,
+        losses: 2,
         KOGF : 0 ,
         KOGA : 0
     }
@@ -61,11 +61,11 @@ const teams = [
     {
         teamName: 'Ro3b🫣',
         teamId: 'To9os ifri9ya',
-        GF: 18,
-        GA: 10,
-        wins: 5,
+        GF: 23,
+        GA: 13,
+        wins: 6,
         draws: 0,
-        losses: 0,
+        losses: 1,
         KOGF : 0 ,
         KOGA : 0
     }
