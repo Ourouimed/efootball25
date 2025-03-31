@@ -25,9 +25,9 @@ const teams = [
     {
         teamName: 'F PES ANA SULTAN',
         teamId: 'KAIDO_MORRI',
-        GF: 26,
-        GA: 10,
-        wins: 4,
+        GF: 31,
+        GA: 13,
+        wins: 5,
         draws: 0,
         losses: 1,
         KOGF : 0 ,
@@ -358,11 +358,11 @@ const teams = [
     {
         teamName: 'Zizozazi',
         teamId: 'Zizo',
-        GF: 6,
-        GA: 6,
+        GF: 9,
+        GA: 15,
         wins: 1,
         draws: 1,
-        losses: 1,
+        losses: 2,
         KOGF : 0 ,
         KOGA : 0
     },

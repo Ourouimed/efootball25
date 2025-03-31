@@ -53,7 +53,7 @@ const matches = [
       {"teamA": "Arsenal", "teamB": "Adamlb", "score": "5-3"},
       {"teamA": "Real Madrid", "teamB": "7O7O", "score": "Vs"},
       {"teamA": "Ro3b🫣", "teamB": "Hatiem", "score": "4-0"},
-      {"teamA": "F PES ANA SULTAN", "teamB": "Zizozazi", "score": "Vs"},
+      {"teamA": "F PES ANA SULTAN", "teamB": "Zizozazi", "score": "5-3"},
       {"teamA": "L9irch", "teamB": "Stutman", "score": "Vs"},
       {"teamA": "5yearsjail", "teamB": "Raja atheltic club", "score": "Vs"},
       {"teamA": "BYE4", "teamB": "المدمر 33", "score": "1-5"},
