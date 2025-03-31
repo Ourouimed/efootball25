@@ -7,7 +7,7 @@ const matches = [
       {"teamA": "CR flamengo", "teamB": "المدمر 33", "score": "0-3"},
       {"teamA": "Arsenal", "teamB": "FAR", "score": "0-3"},
       {"teamA": "L9irch", "teamB": "Real Madrid", "score": "10-4"},
-      {"teamA": "Raja atheltic club", "teamB": "L3zwa", "score": "4-0"},
+      {"teamA": "Raja atheltic club", "teamB": "L3zwa", "score": "0-4"},
       {"teamA": "Maroc", "teamB": "Pala", "score": "6-2"},
       {"teamA": "Wydad Ac", "teamB": "Ro3b🫣", "score": "2-3"},
       {"teamA": "FC BARCELONA", "teamB": "Marseille", "score": "Vs"},
