@@ -65,7 +65,7 @@ const matches = [
   
     // GW4
     [
-      {"teamA": "Saudi arabia", "teamB": "Med FC", "score": "Vs"},
+      {"teamA": "Saudi arabia", "teamB": "Med FC", "score": "2°0"},
       {"teamA": "7O7O", "teamB": "Real Madrid", "score": "Vs"},
       {"teamA": "Inter", "teamB": "5yearsjail", "score": "Vs"},
       {"teamA": "Ro3b🫣", "teamB": "abdo tiger", "score": "2-1"},

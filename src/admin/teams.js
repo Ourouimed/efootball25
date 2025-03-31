@@ -86,10 +86,10 @@ const teams = [
         teamName: 'Med Fc',
         teamId: 'Medox24',
         GF: 5,
-        GA: 26,
+        GA: 28,
         wins: 0,
         draws: 0,
-        losses: 6,
+        losses: 7,
         KOGF : 0 ,
         KOGA : 0
     }
@@ -312,9 +312,9 @@ const teams = [
     {
         teamName: 'Saudi arabia',
         teamId: 'Yahya05',
-        GF: 2,
+        GF: 4,
         GA: 1,
-        wins: 1,
+        wins: 2,
         draws: 0,
         losses: 0,
         KOGF : 0 ,
