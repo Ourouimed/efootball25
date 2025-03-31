@@ -26,7 +26,7 @@ const matches = [
       {"teamA": "المدمر 33", "teamB": "T9aba", "score": "3-5"},
       {"teamA": "BYE2", "teamB": "abdo tiger", "score": "3-2"},
       {"teamA": "F PES ANA SULTAN", "teamB": "Bayern Munich", "score": "3-5"},
-      {"teamA": "Arsenal", "teamB": "Maroc", "score": "5-1"},
+      {"teamA": "Arsenal", "teamB": "Maroc", "score": "1-5"},
       {"teamA": "Wydad Ac", "teamB": "Pala", "score": "5-2"},
       {"teamA": "Zizozazi", "teamB": "Raja atheltic club", "score": "Vs"},
       {"teamA": "Kolchitach", "teamB": "FAR", "score": "Vs"},
