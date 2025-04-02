@@ -78,8 +78,8 @@ const teams = [
         wins: 6,
         draws: 0,
         losses: 2,
-        KOGF : 0 ,
-        KOGA : 0
+        KOGF : 7 ,
+        KOGA : 3
     }
     ,
     {
@@ -113,8 +113,8 @@ const teams = [
         wins: 4,
         draws: 0,
         losses: 4,
-        KOGF : 0 ,
-        KOGA : 0
+        KOGF : 7 ,
+        KOGA : 3
     },
     {
         teamName: 'Maroc',
@@ -124,8 +124,8 @@ const teams = [
         wins: 5,
         draws: 1,
         losses: 2,
-        KOGF : 0 ,
-        KOGA : 0
+        KOGF : 4 ,
+        KOGA : 3
     },
     {
         teamName: 'LOS REYES1!',
@@ -135,8 +135,8 @@ const teams = [
         wins: 5,
         draws: 1,
         losses: 2,
-        KOGF : 0 ,
-        KOGA : 0
+        KOGF : 3 ,
+        KOGA : 7
     } ,
     {
         teamName: 'L3zwa',
@@ -146,7 +146,7 @@ const teams = [
         wins: 5,
         draws: 0,
         losses: 3,
-        KOGF : 0 ,
+        KOGF : 3 ,
         KOGA : 0
     },
     {
@@ -225,8 +225,8 @@ const teams = [
         wins: 6,
         draws: 0,
         losses: 2,
-        KOGF : 0 ,
-        KOGA : 0
+        KOGF : 6 ,
+        KOGA : 2
     }
     ,
     {
@@ -260,7 +260,7 @@ const teams = [
         wins: 2,
         draws: 2,
         losses: 4,
-        KOGF : 0 ,
+        KOGF : 2 ,
         KOGA : 0
     },
     {
@@ -305,8 +305,8 @@ const teams = [
         wins: 3,
         draws: 1,
         losses: 4,
-        KOGF : 0 ,
-        KOGA : 0
+        KOGF : 2 ,
+        KOGA : 6
     }
     ,
     {
@@ -352,8 +352,8 @@ const teams = [
         wins: 5,
         draws: 0,
         losses: 3,
-        KOGF : 0 ,
-        KOGA : 0
+        KOGF : 3 ,
+        KOGA : 7
     },
     {
         teamName: 'Zizozazi',
@@ -363,8 +363,8 @@ const teams = [
         wins: 1,
         draws: 3,
         losses: 4,
-        KOGF : 0 ,
-        KOGA : 0
+        KOGF : 3 ,
+        KOGA : 4
     },
     {
         teamName: 'Kolchitach',
