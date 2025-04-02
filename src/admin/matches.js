@@ -183,12 +183,12 @@ const matches = [
   {
     "teamA": "FC Barcelona",
     "teamB": "Stutman",
-    "score": "Vs"
+    "score": "3-0"
   },
   {
     "teamA": "River Plate",
     "teamB": "Wydad Ac",
-    "score": "Vs"
+    "score": "6-10"
   },
   {
     "teamA": "5yearsJail",
@@ -214,7 +214,7 @@ const matches = [
 // Round of 16
 [
   {
-    "teamA": "FC Barcelona/stutman",
+    "teamA": "FC Barcelona",
     "teamB": "Japan",
     "score": "Vs"
   },
@@ -234,7 +234,7 @@ const matches = [
     "score": "Vs"
   },
   {
-    "teamA": "River/wydad",
+    "teamA": "wydad",
     "teamB": "Bayern",
     "score": "Vs"
   },

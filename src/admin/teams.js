@@ -7,7 +7,7 @@ const teams = [
         wins: 4,
         draws: 0,
         losses: 4,
-        KOGF : 0 ,
+        KOGF : 3 ,
         KOGA : 0
     },
     {
@@ -180,7 +180,7 @@ const teams = [
         draws: 0,
         losses: 5,
         KOGF : 0 ,
-        KOGA : 0
+        KOGA : 3
     }
     ,
     {
@@ -191,8 +191,8 @@ const teams = [
         wins: 3,
         draws: 0,
         losses: 5,
-        KOGF : 0 ,
-        KOGA : 0
+        KOGF : 6 ,
+        KOGA : 10
     }
     ,
     {
@@ -340,8 +340,8 @@ const teams = [
         wins: 3,
         draws: 2,
         losses: 3,
-        KOGF : 0 ,
-        KOGA : 0
+        KOGF : 10 ,
+        KOGA : 6
     }
     ,
     {
