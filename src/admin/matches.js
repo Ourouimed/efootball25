@@ -231,7 +231,7 @@ const matches = [
   {
     "teamA": "Abdo tiger",
     "teamB": "ro3b",
-    "score": "2-8"
+    "score": "8-2"
   },
   {
     "teamA": "wydad",
