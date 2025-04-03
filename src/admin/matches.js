@@ -183,7 +183,7 @@ const matches = [
   {
     "teamA": "FC Barcelona",
     "teamB": "Stutman",
-    "score": "3-0"
+    "score": "1-6"
   },
   {
     "teamA": "River Plate",
@@ -214,7 +214,7 @@ const matches = [
 // Round of 16
 [
   {
-    "teamA": "FC Barcelona",
+    "teamA": "Stutman",
     "teamB": "Japan",
     "score": "Vs"
   },
@@ -231,7 +231,7 @@ const matches = [
   {
     "teamA": "Abdo tiger",
     "teamB": "ro3b",
-    "score": "Vs"
+    "score": "2-8"
   },
   {
     "teamA": "wydad",

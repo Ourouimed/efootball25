@@ -7,8 +7,8 @@ const teams = [
         wins: 4,
         draws: 0,
         losses: 4,
-        KOGF : 3 ,
-        KOGA : 0
+        KOGF : 1,
+        KOGA : 6
     },
     {
         teamName: 'Raja atheltic club',
@@ -66,8 +66,8 @@ const teams = [
         wins: 7,
         draws: 0,
         losses: 1,
-        KOGF : 0 ,
-        KOGA : 0
+        KOGF : 2 ,
+        KOGA : 8
     }
     ,
     {
@@ -113,8 +113,8 @@ const teams = [
         wins: 4,
         draws: 0,
         losses: 4,
-        KOGF : 7 ,
-        KOGA : 3
+        KOGF : 15 ,
+        KOGA : 5
     },
     {
         teamName: 'Maroc',
@@ -179,8 +179,8 @@ const teams = [
         wins: 3,
         draws: 0,
         losses: 5,
-        KOGF : 0 ,
-        KOGA : 3
+        KOGF : 6,
+        KOGA : 1
     }
     ,
     {
