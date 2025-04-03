@@ -146,8 +146,8 @@ const teams = [
         wins: 5,
         draws: 0,
         losses: 3,
-        KOGF : 3 ,
-        KOGA : 0
+        KOGF : 7 ,
+        KOGA : 5
     },
     {
         teamName: 'T9aba',
@@ -157,8 +157,8 @@ const teams = [
         wins: 7,
         draws: 0,
         losses: 1,
-        KOGF : 0 ,
-        KOGA : 0
+        KOGF : 5 ,
+        KOGA : 4
     },
     {
         teamName: 'Bayern Munich',
