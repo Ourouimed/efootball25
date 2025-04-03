@@ -19,7 +19,6 @@ const Standings = ()=>{
                 <th className='text-center'>Points</th>
             </tr>
         </thead>
-
         <tbody>
             {standings.map((team, index) => (
                 <tr key={index} className={`hover:bg-slate-100 ${index < 8 ? 'top-team' : index < 24  ? 'play-off': ''}`}>

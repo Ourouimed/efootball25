@@ -30,8 +30,8 @@ const teams = [
         wins: 7,
         draws: 0,
         losses: 1,
-        KOGF : 0 ,
-        KOGA : 0
+        KOGF : 4 ,
+        KOGA : 2
     }
     ,
     {
@@ -78,8 +78,8 @@ const teams = [
         wins: 6,
         draws: 0,
         losses: 2,
-        KOGF : 7 ,
-        KOGA : 3
+        KOGF : 11 ,
+        KOGA : 7
     }
     ,
     {
@@ -102,8 +102,8 @@ const teams = [
         wins: 7,
         draws: 0,
         losses: 1,
-        KOGF : 0 ,
-        KOGA : 0
+        KOGF : 4 ,
+        KOGA : 4
     }
     ,{
         teamName: 'abdo tiger',
@@ -124,8 +124,8 @@ const teams = [
         wins: 5,
         draws: 1,
         losses: 2,
-        KOGF : 4 ,
-        KOGA : 3
+        KOGF : 6 ,
+        KOGA : 7
     },
     {
         teamName: 'LOS REYES1!',

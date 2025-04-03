@@ -241,7 +241,7 @@ const matches = [
   {
     "teamA": "Maroc",
     "teamB": "F PES ANA SULTAN",
-    "score": "Vs"
+    "score": "2-4"
   },
   {
     "teamA": "L3zwa",
@@ -251,14 +251,45 @@ const matches = [
   {
     "teamA": "L9irch",
     "teamB": "العذاب اخويا العذاب",
-    "score": "Vs"
+    "score": "(p)4-4"
   },
 ], 
 // Quarter
-[],
+[
+  {
+    teamA : 'F PES ANA SULTAN',
+    teamB : 'habiboff/المدمر 33',
+    score : 'Vs'
+  },
+  {
+    teamA :'T9aba',
+    teamB : 'Abdo tiger',
+    score : 'Vs'
+  },
+  {
+    teamA : 'Wydad/Bayern',
+    teamB : 'L9irch',
+    score : 'Vs'
+  },
+  {
+    teamA : 'Far/SaudiArabia',
+    teamB : 'Stutman/Japan',
+    score : 'Vs'
+  }
+],
 // Semi
-[],
-// final (keep as is)
+[
+  {
+    teamA : 'QF1',
+    teamB : 'QF3',
+    score : 'Vs'
+  },
+  {
+    teamA : 'QF2',
+    teamB : 'QF4',
+    score : 'Vs'
+  }
+],
 {
   teamA: 'SF1',
   teamB: 'SF2',
