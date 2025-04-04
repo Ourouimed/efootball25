@@ -157,8 +157,8 @@ const teams = [
         wins: 7,
         draws: 0,
         losses: 1,
-        KOGF : 5 ,
-        KOGA : 4
+        KOGF : 9 ,
+        KOGA : 7
     },
     {
         teamName: 'Bayern Munich',
@@ -169,7 +169,7 @@ const teams = [
         draws: 0,
         losses: 1,
         KOGF : 0 ,
-        KOGA : 0
+        KOGA : 3
     },
     {
         teamName: 'Stutman',
@@ -179,8 +179,8 @@ const teams = [
         wins: 3,
         draws: 0,
         losses: 5,
-        KOGF : 6,
-        KOGA : 1
+        KOGF : 8,
+        KOGA : 8
     }
     ,
     {
@@ -225,8 +225,8 @@ const teams = [
         wins: 6,
         draws: 0,
         losses: 2,
-        KOGF : 6 ,
-        KOGA : 2
+        KOGF : 9 ,
+        KOGA : 6
     }
     ,
     {
@@ -260,8 +260,8 @@ const teams = [
         wins: 2,
         draws: 2,
         losses: 4,
-        KOGF : 2 ,
-        KOGA : 0
+        KOGF : 7 ,
+        KOGA : 6
     },
     {
         teamName: 'Marseille',
@@ -317,8 +317,8 @@ const teams = [
         wins: 8,
         draws: 0,
         losses: 0,
-        KOGF : 0 ,
-        KOGA : 0
+        KOGF : 6 ,
+        KOGA : 5
     }
     ,
     {
@@ -340,7 +340,7 @@ const teams = [
         wins: 3,
         draws: 2,
         losses: 3,
-        KOGF : 10 ,
+        KOGF : 13 ,
         KOGA : 6
     }
     ,
@@ -385,8 +385,8 @@ const teams = [
         wins: 6,
         draws: 1,
         losses: 1,
-        KOGF : 0 ,
-        KOGA : 0
+        KOGF : 7 ,
+        KOGA : 1
     }
 ];
 

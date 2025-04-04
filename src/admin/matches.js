@@ -216,17 +216,17 @@ const matches = [
   {
     "teamA": "Stutman",
     "teamB": "Japan",
-    "score": "Vs"
+    "score": "1-7"
   },
   {
     "teamA": "Far",
     "teamB": "Saudi Arabia",
-    "score": "Vs"
+    "score": "5-6"
   },
   {
     "teamA": "habiboff",
     "teamB": "المدمر 33",
-    "score": "Vs"
+    "score": "3-4"
   },
   {
     "teamA": "Abdo tiger",
@@ -236,7 +236,7 @@ const matches = [
   {
     "teamA": "wydad",
     "teamB": "Bayern",
-    "score": "Vs"
+    "score": "3-0"
   },
   {
     "teamA": "Maroc",
@@ -258,7 +258,7 @@ const matches = [
 [
   {
     teamA : 'F PES ANA SULTAN',
-    teamB : 'habiboff/المدمر 33',
+    teamB : 'المدمر 33',
     score : 'Vs'
   },
   {
@@ -267,26 +267,26 @@ const matches = [
     score : 'Vs'
   },
   {
-    teamA : 'Wydad/Bayern',
+    teamA : 'Wydad',
     teamB : 'L9irch',
     score : 'Vs'
   },
   {
-    teamA : 'Far/SaudiArabia',
-    teamB : 'Stutman/Japan',
+    teamA : 'Saudi Arabia',
+    teamB : 'Japan',
     score : 'Vs'
   }
 ],
 // Semi
 [
   {
-    teamA : 'QF1',
-    teamB : 'QF3',
+    teamA : 'ANA SULTAN/المدمر',
+    teamB : 'Wydad/L9irch',
     score : 'Vs'
   },
   {
-    teamA : 'QF2',
-    teamB : 'QF4',
+    teamA : 'T9aba/Abdo tiger',
+    teamB : 'Saudi/Japan',
     score : 'Vs'
   }
 ],
