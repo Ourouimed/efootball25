@@ -5,8 +5,8 @@ const Timer = () => {
 
     function calculateTimeLeft() {
         const current = new Date().getTime();
-        let date = '2025-04-05'
-        let time = '2:00'
+        let date = '2025-04-07'
+        let time = '0:00'
         const deadline = new Date(`${date} ${time}`).getTime();
         const difference = deadline - current;
         
@@ -40,7 +40,7 @@ const Timer = () => {
     return (
         <div className="bg-white mb-4 rounded-md overflow-hidden max-w-4xl mx-auto">
             <h1 className='bg-fourth p-4 text-white text-xl text-center'>
-               Quarter Deadline
+               semi & final Deadline
             </h1>
             <div className="p-2 md:p-4">
                 {timeLeft.expired ? (

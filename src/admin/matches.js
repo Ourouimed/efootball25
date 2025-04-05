@@ -259,40 +259,40 @@ const matches = [
   {
     teamA : 'F PES ANA SULTAN',
     teamB : 'المدمر 33',
-    score : 'Vs'
+    score : '1-4'
   },
   {
     teamA :'T9aba',
     teamB : 'Abdo tiger',
-    score : 'Vs'
+    score : '7-8'
   },
   {
     teamA : 'Wydad',
     teamB : 'L9irch',
-    score : 'Vs'
+    score : '0-3'
   },
   {
     teamA : 'Saudi Arabia',
     teamB : 'Japan',
-    score : 'Vs'
+    score : '3-7'
   }
 ],
 // Semi
 [
   {
-    teamA : 'ANA SULTAN/المدمر',
-    teamB : 'Wydad/L9irch',
+    teamA : 'المدمر 33',
+    teamB : 'L9irch',
     score : 'Vs'
   },
   {
-    teamA : 'T9aba/Abdo tiger',
-    teamB : 'Saudi/Japan',
+    teamA : 'Abdo tiger',
+    teamB : 'Japan',
     score : 'Vs'
   }
 ],
 {
-  teamA: 'SF1',
-  teamB: 'SF2',
+  teamA: 'المدمر/L9irch',
+  teamB: 'Abdo tiger/Japan',
   score: 'Vs'
 }
 ];

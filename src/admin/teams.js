@@ -30,8 +30,8 @@ const teams = [
         wins: 7,
         draws: 0,
         losses: 1,
-        KOGF : 4 ,
-        KOGA : 2
+        KOGF : 5 ,
+        KOGA : 6
     }
     ,
     {
@@ -42,8 +42,8 @@ const teams = [
         wins: 6,
         draws: 0,
         losses: 2,
-        KOGF : 0 ,
-        KOGA : 0
+        KOGF : 12 ,
+        KOGA : 9
     }
     ,
     {
@@ -113,8 +113,8 @@ const teams = [
         wins: 4,
         draws: 0,
         losses: 4,
-        KOGF : 15 ,
-        KOGA : 5
+        KOGF : 23 ,
+        KOGA : 12
     },
     {
         teamName: 'Maroc',
@@ -157,8 +157,8 @@ const teams = [
         wins: 7,
         draws: 0,
         losses: 1,
-        KOGF : 9 ,
-        KOGA : 7
+        KOGF : 16 ,
+        KOGA : 15
     },
     {
         teamName: 'Bayern Munich',
@@ -317,8 +317,8 @@ const teams = [
         wins: 8,
         draws: 0,
         losses: 0,
-        KOGF : 6 ,
-        KOGA : 5
+        KOGF : 9 ,
+        KOGA : 12
     }
     ,
     {
@@ -385,8 +385,8 @@ const teams = [
         wins: 6,
         draws: 1,
         losses: 1,
-        KOGF : 7 ,
-        KOGA : 1
+        KOGF : 14 ,
+        KOGA : 4
     }
 ];
 
