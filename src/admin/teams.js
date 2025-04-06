@@ -102,8 +102,8 @@ const teams = [
         wins: 7,
         draws: 0,
         losses: 1,
-        KOGF : 15 ,
-        KOGA : 10
+        KOGF : 19 ,
+        KOGA : 11
     }
     ,{
         teamName: 'abdo tiger',
@@ -113,8 +113,8 @@ const teams = [
         wins: 4,
         draws: 0,
         losses: 4,
-        KOGF : 30 ,
-        KOGA : 14
+        KOGF : 31 ,
+        KOGA : 18
     },
     {
         teamName: 'Maroc',

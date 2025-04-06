@@ -293,7 +293,7 @@ const matches = [
 {
   teamA: 'L9irch',
   teamB: 'Abdo tiger',
-  score: 'Vs'
+  score: '4-1'
 }
 ];
 
