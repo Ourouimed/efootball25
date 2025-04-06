@@ -6,11 +6,11 @@ const Register = ()=> {
                     <h3 className="text-third font-bold text-2xl mb-2">
                         Register Now
                     </h3>
-                    <p className="text-white mb-2">Fill Your team informations</p>
+                    <p className="text-white mb-2">Aji T9yd f Ahsan Tournoi d pes f tarikh</p>
                     <div className="input-fields">
-                        <input type="text" name="team" placeholder="Your Team name" required/>
-                        <input type="text" name="userid" placeholder="Your Username" required/>
-                        <input type="number" name="phone" placeholder="Your Phone Number" required/>
+                        <input type="text" name="team" placeholder="Smit fr9tk" required/>
+                        <input type="text" name="userid" placeholder="smitk" required/>
+                        <input type="number" name="phone" placeholder="Nmra d tele" required/>
                     </div>
                     <button type="submit" className="font-bold bg-fourth text-2xl text-white rounded-md py-2 px-4 cursor-pointer mt-2 w-full">Register Team</button>
                 </form>
