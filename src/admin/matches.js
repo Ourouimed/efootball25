@@ -282,17 +282,17 @@ const matches = [
   {
     teamA : 'المدمر 33',
     teamB : 'L9irch',
-    score : 'Vs'
+    score : '6-11'
   },
   {
     teamA : 'Abdo tiger',
     teamB : 'Japan',
-    score : 'Vs'
+    score : '7-2'
   }
 ],
 {
-  teamA: 'المدمر/L9irch',
-  teamB: 'Abdo tiger/Japan',
+  teamA: 'L9irch',
+  teamB: 'Abdo tiger',
   score: 'Vs'
 }
 ];
