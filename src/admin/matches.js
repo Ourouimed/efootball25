@@ -44,7 +44,7 @@ const matches = [
     {
       "teamA": "العذاب اخويا العذاب",
       "teamB": "Japane",
-      "score": "Vs"
+      "score": "1-2"
     },
     {
       "teamA": "5yearsjail",
@@ -112,7 +112,7 @@ const matches = [
     {
       "teamA": "Lmasoniya",
       "teamB": "الخراي",
-      "score": "Vs"
+      "score": "4-2"
     },
     {
       "teamA": "F PES ANA SULTAN",
@@ -230,7 +230,7 @@ const matches = [
     {
       "teamA": "Lmasoniya",
       "teamB": "CR Flamengo",
-      "score": "Vs"
+      "score": "2-4"
     }
   ],
   // gw 4
@@ -371,7 +371,7 @@ const matches = [
     {
       "teamA": "Johny sins",
       "teamB": "العذاب اخويا العذاب",
-      "score": "Vs"
+      "score": "5-2"
     },
     {
       "teamA": "FAR BEFORE ABC",
@@ -404,7 +404,7 @@ const matches = [
     {
       "teamA": "Chill guy",
       "teamB": "Zooooooooooot",
-      "score": "Vs"
+      "score": "2-1"
     },
     {
       "teamA": "maroc",
@@ -419,7 +419,7 @@ const matches = [
     {
       "teamA": "Kolchi_tach",
       "teamB": "الخراي",
-      "score": "Vs"
+      "score": "5-9"
     },
     {
       "teamA": "L9irch",
