@@ -68,9 +68,9 @@ const teams = [
     {
         teamName: 'Zelala',
         teamId: 'Wassim the real',
-        GF: 4,
-        GA: 3,
-        wins: 1,
+        GF: 7,
+        GA: 4,
+        wins: 2,
         draws: 0,
         losses: 0,
         KOGF : 0 ,
@@ -145,11 +145,11 @@ const teams = [
     {
         teamName: 'Thelegend',
         teamId: 'Thelegend',
-        GF: 0,
-        GA: 0,
+        GF: 1,
+        GA: 3,
         wins: 0,
         draws: 0,
-        losses: 0,
+        losses: 1,
         KOGF : 0 ,
         KOGA : 0
     },
