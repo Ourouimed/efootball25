@@ -4,7 +4,7 @@ const matches = [
     {
       "teamA": "الخراي",
       "teamB": "Med Fc",
-      "score": "Vs"
+      "score": "5-5"
     },
     {
       "teamA": "Chill guy",
@@ -19,7 +19,7 @@ const matches = [
     {
       "teamA": "البوال",
       "teamB": "Thorny Dragon",
-      "score": "Vs"
+      "score": "3-0"
     },
     {
       "teamA": "FAR BEFORE ABC",
@@ -49,7 +49,7 @@ const matches = [
     {
       "teamA": "5yearsjail",
       "teamB": "F PES ANA SULTAN",
-      "score": "Vs"
+      "score": "2-0"
     },
     {
       "teamA": "L9irch",
@@ -64,17 +64,17 @@ const matches = [
     {
       "teamA": "CR Flamengo",
       "teamB": "نادي الجيش الملكي",
-      "score": "Vs"
+      "score": "5-3"
     },
     {
       "teamA": "FARI9 LMXRML",
       "teamB": "Saudi the second",
-      "score": "Vs"
+      "score": "5-2"
     },
     {
       "teamA": "Lmasoniya",
-      "teamB": "SIMO",
-      "score": "Vs"
+      "teamB": "Kolchi_tach",
+      "score": "1-1"
     }
   ],
   // gw 2
@@ -82,11 +82,16 @@ const matches = [
     {
       "teamA": "FARI9 LMXRML",
       "teamB": "Med Fc",
-      "score": "Vs"
+      "score": "2-1"
     },
     {
       "teamA": "Dos Kallas",
       "teamB": "Pala",
+      "score": "Vs"
+    },
+    {
+      "teamA": "CR Flamengo",
+      "teamB": "Olympique de Safi",
       "score": "Vs"
     },
     {
@@ -97,7 +102,7 @@ const matches = [
     {
       "teamA": "Milan",
       "teamB": "Thorny Dragon",
-      "score": "Vs"
+      "score": "3-0"
     },
     {
       "teamA": "العذاب اخويا العذاب",
@@ -145,7 +150,7 @@ const matches = [
       "score": "Vs"
     },
     {
-      "teamA": "SIMO",
+      "teamA": "Kolchi_tach",
       "teamB": "FAR BEFORE ABC",
       "score": "Vs"
     }
@@ -155,7 +160,7 @@ const matches = [
     {
       "teamA": "Johny sins",
       "teamB": "Med Fc",
-      "score": "Vs"
+      "score": "4-1"
     },
     {
       "teamA": "Thorny Dragon",
@@ -183,14 +188,14 @@ const matches = [
       "score": "Vs"
     },
     {
-      "teamA": "SIMO",
+      "teamA": "Kolchi_tach",
       "teamB": "Milan",
       "score": "Vs"
     },
     {
       "teamA": "Chrwit",
       "teamB": "صلي على محمد",
-      "score": "Vs"
+      "score": "5-1"
     },
     {
       "teamA": "ro3b☠️",
@@ -200,7 +205,7 @@ const matches = [
     {
       "teamA": "العذاب اخويا العذاب",
       "teamB": "F PES ANA SULTAN",
-      "score": "Vs"
+      "score": "2-1"
     },
     {
       "teamA": "FC BARCELONA",
@@ -215,7 +220,7 @@ const matches = [
     {
       "teamA": "FAR BEFORE ABC",
       "teamB": "5yearsjail",
-      "score": "Vs"
+      "score": "0-5"
     },
     {
       "teamA": "Chill guy",
@@ -233,7 +238,7 @@ const matches = [
     {
       "teamA": "صلي على محمد",
       "teamB": "Med Fc",
-      "score": "Vs"
+      "score": "1-1"
     },
     {
       "teamA": "L9irch",
@@ -253,12 +258,12 @@ const matches = [
     {
       "teamA": "Milan",
       "teamB": "البوال",
-      "score": "Vs"
+      "score": "2-3"
     },
     {
       "teamA": "Johny sins",
       "teamB": "الخراي",
-      "score": "Vs"
+      "score": "4-5"
     },
     {
       "teamA": "Thelegend",
@@ -273,22 +278,22 @@ const matches = [
     {
       "teamA": "ro3b☠️",
       "teamB": "F PES ANA SULTAN",
-      "score": "Vs"
+      "score": "1-4"
     },
     {
       "teamA": "Dos Kallas",
       "teamB": "5yearsjail",
-      "score": "Vs"
+      "score": "5-2"
     },
     {
       "teamA": "FAR BEFORE ABC",
       "teamB": "العذاب اخويا العذاب",
-      "score": "Vs"
+      "score": "1-4"
     },
     {
-      "teamA": "SIMO",
+      "teamA": "Kolchi_tach",
       "teamB": "FC BARCELONA",
-      "score": "Vs"
+      "score": "4-0"
     },
     {
       "teamA": "Olympique de Safi",
@@ -334,14 +339,14 @@ const matches = [
       "score": "Vs"
     },
     {
-      "teamA": "SIMO",
+      "teamA": "Kolchi_tach",
       "teamB": "Zelala",
       "score": "Vs"
     },
     {
       "teamA": "maroc",
       "teamB": "صلي على محمد",
-      "score": "Vs"
+      "score": "4-5"
     },
     {
       "teamA": "Chill guy",
@@ -389,7 +394,7 @@ const matches = [
     {
       "teamA": "Dos Kallas",
       "teamB": "Med Fc",
-      "score": "Vs"
+      "score": "2-0"
     },
     {
       "teamA": "CR Flamengo",
@@ -412,19 +417,19 @@ const matches = [
       "score": "Vs"
     },
     {
-      "teamA": "SIMO",
+      "teamA": "Kolchi_tach",
       "teamB": "الخراي",
       "score": "Vs"
     },
     {
       "teamA": "L9irch",
       "teamB": "Zelala",
-      "score": "Vs"
+      "score": "3-4"
     },
     {
       "teamA": "F PES ANA SULTAN",
       "teamB": "Milan",
-      "score": "Vs"
+      "score": "1-0"
     },
     {
       "teamA": "Olympique de Safi",
@@ -449,7 +454,7 @@ const matches = [
     {
       "teamA": "Saudi the second",
       "teamB": "العذاب اخويا العذاب",
-      "score": "Vs"
+      "score": "0-3"
     },
     {
       "teamA": "FAR BEFORE ABC",
@@ -472,7 +477,7 @@ const matches = [
     {
       "teamA": "نادي الجيش الملكي",
       "teamB": "Med Fc",
-      "score": "Vs"
+      "score": "2-1"
     },
     {
       "teamA": "Thorny Dragon",
@@ -482,7 +487,7 @@ const matches = [
     {
       "teamA": "L9irch",
       "teamB": "البوال",
-      "score": "Vs"
+      "score": "6-5"
     },
     {
       "teamA": "CR Flamengo",
@@ -497,7 +502,7 @@ const matches = [
     {
       "teamA": "العذاب اخويا العذاب",
       "teamB": "Milan",
-      "score": "Vs"
+      "score": "2-1"
     },
     {
       "teamA": "Chill guy",
@@ -512,7 +517,7 @@ const matches = [
     {
       "teamA": "F PES ANA SULTAN",
       "teamB": "maroc",
-      "score": "Vs"
+      "score": "0-1"
     },
     {
       "teamA": "Lmasoniya",
@@ -520,19 +525,19 @@ const matches = [
       "score": "Vs"
     },
     {
-      "teamA": "SIMO",
+      "teamA": "Kolchi_tach",
       "teamB": "Thelegend",
       "score": "Vs"
     },
     {
       "teamA": "Johny sins",
       "teamB": "FAR BEFORE ABC",
-      "score": "Vs"
+      "score": "3-0"
     },
     {
       "teamA": "FC BARCELONA",
       "teamB": "Chrwit",
-      "score": "Vs"
+      "score": "0-2"
     },
     {
       "teamA": "Olympique de Safi",
@@ -545,7 +550,7 @@ const matches = [
     {
       "teamA": "L9irch",
       "teamB": "Med Fc",
-      "score": "Vs"
+      "score": "3-1"
     },
     {
       "teamA": "Chrwit",
@@ -553,7 +558,7 @@ const matches = [
       "score": "Vs"
     },
     {
-      "teamA": "SIMO",
+      "teamA": "Kolchi_tach",
       "teamB": "Zooooooooooot",
       "score": "Vs"
     },
@@ -595,16 +600,21 @@ const matches = [
     {
       "teamA": "FAR BEFORE ABC",
       "teamB": "FC BARCELONA",
-      "score": "Vs"
+      "score": "5-0"
     },
     {
       "teamA": "Dos Kallas",
       "teamB": "العذاب اخويا العذاب",
-      "score": "Vs"
+      "score": "3-5"
     },
     {
       "teamA": "Lmasoniya",
       "teamB": "Chill guy",
+      "score": "Vs"
+    },
+    {
+      "teamA": "FARI9 LMXRML",
+      "teamB": "نادي الجيش الملكي",
       "score": "Vs"
     },
     {
