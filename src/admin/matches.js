@@ -14,7 +14,7 @@ const matches = [
     {
       "teamA": "Milan",
       "teamB": "Zooooooooooot",
-      "score": "Vs"
+      "score": "3-0"
     },
     {
       "teamA": "البوال",
@@ -34,7 +34,7 @@ const matches = [
     {
       "teamA": "Dos Kallas",
       "teamB": "صلي على محمد",
-      "score": "Vs"
+      "score": "3-2"
     },
     {
       "teamA": "FC BARCELONA",
@@ -87,7 +87,7 @@ const matches = [
     {
       "teamA": "Dos Kallas",
       "teamB": "Pala",
-      "score": "Vs"
+      "score": "3-1"
     },
     {
       "teamA": "CR Flamengo",
@@ -97,7 +97,7 @@ const matches = [
     {
       "teamA": "5yearsjail",
       "teamB": "Zooooooooooot",
-      "score": "Vs"
+      "score": "0-8"
     },
     {
       "teamA": "Milan",
@@ -122,7 +122,7 @@ const matches = [
     {
       "teamA": "ro3b☠️",
       "teamB": "صلي على محمد",
-      "score": "Vs"
+      "score": "5-1"
     },
     {
       "teamA": "Chill guy",
@@ -180,7 +180,7 @@ const matches = [
     {
       "teamA": "نادي الجيش الملكي",
       "teamB": "الخراي",
-      "score": "Vs"
+      "score": "2-4"
     },
     {
       "teamA": "FARI9 LMXRML",
@@ -190,7 +190,7 @@ const matches = [
     {
       "teamA": "Kolchi_tach",
       "teamB": "Milan",
-      "score": "Vs"
+      "score": "3-2"
     },
     {
       "teamA": "Chrwit",
@@ -200,7 +200,7 @@ const matches = [
     {
       "teamA": "ro3b☠️",
       "teamB": "maroc",
-      "score": "Vs"
+      "score": "3-0"
     },
     {
       "teamA": "العذاب اخويا العذاب",
@@ -248,7 +248,7 @@ const matches = [
     {
       "teamA": "maroc",
       "teamB": "Zooooooooooot",
-      "score": "Vs"
+      "score": "2-2"
     },
     {
       "teamA": "Chill guy",
@@ -308,7 +308,7 @@ const matches = [
     {
       "teamA": "CR Flamengo",
       "teamB": "FARI9 LMXRML",
-      "score": "Vs"
+      "score": "5-4"
     }
   ],
   // gw 5
@@ -351,7 +351,7 @@ const matches = [
     {
       "teamA": "Chill guy",
       "teamB": "ro3b☠️",
-      "score": "Vs"
+      "score": "1-5"
     },
     {
       "teamA": "Japane",
@@ -386,7 +386,7 @@ const matches = [
     {
       "teamA": "نادي الجيش الملكي",
       "teamB": "Lmasoniya",
-      "score": "Vs"
+      "score": "3-1"
     }
   ],
   // gw 6
@@ -459,12 +459,12 @@ const matches = [
     {
       "teamA": "FAR BEFORE ABC",
       "teamB": "نادي الجيش الملكي",
-      "score": "Vs"
+      "score": "2-2"
     },
     {
       "teamA": "FARI9 LMXRML",
       "teamB": "Chrwit",
-      "score": "Vs"
+      "score": "3-2"
     }
   ],
   // gw 7
@@ -512,7 +512,7 @@ const matches = [
     {
       "teamA": "Japane",
       "teamB": "ro3b☠️",
-      "score": "Vs"
+      "score": "0-3"
     },
     {
       "teamA": "F PES ANA SULTAN",
@@ -575,12 +575,12 @@ const matches = [
     {
       "teamA": "Johny sins",
       "teamB": "Milan",
-      "score": "Vs"
+      "score": "8-4"
     },
     {
       "teamA": "الخراي",
       "teamB": "ro3b☠️",
-      "score": "Vs"
+      "score": "0-6"
     },
     {
       "teamA": "Japane",
