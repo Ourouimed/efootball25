@@ -590,7 +590,7 @@ const matches = [
     {
       "teamA": "نادي الجيش الملكي",
       "teamB": "صلي على محمد",
-      "score": "Vs"
+      "score": "1-3"
     },
     {
       "teamA": "Saudi the second",

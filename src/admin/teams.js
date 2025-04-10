@@ -101,9 +101,9 @@ const teams = [
     {
         teamName: 'صلي على محمد',
         teamId: 'سفيان',
-        GF: 13,
-        GA: 18,
-        wins: 2,
+        GF: 16,
+        GA: 19,
+        wins: 3,
         draws: 1,
         losses: 3,
         KOGF : 0 ,
@@ -244,11 +244,11 @@ const teams = [
     {
         teamName: 'نادي الجيش الملكي',
         teamId: 'Zakaria',
-        GF: 14,
-        GA: 15,
+        GF: 15,
+        GA: 18,
         wins: 2,
         draws:  2,
-        losses: 2,
+        losses: 3,
         KOGF : 0 ,
         KOGA : 0
     },
