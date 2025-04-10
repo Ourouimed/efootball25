@@ -29,7 +29,7 @@ const matches = [
     {
       "teamA": "Chrwit",
       "teamB": "ro3b☠️",
-      "score": "Vs"
+      "score": "0-3"
     },
     {
       "teamA": "Dos Kallas",
@@ -142,7 +142,7 @@ const matches = [
     {
       "teamA": "Chrwit",
       "teamB": "L9irch",
-      "score": "Vs"
+      "score": "1-0"
     },
     {
       "teamA": "Johny sins",
@@ -303,7 +303,7 @@ const matches = [
     {
       "teamA": "Saudi the second",
       "teamB": "Lmasoniya",
-      "score": "Vs"
+      "score": "3-2"
     },
     {
       "teamA": "CR Flamengo",
@@ -399,7 +399,7 @@ const matches = [
     {
       "teamA": "CR Flamengo",
       "teamB": "Pala",
-      "score": "Vs"
+      "score": "3-0"
     },
     {
       "teamA": "Chill guy",
@@ -497,7 +497,7 @@ const matches = [
     {
       "teamA": "Saudi the second",
       "teamB": "Pala",
-      "score": "Vs"
+      "score": "3-0"
     },
     {
       "teamA": "العذاب اخويا العذاب",

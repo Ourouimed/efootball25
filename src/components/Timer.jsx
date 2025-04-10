@@ -5,8 +5,8 @@ const Timer = () => {
 
     function calculateTimeLeft() {
         const current = new Date().getTime();
-        let date = '2025-04-12'
-        let time = '0:00'
+        let date = '2025-04-11'
+        let time = '17:00'
         const deadline = new Date(`${date} ${time}`).getTime();
         const difference = deadline - current;
         
