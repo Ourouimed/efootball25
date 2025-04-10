@@ -39,7 +39,7 @@ const matches = [
     {
       "teamA": "FC BARCELONA",
       "teamB": "maroc",
-      "score": "Vs"
+      "score": "1-5"
     },
     {
       "teamA": "العذاب اخويا العذاب",
@@ -107,7 +107,7 @@ const matches = [
     {
       "teamA": "العذاب اخويا العذاب",
       "teamB": "البوال",
-      "score": "Vs"
+      "score": "0-0"
     },
     {
       "teamA": "Lmasoniya",
@@ -117,7 +117,7 @@ const matches = [
     {
       "teamA": "F PES ANA SULTAN",
       "teamB": "Zelala",
-      "score": "Vs"
+      "score": "3-2"
     },
     {
       "teamA": "ro3b☠️",
@@ -132,7 +132,7 @@ const matches = [
     {
       "teamA": "Saudi the second",
       "teamB": "Japane",
-      "score": "Vs"
+      "score": "3-0"
     },
     {
       "teamA": "Olympique de Safi",
@@ -147,12 +147,12 @@ const matches = [
     {
       "teamA": "Johny sins",
       "teamB": "FC BARCELONA",
-      "score": "Vs"
+      "score": "8-0"
     },
     {
       "teamA": "Kolchi_tach",
       "teamB": "FAR BEFORE ABC",
-      "score": "Vs"
+      "score": "5-1"
     }
   ],
   // gw 3
@@ -170,7 +170,7 @@ const matches = [
     {
       "teamA": "Japane",
       "teamB": "Zooooooooooot",
-      "score": "Vs"
+      "score": "0-3"
     },
     {
       "teamA": "Olympique de Safi",
@@ -243,7 +243,7 @@ const matches = [
     {
       "teamA": "L9irch",
       "teamB": "Pala",
-      "score": "Vs"
+      "score": "3-0"
     },
     {
       "teamA": "maroc",
@@ -273,7 +273,7 @@ const matches = [
     {
       "teamA": "Chrwit",
       "teamB": "Japane",
-      "score": "Vs"
+      "score": "3-0"
     },
     {
       "teamA": "ro3b☠️",
@@ -356,7 +356,7 @@ const matches = [
     {
       "teamA": "Japane",
       "teamB": "F PES ANA SULTAN",
-      "score": "Vs"
+      "score": "0-3"
     },
     {
       "teamA": "CR Flamengo",
@@ -409,7 +409,7 @@ const matches = [
     {
       "teamA": "maroc",
       "teamB": "Thorny Dragon",
-      "score": "Vs"
+      "score": "2-1"
     },
     {
       "teamA": "Johny sins",
@@ -439,7 +439,7 @@ const matches = [
     {
       "teamA": "Japane",
       "teamB": "صلي على محمد",
-      "score": "Vs"
+      "score": "0-3"
     },
     {
       "teamA": "Lmasoniya",
@@ -585,7 +585,7 @@ const matches = [
     {
       "teamA": "Japane",
       "teamB": "maroc",
-      "score": "Vs"
+      "score": "0-3"
     },
     {
       "teamA": "نادي الجيش الملكي",
