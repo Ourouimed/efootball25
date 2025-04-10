@@ -59,7 +59,7 @@ const matches = [
     {
       "teamA": "Olympique de Safi",
       "teamB": "Johny sins",
-      "score": "Vs"
+      "score": "1-5"
     },
     {
       "teamA": "CR Flamengo",
@@ -92,7 +92,7 @@ const matches = [
     {
       "teamA": "CR Flamengo",
       "teamB": "Olympique de Safi",
-      "score": "Vs"
+      "score": "2-0"
     },
     {
       "teamA": "5yearsjail",
@@ -127,7 +127,7 @@ const matches = [
     {
       "teamA": "Chill guy",
       "teamB": "maroc",
-      "score": "Vs"
+      "score": "0-2"
     },
     {
       "teamA": "Saudi the second",
@@ -175,7 +175,7 @@ const matches = [
     {
       "teamA": "Olympique de Safi",
       "teamB": "البوال",
-      "score": "Vs"
+      "score": "0-3"
     },
     {
       "teamA": "نادي الجيش الملكي",
@@ -298,7 +298,7 @@ const matches = [
     {
       "teamA": "Olympique de Safi",
       "teamB": "نادي الجيش الملكي",
-      "score": "Vs"
+      "score": "2-2"
     },
     {
       "teamA": "Saudi the second",
@@ -321,12 +321,12 @@ const matches = [
     {
       "teamA": "Saudi the second",
       "teamB": "Med Fc",
-      "score": "Vs"
+      "score": "3-0"
     },
     {
       "teamA": "Thorny Dragon",
       "teamB": "Zooooooooooot",
-      "score": "Vs"
+      "score": "0-4"
     },
     {
       "teamA": "Milan",
@@ -414,7 +414,7 @@ const matches = [
     {
       "teamA": "Johny sins",
       "teamB": "البوال",
-      "score": "Vs"
+      "score": "4-6"
     },
     {
       "teamA": "Kolchi_tach",
@@ -472,7 +472,7 @@ const matches = [
     {
       "teamA": "Dos Kallas",
       "teamB": "Zooooooooooot",
-      "score": "Vs"
+      "score": "1-2"
     },
     {
       "teamA": "نادي الجيش الملكي",
@@ -560,7 +560,7 @@ const matches = [
     {
       "teamA": "Kolchi_tach",
       "teamB": "Zooooooooooot",
-      "score": "Vs"
+      "score": "1-2"
     },
     {
       "teamA": "Zelala",
@@ -570,7 +570,7 @@ const matches = [
     {
       "teamA": "Thelegend",
       "teamB": "البوال",
-      "score": "Vs"
+      "score": "2-4"
     },
     {
       "teamA": "Johny sins",
@@ -595,7 +595,7 @@ const matches = [
     {
       "teamA": "Saudi the second",
       "teamB": "F PES ANA SULTAN",
-      "score": "Vs"
+      "score": "2-2"
     },
     {
       "teamA": "FAR BEFORE ABC",
