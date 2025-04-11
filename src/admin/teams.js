@@ -233,8 +233,8 @@ const teams = [
     {
         teamName: 'نادي الجيش الملكي',
         teamId: 'Zakaria',
-        GF: 15,
-        GA: 18,
+        GF: 17,
+        GA: 21,
         wins: 2,
         draws:  2,
         losses: 4,
@@ -301,11 +301,11 @@ const teams = [
     {
         teamName: 'FARI9 LMXRML',
         teamId: 'Hamada',
-        GF: 26,
-        GA: 21,
-        wins: 4,
+        GF: 29,
+        GA: 23,
+        wins: 5,
         draws: 1,
-        losses: 3,
+        losses: 2,
         KOGF : 0 ,
         KOGA : 0
     },

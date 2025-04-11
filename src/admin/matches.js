@@ -615,7 +615,7 @@ const matches = [
     {
       "teamA": "FARI9 LMXRML",
       "teamB": "نادي الجيش الملكي",
-      "score": "CA"
+      "score": "3-2"
     },
     {
       "teamA": "CR Flamengo",
