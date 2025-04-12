@@ -29,8 +29,8 @@ const teams = [
         wins: 5,
         draws: 1,
         losses: 2,
-        KOGF : 0 ,
-        KOGA : 0
+        KOGF : 6 ,
+        KOGA : 1
     },
     {
         teamName: 'Thorny Dragon',
@@ -40,8 +40,8 @@ const teams = [
         wins: 2,
         draws: 0,
         losses: 6,
-        KOGF : 0 ,
-        KOGA : 0
+        KOGF : 1 ,
+        KOGA : 6
     },
     {
         teamName: 'البوال',
@@ -62,7 +62,7 @@ const teams = [
         wins: 5,
         draws: 1,
         losses: 2,
-        KOGF : 0 ,
+        KOGF : 7 ,
         KOGA : 0
     },
     {
@@ -84,8 +84,8 @@ const teams = [
         wins: 2,
         draws: 0,
         losses: 6,
-        KOGF : 0 ,
-        KOGA : 0
+        KOGF : 3 ,
+        KOGA : 2
     },
     {
         teamName: 'ro3b☠️',
@@ -106,8 +106,8 @@ const teams = [
         wins: 3,
         draws: 1,
         losses: 4,
-        KOGF : 0 ,
-        KOGA : 0
+        KOGF : 2 ,
+        KOGA : 3
     },
     {
         teamName: 'maroc',
@@ -117,8 +117,8 @@ const teams = [
         wins: 5,
         draws: 1,
         losses: 2,
-        KOGF : 0 ,
-        KOGA : 0
+        KOGF : 4 ,
+        KOGA : 2
     },
     {
         teamName: 'F PES ANA SULTAN',
@@ -128,8 +128,8 @@ const teams = [
         wins: 5,
         draws: 1,
         losses: 2,
-        KOGF : 0 ,
-        KOGA : 0
+        KOGF : 5 ,
+        KOGA : 5
     },
     {
         teamName: 'Thelegend',
@@ -162,7 +162,7 @@ const teams = [
         draws: 0,
         losses: 7,
         KOGF : 0 ,
-        KOGA : 0
+        KOGA : 7
     },
     {
         teamName: 'العذاب اخويا العذاب',
@@ -172,8 +172,8 @@ const teams = [
         wins: 5,
         draws: 1,
         losses: 2,
-        KOGF : 0 ,
-        KOGA : 0
+        KOGF : 2 ,
+        KOGA : 5
     },
     {
         teamName: 'FC BARCELONA',
@@ -205,8 +205,8 @@ const teams = [
         wins: 4,
         draws: 0,
         losses: 4,
-        KOGF : 0 ,
-        KOGA : 0
+        KOGF : 8 ,
+        KOGA : 4
     },
     {
         teamName: 'FAR BEFORE ABC',
@@ -216,8 +216,8 @@ const teams = [
         wins: 1,
         draws: 1,
         losses: 6,
-        KOGF : 0 ,
-        KOGA : 0
+        KOGF : 5 ,
+        KOGA : 2
     },
     {
         teamName: 'Chrwit',
@@ -238,8 +238,8 @@ const teams = [
         wins: 2,
         draws:  2,
         losses: 4,
-        KOGF : 0 ,
-        KOGA : 0
+        KOGF : 5 ,
+        KOGA : 1
     },
     {
         teamName: 'Saudi the second',
@@ -249,8 +249,8 @@ const teams = [
         wins: 4,
         draws: 1,
         losses: 3,
-        KOGF : 0 ,
-        KOGA : 0
+        KOGF : 5 ,
+        KOGA : 5
     },
     {
         teamName: 'Kolchi_tach',
@@ -260,8 +260,8 @@ const teams = [
         wins: 3,
         draws: 1,
         losses: 4,
-        KOGF : 0 ,
-        KOGA : 0
+        KOGF : 1 ,
+        KOGA : 5
     },
 
     {
@@ -284,8 +284,8 @@ const teams = [
         wins: 1,
         draws: 1,
         losses: 6,
-        KOGF : 0 ,
-        KOGA : 0
+        KOGF : 2 ,
+        KOGA : 4
     },
     {
         teamName: 'Olympique de Safi',
@@ -306,8 +306,8 @@ const teams = [
         wins: 5,
         draws: 1,
         losses: 2,
-        KOGF : 0 ,
-        KOGA : 0
+        KOGF : 4 ,
+        KOGA : 8
     },
     {
         teamName: 'CR Flamengo',

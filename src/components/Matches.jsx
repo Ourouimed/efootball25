@@ -4,7 +4,7 @@ import { ArrowForwardIos, ArrowBackIosNew } from '@mui/icons-material';
 import { useState } from 'react';
 
 const Matches = () => {
-    const [currentGw, setCurrentGw] = useState(0);
+    const [currentGw, setCurrentGw] = useState(9);
     const [matchView, setMatchView] = useState('Choose Team');
     const [selectedTeam, setSelectedTeam] = useState('');
 
