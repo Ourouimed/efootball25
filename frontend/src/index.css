@@ -1,0 +1,50 @@
+@import "tailwindcss";
+@font-face {
+  font-family: "efootballStencil"; /* Name you want to give to your font */
+  src: url("./assets/fonts/efootballStencil/eFootballStencil-Regular.ttf") format("truetype"); /* Path to your TTF file */
+  font-weight: normal; /* Optional, set font weight if needed */
+  font-style: normal;  /* Optional, set font style if needed */
+}
+
+
+@theme {
+  --color-primary : #000096;
+  --color-secondary : #3132fe;
+  --color-third : #ff0082; 
+  --color-fourth : #ffff00;
+}
+
+
+body {
+  @apply bg-secondary ;
+  font-family : 'efootballStencil' , sans-serif;
+}
+
+header {
+  @apply bg-primary px-[10%] py-5 text-white flex justify-between items-center fixed w-full top-0
+}
+
+header > a.home-link {
+  @apply text-fourth text-4xl uppercase;
+}
+
+
+
+header .nav-links  {
+  @apply bg-secondary rounded-full flex justify-between items-center
+}
+
+header .nav-links li a {
+  @apply text-fourth py-2 px-8 rounded-full block text-xl
+}
+header .nav-links li:first-child a{
+  @apply bg-fourth text-secondary
+}
+
+.container {
+  @apply w-[950px] max-w-full m-auto
+}
+
+.register-input {
+  @apply py-2 px-4 w-full outline-none text-white
+}
