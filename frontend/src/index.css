@@ -48,3 +48,19 @@ header .nav-links li:first-child a{
 .register-input {
   @apply py-2 px-4 w-full outline-none text-white
 }
+
+.success-msg {
+  width: 100%;
+  padding: 10px;
+  background: #c6ffc6;
+  border: 2px solid #00bb00;
+  border-radius: 8px;
+}
+
+.error-msg {
+  width: 100%;
+  padding: 10px;
+  background: #f5d0d0;
+  border: 2px solid red;
+  border-radius: 8px;
+}

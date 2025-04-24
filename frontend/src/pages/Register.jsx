@@ -8,21 +8,33 @@ const Register = () => {
     userName: ''
   });
 
-  // State for handling submission status (e.g., success or error)
-  const [status, setStatus] = useState(null);
+  const [statusMsg, setstatusMsg] = useState(null);
+  const [status , setStatus] = useState(null)
 
   const handleRegisterTeam = async (e) => {
     e.preventDefault();
-    let a = await axios.get('https://3000-idx-efootball25-1745400587666.cluster-axf5tvtfjjfekvhwxwkkkzsk2y.cloudworkstations.dev/register' , inscription)
-
-
+    const {teamName, phoneNum , userName} = inscription
+    if (!teamName || !phoneNum || !userName) {
+        setstatusMsg('Please , 3mr Ga3 lma3lomat la Jat ela khatrk')
+        return 
+    }
+    try {
+      const response = await axios.post('http://localhost:3001/register', inscription);
+      setstatusMsg(response.data);
+      setStatus(true)
+    } catch (err) {
+      console.error(err);
+      setstatusMsg(err.response.data);
+      setStatus(false)
+    }
   };
 
   return (
-    <div className="container flex items-center justify-center min-h-screen">
+    <div className="container flex items-center justify-center min-h-screen flex-col">
+      <div>
       <form
         className="bg-primary p-4 rounded-lg w-[400px] max-w-full"
-        onSubmit={handleRegisterTeam} 
+        onSubmit={handleRegisterTeam}
       >
         <h3 className="text-fourth text-xl">Aji T9YD F Ahsan Tournoi d efootball</h3>
         <div className="divide-y-1 divide-[#ededed] rounded border border-[#ededed] mt-2">
@@ -55,7 +67,9 @@ const Register = () => {
           T9yd db
         </button>
       </form>
-      {status && <div className="mt-4 text-center">{status}</div>}
+      {statusMsg && <div className={`mt-2 text-center ${status ? 'success-msg' : 'error-msg'}`}>{statusMsg}</div>}
+      </div>
+      
     </div>
   );
 };
