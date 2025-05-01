@@ -66,6 +66,8 @@ header .nav-links li a {
 
 
 
+
+
 .standing-table thead tr {
   @apply bg-third text-white 
 }
@@ -76,11 +78,11 @@ header .nav-links li a {
 .standing-table tbody tr:not(:last-child){
   @apply  border-b border-[#ededed] 
 }
-.standing-table tbody tr.top-8 {
-  @apply border-l-4 border-l-[#02cd02]
+.best-8 {
+  @apply !border-l-4 !border-l-[#02cd02]
 }
 
-.standing-table tbody tr.playoffs{
+.playoffs{
   @apply border-l-4 border-l-[#ff8402]
 }
 
@@ -107,11 +109,52 @@ header .nav-links li a {
   @apply mb-1
 }
 .navbar{
-  @apply bg-primary text-white flex py-4 px-8 w-full sticky top-0
+  @apply bg-primary text-white flex py-4 px-8 w-full sticky top-0 justify-between items-center
 }
 
-.grid-resize {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 16px;
+
+.dashb-table {
+  @apply w-full border-collapse rounded-lg overflow-hidden shadow-sm;
+}
+
+.dashb-table th, .dashb-table td {
+  @apply px-4 py-3 text-center align-middle;
+  @apply text-sm md:text-base; 
+}
+
+.dashb-table thead tr {
+  @apply border-b bg-gray-50; 
+}
+
+.dashb-table thead th {
+  @apply font-semibold text-gray-700 py-3; 
+}
+
+
+
+.dashb-table tbody tr:not(:last-child) {
+  @apply border-b border-gray-100; 
+}
+
+
+.dashb-table tbody tr:nth-child(even) {
+  @apply bg-gray-50;
+}
+
+
+
+.popup-container {
+  @apply w-full h-screen top-0 left-0 fixed bg-[#000000b3] flex justify-center items-center z-10
+}
+
+.popup{
+  @apply w-[500px] bg-white rounded-md max-w-full z-10 
+}  
+
+.popup-header {
+  @apply px-4 py-2 flex items-center justify-between border-b-2 border-[#ededed]
+}
+
+.popup-content{
+  @apply px-4 py-2
 }

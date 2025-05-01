@@ -30,6 +30,18 @@ catch (err){
 }
 
 
+function generateRandomCode(length = 12) {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
+  let result = '';
+  
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * chars.length);
+    result += chars[randomIndex];
+  }
+  
+  return result;
+}
+
 
 app.post('/register', (req, res) => {
   const { teamName, phoneNum, userName } = req.body;
@@ -72,27 +84,29 @@ app.post('/login', (req, res) => {
     if (user.password !== password) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
-    res.json(user);
+    let randomSessionId = generateRandomCode(50)
+    connection.execute('INSERT INTO session (id_session , id_user) values (? , ?)' , [randomSessionId , user.id])
+    res.json({...user ,sessionCode : randomSessionId})
   });
 })
 
 
-app.get('/verify-session', (req, res) => {
-  const { id } = req.query;  
-
-  connection.execute('SELECT * FROM users WHERE id = ?', [id], (err, results) => {
+app.post('/verify-session' , (req , res)=>{
+  const {id , sessionId} = req.body
+  connection.execute('SELECT S.* , U.role from session S inner Join users U' ,[], (err , results)=>{
     if (err) {
       console.error('Database error:', err);
-      return res.status(500).json({ error: 'Error verifying session' });
+      return res.status(500).json({ error: 'Error fetching teams' });
     }
-
     if (results.length === 0) {
-      return res.status(401).json({ error: 'User not found' });
+      return res.status(401).json({ error: 'Invalid credentials' });
     }
+    const session = results[0];
+    res.json(session)
+  })
+ 
+})
 
-    res.json({ message: 'User session is valid', user: results[0] });
-  });
-});
 
 
 app.listen(PORT, () => {

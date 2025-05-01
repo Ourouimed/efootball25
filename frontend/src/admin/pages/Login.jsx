@@ -1,16 +1,37 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios"; // Import Axios
+import axios from "axios"; 
 const Login = () => {
   const [loading , setLoading] = useState(null)
-  const [isLoggedIn , setisLoggedIn] = useState(false)
   const [user , setUser] = useState({
     id : '',
     password : ''
   })
   const [error , setError] = useState(null)
-  
   const navigate = useNavigate()
+  const verifySession = async (user) => {
+    try {
+      const res = await axios.post('http://localhost:3001/verify-session', {
+        id: user.id,
+        sessionCode: user.sessionCode
+      });
+      const { id_session} = res.data;
+      if (id_session === user.sessionCode) {
+        navigate('/dashboard');
+      }
+    } catch {
+      
+    }
+  };
+
+  
+  
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) verifySession(user);
+  }, [navigate]);
+
+
   const login = async () => {
     setLoading(true); 
     try {
@@ -50,9 +71,9 @@ const Login = () => {
               setUser({ ...user, password: e.target.value })
             }
           />
-          <p className="admin-alert mb-1">
-            To Connect to admin Panel use (username : admin , password : admin)
-          </p>
+          <div className="admin-alert mb-1">
+            To Connect to admin Panel as a guest use <br></br>username : guest <br></br> password : guest
+          </div>
 
             <button
               className="bg-primary w-full py-2 px-4 rounded-md text-white cursor-pointer"

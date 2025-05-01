@@ -1,4 +1,4 @@
-import { Menu , Home} from '@mui/icons-material';
+import { Menu , Home, Group} from '@mui/icons-material';
 import { useContext } from 'react';
 import { SideNavContext } from '../../contexts/Sidenavontext';
 import { useLocation } from 'react-router-dom';
@@ -13,10 +13,10 @@ const Sidenav = ()=>{
                 <button className='cursor-pointer' onClick={toggleSidenav}><Menu/></button>
             </div>
             <ul className='py-2 px-4'>
-                <li><Link to='/dashbord' className={`${location.pathname == '/dashbord' ? 'bg-primary/10 text-primary' : 'text-primary'}`}><Home/>Home</Link></li>
-                <li><Link to='/dashbord/settings' className={`${location.pathname == '/dashbord/settings' ? 'bg-primary/10 text-primary' : 'text-primary'}`}><Home/>Home</Link></li>
-                <li><Link to='/dashbord/test'className={`${location.pathname == '/dashbord/test' ? 'bg-primary/10 text-primary' : 'text-primary'}`}><Home/>Home</Link></li>
-                <li><Link to='/dashbord/test2'className={`${location.pathname == '/dashbord/test2' ? 'bg-primary/10 text-primary' : 'text-primary'}`}><Home/>Home</Link></li>
+                <li><Link to='/dashboard' className={`${location.pathname == '/dashboard' ? 'bg-primary/10 text-primary' : 'text-primary'}`}><Home/>Home</Link></li>
+                <li><Link to='/dashboard/teams' className={`${location.pathname == '/dashboard/teams' ? 'bg-primary/10 text-primary' : 'text-primary'}`}><Group/>teams</Link></li>
+                <li><Link to='/dashboard/test'className={`${location.pathname == '/dashboard/test' ? 'bg-primary/10 text-primary' : 'text-primary'}`}><Home/>Home</Link></li>
+                <li><Link to='/dashboard/test2'className={`${location.pathname == '/dashboard/test2' ? 'bg-primary/10 text-primary' : 'text-primary'}`}><Home/>Home</Link></li>
                 
             </ul>
         </div>

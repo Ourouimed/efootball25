@@ -1,4 +1,4 @@
-import { Menu } from '@mui/icons-material';
+import { Logout, Menu } from '@mui/icons-material';
 import { useContext } from 'react';
 import { SideNavContext } from '../../contexts/Sidenavontext';
 const Navbar = ()=>{
@@ -9,7 +9,7 @@ const Navbar = ()=>{
                 <button className='cursor-pointer' onClick={toggleSidenav}><Menu/></button>
                 <h3 className="text-2xl">Admin Dashbord</h3>   
             </div>
-            
+            <button className='flex items-center cursor-pointer'><Logout/> logOut</button>
         </nav>
     </>
 }
