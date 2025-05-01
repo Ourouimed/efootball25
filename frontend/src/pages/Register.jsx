@@ -1,7 +1,10 @@
 import { useState } from "react";
 import axios from 'axios';
+import { useNavigate }  from "react-router-dom";
+import Header from "../components/Header";
 
 const Register = () => {
+  const navigate = useNavigate()
   const [inscription, setInscription] = useState({
     teamName: '',
     phoneNum: '',
@@ -20,8 +23,10 @@ const Register = () => {
     }
     try {
       const response = await axios.post('http://localhost:3001/register', inscription);
-      setstatusMsg(response.data);
+      setstatusMsg(response.data.message);
       setStatus(true)
+      setTimeout(()=>{navigate('/stats')} , 1000)
+      
     } catch (err) {
       console.error(err);
       setstatusMsg(err.response.data);
@@ -29,14 +34,17 @@ const Register = () => {
     }
   };
 
-  return (
-    <div className="container flex items-center justify-center min-h-screen flex-col">
+  return <>
+    <Header/>
+    <div className="bg-secondary">
+      <div className="container flex items-center justify-center min-h-screen flex-col">
       <div>
       <form
         className="bg-primary p-4 rounded-lg w-[400px] max-w-full"
         onSubmit={handleRegisterTeam}
       >
-        <h3 className="text-fourth text-xl">Aji T9YD F Ahsan Tournoi d efootball</h3>
+        <h3 className="text-fourth text-2xl">Register Now</h3>
+        <p className="text-white">T9yd db f <span className="text-fourth">Saison 2</span> ahsan Tournoi d efootball</p>
         <div className="divide-y-1 divide-[#ededed] rounded border border-[#ededed] mt-2">
           <input
             type="text"
@@ -71,7 +79,9 @@ const Register = () => {
       </div>
       
     </div>
-  );
+    </div>
+    
+  </>;
 };
 
 export default Register;

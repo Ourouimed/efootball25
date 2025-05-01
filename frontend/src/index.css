@@ -1,9 +1,7 @@
 @import "tailwindcss";
 @font-face {
-  font-family: "efootballStencil"; /* Name you want to give to your font */
-  src: url("./assets/fonts/efootballStencil/eFootballStencil-Regular.ttf") format("truetype"); /* Path to your TTF file */
-  font-weight: normal; /* Optional, set font weight if needed */
-  font-style: normal;  /* Optional, set font style if needed */
+  font-family: "efootballStencil"; 
+  src: url("./assets/fonts/efootballStencil/eFootballStencil-Regular.ttf") format("truetype"); 
 }
 
 
@@ -16,12 +14,11 @@
 
 
 body {
-  @apply bg-secondary ;
   font-family : 'efootballStencil' , sans-serif;
 }
 
 header {
-  @apply bg-primary px-[10%] py-5 text-white flex justify-between items-center fixed w-full top-0
+  @apply bg-primary px-[10%] py-5 text-white flex justify-between items-center sticky top-0
 }
 
 header > a.home-link {
@@ -35,21 +32,19 @@ header .nav-links  {
 }
 
 header .nav-links li a {
-  @apply text-fourth py-2 px-8 rounded-full block text-xl
-}
-header .nav-links li:first-child a{
-  @apply bg-fourth text-secondary
+  @apply py-2 px-8 rounded-full block text-xl
 }
 
+
 .container {
-  @apply w-[950px] max-w-full m-auto
+  @apply w-full m-auto px-[10%] py-2
 }
 
 .register-input {
   @apply py-2 px-4 w-full outline-none text-white
 }
 
-.success-msg {
+.success-msg  , .admin-alert{
   width: 100%;
   padding: 10px;
   background: #c6ffc6;
@@ -63,4 +58,60 @@ header .nav-links li:first-child a{
   background: #f5d0d0;
   border: 2px solid red;
   border-radius: 8px;
+}
+
+.home-btn {
+  @apply  py-2 px-8 rounded-full block text-xl
+}
+
+
+
+.standing-table thead tr {
+  @apply bg-third text-white 
+}
+
+.standing-table td , .standing-table  th {
+  @apply py-2 px-4
+}
+.standing-table tbody tr:not(:last-child){
+  @apply  border-b border-[#ededed] 
+}
+.standing-table tbody tr.top-8 {
+  @apply border-l-4 border-l-[#02cd02]
+}
+
+.standing-table tbody tr.playoffs{
+  @apply border-l-4 border-l-[#ff8402]
+}
+
+.login-inp {
+  @apply w-full py-2 px-4 border border-2 border-[#ededed] outline-none rounded-md mb-1;
+  transition : .4s ease
+}
+
+
+.login-inp:focus-within {
+  @apply border-cyan-500
+}
+
+
+.sidenav {
+  @apply bg-white h-screen shadow-sm overflow-hidden;
+  transition: .4s ease;
+}
+.sidenav ul li a {
+  @apply flex items-center py-2 px-4 rounded-md text-xl hover:bg-primary/10 hover:text-primary;
+  transition: .4s ease;
+}
+.sidenav ul li:not(:last-child){
+  @apply mb-1
+}
+.navbar{
+  @apply bg-primary text-white flex py-4 px-8 w-full sticky top-0
+}
+
+.grid-resize {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
 }
