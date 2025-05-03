@@ -1,4 +1,4 @@
-import { Menu , Home, Group} from '@mui/icons-material';
+import { Menu , Home, Group, SportsSoccer} from '@mui/icons-material';
 import { useContext } from 'react';
 import { SideNavContext } from '../../contexts/Sidenavontext';
 import { useLocation } from 'react-router-dom';
@@ -15,7 +15,7 @@ const Sidenav = ()=>{
             <ul className='py-2 px-4'>
                 <li><Link to='/dashboard' className={`${location.pathname == '/dashboard' ? 'bg-primary/10 text-primary' : 'text-primary'}`}><Home/>Home</Link></li>
                 <li><Link to='/dashboard/teams' className={`${location.pathname == '/dashboard/teams' ? 'bg-primary/10 text-primary' : 'text-primary'}`}><Group/>teams</Link></li>
-                <li><Link to='/dashboard/test'className={`${location.pathname == '/dashboard/test' ? 'bg-primary/10 text-primary' : 'text-primary'}`}><Home/>Home</Link></li>
+                <li><Link to='/dashboard/matches'className={`${location.pathname == '/dashboard/matches' ? 'bg-primary/10 text-primary' : 'text-primary'}`}><SportsSoccer/>matches</Link></li>
                 <li><Link to='/dashboard/test2'className={`${location.pathname == '/dashboard/test2' ? 'bg-primary/10 text-primary' : 'text-primary'}`}><Home/>Home</Link></li>
                 
             </ul>

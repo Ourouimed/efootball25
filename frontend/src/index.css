@@ -4,157 +4,139 @@
   src: url("./assets/fonts/efootballStencil/eFootballStencil-Regular.ttf") format("truetype"); 
 }
 
-
 @theme {
-  --color-primary : #000096;
-  --color-secondary : #3132fe;
-  --color-third : #ff0082; 
-  --color-fourth : #ffff00;
+  --color-primary: #000096;
+  --color-secondary: #3132fe;
+  --color-third: #ff0082;
+  --color-fourth: #ffff00;
 }
 
-
 body {
-  font-family : 'efootballStencil' , sans-serif;
+  font-family: "efootballStencil", sans-serif;
 }
 
 header {
-  @apply bg-primary px-[10%] py-5 text-white flex justify-between items-center sticky top-0
+  @apply bg-primary px-4 md:px-[10%] py-4 text-white flex justify-between items-center sticky top-0 z-20;
 }
 
 header > a.home-link {
-  @apply text-fourth text-4xl uppercase;
+  @apply text-fourth text-2xl sm:text-3xl md:text-4xl uppercase;
 }
 
-
-
-header .nav-links  {
-  @apply bg-secondary rounded-full flex justify-between items-center
+header .nav-links {
+  @apply bg-secondary rounded-full flex flex-wrap gap-2 justify-between items-center px-2 py-1;
 }
 
 header .nav-links li a {
-  @apply py-2 px-8 rounded-full block text-xl
+  @apply py-2 px-4 md:px-8 rounded-full block text-base sm:text-lg md:text-xl;
 }
 
-
 .container {
-  @apply w-full m-auto px-[10%] py-2
+  @apply w-full max-w-screen-xl m-auto px-4 md:px-[10%] py-4;
 }
 
 .register-input {
-  @apply py-2 px-4 w-full outline-none text-white
+  @apply py-2 px-4 w-full outline-none text-white;
 }
 
-.success-msg  , .admin-alert{
-  width: 100%;
-  padding: 10px;
-  background: #c6ffc6;
-  border: 2px solid #00bb00;
-  border-radius: 8px;
+.success-msg, .admin-alert, .error-msg {
+  @apply w-full p-4 rounded-md text-sm md:text-base;
 }
-
+.success-msg, .admin-alert {
+  @apply bg-green-100 border-2 border-green-500;
+}
 .error-msg {
-  width: 100%;
-  padding: 10px;
-  background: #f5d0d0;
-  border: 2px solid red;
-  border-radius: 8px;
+  @apply bg-red-100 border-2 border-red-500;
 }
 
 .home-btn {
-  @apply  py-2 px-8 rounded-full block text-xl
+  @apply py-2 px-6 md:px-8 rounded-full block text-base md:text-xl;
 }
-
-
-
-
 
 .standing-table thead tr {
-  @apply bg-third text-white 
+  @apply bg-third text-white;
 }
 
-.standing-table td , .standing-table  th {
-  @apply py-2 px-4
+.standing-table td, .standing-table th {
+  @apply py-2 px-3 md:px-4 text-center text-sm md:text-base;
 }
-.standing-table tbody tr:not(:last-child){
-  @apply  border-b border-[#ededed] 
+
+.standing-table tbody tr:not(:last-child) {
+  @apply border-b border-gray-200;
 }
+
 .best-8 {
-  @apply !border-l-4 !border-l-[#02cd02]
+  @apply !border-l-4 !border-l-green-500;
 }
 
-.playoffs{
-  @apply border-l-4 border-l-[#ff8402]
+.playoffs {
+  @apply !border-l-4 !border-l-orange-500;
 }
 
 .login-inp {
-  @apply w-full py-2 px-4 border border-2 border-[#ededed] outline-none rounded-md mb-1;
-  transition : .4s ease
+  @apply w-full py-2 px-4 border border-gray-300 outline-none rounded-md mb-2 transition duration-300;
+}
+.login-inp:focus {
+  @apply border-cyan-500;
 }
 
-
-.login-inp:focus-within {
-  @apply border-cyan-500
+.select {
+  @apply py-2 px-4 border border-gray-300 outline-none rounded-md transition duration-300;
 }
-
 
 .sidenav {
-  @apply bg-white h-screen shadow-sm overflow-hidden;
-  transition: .4s ease;
+  @apply bg-white h-screen shadow-sm overflow-y-auto fixed md:sticky top-0 z-20;
+  transition : .4s ease
 }
 .sidenav ul li a {
-  @apply flex items-center py-2 px-4 rounded-md text-xl hover:bg-primary/10 hover:text-primary;
-  transition: .4s ease;
+  @apply flex items-center py-2 px-4 rounded-md text-base md:text-xl hover:bg-primary/10 hover:text-primary transition;
 }
-.sidenav ul li:not(:last-child){
-  @apply mb-1
-}
-.navbar{
-  @apply bg-primary text-white flex py-4 px-8 w-full sticky top-0 justify-between items-center
+.sidenav ul li:not(:last-child) {
+  @apply mb-1;
 }
 
+.navbar {
+  @apply bg-primary text-white flex py-4 px-4 md:px-8 w-full sticky top-0 z-19 justify-between items-center;
+}
+
+.match {
+  @apply flex flex-col sm:flex-row items-center gap-2 justify-between p-3 border-2 border-gray-200 rounded-md;
+}
+.match:not(:last-child) {
+  @apply mb-2;
+}
 
 .dashb-table {
-  @apply w-full border-collapse rounded-lg overflow-hidden shadow-sm;
+  @apply w-full border-collapse rounded-lg overflow-hidden shadow-sm text-xs sm:text-sm;
 }
-
 .dashb-table th, .dashb-table td {
-  @apply px-4 py-3 text-center align-middle;
-  @apply text-sm md:text-base; 
+  @apply px-2 sm:px-4 py-3 text-center align-middle;
 }
-
 .dashb-table thead tr {
-  @apply border-b bg-gray-50; 
+  @apply border-b bg-gray-50;
 }
-
 .dashb-table thead th {
-  @apply font-semibold text-gray-700 py-3; 
+  @apply font-semibold text-gray-700 py-3;
 }
-
-
-
 .dashb-table tbody tr:not(:last-child) {
-  @apply border-b border-gray-100; 
+  @apply border-b border-gray-100;
 }
-
-
 .dashb-table tbody tr:nth-child(even) {
   @apply bg-gray-50;
 }
 
-
-
 .popup-container {
-  @apply w-full h-screen top-0 left-0 fixed bg-[#000000b3] flex justify-center items-center z-10
+  @apply w-full h-screen fixed top-0 left-0 bg-black/70 flex justify-center items-center z-50;
 }
 
-.popup{
-  @apply w-[500px] bg-white rounded-md max-w-full z-10 
-}  
+.popup {
+  @apply w-[500px] bg-white rounded-md z-50 max-w-[90%];
+}
 
 .popup-header {
-  @apply px-4 py-2 flex items-center justify-between border-b-2 border-[#ededed]
+  @apply px-4 py-2 flex items-center justify-between border-b border-gray-200;
 }
 
-.popup-content{
-  @apply px-4 py-2
+.popup-content {
+  @apply px-4 py-2;
 }

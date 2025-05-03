@@ -45,7 +45,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <h1 className="text-3xl">Dashboard</h1>
+      <h1 className="text-3xl">Welcome {JSON.parse(localStorage.getItem('user')).name}</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 mt-2">
         <StatsCard label="Total Goals" value={goals} icon={<SportsSoccer fontSize="large" className="text-primary" />} />
         <StatsCard label="Total Teams" value={totalTeams} icon={<Group fontSize="large" className="text-primary" />} />

@@ -1,21 +1,49 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Add } from "@mui/icons-material";
+import { Add, Edit, Delete } from "@mui/icons-material";
 import PopUpWindow from "../components/PopUpWindow";
+import { useNavigate } from "react-router-dom";
 
 const Teams = () => {
     const [teams, setTeams] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [showPopup, setShowPopup] = useState(false);
-    const [newTeam, setNewTeam] = useState({
-        teamName: '',
-        phoneNum: '',
-        userName: ''
-    });
-    const [statusMsg, setstatusMsg] = useState('');
-    const [status, setStatus] = useState(true); 
-    
+    const [isEditing, setIsEditing] = useState(false);
+    const [currentTeam, setCurrentTeam] = useState({ teamName: '', phoneNum: '', userName: '' });
+    const [statusMsg, setStatusMsg] = useState('');
+    const [status, setStatus] = useState(true);
+    const navigate = useNavigate();
+
+    // Function to verify session before performing any action
+    const verifySession = async () => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (!user) {
+            navigate('/login');
+            return false; 
+        }
+
+        try {
+            const res = await axios.post('http://localhost:3001/verify-session', {
+                id: user.id,
+                sessionCode: user.sessionCode
+            });
+            const { id_session, role } = res.data;
+            if (id_session === user.sessionCode && role === 'admin') {
+                return true;
+            } else {
+                setStatusMsg('You do not have the necessary permissions.');
+                setStatus(false);
+                return false; 
+            }
+        } catch (err) {
+            console.error(err);
+            navigate('/login');
+            return false;
+        }
+    };
+
+    // Fetch all teams
     const fetchTeams = async () => {
         setLoading(true);
         try {
@@ -27,79 +55,95 @@ const Teams = () => {
             setLoading(false);
         }
     };
-    
+
     useEffect(() => {
         fetchTeams();
     }, []);
-    
+
     const handleClosePopup = () => {
         setShowPopup(false);
-        setNewTeam({
-            teamName: '',
-            phoneNum: '',
-            userName: ''
-        });
-        setstatusMsg('');
+        setIsEditing(false);
+        setCurrentTeam({ teamName: '', phoneNum: '', userName: '' });
+        setStatusMsg('');
     };
 
-    const handleOpenPopup = () => {
+    const handleOpenAddPopup = () => {
         setShowPopup(true);
+        setIsEditing(false);
+        setCurrentTeam({ teamName: '', phoneNum: '', userName: '' });
     }
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setNewTeam(prev => ({
-            ...prev,
-            [name]: value
-        }));
+    const handleOpenEditPopup = (team) => {
+        setShowPopup(true);
+        setIsEditing(true);
+        setCurrentTeam({ teamName: team.teamName, phoneNum: team.phoneNum, userName: team.userName });
+    }
+
+    const handleDeleteTeam = async (userName) => {
+        const sessionValid = await verifySession();
+        if (!sessionValid) return; // Don't proceed if session is invalid
+
+        if (confirm('Are you sure you want to delete this team?')) {
+            try {
+                await axios.delete(`http://localhost:3001/teams/${userName}`);
+                setStatusMsg('Team deleted successfully!');
+                setStatus(true);
+                fetchTeams();
+            } catch (err) {
+                console.error(err);
+                setStatusMsg('Failed to delete team');
+                setStatus(false);
+            }
+        }
     };
 
-    const handleAddTeam = async (e) => {
+    const handleSubmitTeam = async (e) => {
         e.preventDefault();
-        const { teamName, phoneNum, userName } = newTeam;
-        
+
+        const { teamName, phoneNum, userName } = currentTeam;
         if (!teamName || !phoneNum || !userName) {
-            setstatusMsg('Please fill in all the required fields');
+            setStatusMsg('Please fill in all fields');
             setStatus(false);
             return;
         }
 
+        const sessionValid = await verifySession();
+        if (!sessionValid) return; // Don't proceed if session is invalid
+
         try {
-            const response = await axios.post('http://localhost:3001/register', {
-                teamName,
-                phoneNum,
-                userName,
-            });
+            let response;
+            if (isEditing) {
+                response = await axios.post(`http://localhost:3001/teams/${userName}`, { teamName, phoneNum, userName });
+                setStatusMsg('Team updated successfully!');
+            } else {
+                response = await axios.post('http://localhost:3001/register', { teamName, phoneNum, userName });
+                setStatusMsg('Team added successfully!');
+            }
             setStatus(true);
-            setstatusMsg('Team added successfully!');
-            
-            fetchTeams(); 
-            setTimeout(() => {
-                handleClosePopup();
-            }, 1500);
+            fetchTeams();
+            setTimeout(handleClosePopup, 1500);
         } catch (err) {
-            console.error(err);
-            setstatusMsg(err.response?.data?.message || 'Failed to add team');
+            setStatusMsg(err.response?.data?.message || `Failed to ${isEditing ? 'update' : 'add'} team`);
             setStatus(false);
         }
     };
 
     if (loading) return <div className="text-center py-8">Loading teams...</div>;
     if (error) return <div className="text-center py-8">Error: {error}</div>;
-    
+
     return (
         <>
             {showPopup && (
-                <PopUpWindow onClose={handleClosePopup} title='Add New Team'>
-                    <form onSubmit={handleAddTeam}>
+                <PopUpWindow onClose={handleClosePopup} title={isEditing ? 'Edit Team' : 'Add New Team'}>
+                    <form onSubmit={handleSubmitTeam}>
                         <div className="space-y-4">
                             <div>
                                 <label className="block mb-1">Team Name</label>
                                 <input 
                                     type='text' 
                                     name="teamName"
-                                    value={newTeam.teamName}
-                                    onChange={handleInputChange}
+                                    value={currentTeam.teamName}
+                                    onChange={(e) => setCurrentTeam({ ...currentTeam, teamName: e.target.value })}
                                     className='login-inp w-full' 
                                     placeholder="Team name"
                                 />
@@ -109,10 +153,11 @@ const Teams = () => {
                                 <input 
                                     type='text' 
                                     name="userName"
-                                    value={newTeam.userName}
-                                    onChange={handleInputChange}
+                                    value={currentTeam.userName}
+                                    onChange={(e) => setCurrentTeam({ ...currentTeam, userName: e.target.value })}
                                     className='login-inp w-full' 
                                     placeholder="User name"
+                                    disabled={isEditing} // Disable editing of username as it's likely the primary key
                                 />
                             </div>
                             <div>
@@ -120,19 +165,19 @@ const Teams = () => {
                                 <input 
                                     type='tel' 
                                     name="phoneNum"
-                                    value={newTeam.phoneNum}
-                                    onChange={handleInputChange}
+                                    value={currentTeam.phoneNum}
+                                    onChange={(e) => setCurrentTeam({ ...currentTeam, phoneNum: e.target.value })}
                                     className='login-inp w-full' 
                                     placeholder="Phone number"
                                 />
                             </div>
-                            
+
                             {statusMsg && (
                                 <div className={`p-2 rounded ${status ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
                                     {statusMsg}
                                 </div>
                             )}
-                            
+
                             <div className="flex justify-end gap-2 pt-2">
                                 <button 
                                     type="button"
@@ -145,27 +190,34 @@ const Teams = () => {
                                     type="submit"
                                     className='bg-primary py-2 px-6 rounded text-white cursor-pointer flex items-center hover:bg-primary-dark'
                                 >
-                                    Add Team
+                                    {isEditing ? 'Update Team' : 'Add Team'}
                                 </button>
                             </div>
                         </div>
                     </form>
                 </PopUpWindow>
             )}
-            
+
             <div className="flex items-center justify-between">
                 <h1 className="text-3xl">Team Management</h1>
                 <button 
                     className="bg-primary py-2 px-4 rounded text-white cursor-pointer flex items-center hover:bg-primary-dark"
-                    onClick={handleOpenPopup}
+                    onClick={handleOpenAddPopup}
                 >
                     <Add className="mr-1"/>Add New team
                 </button>
             </div>
-            
+
+            {statusMsg && !showPopup && (
+                <div className={`p-2 rounded mt-4 ${status ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                    {statusMsg}
+                </div>
+            )}
+
             <table className="dashb-table mt-6">
                 <thead>
                     <tr>
+                        <td>Actions</td>
                         <td>UserName</td>
                         <td>TeamName</td>
                         <td>Phone Number</td>
@@ -181,11 +233,25 @@ const Teams = () => {
                 <tbody>
                     {teams.map(team => (
                         <tr key={team.userName}>
+                            <td className="flex gap-2">
+                                <button 
+                                    onClick={() => handleOpenEditPopup(team)}
+                                    className="text-blue-500 hover:text-blue-700"
+                                >
+                                    <Edit fontSize="small" />
+                                </button>
+                                <button 
+                                    onClick={() => handleDeleteTeam(team.userName)}
+                                    className="text-red-500"
+                                >
+                                    <Delete fontSize="small" />
+                                </button>
+                            </td>
                             <td>{team.userName}</td>
                             <td>{team.teamName}</td>
                             <td>{team.phoneNum}</td>
                             <td>{team.wins}</td>
-                            <td>{team.lowses}</td>
+                            <td>{team.losses}</td>
                             <td>{team.draws}</td>
                             <td>{team.GF}</td>
                             <td>{team.GA}</td>

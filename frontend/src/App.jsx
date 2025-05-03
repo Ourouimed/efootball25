@@ -7,6 +7,7 @@ import Login from './admin/pages/Login'
 import ErrorPage from './pages/ErrorPage'
 import Teams from './admin/pages/Teams'
 import DashboardLayout from './admin/pages/DashboardLayout'
+import Matches from './admin/pages/Matches'
 const App = () => {
   return (
     <Routes>
@@ -18,6 +19,7 @@ const App = () => {
       <Route path='/dashboard' element={<DashboardLayout />}>
         <Route index element={<Dashboard />} />
         <Route path='teams' element={<Teams />} />
+        <Route path='matches' element={<Matches/>} />
       </Route>
 
       <Route path='*' element={<ErrorPage />} />

@@ -13,7 +13,7 @@ const DashboardLayout = () => {
         id: user.id,
         sessionCode: user.sessionCode
       });
-      const { id_session} = res.data;
+      const { id_session , role } = res.data;
       if (id_session !== user.sessionCode) {
         navigate('/login');
       }
@@ -32,15 +32,19 @@ const DashboardLayout = () => {
     <SideNavContext.Provider
       value={{
         currentState: sidenavIsOpen,
-        toggleSidenav: () => setSidenavIsOpen(!sidenavIsOpen),
+        toggleSidenav: () => setSidenavIsOpen(!sidenavIsOpen)
       }}
     >
       <div className="bg-[#ededed] min-h-screen">
-        <Navbar />
         <div className="flex">
           <Sidenav />
-          <div className="py-4 px-8 w-full">
-            <Outlet />
+          <div className="w-full">
+                <Navbar />
+                <div className="py-4 px-8 w-full">
+                    <Outlet />
+                </div>
+                
+            
           </div>
         </div>
       </div>

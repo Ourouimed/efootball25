@@ -1,43 +1,48 @@
 const Standing = ({teams})=>{
-    let sortedTeams = teams.map(team => ({...team , pts : (team.wins * 3) + (team.draws * 1) + (team.lowses * 0)})).sort((a, b) => b.pts - a.pts || (b.GF + b.KOGF) - (a.GF + a.KOGF));
+    let sortedTeams = teams.map(team => ({...team , pts : (Number(team.wins) * 3) + (Number(team.draws) * 1) + (Number(team.losses) * 0)})).sort((a, b) => b.pts - a.pts || (b.GF + b.KOGF) - (a.GF + a.KOGF));
     return <>
-        <div className="bg-white rounded-md overflow-hidden">
-            <table className="standing-table">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Team Name</th>
-                        <th>User Name</th>
-                        <th>GP</th>
-                        <th>W</th>
-                        <th>D</th>
-                        <th>L</th>
-                        <th>+/-</th>
-                        <th>GD</th>
-                        <th>PTS</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {sortedTeams.map((team , index)=> {
-                    const { teamName , userName , wins , lowses , draws , GF , GA , pts} = team
-                    let GP = wins + lowses + draws
-                    return <tr className={`${index < 8 ? 'best-8' : index < 24 ? 'playoffs' : ''}`} key={team.userName}>
-                        <td>{index+1}</td>
-                        <td>{teamName}</td>
-                        <td>{userName}</td>
-                        <td>{GP}</td>
-                        <td>{wins}</td>
-                        <td>{draws}</td>
-                        <td>{lowses}</td>
-                        <td>{GF}/{GA}</td>
-                        <td>{GF - GA}</td>
-                        <td>{pts}</td>
-                    </tr>
-                    })}
-                        
-                </tbody>
-            </table>
-        </div>
+        <div className="bg-white rounded-md overflow-auto shadow-md h-[max-content]">
+  <table className="standing-table min-w-full text-sm sm:text-base">
+    <thead className="bg-third text-white">
+      <tr>
+        <th className="px-2 py-3">#</th>
+        <th className="px-2 py-3">Team Name</th>
+        <th className="px-2 py-3">User Name</th>
+        <th className="px-2 py-3">GP</th>
+        <th className="px-2 py-3">W</th>
+        <th className="px-2 py-3">D</th>
+        <th className="px-2 py-3">L</th>
+        <th className="px-2 py-3">+/-</th>
+        <th className="px-2 py-3">GD</th>
+        <th className="px-2 py-3">PTS</th>
+      </tr>
+    </thead>
+    <tbody>
+      {sortedTeams.map((team, index) => {
+        const { teamName, userName, wins, losses, draws, GF, GA, pts } = team;
+        const GP = wins + draws + losses;
+        const rowClass =
+          index < 8 ? "best-8" : index < 24 ? "playoffs" : "";
+
+        return (
+          <tr className={`${rowClass} text-center`} key={team.userName}>
+            <td className="px-2 py-2">{index + 1}</td>
+            <td className="px-2 py-2">{teamName}</td>
+            <td className="px-2 py-2">{userName}</td>
+            <td className="px-2 py-2">{GP}</td>
+            <td className="px-2 py-2">{wins}</td>
+            <td className="px-2 py-2">{draws}</td>
+            <td className="px-2 py-2">{losses}</td>
+            <td className="px-2 py-2">{GF}/{GA}</td>
+            <td className="px-2 py-2">{GF - GA}</td>
+            <td className="px-2 py-2">{pts}</td>
+          </tr>
+        );
+      })}
+    </tbody>
+  </table>
+</div>
+
     </>
 }
 

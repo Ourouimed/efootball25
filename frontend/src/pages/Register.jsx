@@ -40,7 +40,7 @@ const Register = () => {
       <div className="container flex items-center justify-center min-h-screen flex-col">
       <div>
       <form
-        className="bg-primary p-4 rounded-lg w-[400px] max-w-full"
+        className="bg-primary p-4 rounded-lg w-[400px] max-w-[90%] m-auto"
         onSubmit={handleRegisterTeam}
       >
         <h3 className="text-fourth text-2xl">Register Now</h3>
