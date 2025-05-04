@@ -24,18 +24,15 @@ const connection = mysql.createConnection({
   database: process.env.DB_DATABASE  || 'your_db_name'
 });
 
-try {
-  connection.connect(err => {
-    if (err) {
-      console.error('Error connecting to MySQL:', err);
-      return;
-    }
-    console.log('Connected to MySQL database');
-  });
-}
-catch (err){
-  console.error('Error connecting to MySQL:', err);
-}
+app.get('/test-db', async (req, res) => {
+  try {
+    const [results] = await connection.execute('SELECT NOW() AS current_time');
+    res.json({ message: 'Connected to database', current_time: results });
+  } catch (err) {
+    console.error('Database Connection Error:', err);
+    res.status(500).json({ error: 'Failed to connect to database' });
+  }
+});
 
 
 function generateRandomCode(length = 12) {
