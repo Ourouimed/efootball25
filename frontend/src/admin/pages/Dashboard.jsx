@@ -17,7 +17,7 @@ const Dashboard = () => {
   const fetchTeams = async () => {
     setLoading(true);
     try {
-      const res = await axios.get('http://localhost:3001/teams');
+      const res = await axios.get('https://efootball25-api.vercel.app/teams');
       setTeams(res.data);
     } catch (err) {
       setError('Failed to fetch teams');

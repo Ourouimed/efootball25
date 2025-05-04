@@ -9,7 +9,7 @@ const DashboardLayout = () => {
   const navigate = useNavigate()
   const verifySession = async (user) => {
     try {
-      const res = await axios.post('http://localhost:3001/verify-session', {
+      const res = await axios.post('https://efootball25-api.vercel.app/verify-session', {
         id: user.id,
         sessionCode: user.sessionCode
       });

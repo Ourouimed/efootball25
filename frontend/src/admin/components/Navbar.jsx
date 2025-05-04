@@ -11,7 +11,7 @@ const Navbar = ()=>{
         localStorage.removeItem('user');
         navigate('/login');
         try {
-            await axios.delete('http://localhost:3001/logout',  { data : user } );
+            await axios.delete('https://efootball25-api.vercel.app/logout',  { data : user } );
         } catch (err) {
             console.error(err);
             alert('Cannot log out');

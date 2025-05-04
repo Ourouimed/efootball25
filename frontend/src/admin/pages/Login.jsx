@@ -11,7 +11,7 @@ const Login = () => {
   const navigate = useNavigate()
   const verifySession = async (user) => {
     try {
-      const res = await axios.post('http://localhost:3001/verify-session', {
+      const res = await axios.post('https://efootball25-api.vercel.app/verify-session', {
         id: user.id,
         sessionCode: user.sessionCode
       });
@@ -35,7 +35,7 @@ const Login = () => {
   const login = async () => {
     setLoading(true); 
     try {
-      const response = await axios.post('http://localhost:3001/login', user);
+      const response = await axios.post('https://efootball25-api.vercel.app/login', user);
       
       if (response.status === 200) {
         localStorage.setItem('user' , JSON.stringify(response.data))

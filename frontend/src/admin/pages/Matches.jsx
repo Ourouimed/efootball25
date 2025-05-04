@@ -24,7 +24,7 @@ const Matches = () => {
         }
 
         try {
-            const res = await axios.post('http://localhost:3001/verify-session', {
+            const res = await axios.post('https://efootball25-api.vercel.app/verify-session', {
                 id: user.id,
                 sessionCode: user.sessionCode
             });
@@ -49,7 +49,7 @@ const Matches = () => {
         if (!sessionValid) return;
 
         try {
-            await axios.post('http://localhost:3001/generate-matches');
+            await axios.post('https://efootball25-api.vercel.app/generate-matches');
             fetchMatches();
             setStatusMsg('Matches generated successfully.');
             setStatus(true);
@@ -78,7 +78,7 @@ const Matches = () => {
         if (!sessionValid) return;
 
         try {
-            await axios.post(`http://localhost:3001/matches/${selectedMatch.id_match}`, {
+            await axios.post(`https://efootball25-api.vercel.app/matches/${selectedMatch.id_match}`, {
                 home_score: homeScore,
                 away_score: awayScore
             });
@@ -95,7 +95,7 @@ const Matches = () => {
     const fetchMatches = async () => {
         setLoading(true);
         try {
-            const res = await axios.get('http://localhost:3001/matches');
+            const res = await axios.get('https://efootball25-api.vercel.app/matches');
             setMatches(res.data);
         } catch (err) {
             setStatusMsg('Failed to fetch matches.');

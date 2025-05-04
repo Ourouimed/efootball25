@@ -24,7 +24,7 @@ const Teams = () => {
         }
 
         try {
-            const res = await axios.post('http://localhost:3001/verify-session', {
+            const res = await axios.post('https://efootball25-api.vercel.app/verify-session', {
                 id: user.id,
                 sessionCode: user.sessionCode
             });
@@ -47,7 +47,7 @@ const Teams = () => {
     const fetchTeams = async () => {
         setLoading(true);
         try {
-            const res = await axios.get('http://localhost:3001/teams');
+            const res = await axios.get('https://efootball25-api.vercel.app/teams');
             setTeams(res.data);
         } catch (err) {
             setError('Failed to fetch teams');
@@ -85,7 +85,7 @@ const Teams = () => {
 
         if (confirm('Are you sure you want to delete this team?')) {
             try {
-                await axios.delete(`http://localhost:3001/teams/${userName}`);
+                await axios.delete(`https://efootball25-api.vercel.app/teams/${userName}`);
                 setStatusMsg('Team deleted successfully!');
                 setStatus(true);
                 fetchTeams();
@@ -113,10 +113,10 @@ const Teams = () => {
         try {
             let response;
             if (isEditing) {
-                response = await axios.post(`http://localhost:3001/teams/${userName}`, { teamName, phoneNum, userName });
+                response = await axios.post(`https://efootball25-api.vercel.app/teams/${userName}`, { teamName, phoneNum, userName });
                 setStatusMsg('Team updated successfully!');
             } else {
-                response = await axios.post('http://localhost:3001/register', { teamName, phoneNum, userName });
+                response = await axios.post('https://efootball25-api.vercel.app/register', { teamName, phoneNum, userName });
                 setStatusMsg('Team added successfully!');
             }
             setStatus(true);
