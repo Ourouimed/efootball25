@@ -24,22 +24,6 @@ const connection = mysql.createConnection({
   database: process.env.DB_DATABASE  || 'your_db_name'
 });
 
-app.get('/test-conn', (req , res)=>{
-  try {
-    connection.connect(err => {
-      if (err) {
-        res.send('Error connecting to MySQL:', err);
-        return;
-      }
-      res.send('Connected to MySQL database');
-    });
-  }
-  catch (err){
-    res.send('Error connecting to MySQL:', err);
-  }
-})
-
-
 
 function generateRandomCode(length = 12) {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
