@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: '/frontend/', // Set this to your base path if you're deploying to a subdirectory
+  base: '/', // Set this to your base path if you're deploying to a subdirectory
   build: {
     outDir: 'dist', // Make sure the output folder is correct
   },
