@@ -117,21 +117,36 @@ header .nav-links li a {
   @apply mb-2;
 }
 
+
+.dashb-table-wrapper {
+  @apply w-full overflow-x-auto;
+}
+
+.dashb-table-wrapper {
+  @apply w-full overflow-x-auto;
+}
+
 .dashb-table {
-  @apply w-full border-collapse rounded-lg overflow-hidden shadow-sm text-xs sm:text-sm;
+  @apply w-full min-w-[600px] border-collapse rounded-lg overflow-hidden shadow-sm text-xs sm:text-sm;
 }
-.dashb-table th, .dashb-table td {
-  @apply px-2 sm:px-4 py-3 text-center align-middle;
+
+.dashb-table th,
+.dashb-table td {
+  @apply px-2 sm:px-4 py-3 text-center align-middle whitespace-nowrap;
 }
+
 .dashb-table thead tr {
   @apply border-b bg-gray-50;
 }
+
 .dashb-table thead th {
   @apply font-semibold text-gray-700 py-3;
 }
+
 .dashb-table tbody tr:not(:last-child) {
   @apply border-b border-gray-100;
 }
+
 .dashb-table tbody tr:nth-child(even) {
   @apply bg-gray-50;
 }

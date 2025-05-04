@@ -124,6 +124,7 @@ const Matches = () => {
                             <label className="block mb-1">Home Score</label>
                             <input
                                 type="number"
+                                min={0}
                                 className="login-inp"
                                 value={homeScore}
                                 onChange={(e) => setHomeScore(e.target.value)}
@@ -133,6 +134,7 @@ const Matches = () => {
                             <label className="block mb-1">Away Score</label>
                             <input
                                 type="number"
+                                min={0}
                                 className="login-inp"
                                 value={awayScore}
                                 onChange={(e) => setAwayScore(e.target.value)}
@@ -146,7 +148,8 @@ const Matches = () => {
                         <div className="flex justify-end">
                             <button
                                 type="submit"
-                                className="bg-primary py-2 px-4 rounded text-white cursor-pointer flex items-center hover:bg-primary-dark"
+                                disabled={loading}
+                                className={`bg-primary py-2 px-4 rounded text-white cursor-pointer flex items-center hover:bg-primary-dark ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
                             >
                                 Save
                             </button>
@@ -165,7 +168,8 @@ const Matches = () => {
                         ))}
                     </select>
                     <button
-                        className="justify-center w-full md:w-auto bg-green-500 py-2 px-4 rounded text-white cursor-pointer flex items-center hover:bg-primary-dark"
+                        disabled={loading}
+                        className={`justify-center w-full md:w-auto bg-green-500 py-2 px-4 rounded text-white cursor-pointer flex items-center hover:bg-primary-dark ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
                         onClick={handleStartDraw}
                     >
                         <SportsSoccer className="mr-1" />Generate Draw
@@ -179,35 +183,37 @@ const Matches = () => {
                 </div>
             )}
 
-            <table className="dashb-table mt-6">
-                <thead>
-                    <tr>
-                        <td>id_match</td>
-                        <td>home_team</td>
-                        <td>away_team</td>
-                        <td>Score</td>
-                        <td>Action</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    {(currentRound === 'ALL' ? matches : matches.filter(match => match.round === currentRound)).map(match => (
-                        <tr key={match.id_match}>
-                            <td>{match.id_match}</td>
-                            <td>{match.hometeam_name}</td>
-                            <td>{match.awayteam_name}</td>
-                            <td>{match.home_score} - {match.away_score}</td>
-                            <td>
-                                <button
-                                    onClick={() => handleEditMatch(match)}
-                                    className="text-blue-500 hover:underline"
-                                >
-                                    <Edit />
-                                </button>
-                            </td>
+            <div className="dashb-table-wrapper mt-6">
+                <table className="dashb-table">
+                    <thead>
+                        <tr>
+                            <th>id_match</th>
+                            <th>home_team</th>
+                            <th>away_team</th>
+                            <th>Score</th>
+                            <th>Action</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {(currentRound === 'ALL' ? matches : matches.filter(match => match.round === currentRound)).map(match => (
+                            <tr key={match.id_match}>
+                                <td>{match.id_match}</td>
+                                <td>{match.hometeam_name}</td>
+                                <td>{match.awayteam_name}</td>
+                                <td>{match.home_score} - {match.away_score}</td>
+                                <td>
+                                    <button
+                                        onClick={() => handleEditMatch(match)}
+                                        className="text-blue-500 hover:underline"
+                                    >
+                                        <Edit />
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </>
     );
 };
