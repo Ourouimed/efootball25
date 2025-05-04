@@ -58,7 +58,7 @@ npm install
 ```
 Create a `.env` file in the `frontend` directory and fil it with your backend_api_url:
 ```env
-API_URL = your_frontend_url #default http://localhost:5173
+VITE_API_URL=your_frontend_url #default http://localhost:5173
 ```
 Then start the server:
 ```bash
