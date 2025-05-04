@@ -22,7 +22,7 @@ const Register = () => {
         return 
     }
     try {
-      const response = await axios.post('http://localhost:3001/register', inscription);
+      const response = await axios.post('http://efootball25-api.vercel.app/register', inscription);
       setstatusMsg(response.data.message);
       setStatus(true)
       setTimeout(()=>{navigate('/stats')} , 1000)

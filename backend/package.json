@@ -1,19 +1,19 @@
 {
-  "name": "backend",
+  "name": "efootball-api",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "api/index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "dev": "vercel dev",
+    "start": "node api/index.js"
   },
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
-    "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
-    "dotenv": "^16.5.0",
-    "express": "^5.1.0",
-    "mysql2": "^3.14.0",
-    "nodemon": "^3.1.10"
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mysql2": "^3.6.1",
+    "serverless-http": "^3.0.2"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }

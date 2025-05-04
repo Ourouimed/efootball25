@@ -13,7 +13,7 @@ const Stats = () => {
     useEffect(() => {
         const fetchTeams = async () => {
             try {
-                const response = await axios.get('http://localhost:3001/teams');
+                const response = await axios.get('http://efootball25-api.vercel.app/teams');
                 setTeams(response.data);
             } catch (err) {
                 setError(err.message);
@@ -28,7 +28,7 @@ const Stats = () => {
     useEffect(() => {
         const fetchMatches = async () => {
             try {
-                const response = await axios.get('http://localhost:3001/matches');
+                const response = await axios.get('http://efootball25-api.vercel.app/matches');
                 setMatches(response.data);
             } catch (err) {
                 setError(err.message);

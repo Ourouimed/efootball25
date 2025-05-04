@@ -1,4 +1,5 @@
 require('dotenv').config();
+const serverless = require('serverless-http');
 const express = require('express');
 const app = express();
 const cors = require('cors');
@@ -7,7 +8,7 @@ const mysql = require('mysql2');
 const PORT = process.env.PORT || 3001;
 
 const corsOptions = {
-  origin: 'http://localhost:5173',
+  origin: 'https://efootball25-league.vercel.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], 
   allowedHeaders: ['Content-Type', 'Authorization']
 };
@@ -18,10 +19,10 @@ app.use(express.json());
 
 
 const connection = mysql.createConnection({
-  host: process.env.DB_HOST ,
-  user: process.env.DB_USER,   
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE 
+  host: process.env.DB_HOST || 'localhost' ,
+  user: process.env.DB_USER || 'root',   
+  password: process.env.DB_PASSWORD || '',
+  database: process.env.DB_DATABASE  || ''
 });
 
 try {
@@ -346,3 +347,6 @@ app.post('/generate-matches', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+
+module.exports.handler = serverless(app);
