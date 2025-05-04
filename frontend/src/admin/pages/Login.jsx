@@ -15,6 +15,7 @@ const Login = () => {
         id: user.id,
         sessionCode: user.sessionCode
       });
+      console.log(res.data)
       const { id_session} = res.data;
       if (id_session === user.sessionCode) {
         navigate('/dashboard');
