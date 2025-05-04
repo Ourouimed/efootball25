@@ -16,7 +16,6 @@ const Sidenav = ()=>{
                 <li><Link to='/dashboard' className={`${location.pathname == '/dashboard' ? 'bg-primary/10 text-primary' : 'text-primary'}`}><Home/>Home</Link></li>
                 <li><Link to='/dashboard/teams' className={`${location.pathname == '/dashboard/teams' ? 'bg-primary/10 text-primary' : 'text-primary'}`}><Group/>teams</Link></li>
                 <li><Link to='/dashboard/matches'className={`${location.pathname == '/dashboard/matches' ? 'bg-primary/10 text-primary' : 'text-primary'}`}><SportsSoccer/>matches</Link></li>
-                <li><Link to='/dashboard/test2'className={`${location.pathname == '/dashboard/test2' ? 'bg-primary/10 text-primary' : 'text-primary'}`}><Home/>Home</Link></li>
                 
             </ul>
         </div>

@@ -9,7 +9,7 @@ import Teams from './admin/pages/Teams'
 import DashboardLayout from './admin/pages/DashboardLayout'
 import Matches from './admin/pages/Matches'
 const App = () => {
-  return (
+  return <>
     <Routes>
       <Route path='/' element={<Home />} />
       <Route path='/stats' element={<Stats />} />
@@ -24,7 +24,7 @@ const App = () => {
 
       <Route path='*' element={<ErrorPage />} />
     </Routes>
-  );
+  </>
 };
 
 export default App;
