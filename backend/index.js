@@ -218,10 +218,7 @@ app.post('/verify-session', (req, res) => {
         });
       }
       
-      res.json({
-        session: results[0],
-        message: 'Session verified successfully'
-      });
+      res.json(results[0]);
     }
   );
 });
