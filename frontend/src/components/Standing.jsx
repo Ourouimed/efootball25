@@ -18,7 +18,9 @@ const Standing = ({teams})=>{
       </tr>
     </thead>
     <tbody>
-      {sortedTeams.map((team, index) => {
+      {sortedTeams.length === 0 ? <div className="text-center text-gray-500 py-4">
+          No registred teams yet.
+        </div> :sortedTeams.map((team, index) => {
         const { teamName, userName, wins, losses, draws, GF, GA, pts } = team;
         const GP = wins + draws + losses;
         const rowClass =
