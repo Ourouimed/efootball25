@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3001;
 
 const corsOptions = {
   origin: 'https://efootball25-league.vercel.app',
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], 
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 };
 
@@ -80,128 +80,131 @@ function generateMatches(teams, totalRounds) {
 }
 
 app.get('/', (req, res) => {
-  res.send('<h1>Hello World</h1>')
+  res.send('<h1>Hello World</h1>');
 });
 
-app.post('/register', (req, res) => {
-  const { teamName, phoneNum, userName } = req.body;
+// Matches Routes
 
-  connection.execute(
-    'INSERT INTO teams (userName, teamName, phoneNum) VALUES (?, ?, ?)', 
-    [userName, teamName, phoneNum], 
-    (err, results) => {
-      if (err) {
-        console.error('Database error:', err);
-        return res.status(500).json({ error: 'Something went wrong while processing your request. Please try again later.' });
-      }
-      res.json({ message: 'Data inserted successfully!', id: results.insertId });
-    }
-  );
-});
-
-app.get('/teams', (req, res) => {
-  connection.execute('SELECT * FROM teams', (err, results) => {
+// Get all matches
+app.get('/matches', (req, res) => {
+  connection.execute('SELECT * FROM matches', (err, results) => {
     if (err) {
       console.error('Database error:', err);
-      return res.status(500).json({ error: 'Error fetching teams, please try again later.' });
+      return res.status(500).json({ error: 'Error fetching matches. Please try again later.' });
     }
     res.json(results);
   });
 });
 
-app.post('/login', (req, res) => {
-  const { id, password } = req.body;
-  
-  connection.execute(
-    'SELECT * FROM users WHERE id = ? AND password = ?',
-    [id, password],
-    (err, results) => {
+// Create or update match scores
+app.post('/matches/:id', (req, res) => {
+  const { id } = req.params;
+  const { home_score, away_score } = req.body;
+
+  // Step 1: Get the old match data
+  connection.execute('SELECT * FROM matches WHERE id_match = ?', [id], (err, [oldMatch]) => {
+    if (err || !oldMatch) {
+      console.error('Error fetching old match:', err);
+      return res.status(500).json({ error: 'Match not found or error fetching match.' });
+    }
+
+    const { home_team, away_team, home_score: old_home, away_score: old_away } = oldMatch;
+
+    // Step 2: If there was an old score, revert its effect
+    if (old_home !== null && old_away !== null) {
+      let oldHomeUpdate = '', oldAwayUpdate = '';
+
+      if (old_home > old_away) {
+        oldHomeUpdate = 'wins = wins - 1';
+        oldAwayUpdate = 'losses = losses - 1';
+      } else if (old_home < old_away) {
+        oldHomeUpdate = 'losses = losses - 1';
+        oldAwayUpdate = 'wins = wins - 1';
+      } else {
+        oldHomeUpdate = 'draws = draws - 1';
+        oldAwayUpdate = 'draws = draws - 1';
+      }
+
+      connection.execute(`UPDATE teams SET GF = GF - ?, GA = GA - ?, ${oldHomeUpdate} WHERE userName = ?`, [old_home, old_away, home_team]);
+      connection.execute(`UPDATE teams SET GF = GF - ?, GA = GA - ?, ${oldAwayUpdate} WHERE userName = ?`, [old_away, old_home, away_team]);
+    }
+
+    // Step 3: Update the match score
+    connection.execute('UPDATE matches SET home_score = ?, away_score = ? WHERE id_match = ?', [home_score, away_score, id], (err, results) => {
       if (err) {
-        console.error('Database error:', err);
-        return res.status(500).json({ error: 'Something went wrong during login. Please try again later.' });
+        console.error('Error updating match:', err);
+        return res.status(500).json({ error: 'Failed to update match.' });
       }
 
-      if (results.length === 0) {
-        return res.status(401).json({ error: 'Invalid credentials, please check your login details.' });
-      }
+      // Step 4: If the new score is valid, apply new stats
+      if (home_score !== null && away_score !== null) {
+        let newHomeUpdate = '', newAwayUpdate = '';
 
-      const user = results[0];
-      let randomSessionId = generateRandomCode(50);
-
-      connection.execute(
-        'INSERT INTO session (id_session, id_user) VALUES (?, ?)',
-        [randomSessionId, user.id],
-        (err, results) => {
-          if (err) {
-            console.error('Session error:', err);
-            return res.status(500).json({ error: 'Error creating session, please try again later.' });
-          }
-
-          res.json({ ...user, sessionCode: randomSessionId });
+        if (home_score > away_score) {
+          newHomeUpdate = 'wins = wins + 1';
+          newAwayUpdate = 'losses = losses + 1';
+        } else if (home_score < away_score) {
+          newHomeUpdate = 'losses = losses + 1';
+          newAwayUpdate = 'wins = wins + 1';
+        } else {
+          newHomeUpdate = 'draws = draws + 1';
+          newAwayUpdate = 'draws = draws + 1';
         }
-      );
-    }
-  );
+
+        connection.execute(`UPDATE teams SET GF = GF + ?, GA = GA + ?, ${newHomeUpdate} WHERE userName = ?`, [home_score, away_score, home_team]);
+        connection.execute(`UPDATE teams SET GF = GF + ?, GA = GA + ?, ${newAwayUpdate} WHERE userName = ?`, [away_score, home_score, away_team]);
+      }
+
+      res.json({ message: 'Match score and team stats updated successfully.' });
+    });
+  });
 });
 
-app.post('/verify-session', (req, res) => {
-  const { id, sessionCode } = req.body;
-  connection.execute(
-    'SELECT S.*, U.role FROM session S INNER JOIN users U ON S.id_user = U.id WHERE id_user = ? AND id_session = ?',
-    [id, sessionCode],
-    (err, results) => {
-      if (err) {
-        console.error('Session verification error:', err);
-        return res.status(500).json({ error: 'Error verifying session, please try again later.' });
-      }
-      if (results.length === 0) {
-        return res.status(401).json({ error: 'Invalid session or credentials.' });
-      }
-      const session = results[0];
-      res.json(session);
+// Generate new matches
+app.post('/generate-matches', (req, res) => {
+  connection.execute('DELETE FROM matches', (err) => {
+    if (err) {
+      console.error('Error deleting matches:', err);
+      return res.status(500).json({ error: 'Error deleting matches. Please try again later.' });
     }
-  );
-});
 
-app.delete('/teams/:username', (req, res) => {
-  const { username } = req.params;
-
-  connection.execute(
-    'DELETE FROM teams WHERE userName = ?', 
-    [username], 
-    (err, results) => {
+    // 2. Reset team stats
+    connection.execute('UPDATE teams SET wins = 0, losses = 0, draws = 0, GF = 0, GA = 0', (err) => {
       if (err) {
-        console.error('Database error:', err);
-        return res.status(500).json({ error: 'Something went wrong while deleting the team. Please try again later.' });
+        console.error('Error resetting team stats:', err);
+        return res.status(500).json({ error: 'Error resetting team stats. Please try again later.' });
       }
 
-      if (results.affectedRows === 0) {
-        return res.status(404).json({ error: 'Team not found.' });
-      }
+      // 3. Fetch teams
+      connection.execute('SELECT * FROM teams', (err, results) => {
+        if (err) {
+          console.error('Database error:', err);
+          return res.status(500).json({ error: 'Error fetching teams. Please try again later.' });
+        }
 
-      res.json({ message: 'Team deleted successfully.' });
-    }
-  );
-});
+        const teams = results;
+        const gws = 8;
+        const matches = generateMatches(teams, gws);
 
-app.delete('/logout', (req, res) => {
-  const { id, sessionCode } = req.body;
-  connection.execute(
-    'DELETE FROM session WHERE id_user = ? AND id_session = ?',
-    [id, sessionCode],
-    (err, results) => {
-      if (err) {
-        console.error('Session logout error:', err);
-        return res.status(500).json({ error: 'Error during logout, please try again later.' });
-      }
+        const query = `INSERT INTO matches (id_match, home_team, hometeam_name, home_score, away_team, awayteam_name, away_score, round) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
 
-      if (results.affectedRows === 0) {
-        return res.status(404).json({ error: 'Session not found.' });
-      }
-      
-      res.json({ message: 'Session deleted successfully.' });
-    }
-  );
+        matches.forEach(match => {
+          connection.execute(query, [
+            match.id_match,
+            match.home_team.userName,
+            match.home_team.teamName,
+            match.home_score,
+            match.away_team.userName,
+            match.away_team.teamName,
+            match.away_score,
+            match.round
+          ]);
+        });
+
+        res.json({ message: 'Matches generated and team stats reset.' });
+      });
+    });
+  });
 });
 
 app.listen(PORT, () => {
