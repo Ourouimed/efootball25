@@ -1,5 +1,4 @@
 require('dotenv').config();
-const serverless = require('serverless-http');
 const express = require('express');
 const app = express();
 const cors = require('cors');
@@ -353,5 +352,3 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
-
-module.exports.handler = serverless(app);
