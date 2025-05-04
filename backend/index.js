@@ -22,7 +22,7 @@ const connection = mysql.createConnection({
   host: process.env.DB_HOST || 'localhost' ,
   user: process.env.DB_USER || 'root',   
   password: process.env.DB_PASSWORD || '',
-  database: process.env.DB_DATABASE  || ''
+  database: process.env.DB_DATABASE  || 'your_db_name'
 });
 
 try {
@@ -86,6 +86,11 @@ function generateMatches(teams, totalRounds) {
 
   return matches;
 }
+
+
+app.get('/', (req , res)=>{
+    res.send('<h1>Hello World</h1>')
+})
 
 
 
