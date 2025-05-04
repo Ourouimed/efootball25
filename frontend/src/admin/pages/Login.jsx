@@ -1,17 +1,19 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios"; 
+import axios from "axios";
+const API_URL = import.meta.env.VITE_API_URL;
 const Login = () => {
-  const [loading , setLoading] = useState(null)
-  const [user , setUser] = useState({
-    id : '',
-    password : ''
-  })
-  const [error , setError] = useState(null)
-  const navigate = useNavigate()
+  const [loading, setLoading] = useState(null);
+  const [user, setUser] = useState({
+    id: '',
+    password: ''
+  });
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
   const verifySession = async (user) => {
     try {
-      const res = await axios.post('https://efootball25-api.vercel.app/verify-session', {
+      const res = await axios.post(`${API_URL}/verify-session`, {
         id: user.id,
         sessionCode: user.sessionCode
       });
@@ -20,25 +22,22 @@ const Login = () => {
         navigate('/dashboard');
       }
     } catch {
-      
+      // Handle errors here
     }
   };
 
-  
-  
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
     if (user) verifySession(user);
   }, [navigate]);
 
-
   const login = async () => {
     setLoading(true); 
     try {
-      const response = await axios.post('https://efootball25-api.vercel.app/login', user);
-      
+      const response = await axios.post(`${API_URL}/login`, user);
+
       if (response.status === 200) {
-        localStorage.setItem('user' , JSON.stringify(response.data))
+        localStorage.setItem('user', JSON.stringify(response.data));
         navigate('/dashboard'); 
       } else {
         throw new Error('Login failed');
@@ -75,12 +74,12 @@ const Login = () => {
             To Connect to admin Panel as a guest use <br></br>username : guest <br></br> password : guest
           </div>
 
-            <button
-              className="bg-primary w-full py-2 px-4 rounded-md text-white cursor-pointer"
-              onClick={login}
-            >
-              Login to Dashboard
-            </button>
+          <button
+            className="bg-primary w-full py-2 px-4 rounded-md text-white cursor-pointer"
+            onClick={login}
+          >
+            Login to Dashboard
+          </button>
           
           {error && <p className="text-red-500 mt-2">{error}</p>}
         </div>

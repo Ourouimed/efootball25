@@ -7,17 +7,20 @@ import Card from '../components/Card';
 import TopScorer from "../components/TopScorer";
 import Standing from "../components/Standing";
 
+// Get API URL from environment variables
+const API_URL = import.meta.env.VITE_API_URL;
+
 const Dashboard = () => {
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const navigate = useNavigate()
-  
+  const navigate = useNavigate();
 
+  // Fetch teams data using the API URL
   const fetchTeams = async () => {
     setLoading(true);
     try {
-      const res = await axios.get('https://efootball25-api.vercel.app/teams');
+      const res = await axios.get(`${API_URL}/teams`);
       setTeams(res.data);
     } catch (err) {
       setError('Failed to fetch teams');
@@ -29,8 +32,6 @@ const Dashboard = () => {
   useEffect(() => {
     fetchTeams();
   }, []);
-
-
 
   if (loading) return <div className="text-center text-white py-8">Loading teams...</div>;
   if (error) return <div className="text-center text-white py-8">Error: {error}</div>;

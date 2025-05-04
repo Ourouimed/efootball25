@@ -1,19 +1,23 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Sidenav from "../components/Sidenav";
-import { useState , useEffect } from "react";
+import { useState, useEffect } from "react";
 import { SideNavContext } from "../../contexts/Sidenavontext";
 import axios from "axios";
+
+const API_URL = import.meta.env.VITE_API_URL;
+
 const DashboardLayout = () => {
   const [sidenavIsOpen, setSidenavIsOpen] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
   const verifySession = async (user) => {
     try {
-      const res = await axios.post('https://efootball25-api.vercel.app/verify-session', {
+      const res = await axios.post(`${API_URL}/verify-session`, {
         id: user.id,
         sessionCode: user.sessionCode
       });
-      const { id_session , role } = res.data;
+      const { id_session, role } = res.data;
       if (id_session !== user.sessionCode) {
         navigate('/login');
       }
@@ -22,12 +26,12 @@ const DashboardLayout = () => {
     }
   };
 
-
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
     if (!user) navigate('/login');
     else verifySession(user);
   }, [navigate]);
+
   return (
     <SideNavContext.Provider
       value={{
@@ -39,12 +43,10 @@ const DashboardLayout = () => {
         <div className="flex">
           <Sidenav />
           <div className="w-full">
-                <Navbar />
-                <div className="py-4 px-8 w-full">
-                    <Outlet />
-                </div>
-                
-            
+            <Navbar />
+            <div className="py-4 px-8 w-full">
+              <Outlet />
+            </div>
           </div>
         </div>
       </div>

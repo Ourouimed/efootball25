@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const Matches = () => {
     const [showPopup, setShowPopup] = useState(false);
     const [matches, setMatches] = useState([]);
@@ -24,7 +26,7 @@ const Matches = () => {
         }
 
         try {
-            const res = await axios.post('https://efootball25-api.vercel.app/verify-session', {
+            const res = await axios.post(`${API_URL}/verify-session`, {
                 id: user.id,
                 sessionCode: user.sessionCode
             });
@@ -49,7 +51,7 @@ const Matches = () => {
         if (!sessionValid) return;
 
         try {
-            await axios.post('https://efootball25-api.vercel.app/generate-matches');
+            await axios.post(`${API_URL}/generate-matches`);
             fetchMatches();
             setStatusMsg('Matches generated successfully.');
             setStatus(true);
@@ -78,7 +80,7 @@ const Matches = () => {
         if (!sessionValid) return;
 
         try {
-            await axios.post(`https://efootball25-api.vercel.app/matches/${selectedMatch.id_match}`, {
+            await axios.post(`${API_URL}/matches/${selectedMatch.id_match}`, {
                 home_score: homeScore,
                 away_score: awayScore
             });
@@ -95,7 +97,7 @@ const Matches = () => {
     const fetchMatches = async () => {
         setLoading(true);
         try {
-            const res = await axios.get('https://efootball25-api.vercel.app/matches');
+            const res = await axios.get(`${API_URL}/matches`);
             setMatches(res.data);
         } catch (err) {
             setStatusMsg('Failed to fetch matches.');

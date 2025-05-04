@@ -1,18 +1,19 @@
 import { useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 
 const Register = () => {
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001"
   const navigate = useNavigate();
 
   const [inscription, setInscription] = useState({
-    teamName: '',
-    phoneNum: '',
-    userName: ''
+    teamName: "",
+    phoneNum: "",
+    userName: ""
   });
 
-  const [statusMsg, setstatusMsg] = useState(null);
+  const [statusMsg, setStatusMsg] = useState(null);
   const [status, setStatus] = useState(null);
 
   const handleRegisterTeam = async (e) => {
@@ -20,23 +21,23 @@ const Register = () => {
     const { teamName, phoneNum, userName } = inscription;
 
     if (!teamName || !phoneNum || !userName) {
-      setstatusMsg('Please, 3mr Ga3 lma3lomat la Jat ela khatrk');
+      setStatusMsg("Please, 3mr Ga3 lma3lomat la Jat ela khatrk");
       setStatus(false);
       return;
     }
 
     try {
-      const response = await axios.post('https://efootball25-api.vercel.app/register', inscription);
-      setstatusMsg(response.data.message);
+      const response = await axios.post(`${API_URL}/register`, inscription);
+      setStatusMsg(response.data.message);
       setStatus(true);
-      setTimeout(() => navigate('/stats'), 1000);
+      setTimeout(() => navigate("/stats"), 1000);
     } catch (err) {
       console.error(err);
       const errorMsg =
-        typeof err.response?.data === 'string'
+        typeof err.response?.data === "string"
           ? err.response.data
-          : err.response?.data?.message || 'Something went wrong. Please try again.';
-      setstatusMsg(errorMsg);
+          : err.response?.data?.message || "Something went wrong. Please try again.";
+      setStatusMsg(errorMsg);
       setStatus(false);
     }
   };
@@ -94,7 +95,7 @@ const Register = () => {
             {statusMsg && (
               <div
                 className={`mt-2 text-center ${
-                  status ? 'success-msg' : 'error-msg'
+                  status ? "success-msg" : "error-msg"
                 }`}
               >
                 {statusMsg}

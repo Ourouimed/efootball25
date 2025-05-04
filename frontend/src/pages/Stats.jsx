@@ -14,10 +14,12 @@ const Stats = () => {
   const [teamsLoading, setTeamsLoading] = useState(true);
   const [matchesLoading, setMatchesLoading] = useState(true);
 
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
+
   useEffect(() => {
     const fetchTeams = async () => {
       try {
-        const res = await axios.get('https://efootball25-api.vercel.app/teams');
+        const res = await axios.get(`${API_URL}/teams`);
         setTeams(res.data);
       } catch (err) {
         setTeamsError(err.response?.data?.message || 'Failed to fetch teams');
@@ -28,7 +30,7 @@ const Stats = () => {
 
     const fetchMatches = async () => {
       try {
-        const res = await axios.get('https://efootball25-api.vercel.app/matches');
+        const res = await axios.get(`${API_URL}/matches`);
         setMatches(res.data);
       } catch (err) {
         setMatchesError(err.response?.data?.message || 'Failed to fetch matches');
@@ -39,7 +41,7 @@ const Stats = () => {
 
     fetchTeams();
     fetchMatches();
-  }, []);
+  }, [API_URL]);
 
   return (
     <>

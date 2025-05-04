@@ -7,7 +7,7 @@ const mysql = require('mysql2');
 const PORT = process.env.PORT || 3001;
 
 const corsOptions = {
-  origin: 'https://efootball25-league.vercel.app',
+  origin: process.env.DB_HOST || 'http://localhost:5173',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], 
   allowedHeaders: ['Content-Type', 'Authorization']
 };

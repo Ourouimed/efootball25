@@ -4,6 +4,8 @@ import { Add, Edit, Delete } from "@mui/icons-material";
 import PopUpWindow from "../components/PopUpWindow";
 import { useNavigate } from "react-router-dom";
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+
 const Teams = () => {
     const [teams, setTeams] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -24,7 +26,7 @@ const Teams = () => {
         }
 
         try {
-            const res = await axios.post('https://efootball25-api.vercel.app/verify-session', {
+            const res = await axios.post(`${API_URL}/verify-session`, {
                 id: user.id,
                 sessionCode: user.sessionCode
             });
@@ -46,7 +48,7 @@ const Teams = () => {
     const fetchTeams = async () => {
         setLoading(true);
         try {
-            const res = await axios.get('https://efootball25-api.vercel.app/teams');
+            const res = await axios.get(`${API_URL}/teams`);
             setTeams(res.data);
         } catch (err) {
             setError('Failed to fetch teams');
@@ -84,8 +86,8 @@ const Teams = () => {
 
         if (confirm('Are you sure you want to delete this team?')) {
             try {
-                await axios.delete(`https://efootball25-api.vercel.app/teams/${userName}`);
-                setTeams(prev => prev.filter(t => t.userName !== userName)); // optimistic update
+                await axios.delete(`${API_URL}/teams/${userName}`);
+                setTeams(prev => prev.filter(t => t.userName !== userName));
                 setStatusMsg('Team deleted successfully!');
                 setStatus(true);
             } catch (err) {
@@ -116,11 +118,11 @@ const Teams = () => {
 
         try {
             if (isEditing) {
-                await axios.post(`https://efootball25-api.vercel.app/teams/${userName}`, currentTeam);
+                await axios.post(`${API_URL}/teams/${userName}`, currentTeam);
                 setTeams(prev => prev.map(t => t.userName === userName ? { ...t, ...currentTeam } : t));
                 setStatusMsg('Team updated successfully!');
             } else {
-                await axios.post('https://efootball25-api.vercel.app/register', currentTeam);
+                await axios.post(`${API_URL}/register`, currentTeam);
                 setTeams(prev => [...prev, currentTeam]);
                 setStatusMsg('Team added successfully!');
             }
