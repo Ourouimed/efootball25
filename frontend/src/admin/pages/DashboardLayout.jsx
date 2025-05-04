@@ -13,7 +13,7 @@ const DashboardLayout = () => {
         id: user.id,
         sessionCode: user.sessionCode
       });
-      const { id_session , role } = res.data;
+      const { id_session , role } = res.data.session.session;
       if (id_session !== user.sessionCode) {
         navigate('/login');
       }
