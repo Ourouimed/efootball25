@@ -62,7 +62,7 @@ function generateMatches(teams, totalRounds) {
       // Skip BYE matches
       if (teamA !== "BYE" && teamB !== "BYE") {
         matches.push({
-          id_match: `M${String(matches.length + 1).padStart(3, '0')}-GW${String(round).padStart(2, '0')}`,
+          id_match: `M${String(round).padStart(3, '0')}-GW${String(round).padStart(2, '0')}`,
           home_team: round % 2 === 0 ? teamB : teamA, // Alternate home/away
           away_team: round % 2 === 0 ? teamA : teamB,
           home_score: null,
