@@ -46,51 +46,55 @@ function generateRandomCode(length = 12) {
 
 // Match generation logic
 function generateMatches(teams, totalRounds) {
-  const matches = [];
-  const playedMatches = new Set();
-  const teamPool = [...teams];
-  const matchesPerRound = teamPool.length / 2;
+  const n = teams.length;
+  if (n % 2 !== 0) {
+    throw new Error("Number of teams must be even");
+  }
 
-  for (let round = 1; round <= totalRounds; round++) {
-    const roundTeams = [...teamPool];
-    let roundMatches = 0;
-    let attempts = 0;
+  const matchesPerRound = n / 2;
 
-    while (roundMatches < matchesPerRound && attempts < 1000) {
-      attempts++;
-
-      const homeIndex = Math.floor(Math.random() * roundTeams.length);
-      const homeTeam = roundTeams[homeIndex];
-
-      const remainingTeams = roundTeams.filter(t => t !== homeTeam);
-      const awayIndex = Math.floor(Math.random() * remainingTeams.length);
-      const awayTeam = remainingTeams[awayIndex];
-
-      const matchKey1 = `${homeTeam}-${awayTeam}`;
-      const matchKey2 = `${awayTeam}-${homeTeam}`;
-
-      if (!playedMatches.has(matchKey1) && !playedMatches.has(matchKey2)) {
-        // Mark as played
-        playedMatches.add(matchKey1);
-        roundTeams.splice(roundTeams.indexOf(homeTeam), 1);
-        roundTeams.splice(roundTeams.indexOf(awayTeam), 1);
-
-        matches.push({
-          id_match: `M${String(matches.length + 1).padStart(3, '0')}-GW${String(round).padStart(2, '0')}`,
-          home_team: homeTeam,
-          away_team: awayTeam,
-          home_score: null,
-          away_score: null,
-          round: `GW${round}`
-        });
-
-        roundMatches++;
-      }
+  // 1) build every unique pairing [i<j]
+  const allPairings = [];
+  for (let i = 0; i < n; i++) {
+    for (let j = i + 1; j < n; j++) {
+      allPairings.push([teams[i], teams[j]]);
     }
+  }
 
-    // Optional: warn if not all matches could be scheduled due to constraints
-    if (roundMatches < matchesPerRound) {
-      console.warn(`Incomplete round GW${round}: only ${roundMatches}/${matchesPerRound} matches generated`);
+  // 2) shuffle Fisher–Yates
+  for (let i = allPairings.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [allPairings[i], allPairings[j]] = [allPairings[j], allPairings[i]];
+  }
+
+  // 3) check we have enough pairings
+  if (totalRounds * matchesPerRound > allPairings.length) {
+    console.warn(
+      `Requested ${totalRounds} rounds but only ${allPairings.length} unique matches exist.`
+    );
+  }
+
+  // 4) slice out matchesPerRound for each GW
+  const matches = [];
+  let ptr = 0;
+  for (let round = 1; round <= totalRounds; round++) {
+    for (let m = 1; m <= matchesPerRound; m++, ptr++) {
+      if (ptr >= allPairings.length) break;
+      const [teamA, teamB] = allPairings[ptr];
+      
+      // randomly pick who’s home
+      const homeFirst = Math.random() < 0.5;
+      const home = homeFirst ? teamA : teamB;
+      const away = homeFirst ? teamB : teamA;
+
+      matches.push({
+        id_match: `M${String((round-1)*matchesPerRound + m).padStart(3, '0')}-GW${String(round).padStart(2, '0')}`,
+        home_team: home,
+        away_team: away,
+        home_score: null,
+        away_score: null,
+        round: `GW${round}`,
+      });
     }
   }
 
