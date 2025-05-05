@@ -192,7 +192,8 @@ app.post('/login', (req, res) => {
           }
 
           res.json({ 
-            id: user.id, 
+            id: user.id,
+            name : user.name, 
             sessionCode: randomSessionId,
             message: 'Login successful'
           });
