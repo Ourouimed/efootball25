@@ -47,36 +47,56 @@ function generateRandomCode(length = 12) {
 // Match generation logic
 function generateMatches(teams, totalRounds) {
   const matches = [];
-  const teamPool = [...teams]; 
+  const playedMatches = new Set();
+  const teamPool = [...teams];
   const matchesPerRound = teamPool.length / 2;
 
   for (let round = 1; round <= totalRounds; round++) {
-    const roundTeams = [...teamPool]; 
-    
-    for (let matchNum = 1; matchNum <= matchesPerRound; matchNum++) {
-      if (roundTeams.length < 2) break; 
+    const roundTeams = [...teamPool];
+    let roundMatches = 0;
+    let attempts = 0;
+
+    while (roundMatches < matchesPerRound && attempts < 1000) {
+      attempts++;
 
       const homeIndex = Math.floor(Math.random() * roundTeams.length);
       const homeTeam = roundTeams[homeIndex];
-      roundTeams.splice(homeIndex, 1); 
 
-      const awayIndex = Math.floor(Math.random() * roundTeams.length);
-      const awayTeam = roundTeams[awayIndex];
-      roundTeams.splice(awayIndex, 1); 
+      const remainingTeams = roundTeams.filter(t => t !== homeTeam);
+      const awayIndex = Math.floor(Math.random() * remainingTeams.length);
+      const awayTeam = remainingTeams[awayIndex];
 
-      matches.push({
-        id_match: `M${String(matchNum).padStart(3, '0')}-GW${String(round).padStart(2, '0')}`,
-        home_team: homeTeam,
-        away_team: awayTeam,
-        home_score: null,
-        away_score: null,
-        round: `GW${round}`
-      });
+      const matchKey1 = `${homeTeam}-${awayTeam}`;
+      const matchKey2 = `${awayTeam}-${homeTeam}`;
+
+      if (!playedMatches.has(matchKey1) && !playedMatches.has(matchKey2)) {
+        // Mark as played
+        playedMatches.add(matchKey1);
+        roundTeams.splice(roundTeams.indexOf(homeTeam), 1);
+        roundTeams.splice(roundTeams.indexOf(awayTeam), 1);
+
+        matches.push({
+          id_match: `M${String(matches.length + 1).padStart(3, '0')}-GW${String(round).padStart(2, '0')}`,
+          home_team: homeTeam,
+          away_team: awayTeam,
+          home_score: null,
+          away_score: null,
+          round: `GW${round}`
+        });
+
+        roundMatches++;
+      }
+    }
+
+    // Optional: warn if not all matches could be scheduled due to constraints
+    if (roundMatches < matchesPerRound) {
+      console.warn(`Incomplete round GW${round}: only ${roundMatches}/${matchesPerRound} matches generated`);
     }
   }
 
   return matches;
 }
+
 
 // Basic route for health check
 app.get('/', (req, res) => {
