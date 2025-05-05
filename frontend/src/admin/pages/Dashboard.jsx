@@ -6,6 +6,7 @@ import StatsCard from '../components/StatsCard';
 import Card from '../components/Card';
 import TopScorer from "../components/TopScorer";
 import Standing from "../components/Standing";
+import Matches from "../components/Matches";
 
 // Get API URL from environment variables
 const API_URL = import.meta.env.VITE_API_URL;
@@ -77,7 +78,7 @@ const Dashboard = () => {
           <Standing teams={sortedTeams} />
         </Card>
         <Card title='Matches'>
-
+          <Matches matches={matches}/>
         </Card>
       </div>
     </>
