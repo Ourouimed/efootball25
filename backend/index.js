@@ -46,64 +46,36 @@ function generateRandomCode(length = 12) {
 
 // Match generation logic
 function generateMatches(teams, totalRounds) {
+  if (teams.length % 2 !== 0) teams.push("BYE"); // Add dummy team if odd
+
+  const totalTeams = teams.length;
+  const half = totalTeams / 2;
   const matches = [];
-  const previousPairs = new Set();
-  let matchCounter = 0;
 
-  const teamIds = teams.map(team => team.id);
-  const totalUniquePairs = [];
+  let teamList = [...teams]; // Copy original list
 
-  // Generate all possible unique pairs
-  for (let i = 0; i < teamIds.length; i++) {
-    for (let j = i + 1; j < teamIds.length; j++) {
-      totalUniquePairs.push([teamIds[i], teamIds[j]]);
-    }
-  }
-
-  // Shuffle all possible pairs
   for (let round = 1; round <= totalRounds; round++) {
-    const roundMatches = [];
-    const usedTeams = new Set();
+    for (let i = 0; i < half; i++) {
+      const teamA = teamList[i];
+      const teamB = teamList[totalTeams - 1 - i];
 
-    const availablePairs = totalUniquePairs.filter(([a, b]) => {
-      const key = `${a}-${b}`;
-      return !previousPairs.has(key);
-    });
-
-    // Shuffle availablePairs
-    for (let i = availablePairs.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [availablePairs[i], availablePairs[j]] = [availablePairs[j], availablePairs[i]];
+      // Skip BYE matches
+      if (teamA !== "BYE" && teamB !== "BYE") {
+        matches.push({
+          id_match: `M${String(matches.length + 1).padStart(3, '0')}-GW${String(round).padStart(2, '0')}`,
+          home_team: round % 2 === 0 ? teamB : teamA, // Alternate home/away
+          away_team: round % 2 === 0 ? teamA : teamB,
+          home_score: null,
+          away_score: null,
+          round: `GW${round}`,
+        });
+      }
     }
 
-    for (const [homeId, awayId] of availablePairs) {
-      if (usedTeams.has(homeId) || usedTeams.has(awayId)) continue;
-
-      const home = teams.find(t => t.id === homeId);
-      const away = teams.find(t => t.id === awayId);
-
-      roundMatches.push({
-        id_match: `M${String(matchCounter + 1).padStart(3, '0')}-GW${String(round).padStart(2, '0')}`,
-        home_team: home,
-        away_team: away,
-        home_score: null,
-        away_score: null,
-        round: `GW${round}`,
-      });
-
-      previousPairs.add(`${homeId}-${awayId}`);
-      usedTeams.add(homeId);
-      usedTeams.add(awayId);
-      matchCounter++;
-
-      if (usedTeams.size >= teamIds.length) break;
-    }
-
-    if (roundMatches.length > 0) {
-      matches.push(...roundMatches);
-    } else {
-      break; // No more unique pairs
-    }
+    // Rotate teams for next round (except first team)
+    const fixed = teamList[0];
+    const rotated = [fixed, ...teamList.slice(-1), ...teamList.slice(1, -1)];
+    teamList = rotated;
   }
 
   return matches;
@@ -113,7 +85,10 @@ function generateMatches(teams, totalRounds) {
 
 // Basic route for health check
 app.get('/', (req, res) => {
-  res.send('<h1>eFootball League Server</h1><p>Server is running</p>');
+  let teams = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
+  console.log(teams)
+  res.json(generateMatches(teams , 8))
+  // res.send('<h1>eFootball League Server</h1><p>Server is running</p>');
 });
 
 // Team registration endpoint
