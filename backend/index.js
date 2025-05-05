@@ -55,7 +55,6 @@ function generateRandomDraw(teams, totalRounds) {
   }
 
   for (let round = 1; round <= totalRounds; round++) {
-    // Create a shuffled copy of the teams for each round to ensure randomness
     const shuffledTeams = [...teams].sort(() => Math.random() - 0.5);
     const matchesPerRound = Math.floor(numTeams / 2);
 
@@ -64,7 +63,7 @@ function generateRandomDraw(teams, totalRounds) {
       const away = shuffledTeams[m * 2 + 1];
 
       matches.push({
-        id_match: `M${String((round - 1) * matchesPerRound + m + 1).padStart(3, '0')}-GW${String(round).padStart(2, '0')}`,
+        id_match: `M${String(m + 1).padStart(3, '0')}-GW${String(round).padStart(2, '0')}`,
         home_team: home,
         away_team: away,
         home_score: null,
@@ -73,10 +72,10 @@ function generateRandomDraw(teams, totalRounds) {
       });
     }
 
-    // Handle odd number of teams: the last team gets a bye
     if (numTeams % 2 !== 0) {
+      // For consistency, we can consider the bye as a "match" in the numbering for that GW
       matches.push({
-        id_match: `BYE-GW${String(round).padStart(2, '0')}`,
+        id_match: `BYE${String(matchesPerRound + 1).padStart(3, '0')}-GW${String(round).padStart(2, '0')}`,
         home_team: shuffledTeams[numTeams - 1],
         away_team: "BYE",
         home_score: null,
@@ -88,14 +87,6 @@ function generateRandomDraw(teams, totalRounds) {
 
   return matches;
 }
-
-
-
-// Example usage:
-const teams = ["Team A", "Team B", "Team C", "Team D", "Team E"];
-const totalRounds = 3;
-const generatedMatches = generateRandomDraw(teams, totalRounds);
-console.log(JSON.stringify(generatedMatches, null, 2));
 
 
 // Basic route for health check
