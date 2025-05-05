@@ -18,7 +18,8 @@ const Matches = ({matches})=>{
         match => match.round === `GW${currentRound + 1}`
     );
     return <>
-        <div className="flex justify-between items-center pb-2">
+    <div className='p-2'>
+    <div className="flex justify-between items-center pb-2">
         <button
           onClick={prevGw}
           className="bg-primary rounded text-white flex items-center justify-center cursor-pointer disabled:opacity-50"
@@ -53,6 +54,8 @@ const Matches = ({matches})=>{
           </div>
         ))
       )}
+    </div>
+       
     </>
 }
 
