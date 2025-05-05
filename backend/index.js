@@ -48,63 +48,193 @@ function generateRandomCode(length = 12) {
 function generatedMatches(teams, totalRounds) {
   const matches = [];
   const numTeams = teams.length;
-
+  
+  // Check if we have enough teams
   if (numTeams < 2) {
     console.warn("Not enough teams to create matches.");
     return matches;
   }
-
-  // If odd number of teams, add a dummy team to make it even for the algorithm
-  const adjustedTeams = numTeams % 2 !== 0 ? [...teams, null] : [...teams];
-  const numAdjustedTeams = adjustedTeams.length;
-
-  // Generate a random order of teams to start with
-  const shuffledTeams = [...adjustedTeams].sort(() => Math.random() - 0.5);
-
+  
+  // Keep track of matches that have already been scheduled
+  const matchupHistory = new Set();
+  
+  // Shuffle teams to randomize initial pairings
+  const shuffledTeams = [...teams].sort(() => Math.random() - 0.5);
+  
+  // Calculate maximum possible unique games between all teams
+  const maxPossibleMatches = (numTeams * (numTeams - 1)) / 2;
+  
+  // Track which teams have BYEs in each round (for odd number of teams)
+  const byeHistory = new Map();
+  teams.forEach(team => byeHistory.set(team, 0));
+  
+  // For each round
+  let matchIdCounter = 0;
   for (let round = 1; round <= totalRounds; round++) {
-    const matchesInRound = [];
-    for (let i = 0; i < numAdjustedTeams / 2; i++) {
-      const team1 = shuffledTeams[i];
-      const team2 = shuffledTeams[numAdjustedTeams - 1 - i];
-
-      if (team1 !== null && team2 !== null) {
-        // Ensure consistent home/away assignment to avoid immediate duplicates within the round
-        const home = team1;
-        const away = team2;
-
-        matchesInRound.push({
-          id_match: `M${String(matches.filter(m => m.round === `GW${round}`).length + 1).padStart(3, '0')}-GW${String(round).padStart(2, '0')}`,
-          home_team: home,
-          away_team: away,
-          home_score: null,
-          away_score: null,
-          round: `GW${round}`,
-        });
-      } else if (team1 !== null) {
-        matchesInRound.push({
-          id_match: `BYE${String(matches.filter(m => m.round === `GW${round}`).length + 1).padStart(3, '0')}-GW${String(round).padStart(2, '0')}`,
-          home_team: team1,
-          away_team: "BYE",
-          home_score: null,
-          away_score: null,
-          round: `GW${round}`,
-        });
+    // Reset match counter for each round to ensure unique IDs within the round
+    let matchesInRoundCounter = 0;
+    const roundMatches = [];
+    const teamsInThisRound = new Set(shuffledTeams);
+    
+    // Try to create matches for this round
+    while (teamsInThisRound.size >= 2) {
+      // Find teams that can play against each other
+      const remainingTeams = Array.from(teamsInThisRound);
+      let foundMatch = false;
+      
+      // Try to find a legal match (teams that haven't played each other yet)
+      for (let i = 0; i < remainingTeams.length - 1 && !foundMatch; i++) {
+        const homeTeam = remainingTeams[i];
+        
+        for (let j = i + 1; j < remainingTeams.length; j++) {
+          const awayTeam = remainingTeams[j];
+          
+          // Make sure teams aren't playing themselves
+          if (homeTeam === awayTeam) continue;
+          
+          const matchupKey = [homeTeam, awayTeam].sort().join('vs');
+          
+          // If this matchup hasn't happened yet, create it
+          if (!matchupHistory.has(matchupKey)) {
+            matchIdCounter++;
+            matchesInRoundCounter++;
+            
+            // Create match ID
+            const matchId = `M${String(matchesInRoundCounter).padStart(3, '0')}-GW${String(round).padStart(2, '0')}`;
+            
+            // Add match to results
+            roundMatches.push({
+              id_match: matchId,
+              home_team: homeTeam,
+              away_team: awayTeam,
+              home_score: null,
+              away_score: null,
+              round: `GW${round}`,
+            });
+            
+            // Record this matchup
+            matchupHistory.add(matchupKey);
+            
+            // Remove teams from available pool for this round
+            teamsInThisRound.delete(homeTeam);
+            teamsInThisRound.delete(awayTeam);
+            
+            foundMatch = true;
+            break;
+          }
+        }
+      }
+      
+      // If we couldn't find a legal match, we'll have to assign a BYE 
+      // (only happens with odd number of teams or when all remaining teams have played each other)
+      if (!foundMatch && teamsInThisRound.size > 0) {
+        // Find the team with the fewest BYEs
+        let minByes = Infinity;
+        let teamForBye = null;
+        
+        for (const team of teamsInThisRound) {
+          const byeCount = byeHistory.get(team);
+          if (byeCount < minByes) {
+            minByes = byeCount;
+            teamForBye = team;
+          }
+        }
+        
+        if (teamForBye) {
+          matchesInRoundCounter++;
+          
+          // Create BYE match ID
+          const byeId = `BYE${String(matchesInRoundCounter).padStart(3, '0')}-GW${String(round).padStart(2, '0')}`;
+          
+          // Add BYE to results
+          roundMatches.push({
+            id_match: byeId,
+            home_team: teamForBye,
+            away_team: "BYE",
+            home_score: null,
+            away_score: null,
+            round: `GW${round}`,
+          });
+          
+          // Update BYE history and remove team from available pool
+          byeHistory.set(teamForBye, byeHistory.get(teamForBye) + 1);
+          teamsInThisRound.delete(teamForBye);
+        }
       }
     }
-    matches.push(...matchesInRound);
-
-    // Rotate the teams for the next round (except the first team if even number)
-    const firstTeam = shuffledTeams[0];
-    const restOfTeams = shuffledTeams.slice(1);
-    const lastTeam = restOfTeams.pop();
-    shuffledTeams.splice(1, 0, lastTeam);
-    shuffledTeams[0] = firstTeam;
+    
+    // Add all matches from this round to our results
+    matches.push(...roundMatches);
+    
+    // If we've scheduled all possible unique matches, stop
+    if (matchupHistory.size >= maxPossibleMatches) {
+      console.log(`All possible unique matches have been scheduled after round ${round}.`);
+      break;
+    }
   }
-
-  // Remove matches involving the dummy team if the original number of teams was odd
-  return numTeams % 2 !== 0 ? matches.filter(match => match.home_team !== null && match.away_team !== null && match.away_team !== "BYE") : matches;
+  
+  // Validate the final schedule
+  validateMatchSchedule(matches, teams);
+  
+  return matches;
 }
 
+// Function to validate the generated schedule
+function validateMatchSchedule(matches, teams) {
+  // Check for duplicate matches
+  const seenMatchups = new Set();
+  const seenIds = new Set();
+  
+  for (const match of matches) {
+    // Skip BYE matches
+    if (match.away_team === "BYE") continue;
+    
+    // Check for duplicate IDs
+    if (seenIds.has(match.id_match)) {
+      console.error(`Error: Duplicate match ID found: ${match.id_match}`);
+    }
+    seenIds.add(match.id_match);
+    
+    // Check for teams playing against themselves
+    if (match.home_team === match.away_team) {
+      console.error(`Error: Team ${match.home_team} is playing against itself in match ${match.id_match}`);
+    }
+    
+    // Check for duplicate matchups
+    const matchupKey = [match.home_team, match.away_team].sort().join('vs');
+    if (seenMatchups.has(matchupKey)) {
+      console.error(`Error: Duplicate matchup found: ${match.home_team} vs ${match.away_team}`);
+    }
+    seenMatchups.add(matchupKey);
+  }
+  
+  // Check team participation in each round
+  const roundsMap = new Map();
+  for (const match of matches) {
+    if (!roundsMap.has(match.round)) {
+      roundsMap.set(match.round, new Set());
+    }
+    roundsMap.get(match.round).add(match.home_team);
+    if (match.away_team !== "BYE") {
+      roundsMap.get(match.round).add(match.away_team);
+    }
+  }
+  
+  // Make sure each team is in each round (unless there are BYEs)
+  for (const [round, teamsInRound] of roundsMap.entries()) {
+    if (teams.length % 2 === 0) {
+      // For even number of teams, all teams should play in each round
+      if (teamsInRound.size !== teams.length) {
+        console.error(`Error: Not all teams are playing in ${round}. Expected ${teams.length}, got ${teamsInRound.size}`);
+      }
+    } else {
+      // For odd number of teams, all but one team should play in each round
+      if (teamsInRound.size !== teams.length - 1 && teamsInRound.size !== teams.length) {
+        console.error(`Error: Wrong number of teams playing in ${round}. Expected ${teams.length - 1} or ${teams.length}, got ${teamsInRound.size}`);
+      }
+    }
+  }
+}
 
 
 // Basic route for health check
