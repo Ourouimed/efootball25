@@ -45,7 +45,7 @@ function generateRandomCode(length = 12) {
 }
 
 // Match generation logic
-function generateRandomDraw(teams, totalRounds) {
+function generatedMatches(teams, totalRounds) {
   const matches = [];
   const numTeams = teams.length;
 
@@ -54,39 +54,57 @@ function generateRandomDraw(teams, totalRounds) {
     return matches;
   }
 
+  // If odd number of teams, add a dummy team to make it even for the algorithm
+  const adjustedTeams = numTeams % 2 !== 0 ? [...teams, null] : [...teams];
+  const numAdjustedTeams = adjustedTeams.length;
+
+  // Generate a random order of teams to start with
+  const shuffledTeams = [...adjustedTeams].sort(() => Math.random() - 0.5);
+
   for (let round = 1; round <= totalRounds; round++) {
-    const shuffledTeams = [...teams].sort(() => Math.random() - 0.5);
-    const matchesPerRound = Math.floor(numTeams / 2);
+    const matchesInRound = [];
+    for (let i = 0; i < numAdjustedTeams / 2; i++) {
+      const team1 = shuffledTeams[i];
+      const team2 = shuffledTeams[numAdjustedTeams - 1 - i];
 
-    for (let m = 0; m < matchesPerRound; m++) {
-      const home = shuffledTeams[m * 2];
-      const away = shuffledTeams[m * 2 + 1];
+      if (team1 !== null && team2 !== null) {
+        // Ensure consistent home/away assignment to avoid immediate duplicates within the round
+        const home = team1;
+        const away = team2;
 
-      matches.push({
-        id_match: `M${String(m + 1).padStart(3, '0')}-GW${String(round).padStart(2, '0')}`,
-        home_team: home,
-        away_team: away,
-        home_score: null,
-        away_score: null,
-        round: `GW${round}`,
-      });
+        matchesInRound.push({
+          id_match: `M${String(matches.filter(m => m.round === `GW${round}`).length + 1).padStart(3, '0')}-GW${String(round).padStart(2, '0')}`,
+          home_team: home,
+          away_team: away,
+          home_score: null,
+          away_score: null,
+          round: `GW${round}`,
+        });
+      } else if (team1 !== null) {
+        matchesInRound.push({
+          id_match: `BYE${String(matches.filter(m => m.round === `GW${round}`).length + 1).padStart(3, '0')}-GW${String(round).padStart(2, '0')}`,
+          home_team: team1,
+          away_team: "BYE",
+          home_score: null,
+          away_score: null,
+          round: `GW${round}`,
+        });
+      }
     }
+    matches.push(...matchesInRound);
 
-    if (numTeams % 2 !== 0) {
-      // For consistency, we can consider the bye as a "match" in the numbering for that GW
-      matches.push({
-        id_match: `BYE${String(matchesPerRound + 1).padStart(3, '0')}-GW${String(round).padStart(2, '0')}`,
-        home_team: shuffledTeams[numTeams - 1],
-        away_team: "BYE",
-        home_score: null,
-        away_score: null,
-        round: `GW${round}`,
-      });
-    }
+    // Rotate the teams for the next round (except the first team if even number)
+    const firstTeam = shuffledTeams[0];
+    const restOfTeams = shuffledTeams.slice(1);
+    const lastTeam = restOfTeams.pop();
+    shuffledTeams.splice(1, 0, lastTeam);
+    shuffledTeams[0] = firstTeam;
   }
 
-  return matches;
+  // Remove matches involving the dummy team if the original number of teams was odd
+  return numTeams % 2 !== 0 ? matches.filter(match => match.home_team !== null && match.away_team !== null && match.away_team !== "BYE") : matches;
 }
+
 
 
 // Basic route for health check
@@ -542,7 +560,7 @@ app.post('/generate-matches', (req, res) => {
           }
 
           const gws = 8;
-          const matches = generateRandomDraw(teams, gws);
+          const matches = generatedMatches(teams, gws);
 
           const query = `
             INSERT INTO matches 
