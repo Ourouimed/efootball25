@@ -45,52 +45,40 @@ function generateRandomCode(length = 12) {
 }
 
 // Match generation logic
-function generateMatches(teams, totalRounds) {
-  const n = teams.length;
-  if (n % 2 !== 0) {
-    throw new Error("Number of teams must be even");
-  }
-
-  const matchesPerRound = n / 2;
-
-  // 1) build every unique pairing [i<j]
-  const allPairings = [];
-  for (let i = 0; i < n; i++) {
-    for (let j = i + 1; j < n; j++) {
-      allPairings.push([teams[i], teams[j]]);
-    }
-  }
-
-  // 2) shuffle Fisher–Yates
-  for (let i = allPairings.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [allPairings[i], allPairings[j]] = [allPairings[j], allPairings[i]];
-  }
-
-  // 3) check we have enough pairings
-  if (totalRounds * matchesPerRound > allPairings.length) {
-    console.warn(
-      `Requested ${totalRounds} rounds but only ${allPairings.length} unique matches exist.`
-    );
-  }
-
-  // 4) slice out matchesPerRound for each GW
+function generateRandomDraw(teams, totalRounds) {
   const matches = [];
-  let ptr = 0;
+  const numTeams = teams.length;
+
+  if (numTeams < 2) {
+    console.warn("Not enough teams to create matches.");
+    return matches;
+  }
+
   for (let round = 1; round <= totalRounds; round++) {
-    for (let m = 1; m <= matchesPerRound; m++, ptr++) {
-      if (ptr >= allPairings.length) break;
-      const [teamA, teamB] = allPairings[ptr];
-      
-      // randomly pick who’s home
-      const homeFirst = Math.random() < 0.5;
-      const home = homeFirst ? teamA : teamB;
-      const away = homeFirst ? teamB : teamA;
+    // Create a shuffled copy of the teams for each round to ensure randomness
+    const shuffledTeams = [...teams].sort(() => Math.random() - 0.5);
+    const matchesPerRound = Math.floor(numTeams / 2);
+
+    for (let m = 0; m < matchesPerRound; m++) {
+      const home = shuffledTeams[m * 2];
+      const away = shuffledTeams[m * 2 + 1];
 
       matches.push({
-        id_match: `M${String((round-1)*matchesPerRound + m).padStart(3, '0')}-GW${String(round).padStart(2, '0')}`,
+        id_match: `M${String((round - 1) * matchesPerRound + m + 1).padStart(3, '0')}-GW${String(round).padStart(2, '0')}`,
         home_team: home,
         away_team: away,
+        home_score: null,
+        away_score: null,
+        round: `GW${round}`,
+      });
+    }
+
+    // Handle odd number of teams: the last team gets a bye
+    if (numTeams % 2 !== 0) {
+      matches.push({
+        id_match: `BYE-GW${String(round).padStart(2, '0')}`,
+        home_team: shuffledTeams[numTeams - 1],
+        away_team: "BYE",
         home_score: null,
         away_score: null,
         round: `GW${round}`,
@@ -100,6 +88,14 @@ function generateMatches(teams, totalRounds) {
 
   return matches;
 }
+
+
+
+// Example usage:
+const teams = ["Team A", "Team B", "Team C", "Team D", "Team E"];
+const totalRounds = 3;
+const generatedMatches = generateRandomDraw(teams, totalRounds);
+console.log(JSON.stringify(generatedMatches, null, 2));
 
 
 // Basic route for health check
@@ -554,7 +550,7 @@ app.post('/generate-matches', (req, res) => {
           }
 
           const gws = 8;
-          const matches = generateMatches(teams, gws);
+          const matches = generateRandomDraw(teams, gws);
 
           const query = `
             INSERT INTO matches 
