@@ -12,6 +12,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 const Dashboard = () => {
   const [teams, setTeams] = useState([]);
+  const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -29,8 +30,22 @@ const Dashboard = () => {
     }
   };
 
+
+  const fetchMatches = async () => {
+    setLoading(true);
+    try {
+      const res = await axios.get(`${API_URL}/matches`);
+      setMatches(res.data);
+    } catch (err) {
+      setError('Failed to fetch teams');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     fetchTeams();
+    fetchMatches()
   }, []);
 
   if (loading) return <div className="text-center text-white py-8">Loading teams...</div>;
@@ -42,6 +57,7 @@ const Dashboard = () => {
     .sort((a, b) => b.pts - a.pts || (b.GF + b.KOGF) - (a.GF + a.KOGF));
 
   const goals = teams.reduce((acc, curr) => acc + curr.GF + curr.KOGF, 0);
+  const matchesPlayed = matches.filter(match => match.played === 1).length
   const totalTeams = teams.length;
 
   return (
@@ -50,8 +66,7 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 mt-2">
         <StatsCard label="Total Goals" value={goals} icon={<SportsSoccer fontSize="large" className="text-primary" />} />
         <StatsCard label="Total Teams" value={totalTeams} icon={<Group fontSize="large" className="text-primary" />} />
-        <StatsCard label="Matches Played" value={64} icon={<SportsSoccer fontSize="large" className="text-primary" />} />
-        <StatsCard label="Players" value={736} icon={<Group fontSize="large" className="text-primary" />} />
+        <StatsCard label="Matches Played" value={matchesPlayed} icon={<SportsSoccer fontSize="large" className="text-primary" />} />
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 mt-4">
