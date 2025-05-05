@@ -45,67 +45,70 @@ function generateRandomCode(length = 12) {
 }
 
 // Match generation logic
-function generatedMatches(teams, totalRounds) {
+function generateMatches(teams, totalRounds) {
   const matches = [];
-  const numTeams = teams.length;
+  const previousPairs = new Set();
+  let matchCounter = 0;
 
-  if (numTeams < 2) {
-    console.warn("Not enough teams to create matches.");
-    return matches;
-  }
+  const teamIds = teams.map(team => team.id);
+  const totalUniquePairs = [];
 
-  const pairings = [];
-  for (let i = 0; i < numTeams; i++) {
-    for (let j = i + 1; j < numTeams; j++) {
-      // Ensure consistent ordering within the pair to avoid immediate mirroring
-      pairings.push({ home: teams[i], away: teams[j] });
+  // Generate all possible unique pairs
+  for (let i = 0; i < teamIds.length; i++) {
+    for (let j = i + 1; j < teamIds.length; j++) {
+      totalUniquePairs.push([teamIds[i], teamIds[j]]);
     }
   }
 
-  // Shuffle the pairings to distribute them randomly across game weeks
-  const shuffledPairings = pairings.sort(() => Math.random() - 0.5);
-  const numPairings = shuffledPairings.length;
-
+  // Shuffle all possible pairs
   for (let round = 1; round <= totalRounds; round++) {
-    const matchesInRound = [];
-    const matchesPerRound = Math.floor(numTeams / 2); // Max possible matches per round
+    const roundMatches = [];
+    const usedTeams = new Set();
 
-    for (let m = 0; m < matchesPerRound; m++) {
-      const pairingIndex = (round - 1) * matchesPerRound + m;
+    const availablePairs = totalUniquePairs.filter(([a, b]) => {
+      const key = `${a}-${b}`;
+      return !previousPairs.has(key);
+    });
 
-      if (pairingIndex < numPairings) {
-        const pairing = shuffledPairings[pairingIndex];
-        matchesInRound.push({
-          id_match: `M${String(m + 1).padStart(3, '0')}-GW${String(round).padStart(2, '0')}`,
-          home_team: pairing.home,
-          away_team: pairing.away,
-          home_score: null,
-          away_score: null,
-          round: `GW${round}`,
-        });
-      }
+    // Shuffle availablePairs
+    for (let i = availablePairs.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [availablePairs[i], availablePairs[j]] = [availablePairs[j], availablePairs[i]];
     }
-    matches.push(...matchesInRound);
 
-    // Handle odd number of teams: each team will get a bye in some round
-    if (numTeams % 2 !== 0) {
-      const teamsInRound = matchesInRound.flatMap(match => [match.home_team, match.away_team]);
-      const availableTeams = teams.filter(team => !teamsInRound.includes(team));
-      if (availableTeams.length > 0) {
-        matches.push({
-          id_match: `BYE${String(matchesPerRound + 1).padStart(3, '0')}-GW${String(round).padStart(2, '0')}`,
-          home_team: availableTeams[0], // Assign the first available team a bye
-          away_team: "BYE",
-          home_score: null,
-          away_score: null,
-          round: `GW${round}`,
-        });
-      }
+    for (const [homeId, awayId] of availablePairs) {
+      if (usedTeams.has(homeId) || usedTeams.has(awayId)) continue;
+
+      const home = teams.find(t => t.id === homeId);
+      const away = teams.find(t => t.id === awayId);
+
+      roundMatches.push({
+        id_match: `M${String(matchCounter + 1).padStart(3, '0')}-GW${String(round).padStart(2, '0')}`,
+        home_team: home,
+        away_team: away,
+        home_score: null,
+        away_score: null,
+        round: `GW${round}`,
+      });
+
+      previousPairs.add(`${homeId}-${awayId}`);
+      usedTeams.add(homeId);
+      usedTeams.add(awayId);
+      matchCounter++;
+
+      if (usedTeams.size >= teamIds.length) break;
+    }
+
+    if (roundMatches.length > 0) {
+      matches.push(...roundMatches);
+    } else {
+      break; // No more unique pairs
     }
   }
 
   return matches;
 }
+
 
 
 // Basic route for health check
@@ -561,7 +564,7 @@ app.post('/generate-matches', (req, res) => {
           }
 
           const gws = 8;
-          const matches = generatedMatches(teams, gws);
+          const matches = generateMatches(teams, gws);
 
           const query = `
             INSERT INTO matches 
