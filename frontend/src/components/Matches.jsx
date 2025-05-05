@@ -5,7 +5,7 @@ import { useState } from "react";
 const Matches = ({ matches }) => {
   const [currentRound, setCurrentRound] = useState(0);
 
-  const nextGw = () => {
+  const nextGw = () => { 
     if (currentRound < 7) {
       setCurrentRound(prev => prev + 1);
     }
