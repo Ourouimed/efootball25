@@ -64,7 +64,7 @@ const Stats = () => {
               ) : matchesError ? (
                 <p className="text-red-400">Error: {matchesError}</p>
               ) : (
-                <Matches matches={matches} />
+                <Matches matches={matches} teams={teams} />
               )}
             </div>
           </div>

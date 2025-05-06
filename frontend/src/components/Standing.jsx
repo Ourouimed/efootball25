@@ -36,7 +36,7 @@ const Standing = ({teams})=>{
             <td className="px-2 py-2">{draws}</td>
             <td className="px-2 py-2">{losses}</td>
             <td className="px-2 py-2">{GF}/{GA}</td>
-            <td className="px-2 py-2">{GF - GA}</td>
+            <td className="px-2 py-2">{GF - GA > 0 ? `+${GF - GA}` : GF - GA}</td>
             <td className="px-2 py-2">{pts}</td>
           </tr>
         );
