@@ -18,39 +18,24 @@ const Matches = ({ matches, teams }) => {
     }
   };
 
-  const displayedMatches = matches.filter((match) => {
-    const isCurrentRound = match.round === `GW${currentRound + 1}`;
-    const isSelectedTeam =
-      selectedTeam === "ALL" ||
-      match.home_team === selectedTeam ||
-      match.away_team === selectedTeam;
-    return isCurrentRound && isSelectedTeam;
-  });
+  const displayedMatches =
+    selectedTeam === "ALL"
+      ? matches.filter(match => match.round === `GW${currentRound + 1}`)
+      : matches.filter(
+          match =>
+            match.home_team === selectedTeam ||
+            match.away_team === selectedTeam
+        );
+
+  const NavBtnsStyle =
+    "bg-primary disabled:bg-primary/10 cursor-pointer flex items-center justify-center rounded text-white size-[30px]";
 
   return (
     <HomeCard title="matches">
-      <div className="flex items-center justify-between mb-2">
-        <button
-          onClick={prevGw}
-          disabled={currentRound === 0}
-          className="disabled:opacity-30"
-        >
-          <ChevronLeftRounded />
-        </button>
-        <span className="font-semibold text-sm">Gameweek {currentRound + 1}</span>
-        <button
-          onClick={nextGw}
-          disabled={currentRound === 7}
-          className="disabled:opacity-30"
-        >
-          <ChevronRightRounded />
-        </button>
-      </div>
-
       <select
         onChange={(e) => setSelectedTeam(e.target.value)}
         value={selectedTeam}
-        className="w-full mb-3 p-1 rounded border"
+        className="w-full select mb-1"
       >
         <option value="ALL">ALL</option>
         {teams.map((team) => (
@@ -60,14 +45,41 @@ const Matches = ({ matches, teams }) => {
         ))}
       </select>
 
+      {selectedTeam === "ALL" && (
+        <div className="flex items-center justify-between mb-2">
+          <button
+            onClick={prevGw}
+            disabled={currentRound === 0}
+            className={NavBtnsStyle}
+          >
+            <ChevronLeftRounded />
+          </button>
+          <span className="font-semibold text-sm">
+            Gameweek {currentRound + 1}
+          </span>
+          <button
+            onClick={nextGw}
+            disabled={currentRound === 7}
+            className={NavBtnsStyle}
+          >
+            <ChevronRightRounded />
+          </button>
+        </div>
+      )}
+
       {displayedMatches.length === 0 ? (
         <div className="text-center text-gray-500 py-4">
-          No matches this week.
+          No matches found.
         </div>
       ) : (
         displayedMatches.map((match) => (
-          <div key={match.id_match} className="match flex justify-between items-center py-2 border-b">
-            <div className="flex-1 text-center text-sm">{match.hometeam_name}</div>
+          <div
+            key={match.id_match}
+            className="match flex justify-between items-center py-2 border-b"
+          >
+            <div className="flex-1 text-center text-sm">
+              {match.hometeam_name}
+            </div>
             <div
               className={`text-center rounded py-1 px-4 ${
                 match.home_score === null || match.away_score === null
@@ -77,7 +89,9 @@ const Matches = ({ matches, teams }) => {
             >
               {match.home_score} - {match.away_score}
             </div>
-            <div className="flex-1 text-center text-sm">{match.awayteam_name}</div>
+            <div className="flex-1 text-center text-sm">
+              {match.awayteam_name}
+            </div>
           </div>
         ))
       )}
