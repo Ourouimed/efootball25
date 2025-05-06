@@ -8,6 +8,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 const Matches = () => {
     const [showPopup, setShowPopup] = useState(false);
+    const [showDrawPopup, setShowDrawPopup] = useState(false);
     const [matches, setMatches] = useState([]);
     const [loading, setLoading] = useState(true);
     const [selectedMatch, setSelectedMatch] = useState(null);
@@ -119,6 +120,7 @@ const Matches = () => {
 
     return (
         <>
+            {/* Match Edit Popup */}
             {showPopup && selectedMatch && (
                 <PopUpWindow onClose={handleClosePopup} title={`Edit Match ${selectedMatch.id_match}`}>
                     <form onSubmit={handleUpdateMatch} className="space-y-3">
@@ -160,6 +162,37 @@ const Matches = () => {
                 </PopUpWindow>
             )}
 
+            {/* Draw Confirmation Popup */}
+            {showDrawPopup && (
+                <PopUpWindow onClose={() => setShowDrawPopup(false)} title="Generate Matches">
+                    <div className="space-y-4">
+                        <p>Are you sure you want to generate matches?</p>
+                        {statusMsg && (
+                            <div className={`p-2 rounded ${status ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                                {statusMsg}
+                            </div>
+                        )}
+                        <div className="flex justify-end gap-2">
+                            <button
+                                onClick={() => setShowDrawPopup(false)}
+                                className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={async () => {
+                                    await handleStartDraw();
+                                    setShowDrawPopup(false);
+                                }}
+                                className="bg-primary px-4 py-2 rounded text-white hover:bg-primary-dark"
+                            >
+                                Confirm
+                            </button>
+                        </div>
+                    </div>
+                </PopUpWindow>
+            )}
+
             <div className="flex items-center justify-between flex-col md:flex-row gap-1">
                 <h1 className="text-2xl md:text-3xl">Match Management</h1>
                 <div className="flex items-center gap-2 flex-col md:flex-row w-full md:w-auto">
@@ -172,9 +205,9 @@ const Matches = () => {
                     <button
                         disabled={loading}
                         className={`justify-center w-full md:w-auto bg-green-500 py-2 px-4 rounded text-white cursor-pointer flex items-center hover:bg-primary-dark ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
-                        onClick={handleStartDraw}
+                        onClick={() => setShowDrawPopup(true)}
                     >
-                        <SportsSoccer className="mr-1" />Generate Draw
+                        <SportsSoccer className="mr-1" />Start Draw
                     </button>
                 </div>
             </div>
