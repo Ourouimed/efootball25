@@ -86,9 +86,12 @@ function generatePoMatches(teams){
   let matches = []
   let sortedTeams = teams
   .map(team => ({...team , pts : (Number(team.wins) * 3) + (Number(team.draws) * 1) + (Number(team.losses) * 0)}))
-  .sort((a, b) => b.pts - a.pts || (b.GF - b.GA) - (a.GF - a.GA)).filter((team , index) => index > 7 && index < 24)
+  .sort((a, b) => b.pts - a.pts || (b.GF - b.GA) - (a.GF - a.GA)).slice(8,24)
 
-  for (let i = 0; i < sortedTeams.length / 2 ;i++){
+
+  const TotalMatches = sortedTeams.length / 2
+
+  for (let i = 0; i < TotalMatches ;i++){
     let homeTeamIndex= Math.floor(Math.random() * sortedTeams.length)
     let homeTeam = sortedTeams[homeTeamIndex]
     sortedTeams.splice(homeTeamIndex , 1)
