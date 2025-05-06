@@ -4,8 +4,6 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
-const API_URL = import.meta.env.VITE_API_URL;
-
 const Matches = () => {
     const [showPopup, setShowPopup] = useState(false);
     const [showDrawPopup, setShowDrawPopup] = useState(false);
@@ -17,7 +15,10 @@ const Matches = () => {
     const [currentRound, setCurrentRound] = useState('ALL');
     const [statusMsg, setStatusMsg] = useState('');
     const [status, setStatus] = useState(true);
+    const [drawRound , setDrawRound] = useState('LP')
     const navigate = useNavigate();
+
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001'
 
     const verifySession = async () => {
         const user = JSON.parse(localStorage.getItem('user'));
@@ -52,7 +53,9 @@ const Matches = () => {
         if (!sessionValid) return;
 
         try {
-            await axios.post(`${API_URL}/generate-matches`);
+            await axios.post(`${API_URL}/generate-matches` , {
+                round : drawRound
+            });
             fetchMatches();
             setStatusMsg('Matches generated successfully.');
             setStatus(true);
@@ -166,12 +169,20 @@ const Matches = () => {
             {showDrawPopup && (
                 <PopUpWindow onClose={() => setShowDrawPopup(false)} title="Generate Matches">
                     <div className="space-y-4">
+                        <select className="select mb-1 w-full" onChange={e=> {setDrawRound(e.target.value)}}>
+                            <option value='LP'>league Phase</option>
+                            <option value='PO'>Playoffs</option>
+                            <option value='R16'>Round of 16</option>
+                            <option value='QF'>Quarter Final</option>
+                            <option value='SF'>Semi Final</option>
+                        </select>
                         <p>Are you sure you want to generate matches?</p>
                         {statusMsg && (
                             <div className={`p-2 rounded ${status ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
                                 {statusMsg}
                             </div>
                         )}
+
                         <div className="flex justify-end gap-2">
                             <button
                                 onClick={() => setShowDrawPopup(false)}

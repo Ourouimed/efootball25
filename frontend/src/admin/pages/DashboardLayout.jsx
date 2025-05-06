@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { SideNavContext } from "../../contexts/Sidenavontext";
 import axios from "axios";
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001'
 
 const DashboardLayout = () => {
   const [sidenavIsOpen, setSidenavIsOpen] = useState(false);
@@ -26,11 +26,11 @@ const DashboardLayout = () => {
     }
   };
 
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (!user) navigate('/login');
-    else verifySession(user);
-  }, [navigate]);
+  // useEffect(() => {
+  //   const user = JSON.parse(localStorage.getItem('user'));
+  //   if (!user) navigate('/login');
+  //   else verifySession(user);
+  // }, [navigate]);
 
   return (
     <SideNavContext.Provider

@@ -9,7 +9,7 @@ import Standing from "../components/Standing";
 import Matches from "../components/Matches";
 
 // Get API URL from environment variables
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
 const Dashboard = () => {
   const [teams, setTeams] = useState([]);
