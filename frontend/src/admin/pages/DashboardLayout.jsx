@@ -26,11 +26,11 @@ const DashboardLayout = () => {
     }
   };
 
-  // useEffect(() => {
-  //   const user = JSON.parse(localStorage.getItem('user'));
-  //   if (!user) navigate('/login');
-  //   else verifySession(user);
-  // }, [navigate]);
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) navigate('/login');
+    else verifySession(user);
+  }, [navigate]);
 
   return (
     <SideNavContext.Provider
