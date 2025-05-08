@@ -212,6 +212,10 @@ const Matches = () => {
                         {[...Array(8)].map((_, i) => (
                             <option key={i} value={`GW${i + 1}`}>Gameweek {i + 1}</option>
                         ))}
+                        <option value="PO">Playoffs</option>
+                        <option value="R16">Round of 16</option>
+                        <option value="QF">Quarter Final</option>
+                        <option value="SF">Semi Final</option>
                     </select>
                     <button
                         disabled={loading}
