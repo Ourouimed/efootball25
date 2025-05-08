@@ -128,7 +128,7 @@ function generateR16matches (teams){
     let awayTeam = pot2[awayTeamIndex]
     pot2.splice(awayTeamIndex , 1)
     matches.push({
-      id_match: `M${String(i + 1).padStart(3, '0')}-PO`,
+      id_match: `M${String(i + 1).padStart(3, '0')}-R16`,
       home_team: homeTeam,
       away_team: awayTeam,
       home_score: null,
