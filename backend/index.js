@@ -113,6 +113,31 @@ function generatePoMatches(teams){
 }
 
 
+function generateR16matches (teams){
+  let matches = []
+  let pot1 = teams.filter(team => team.qualified = 1)
+  let pot2 = teams
+  .map(team => ({...team , pts : (Number(team.wins) * 3) + (Number(team.draws) * 1) + (Number(team.losses) * 0)}))
+  .sort((a, b) => b.pts - a.pts || (b.GF - b.GA) - (a.GF - a.GA)).slice(0,8)
+  let TotalMatches = 8
+  for (let i = 0; i < TotalMatches ;i++){
+    let homeTeamIndex= Math.floor(Math.random() * pot1.length)
+    let homeTeam = pot1[homeTeamIndex]
+    pot1.splice(homeTeamIndex , 1)
+    let awayTeamIndex= Math.floor(Math.random() * pot2.length)
+    let awayTeam = pot2[awayTeamIndex]
+    pot2.splice(awayTeamIndex , 1)
+    matches.push({
+      id_match: `M${String(i + 1).padStart(3, '0')}-PO`,
+      home_team: homeTeam,
+      away_team: awayTeam,
+      home_score: null,
+      away_score: null,
+      round: `R16`,
+    })
+  }
+}
+
 
 // Basic route for health check
 app.get('/', (req, res) => {
@@ -526,9 +551,7 @@ app.get('/matches', (req, res) => {
 
 app.post('/generate-matches', (req, res) => {
   const { round } = req.body
-  switch(round){
-    case 'LP' :
-      connection.execute("DELETE FROM matches where round like 'GW%'", (err) => {
+      connection.execute(`DELETE FROM matches where round = ${round} OR round like 'GW%'`, (err) => {
         if (err) {
           console.error('Match deletion error:', err.message);
           return res.status(500).json({ 
@@ -566,9 +589,20 @@ app.post('/generate-matches', (req, res) => {
                   message: 'Cannot generate matches without any registered teams'
                 });
               }
-    
+              let matches;
               const gws = 8;
-              const matches = generateMatches(teams, gws);
+              switch (round) {
+                case 'LP' : 
+                  matches = generateMatches(teams, gws);
+                  break;
+                case 'PO' : 
+                  matches = generatePoMatches(teams)
+                  break;
+                case 'R16' : 
+                  matches = generateR16matches(teams)
+                  break;
+              }
+              
     
               const query = `
                 INSERT INTO matches 
@@ -608,75 +642,7 @@ app.post('/generate-matches', (req, res) => {
             });
           }
         );
-      });
-      break
-    case 'PO' : 
-    connection.execute("DELETE FROM matches where round = 'PO'", (err) => {
-      if (err) {
-        console.error('Match deletion error:', err.message);
-        return res.status(500).json({ 
-          error: 'Match generation failed',
-          message: 'Could not clear existing matches. No changes were made.'
-        });
-      }
-      connection.execute('SELECT * FROM teams', (err, results) => {
-        if (err) {
-          console.error('Teams query error:', err.message);
-          return res.status(500).json({ 
-            error: 'Match generation failed',
-            message: 'Could not retrieve team list. No changes were made.'
-          });
-        }
-
-        const teams = results;
-        if (teams.length === 0) {
-          return res.status(400).json({ 
-            error: 'No teams available',
-            message: 'Cannot generate matches without any registered teams'
-          });
-        }
-
-        const matches = generatePoMatches(teams)
-
-        const query = `
-          INSERT INTO matches 
-          (id_match, home_team, hometeam_name, home_score, away_team, awayteam_name, away_score, round) 
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-        `;
-
-        // Execute all match insertions in parallel
-        Promise.all(
-          matches.map(match => {
-            return new Promise((resolve, reject) => {
-              connection.execute(query, [
-                match.id_match,
-                match.home_team.userName,
-                match.home_team.teamName,
-                match.home_score,
-                match.away_team.userName,
-                match.away_team.teamName,
-                match.away_score,
-                match.round
-              ], (err) => err ? reject(err) : resolve());
-            });
-          })
-        ).then(() => {
-          res.json({ 
-            message: 'Matches generated successfully',
-            generatedMatches: matches.length,
-            round : 'PO'
-          });
-        }).catch(err => {
-          console.error('Match insertion error:', err.message);
-          res.status(500).json({ 
-            error: 'Match generation incomplete',
-            message: 'Some matches might not have been generated properly'
-          });
-        });
-      });
-    });
-    break
-  }
+  })
 });
 
 app.use((err, req, res, next) => {
