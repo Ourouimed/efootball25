@@ -1,13 +1,14 @@
-import { ChevronLeftRounded, ChevronRightRounded } from "@mui/icons-material";
-import HomeCard from "./HomeCard";
-import { useState } from "react";
-
 const Matches = ({ matches, teams }) => {
   const [currentRound, setCurrentRound] = useState(0);
   const [selectedTeam, setSelectedTeam] = useState("ALL");
 
+  const rounds = [
+    "GW1", "GW2", "GW3", "GW4", "GW5", "GW6", "GW7",
+    "PO", "R16", "QF", "SF", "Final"
+  ];
+
   const nextGw = () => {
-    if (currentRound < 7) {
+    if (currentRound < rounds.length - 1) {
       setCurrentRound((prev) => prev + 1);
     }
   };
@@ -18,13 +19,15 @@ const Matches = ({ matches, teams }) => {
     }
   };
 
+  const currentRoundName = rounds[currentRound];
+
   const displayedMatches =
     selectedTeam === "ALL"
-      ? matches.filter(match => match.round === `GW${currentRound + 1}`)
+      ? matches.filter((match) => match.round === currentRoundName)
       : matches.filter(
-          match =>
-            match.home_team === selectedTeam ||
-            match.away_team === selectedTeam
+          (match) =>
+            (match.home_team === selectedTeam ||
+              match.away_team === selectedTeam)
         );
 
   const NavBtnsStyle =
@@ -55,11 +58,11 @@ const Matches = ({ matches, teams }) => {
             <ChevronLeftRounded />
           </button>
           <span className="font-semibold text-sm">
-            Gameweek {currentRound + 1}
+            {currentRoundName}
           </span>
           <button
             onClick={nextGw}
-            disabled={currentRound === 7}
+            disabled={currentRound === rounds.length - 1}
             className={NavBtnsStyle}
           >
             <ChevronRightRounded />
@@ -98,5 +101,3 @@ const Matches = ({ matches, teams }) => {
     </HomeCard>
   );
 };
-
-export default Matches;
