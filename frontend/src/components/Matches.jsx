@@ -3,11 +3,11 @@ import HomeCard from "./HomeCard";
 import { useState } from "react";
 
 const Matches = ({ matches, teams }) => {
-  const [currentRound, setCurrentRound] = useState(0);
+  const [currentRound, setCurrentRound] = useState(8);
   const [selectedTeam, setSelectedTeam] = useState("ALL");
 
   const rounds = [
-    "GW1", "GW2", "GW3", "GW4", "GW5", "GW6", "GW7",
+    "GW1", "GW2", "GW3", "GW4", "GW5", "GW6", "GW7", "GW8",
     "PO", "R16", "QF", "SF", "Final"
   ];
 
