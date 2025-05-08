@@ -550,99 +550,127 @@ app.get('/matches', (req, res) => {
 });
 
 app.post('/generate-matches', (req, res) => {
-  const { round } = req.body
-      connection.execute(`DELETE FROM matches where round = ${round} OR round like 'GW%'`, (err) => {
-        if (err) {
-          console.error('Match deletion error:', err.message);
-          return res.status(500).json({ 
-            error: 'Match generation failed',
-            message: 'Could not clear existing matches. No changes were made.'
-          });
-        }
-    
-        // 2. Reset team stats
-        connection.execute(
-          'UPDATE teams SET wins = 0, losses = 0, draws = 0, GF = 0, GA = 0',
-          (err) => {
-            if (err) {
-              console.error('Stats reset error:', err.message);
-              return res.status(500).json({ 
-                error: 'Match generation failed',
-                message: 'Could not reset team statistics. No changes were made.'
-              });
-            }
-    
-            // 3. Fetch teams
-            connection.execute('SELECT * FROM teams', (err, results) => {
-              if (err) {
-                console.error('Teams query error:', err.message);
-                return res.status(500).json({ 
-                  error: 'Match generation failed',
-                  message: 'Could not retrieve team list. No changes were made.'
-                });
-              }
-    
-              const teams = results;
-              if (teams.length === 0) {
-                return res.status(400).json({ 
-                  error: 'No teams available',
-                  message: 'Cannot generate matches without any registered teams'
-                });
-              }
-              let matches;
-              const gws = 8;
-              switch (round) {
-                case 'LP' : 
-                  matches = generateMatches(teams, gws);
-                  break;
-                case 'PO' : 
-                  matches = generatePoMatches(teams)
-                  break;
-                case 'R16' : 
-                  matches = generateR16matches(teams)
-                  break;
-              }
-              
-    
-              const query = `
-                INSERT INTO matches 
-                (id_match, home_team, hometeam_name, home_score, away_team, awayteam_name, away_score, round) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-              `;
-    
-              // Execute all match insertions in parallel
-              Promise.all(
-                matches.map(match => {
-                  return new Promise((resolve, reject) => {
-                    connection.execute(query, [
-                      match.id_match,
-                      match.home_team.userName,
-                      match.home_team.teamName,
-                      match.home_score,
-                      match.away_team.userName,
-                      match.away_team.teamName,
-                      match.away_score,
-                      match.round
-                    ], (err) => err ? reject(err) : resolve());
-                  });
-                })
-              ).then(() => {
-                res.json({ 
-                  message: 'Matches generated successfully',
-                  generatedMatches: matches.length,
-                  rounds: gws
-                });
-              }).catch(err => {
-                console.error('Match insertion error:', err.message);
-                res.status(500).json({ 
-                  error: 'Match generation incomplete',
-                  message: 'Some matches might not have been generated properly'
-                });
-              });
+  const { round } = req.body;
+
+  // Validate round
+  if (!['LP', 'PO', 'R16'].includes(round)) {
+    return res.status(400).json({
+      error: 'Invalid round value',
+      message: `Unsupported round: ${round}`
+    });
+  }
+
+  // 1. Delete old matches
+  connection.execute(
+    `DELETE FROM matches WHERE round = ? OR round LIKE 'GW%'`,
+    [round],
+    (err) => {
+      if (err) {
+        console.error('Match deletion error:', err.message);
+        return res.status(500).json({
+          error: 'Match generation failed',
+          message: 'Could not clear existing matches. No changes were made.'
+        });
+      }
+
+      // 2. Reset team stats
+      connection.execute(
+        'UPDATE teams SET wins = 0, losses = 0, draws = 0, GF = 0, GA = 0',
+        (err) => {
+          if (err) {
+            console.error('Stats reset error:', err.message);
+            return res.status(500).json({
+              error: 'Match generation failed',
+              message: 'Could not reset team statistics. No changes were made.'
             });
           }
-        );
-  })
+
+          // 3. Fetch teams
+          connection.execute('SELECT * FROM teams', (err, results) => {
+            if (err) {
+              console.error('Teams query error:', err.message);
+              return res.status(500).json({
+                error: 'Match generation failed',
+                message: 'Could not retrieve team list. No changes were made.'
+              });
+            }
+
+            const teams = results;
+            if (teams.length === 0) {
+              return res.status(400).json({
+                error: 'No teams available',
+                message: 'Cannot generate matches without any registered teams'
+              });
+            }
+
+            // 4. Generate matches
+            let matches;
+            const gws = 8;
+            switch (round) {
+              case 'LP':
+                matches = generateMatches(teams, gws);
+                break;
+              case 'PO':
+                matches = generatePoMatches(teams);
+                break;
+              case 'R16':
+                matches = generateR16matches(teams);
+                break;
+            }
+
+            if (!matches || matches.length === 0) {
+              return res.status(500).json({
+                error: 'Match generation error',
+                message: 'Match generation returned no data'
+              });
+            }
+
+            // 5. Insert matches
+            const insertQuery = `
+              INSERT INTO matches 
+              (id_match, home_team, hometeam_name, home_score, away_team, awayteam_name, away_score, round) 
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            `;
+
+            Promise.all(
+              matches.map(match => {
+                return new Promise((resolve, reject) => {
+                  connection.execute(insertQuery, [
+                    match.id_match,
+                    match.home_team.userName,
+                    match.home_team.teamName,
+                    match.home_score,
+                    match.away_team.userName,
+                    match.away_team.teamName,
+                    match.away_score,
+                    match.round
+                  ], (err) => {
+                    if (err) {
+                      console.error(`Insert error for match ${match.id_match}:`, err.message);
+                      reject(err);
+                    } else {
+                      resolve();
+                    }
+                  });
+                });
+              })
+            ).then(() => {
+              res.json({
+                message: 'Matches generated successfully',
+                generatedMatches: matches.length,
+                rounds: gws
+              });
+            }).catch(err => {
+              res.status(500).json({
+                error: 'Match generation incomplete',
+                message: 'Some matches might not have been generated properly'
+              });
+            });
+          });
+        }
+      );
+    }
+  );
 });
 
 app.use((err, req, res, next) => {
