@@ -147,9 +147,6 @@ function generateR16matches(teams) {
 
 // Basic route for health check
 app.get('/', (req, res) => {
-  connection.execute('select from teams' , (err, results)=>{
-     res.json(generateR16matches(results))
-  })
   res.send('<h1>eFootball League Server</h1><p>Server is running</p>');
 });
 
@@ -545,7 +542,7 @@ app.post('/generate-matches', (req, res) => {
   const { round } = req.body;
 
   // Validate round
-  if (!['LP', 'PO', 'R16' , 'QF' , 'SF'].includes(round)) {
+  if (!['LP', 'PO', 'R16', 'QF', 'SF'].includes(round)) {
     return res.status(400).json({
       error: 'Invalid round value',
       message: `Unsupported round: ${round}`
@@ -554,8 +551,8 @@ app.post('/generate-matches', (req, res) => {
 
   // 1. Delete old matches
   connection.execute(
-    `DELETE FROM matches WHERE round like '${round}%'?`,
-    [round],
+    `DELETE FROM matches WHERE round LIKE ?`,
+    [`${round}%`],  // Correctly pass the parameter with '%' for LIKE clause
     (err) => {
       if (err) {
         console.error('Match deletion error:', err.message);
@@ -565,7 +562,7 @@ app.post('/generate-matches', (req, res) => {
         });
       }
 
-      // 2. Reset team stats
+      // 2. Reset team stats for 'LP' round
       if (round === 'LP') {
         connection.execute(
           'UPDATE teams SET wins = 0, losses = 0, draws = 0, GF = 0, GA = 0',
@@ -596,9 +593,9 @@ app.post('/generate-matches', (req, res) => {
                 });
               }
 
-              // 4. Generate matches
+              // 4. Generate matches based on the round
               let matches;
-              const gws = 8;
+              const gws = 8;  // Assuming this is the number of group stage matches
               switch (round) {
                 case 'LP':
                   matches = generateMatches(teams, gws);
@@ -609,6 +606,7 @@ app.post('/generate-matches', (req, res) => {
                 case 'R16':
                   matches = generateR16matches(teams);
                   break;
+                // Add more rounds as necessary
               }
 
               if (!matches || matches.length === 0) {
@@ -625,6 +623,7 @@ app.post('/generate-matches', (req, res) => {
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)
               `;
 
+              // Promise.all for match insertions
               Promise.all(
                 matches.map(match => {
                   return new Promise((resolve, reject) => {
@@ -654,6 +653,7 @@ app.post('/generate-matches', (req, res) => {
                   rounds: gws
                 });
               }).catch(err => {
+                console.error('Error in match generation:', err.message);
                 res.status(500).json({
                   error: 'Match generation incomplete',
                   message: 'Some matches might not have been generated properly'
@@ -663,9 +663,10 @@ app.post('/generate-matches', (req, res) => {
           }
         );
       }
-      }
+    }
   );
-});
+}); 
+
 
 app.use((err, req, res, next) => {
   console.error('Unhandled error:', err.message);
