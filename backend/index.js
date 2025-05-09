@@ -118,7 +118,7 @@ function generateR16matches (teams){
   let sortedTeams = teams
   .map(team => ({...team , pts : (Number(team.wins) * 3) + (Number(team.draws) * 1) + (Number(team.losses) * 0)}))
   .sort((a, b) => b.pts - a.pts || (b.GF - b.GA) - (a.GF - a.GA))
-  let pot1 = sortedTeams.slice(8,24).filter(team => team.qualified = 1)
+  let pot1 = sortedTeams.slice(8,24).filter(team => team.qualified === 1)
   let pot2 = sortedTeams.slice(0,8)
   let TotalMatches = 8
   for (let i = 0; i < TotalMatches ;i++){
