@@ -115,12 +115,10 @@ function generatePoMatches(teams){
 
 function generateR16matches(teams) {
   let matches = [];
-  let sortedTeams = teams
-    .map(team => ({
+  let sortedTeams = teams.map(team => ({
       ...team,
       pts: (Number(team.wins) * 3) + (Number(team.draws) * 1) + (Number(team.losses) * 0)
-    }))
-    .sort((a, b) => b.pts - a.pts || (b.GF - b.GA) - (a.GF - a.GA));
+    })).sort((a, b) => b.pts - a.pts || (b.GF - b.GA) - (a.GF - a.GA));
 
   let pot1 = sortedTeams.slice(8, 24).filter(team => team.qualified === 1);
   let pot2 = sortedTeams.slice(0, 8);
@@ -149,6 +147,9 @@ function generateR16matches(teams) {
 
 // Basic route for health check
 app.get('/', (req, res) => {
+  connection.execute('select from teams' , (err, results)=>{
+     res.json(generateR16matches(results))
+  })
   res.send('<h1>eFootball League Server</h1><p>Server is running</p>');
 });
 
@@ -417,65 +418,71 @@ app.post('/matches/:id', async (req, res) => {
   }
 
   try {
-    // Fetch old match with round info
     const [rows] = await connection.promise().execute(
-      'SELECT id_match, home_team, away_team, home_score, away_score, round FROM matches WHERE id_match = ?', [id]
+      'SELECT id_match, home_team, away_team, home_score, away_score, round FROM matches WHERE id_match = ?',
+      [id]
     );
-    const oldMatch = rows[0];
 
-    if (!oldMatch) {
-      return res.status(404).json({
-        error: 'Match not found',
-        message: 'No match found with the specified ID'
-      });
+    const match = rows[0];
+    if (!match) {
+      return res.status(404).json({ error: 'Match not found' });
     }
 
-    if (!oldMatch.round || !oldMatch.round.startsWith("GW")) {
-      return res.status(403).json({
-        error: 'Update not allowed',
-        message: 'Match updates are only allowed for rounds starting with "GW"'
-      });
-    }
+    const { round, home_team, away_team, home_score: oldHome, away_score: oldAway } = match;
+    const isGW = round.startsWith("GW");
+    const isKO = ['R16', 'QF', 'SF', 'F', 'PO'].includes(round);
 
-    const { home_team, away_team, home_score: old_home, away_score: old_away } = oldMatch;
+    // Revert old scores if they exist
+    if (oldHome !== null && oldAway !== null) {
+      const homeDiff = oldHome;
+      const awayDiff = oldAway;
 
-    // Revert old stats if there were any
-    if (old_home !== null && old_away !== null) {
-      let oldHomeUpdate = '', oldAwayUpdate = '';
+      if (isGW) {
+        let oldHomeUpdate = '', oldAwayUpdate = '';
+        if (oldHome > oldAway) {
+          oldHomeUpdate = 'wins = wins - 1';
+          oldAwayUpdate = 'losses = losses - 1';
+        } else if (oldHome < oldAway) {
+          oldHomeUpdate = 'losses = losses - 1';
+          oldAwayUpdate = 'wins = wins - 1';
+        } else {
+          oldHomeUpdate = 'draws = draws - 1';
+          oldAwayUpdate = 'draws = draws - 1';
+        }
 
-      if (old_home > old_away) {
-        oldHomeUpdate = 'wins = wins - 1';
-        oldAwayUpdate = 'losses = losses - 1';
-      } else if (old_home < old_away) {
-        oldHomeUpdate = 'losses = losses - 1';
-        oldAwayUpdate = 'wins = wins - 1';
-      } else {
-        oldHomeUpdate = 'draws = draws - 1';
-        oldAwayUpdate = 'draws = draws - 1';
+        await Promise.all([
+          connection.promise().execute(
+            `UPDATE teams SET GF = GF - ?, GA = GA - ?, ${oldHomeUpdate} WHERE userName = ?`,
+            [homeDiff, awayDiff, home_team]
+          ),
+          connection.promise().execute(
+            `UPDATE teams SET GF = GF - ?, GA = GA - ?, ${oldAwayUpdate} WHERE userName = ?`,
+            [awayDiff, homeDiff, away_team]
+          )
+        ]);
+      } else if (isKO) {
+        await Promise.all([
+          connection.promise().execute(
+            `UPDATE teams SET KOGF = KOGF - ?, KOGA = KOGA - ? WHERE userName = ?`,
+            [homeDiff, awayDiff, home_team]
+          ),
+          connection.promise().execute(
+            `UPDATE teams SET KOGF = KOGF - ?, KOGA = KOGA - ? WHERE userName = ?`,
+            [awayDiff, homeDiff, away_team]
+          )
+        ]);
       }
-
-      await Promise.all([
-        connection.promise().execute(
-          `UPDATE teams SET GF = GF - ?, GA = GA - ?, ${oldHomeUpdate} WHERE userName = ?`,
-          [old_home, old_away, home_team]
-        ),
-        connection.promise().execute(
-          `UPDATE teams SET GF = GF - ?, GA = GA - ?, ${oldAwayUpdate} WHERE userName = ?`,
-          [old_away, old_home, away_team]
-        )
-      ]);
     }
 
-    // Update the match score
+    // Update match score
     await connection.promise().execute(
       'UPDATE matches SET home_score = ?, away_score = ? WHERE id_match = ?',
       [home_score, away_score, id]
     );
 
-    // Apply new stats
-    if (home_score !== null && away_score !== null) {
+    // Apply new score
+    if (isGW) {
       let newHomeUpdate = '', newAwayUpdate = '';
-
       if (home_score > away_score) {
         newHomeUpdate = 'wins = wins + 1';
         newAwayUpdate = 'losses = losses + 1';
@@ -497,22 +504,27 @@ app.post('/matches/:id', async (req, res) => {
           [away_score, home_score, away_team]
         )
       ]);
+    } else if (isKO) {
+      await Promise.all([
+        connection.promise().execute(
+          `UPDATE teams SET KOGF = KOGF + ?, KOGA = KOGA + ? WHERE userName = ?`,
+          [home_score, away_score, home_team]
+        ),
+        connection.promise().execute(
+          `UPDATE teams SET KOGF = KOGF + ?, KOGA = KOGA + ? WHERE userName = ?`,
+          [away_score, home_score, away_team]
+        )
+      ]);
     }
 
-    res.json({
-      message: 'Match score and team stats updated successfully',
-      matchId: id,
-      newScores: { home_score, away_score }
-    });
+    res.json({ message: 'Match score updated successfully' });
 
   } catch (err) {
-    console.error('Update error:', err.message);
-    res.status(500).json({
-      error: 'Update failed',
-      message: 'Something went wrong while updating the match.'
-    });
+    console.error('Error updating match:', err.message);
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
+
 
 
 // Get all matches endpoint
@@ -542,7 +554,7 @@ app.post('/generate-matches', (req, res) => {
 
   // 1. Delete old matches
   connection.execute(
-    `DELETE FROM matches WHERE round = ?`,
+    `DELETE FROM matches WHERE round like '${round}%'?`,
     [round],
     (err) => {
       if (err) {
