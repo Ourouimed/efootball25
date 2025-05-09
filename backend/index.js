@@ -397,143 +397,116 @@ app.post('/teams/:username', (req, res) => {
 });
 
 // Match score update endpoint
-app.post('/matches/:id', (req, res) => {
+app.post('/matches/:id', async (req, res) => {
   const { id } = req.params;
   const { home_score, away_score } = req.body;
 
-  // Validate scores
   if (home_score === undefined || away_score === undefined) {
-    return res.status(400).json({ 
+    return res.status(400).json({
       error: 'Validation failed',
       message: 'Both home_score and away_score are required'
     });
   }
 
-  // Get the old match data
-  connection.execute(
-    'SELECT * FROM matches WHERE id_match = ?', 
-    [id], 
-    (err, [oldMatch]) => {
-      if (err) {
-        console.error('Match lookup error:', err.message);
-        return res.status(500).json({ 
-          error: 'Match lookup failed',
-          message: 'Could not retrieve match information. Please try again later.'
-        });
-      }
-      
-      if (!oldMatch) {
-        return res.status(404).json({ 
-          error: 'Match not found',
-          message: 'No match found with the specified ID'
-        });
-      }
+  try {
+    // Fetch old match with round info
+    const [rows] = await connection.promise().execute(
+      'SELECT id_match, home_team, away_team, home_score, away_score, round FROM matches WHERE id_match = ?', [id]
+    );
+    const oldMatch = rows[0];
 
-      const { home_team, away_team, home_score: old_home, away_score: old_away } = oldMatch;
-
-      // If there was an old score, revert its effect
-      if (old_home !== null && old_away !== null) {
-        let oldHomeUpdate = '', oldAwayUpdate = '';
-
-        if (old_home > old_away) {
-          oldHomeUpdate = 'wins = wins - 1';
-          oldAwayUpdate = 'losses = losses - 1';
-        } else if (old_home < old_away) {
-          oldHomeUpdate = 'losses = losses - 1';
-          oldAwayUpdate = 'wins = wins - 1';
-        } else {
-          oldHomeUpdate = 'draws = draws - 1';
-          oldAwayUpdate = 'draws = draws - 1';
-        }
-
-        // Execute updates in parallel
-        Promise.all([
-          new Promise((resolve, reject) => {
-            connection.execute(
-              `UPDATE teams SET GF = GF - ?, GA = GA - ?, ${oldHomeUpdate} WHERE userName = ?`,
-              [old_home, old_away, home_team],
-              (err) => err ? reject(err) : resolve()
-            );
-          }),
-          new Promise((resolve, reject) => {
-            connection.execute(
-              `UPDATE teams SET GF = GF - ?, GA = GA - ?, ${oldAwayUpdate} WHERE userName = ?`,
-              [old_away, old_home, away_team],
-              (err) => err ? reject(err) : resolve()
-            );
-          })
-        ]).catch(err => {
-          console.error('Error reverting old scores:', err.message);
-          return res.status(500).json({ 
-            error: 'Score update failed',
-            message: 'Could not revert previous scores. Changes were not applied.'
-          });
-        });
-      }
-
-      // Update the match score
-      connection.execute(
-        'UPDATE matches SET home_score = ?, away_score = ? WHERE id_match = ?',
-        [home_score, away_score, id],
-        (err, results) => {
-          if (err) {
-            console.error('Match update error:', err.message);
-            return res.status(500).json({ 
-              error: 'Match update failed',
-              message: 'Could not update match scores. Please try again later.'
-            });
-          }
-
-          // If the new score is valid, apply new stats
-          if (home_score !== null && away_score !== null) {
-            let newHomeUpdate = '', newAwayUpdate = '';
-
-            if (home_score > away_score) {
-              newHomeUpdate = 'wins = wins + 1';
-              newAwayUpdate = 'losses = losses + 1';
-            } else if (home_score < away_score) {
-              newHomeUpdate = 'losses = losses + 1';
-              newAwayUpdate = 'wins = wins + 1';
-            } else {
-              newHomeUpdate = 'draws = draws + 1';
-              newAwayUpdate = 'draws = draws + 1';
-            }
-
-            // Execute updates in parallel
-            Promise.all([
-              new Promise((resolve, reject) => {
-                connection.execute(
-                  `UPDATE teams SET GF = GF + ?, GA = GA + ?, ${newHomeUpdate} WHERE userName = ?`,
-                  [home_score, away_score, home_team],
-                  (err) => err ? reject(err) : resolve()
-                );
-              }),
-              new Promise((resolve, reject) => {
-                connection.execute(
-                  `UPDATE teams SET GF = GF + ?, GA = GA + ?, ${newAwayUpdate} WHERE userName = ?`,
-                  [away_score, home_score, away_team],
-                  (err) => err ? reject(err) : resolve()
-                );
-              })
-            ]).catch(err => {
-              console.error('Error applying new scores:', err.message);
-              return res.status(500).json({ 
-                error: 'Score update failed',
-                message: 'Match score was updated but team statistics might be inconsistent.'
-              });
-            });
-          }
-
-          res.json({ 
-            message: 'Match score and team stats updated successfully',
-            matchId: id,
-            newScores: { home_score, away_score }
-          });
-        }
-      );
+    if (!oldMatch) {
+      return res.status(404).json({
+        error: 'Match not found',
+        message: 'No match found with the specified ID'
+      });
     }
-  );
+
+    // ❌ Only allow updates if round starts with "GW"
+    if (!oldMatch.round || !oldMatch.round.startsWith("GW")) {
+      return res.status(403).json({
+        error: 'Update not allowed',
+        message: 'Match updates are only allowed for rounds starting with "GW"'
+      });
+    }
+
+    const { home_team, away_team, home_score: old_home, away_score: old_away } = oldMatch;
+
+    // Revert old stats if there were any
+    if (old_home !== null && old_away !== null) {
+      let oldHomeUpdate = '', oldAwayUpdate = '';
+
+      if (old_home > old_away) {
+        oldHomeUpdate = 'wins = wins - 1';
+        oldAwayUpdate = 'losses = losses - 1';
+      } else if (old_home < old_away) {
+        oldHomeUpdate = 'losses = losses - 1';
+        oldAwayUpdate = 'wins = wins - 1';
+      } else {
+        oldHomeUpdate = 'draws = draws - 1';
+        oldAwayUpdate = 'draws = draws - 1';
+      }
+
+      await Promise.all([
+        connection.promise().execute(
+          `UPDATE teams SET GF = GF - ?, GA = GA - ?, ${oldHomeUpdate} WHERE userName = ?`,
+          [old_home, old_away, home_team]
+        ),
+        connection.promise().execute(
+          `UPDATE teams SET GF = GF - ?, GA = GA - ?, ${oldAwayUpdate} WHERE userName = ?`,
+          [old_away, old_home, away_team]
+        )
+      ]);
+    }
+
+    // Update the match score
+    await connection.promise().execute(
+      'UPDATE matches SET home_score = ?, away_score = ? WHERE id_match = ?',
+      [home_score, away_score, id]
+    );
+
+    // Apply new stats
+    if (home_score !== null && away_score !== null) {
+      let newHomeUpdate = '', newAwayUpdate = '';
+
+      if (home_score > away_score) {
+        newHomeUpdate = 'wins = wins + 1';
+        newAwayUpdate = 'losses = losses + 1';
+      } else if (home_score < away_score) {
+        newHomeUpdate = 'losses = losses + 1';
+        newAwayUpdate = 'wins = wins + 1';
+      } else {
+        newHomeUpdate = 'draws = draws + 1';
+        newAwayUpdate = 'draws = draws + 1';
+      }
+
+      await Promise.all([
+        connection.promise().execute(
+          `UPDATE teams SET GF = GF + ?, GA = GA + ?, ${newHomeUpdate} WHERE userName = ?`,
+          [home_score, away_score, home_team]
+        ),
+        connection.promise().execute(
+          `UPDATE teams SET GF = GF + ?, GA = GA + ?, ${newAwayUpdate} WHERE userName = ?`,
+          [away_score, home_score, away_team]
+        )
+      ]);
+    }
+
+    res.json({
+      message: 'Match score and team stats updated successfully',
+      matchId: id,
+      newScores: { home_score, away_score }
+    });
+
+  } catch (err) {
+    console.error('Update error:', err.message);
+    res.status(500).json({
+      error: 'Update failed',
+      message: 'Something went wrong while updating the match.'
+    });
+  }
 });
+
 
 // Get all matches endpoint
 app.get('/matches', (req, res) => {
