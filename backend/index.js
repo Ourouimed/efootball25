@@ -411,6 +411,7 @@ app.post('/matches/:id', async (req, res) => {
   }
 
   try {
+    // Fetch old match with round info
     const [rows] = await connection.promise().execute(
       'SELECT id_match, home_team, away_team, home_score, away_score, round FROM matches WHERE id_match = ?', [id]
     );
@@ -423,49 +424,43 @@ app.post('/matches/:id', async (req, res) => {
       });
     }
 
-    const isGW = oldMatch.round && oldMatch.round.startsWith("GW");
-    const { home_team, away_team, home_score: old_home, away_score: old_away } = oldMatch;
-
-    // Revert old stats
-    if (old_home !== null && old_away !== null) {
-      if (isGW) {
-        let oldHomeUpdate = '', oldAwayUpdate = '';
-        if (old_home > old_away) {
-          oldHomeUpdate = 'wins = wins - 1';
-          oldAwayUpdate = 'losses = losses - 1';
-        } else if (old_home < old_away) {
-          oldHomeUpdate = 'losses = losses - 1';
-          oldAwayUpdate = 'wins = wins - 1';
-        } else {
-          oldHomeUpdate = 'draws = draws - 1';
-          oldAwayUpdate = 'draws = draws - 1';
-        }
-
-        await Promise.all([
-          connection.promise().execute(
-            `UPDATE teams SET GF = GF - ?, GA = GA - ?, ${oldHomeUpdate} WHERE userName = ?`,
-            [old_home, old_away, home_team]
-          ),
-          connection.promise().execute(
-            `UPDATE teams SET GF = GF - ?, GA = GA - ?, ${oldAwayUpdate} WHERE userName = ?`,
-            [old_away, old_home, away_team]
-          )
-        ]);
-      } else {
-        await Promise.all([
-          connection.promise().execute(
-            `UPDATE teams SET KOGF = KOGF - ?, KOFA = KOFA - ? WHERE userName = ?`,
-            [old_home, old_away, home_team]
-          ),
-          connection.promise().execute(
-            `UPDATE teams SET KOGF = KOGF - ?, KOFA = KOFA - ? WHERE userName = ?`,
-            [old_away, old_home, away_team]
-          )
-        ]);
-      }
+    if (!oldMatch.round || !oldMatch.round.startsWith("GW")) {
+      return res.status(403).json({
+        error: 'Update not allowed',
+        message: 'Match updates are only allowed for rounds starting with "GW"'
+      });
     }
 
-    // Update match scores
+    const { home_team, away_team, home_score: old_home, away_score: old_away } = oldMatch;
+
+    // Revert old stats if there were any
+    if (old_home !== null && old_away !== null) {
+      let oldHomeUpdate = '', oldAwayUpdate = '';
+
+      if (old_home > old_away) {
+        oldHomeUpdate = 'wins = wins - 1';
+        oldAwayUpdate = 'losses = losses - 1';
+      } else if (old_home < old_away) {
+        oldHomeUpdate = 'losses = losses - 1';
+        oldAwayUpdate = 'wins = wins - 1';
+      } else {
+        oldHomeUpdate = 'draws = draws - 1';
+        oldAwayUpdate = 'draws = draws - 1';
+      }
+
+      await Promise.all([
+        connection.promise().execute(
+          `UPDATE teams SET GF = GF - ?, GA = GA - ?, ${oldHomeUpdate} WHERE userName = ?`,
+          [old_home, old_away, home_team]
+        ),
+        connection.promise().execute(
+          `UPDATE teams SET GF = GF - ?, GA = GA - ?, ${oldAwayUpdate} WHERE userName = ?`,
+          [old_away, old_home, away_team]
+        )
+      ]);
+    }
+
+    // Update the match score
     await connection.promise().execute(
       'UPDATE matches SET home_score = ?, away_score = ? WHERE id_match = ?',
       [home_score, away_score, id]
@@ -473,41 +468,29 @@ app.post('/matches/:id', async (req, res) => {
 
     // Apply new stats
     if (home_score !== null && away_score !== null) {
-      if (isGW) {
-        let newHomeUpdate = '', newAwayUpdate = '';
-        if (home_score > away_score) {
-          newHomeUpdate = 'wins = wins + 1';
-          newAwayUpdate = 'losses = losses + 1';
-        } else if (home_score < away_score) {
-          newHomeUpdate = 'losses = losses + 1';
-          newAwayUpdate = 'wins = wins + 1';
-        } else {
-          newHomeUpdate = 'draws = draws + 1';
-          newAwayUpdate = 'draws = draws + 1';
-        }
+      let newHomeUpdate = '', newAwayUpdate = '';
 
-        await Promise.all([
-          connection.promise().execute(
-            `UPDATE teams SET GF = GF + ?, GA = GA + ?, ${newHomeUpdate} WHERE userName = ?`,
-            [home_score, away_score, home_team]
-          ),
-          connection.promise().execute(
-            `UPDATE teams SET GF = GF + ?, GA = GA + ?, ${newAwayUpdate} WHERE userName = ?`,
-            [away_score, home_score, away_team]
-          )
-        ]);
+      if (home_score > away_score) {
+        newHomeUpdate = 'wins = wins + 1';
+        newAwayUpdate = 'losses = losses + 1';
+      } else if (home_score < away_score) {
+        newHomeUpdate = 'losses = losses + 1';
+        newAwayUpdate = 'wins = wins + 1';
       } else {
-        await Promise.all([
-          connection.promise().execute(
-            `UPDATE teams SET KOGF = KOGF + ?, KOFA = KOFA + ? WHERE userName = ?`,
-            [home_score, away_score, home_team]
-          ),
-          connection.promise().execute(
-            `UPDATE teams SET KOGF = KOGF + ?, KOFA = KOFA + ? WHERE userName = ?`,
-            [away_score, home_score, away_team]
-          )
-        ]);
+        newHomeUpdate = 'draws = draws + 1';
+        newAwayUpdate = 'draws = draws + 1';
       }
+
+      await Promise.all([
+        connection.promise().execute(
+          `UPDATE teams SET GF = GF + ?, GA = GA + ?, ${newHomeUpdate} WHERE userName = ?`,
+          [home_score, away_score, home_team]
+        ),
+        connection.promise().execute(
+          `UPDATE teams SET GF = GF + ?, GA = GA + ?, ${newAwayUpdate} WHERE userName = ?`,
+          [away_score, home_score, away_team]
+        )
+      ]);
     }
 
     res.json({
@@ -544,7 +527,7 @@ app.post('/generate-matches', (req, res) => {
   const { round } = req.body;
 
   // Validate round
-  if (!['LP', 'PO', 'R16'].includes(round)) {
+  if (!['LP', 'PO', 'R16' , 'QF' , 'SF'].includes(round)) {
     return res.status(400).json({
       error: 'Invalid round value',
       message: `Unsupported round: ${round}`
@@ -553,7 +536,7 @@ app.post('/generate-matches', (req, res) => {
 
   // 1. Delete old matches
   connection.execute(
-    `DELETE FROM matches WHERE round = ? OR round LIKE 'GW%'`,
+    `DELETE FROM matches WHERE round = ?`,
     [round],
     (err) => {
       if (err) {
