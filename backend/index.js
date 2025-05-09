@@ -574,6 +574,9 @@ app.post('/generate-matches', (req, res) => {
                 message: 'Could not reset team statistics. No changes were made.'
               });
             }
+          })
+      }
+        
 
             // 3. Fetch teams
             connection.execute('SELECT * FROM teams', (err, results) => {
@@ -657,9 +660,9 @@ app.post('/generate-matches', (req, res) => {
                 });
               });
             });
-          }
-        );
-      }
+          
+        
+      
       }
   );
 });
