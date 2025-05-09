@@ -113,21 +113,25 @@ function generatePoMatches(teams){
 }
 
 
-function generateR16matches (teams){
-  let matches = []
+function generateR16matches(teams) {
+  let matches = [];
   let sortedTeams = teams
-  .map(team => ({...team , pts : (Number(team.wins) * 3) + (Number(team.draws) * 1) + (Number(team.losses) * 0)}))
-  .sort((a, b) => b.pts - a.pts || (b.GF - b.GA) - (a.GF - a.GA))
-  let pot1 = sortedTeams.slice(8,24).filter(team => team.qualified === 1)
-  let pot2 = sortedTeams.slice(0,8)
-  let TotalMatches = 8
-  for (let i = 0; i < TotalMatches ;i++){
-    let homeTeamIndex= Math.floor(Math.random() * pot1.length)
-    let homeTeam = pot1[homeTeamIndex]
-    pot1.splice(homeTeamIndex , 1)
-    let awayTeamIndex= Math.floor(Math.random() * pot2.length)
-    let awayTeam = pot2[awayTeamIndex]
-    pot2.splice(awayTeamIndex , 1)
+    .map(team => ({
+      ...team,
+      pts: (Number(team.wins) * 3) + (Number(team.draws) * 1) + (Number(team.losses) * 0)
+    }))
+    .sort((a, b) => b.pts - a.pts || (b.GF - b.GA) - (a.GF - a.GA));
+
+  let pot1 = sortedTeams.slice(8, 24).filter(team => team.qualified === 1);
+  let pot2 = sortedTeams.slice(0, 8);
+
+  for (let i = 0; i < 8; i++) {
+    let homeTeamIndex = Math.floor(Math.random() * pot1.length);
+    let homeTeam = pot1.splice(homeTeamIndex, 1)[0];
+
+    let awayTeamIndex = Math.floor(Math.random() * pot2.length);
+    let awayTeam = pot2.splice(awayTeamIndex, 1)[0];
+
     matches.push({
       id_match: `M${String(i + 1).padStart(3, '0')}-R16`,
       home_team: homeTeam,
@@ -135,11 +139,12 @@ function generateR16matches (teams){
       home_score: null,
       away_score: null,
       round: `R16`,
-    })
-    
-  } 
-  return matches
+    });
+  }
+
+  return matches;
 }
+
 
 
 // Basic route for health check
