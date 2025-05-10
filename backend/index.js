@@ -151,11 +151,11 @@ function generateQFmatches(teams) {
     })).sort((a, b) => b.pts - a.pts || (b.GF - b.GA) - (a.GF - a.GA)).filter(team => team.qualified === 1);
 
   for (let i = 0; i < 8; i++) {
-    let homeTeamIndex = Math.floor(Math.random() * teams.length);
-    let homeTeam = teams.splice(homeTeamIndex, 1)[0];
+    let homeTeamIndex = Math.floor(Math.random() * sortedTeams.length);
+    let homeTeam = sortedTeams.splice(homeTeamIndex, 1)[0];
 
-    let awayTeamIndex = Math.floor(Math.random() * teams.length);
-    let awayTeam = teams.splice(awayTeamIndex, 1)[0];
+    let awayTeamIndex = Math.floor(Math.random() * sortedTeams.length);
+    let awayTeam = sortedTeams.splice(awayTeamIndex, 1)[0];
 
     matches.push({
       id_match: `M${String(i + 1).padStart(3, '0')}-QF`,
@@ -163,7 +163,7 @@ function generateQFmatches(teams) {
       away_team: awayTeam,
       home_score: null,
       away_score: null,
-      round: `R16`,
+      round: `QF`,
     });
   }
 
