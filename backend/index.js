@@ -148,9 +148,7 @@ function generateQFmatches(teams) {
   let sortedTeams = teams.map(team => ({
       ...team,
       pts: (Number(team.wins) * 3) + (Number(team.draws) * 1) + (Number(team.losses) * 0)
-    })).sort((a, b) => b.pts - a.pts || (b.GF - b.GA) - (a.GF - a.GA));
-
-  let teams = sortedTeams.filter(team => team.qualified === 1);
+    })).sort((a, b) => b.pts - a.pts || (b.GF - b.GA) - (a.GF - a.GA)).filter(team => team.qualified === 1);
 
   for (let i = 0; i < 8; i++) {
     let homeTeamIndex = Math.floor(Math.random() * teams.length);
