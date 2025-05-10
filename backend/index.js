@@ -143,6 +143,37 @@ function generateR16matches(teams) {
   return matches;
 }
 
+function generateQFmatches(teams) {
+  let matches = [];
+  let sortedTeams = teams.map(team => ({
+      ...team,
+      pts: (Number(team.wins) * 3) + (Number(team.draws) * 1) + (Number(team.losses) * 0)
+    })).sort((a, b) => b.pts - a.pts || (b.GF - b.GA) - (a.GF - a.GA));
+
+  let teams = sortedTeams.filter(team => team.qualified === 1);
+
+  for (let i = 0; i < 8; i++) {
+    let homeTeamIndex = Math.floor(Math.random() * teams.length);
+    let homeTeam = teams.splice(homeTeamIndex, 1)[0];
+
+    let awayTeamIndex = Math.floor(Math.random() * teams.length);
+    let awayTeam = teams.splice(awayTeamIndex, 1)[0];
+
+    matches.push({
+      id_match: `M${String(i + 1).padStart(3, '0')}-QF`,
+      home_team: homeTeam,
+      away_team: awayTeam,
+      home_score: null,
+      away_score: null,
+      round: `R16`,
+    });
+  }
+
+  return matches;
+}
+
+
+
 
 
 // Basic route for health check
@@ -609,6 +640,8 @@ app.post('/generate-matches', (req, res) => {
                 case 'R16':
                   matches = generateR16matches(teams);
                   break;
+                case 'QF' :
+                  matches = generateQFmatches(teams);
               }
 
               if (!matches || matches.length === 0) {
