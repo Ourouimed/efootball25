@@ -447,7 +447,7 @@ app.post('/matches/:id', async (req, res) => {
 
   try {
     const [rows] = await connection.promise().execute(
-      'SELECT id_match, home_team, away_team, home_score, away_score, round FROM matches WHERE id_match = ?',
+      'SELECT * FROM matches WHERE id_match = ?',
       [id]
     );
 
@@ -456,100 +456,107 @@ app.post('/matches/:id', async (req, res) => {
       return res.status(404).json({ error: 'Match not found' });
     }
 
-    const { round, home_team, away_team, home_score: oldHome, away_score: oldAway } = match;
+    const { home_team, away_team, home_score: oldHome, away_score: oldAway, round } = match;
     const isGW = round.startsWith("GW");
-    const isKO = ['R16', 'QF', 'SF', 'F', 'PO'].includes(round);
 
-    // Revert old scores if they exist
-    if (oldHome !== null && oldAway !== null) {
-      const homeDiff = oldHome;
-      const awayDiff = oldAway;
+    // Revert old score effects if they exist
+    if (oldHome !== null && oldAway !== null && isGW) {
+      const updates = [];
 
-      if (isGW) {
-        let oldHomeUpdate = '', oldAwayUpdate = '';
-        if (oldHome > oldAway) {
-          oldHomeUpdate = 'wins = wins - 1';
-          oldAwayUpdate = 'losses = losses - 1';
-        } else if (oldHome < oldAway) {
-          oldHomeUpdate = 'losses = losses - 1';
-          oldAwayUpdate = 'wins = wins - 1';
-        } else {
-          oldHomeUpdate = 'draws = draws - 1';
-          oldAwayUpdate = 'draws = draws - 1';
-        }
-
-        await Promise.all([
+      if (oldHome > oldAway) {
+        updates.push(
           connection.promise().execute(
-            `UPDATE teams SET GF = GF - ?, GA = GA - ?, ${oldHomeUpdate} WHERE userName = ?`,
-            [homeDiff, awayDiff, home_team]
+            'UPDATE teams SET wins = wins - 1, GF = GF - ?, GA = GA - ? WHERE teamName = ?',
+            [oldHome, oldAway, home_team]
           ),
           connection.promise().execute(
-            `UPDATE teams SET GF = GF - ?, GA = GA - ?, ${oldAwayUpdate} WHERE userName = ?`,
-            [awayDiff, homeDiff, away_team]
+            'UPDATE teams SET losses = losses - 1, GF = GF - ?, GA = GA - ? WHERE teamName = ?',
+            [oldAway, oldHome, away_team]
           )
-        ]);
-      } else if (isKO) {
-        await Promise.all([
+        );
+      } else if (oldHome < oldAway) {
+        updates.push(
           connection.promise().execute(
-            `UPDATE teams SET KOGF = KOGF - ?, KOGA = KOGA - ? WHERE userName = ?`,
-            [homeDiff, awayDiff, home_team]
+            'UPDATE teams SET losses = losses - 1, GF = GF - ?, GA = GA - ? WHERE teamName = ?',
+            [oldHome, oldAway, home_team]
           ),
           connection.promise().execute(
-            `UPDATE teams SET KOGF = KOGF - ?, KOGA = KOGA - ? WHERE userName = ?`,
-            [awayDiff, homeDiff, away_team]
+            'UPDATE teams SET wins = wins - 1, GF = GF - ?, GA = GA - ? WHERE teamName = ?',
+            [oldAway, oldHome, away_team]
           )
-        ]);
+        );
+      } else {
+        updates.push(
+          connection.promise().execute(
+            'UPDATE teams SET draws = draws - 1, GF = GF - ?, GA = GA - ? WHERE teamName = ?',
+            [oldHome, oldAway, home_team]
+          ),
+          connection.promise().execute(
+            'UPDATE teams SET draws = draws - 1, GF = GF - ?, GA = GA - ? WHERE teamName = ?',
+            [oldAway, oldHome, away_team]
+          )
+        );
       }
+
+      await Promise.all(updates);
     }
 
-    // Update match score
+    // Apply new score effects (if group stage)
+    if (isGW) {
+      const updates = [];
+
+      if (home_score > away_score) {
+        updates.push(
+          connection.promise().execute(
+            'UPDATE teams SET wins = wins + 1, GF = GF + ?, GA = GA + ? WHERE teamName = ?',
+            [home_score, away_score, home_team]
+          ),
+          connection.promise().execute(
+            'UPDATE teams SET losses = losses + 1, GF = GF + ?, GA = GA + ? WHERE teamName = ?',
+            [away_score, home_score, away_team]
+          )
+        );
+      } else if (home_score < away_score) {
+        updates.push(
+          connection.promise().execute(
+            'UPDATE teams SET losses = losses + 1, GF = GF + ?, GA = GA + ? WHERE teamName = ?',
+            [home_score, away_score, home_team]
+          ),
+          connection.promise().execute(
+            'UPDATE teams SET wins = wins + 1, GF = GF + ?, GA = GA + ? WHERE teamName = ?',
+            [away_score, home_score, away_team]
+          )
+        );
+      } else {
+        updates.push(
+          connection.promise().execute(
+            'UPDATE teams SET draws = draws + 1, GF = GF + ?, GA = GA + ? WHERE teamName = ?',
+            [home_score, away_score, home_team]
+          ),
+          connection.promise().execute(
+            'UPDATE teams SET draws = draws + 1, GF = GF + ?, GA = GA + ? WHERE teamName = ?',
+            [away_score, home_score, away_team]
+          )
+        );
+      }
+
+      await Promise.all(updates);
+    }
+
+    // Finally, update match table with new score
     await connection.promise().execute(
       'UPDATE matches SET home_score = ?, away_score = ? WHERE id_match = ?',
       [home_score, away_score, id]
     );
 
-    // Apply new score
-    if (isGW) {
-      let newHomeUpdate = '', newAwayUpdate = '';
-      if (home_score > away_score) {
-        newHomeUpdate = 'wins = wins + 1';
-        newAwayUpdate = 'losses = losses + 1';
-      } else if (home_score < away_score) {
-        newHomeUpdate = 'losses = losses + 1';
-        newAwayUpdate = 'wins = wins + 1';
-      } else {
-        newHomeUpdate = 'draws = draws + 1';
-        newAwayUpdate = 'draws = draws + 1';
-      }
-
-      await Promise.all([
-        connection.promise().execute(
-          `UPDATE teams SET GF = GF + ?, GA = GA + ?, ${newHomeUpdate} WHERE userName = ?`,
-          [home_score, away_score, home_team]
-        ),
-        connection.promise().execute(
-          `UPDATE teams SET GF = GF + ?, GA = GA + ?, ${newAwayUpdate} WHERE userName = ?`,
-          [away_score, home_score, away_team]
-        )
-      ]);
-    } else if (isKO) {
-      await Promise.all([
-        connection.promise().execute(
-          `UPDATE teams SET KOGF = KOGF + ?, KOGA = KOGA + ? WHERE userName = ?`,
-          [home_score, away_score, home_team]
-        ),
-        connection.promise().execute(
-          `UPDATE teams SET KOGF = KOGF + ?, KOGA = KOGA + ? WHERE userName = ?`,
-          [away_score, home_score, away_team]
-        )
-      ]);
-    }
-
-    res.json({ message: 'Match score updated successfully' });
+    res.json({ message: 'Match result updated successfully' });
 
   } catch (err) {
-    console.error('Error updating match:', err.message);
-    res.status(500).json({ error: 'Internal server error' });
+    console.error('Error updating match score:', err.message);
+    res.status(500).json({ 
+      error: 'Internal server error',
+      message: 'Could not update match score' 
+    });
   }
 });
 
