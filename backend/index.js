@@ -453,13 +453,16 @@ app.post('/matches/:id', async (req, res) => {
       return res.status(404).json({ error: 'Match not found' });
     }
 
-    const { home_team, away_team, home_score: oldHome, away_score: oldAway, round } = match;
+    const { home_team, away_team, home_score , away_score , round } = match;
     const isGW = round.startsWith("GW");
+    const oldHome = Number(home_score);
+    const oldAway = Number(away_score);
+
 
     // Revert old score effects if they exist
     if (oldHome !== null && oldAway !== null && isGW) {
       const updates = [];
-
+      
       if (oldHome > oldAway) {
         updates.push(
           connection.promise().execute(
