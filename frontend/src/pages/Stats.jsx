@@ -3,6 +3,8 @@ import Standing from "../components/Standing";
 import Header from "../components/Header";
 import Matches from '../components/Matches';
 import axios from 'axios';
+import HomeCard from '../components/HomeCard';
+import TopScorer from '../components/TopScorer';
 
 const Stats = () => {
   const [teams, setTeams] = useState([]);
@@ -59,13 +61,22 @@ const Stats = () => {
               )}
             </div>
             <div>
+            <HomeCard title="matches">
               {matchesLoading ? (
                 <p className="text-white">Loading matches...</p>
               ) : matchesError ? (
                 <p className="text-red-400">Error: {matchesError}</p>
-              ) : (
+              ) : 
                 <Matches matches={matches} teams={teams} />
-              )}
+                
+              }</HomeCard>
+              <HomeCard title='top scorer'>{teamsLoading ? (
+                <p className="text-white">Loading teams...</p>
+              ) : teamsError ? (
+                <p className="text-red-400">Error: {teamsError}</p>
+              ) : (
+                <TopScorer teams={teams} />
+              )}</HomeCard>
             </div>
           </div>
         </div>

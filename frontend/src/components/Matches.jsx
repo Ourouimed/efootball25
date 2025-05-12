@@ -37,8 +37,8 @@ const Matches = ({ matches, teams }) => {
   const NavBtnsStyle =
     "bg-primary disabled:bg-primary/10 cursor-pointer flex items-center justify-center rounded text-white size-[30px]";
 
-  return (
-    <HomeCard title="matches">
+  return <>
+    
       <select
         onChange={(e) => setSelectedTeam(e.target.value)}
         value={selectedTeam}
@@ -102,8 +102,7 @@ const Matches = ({ matches, teams }) => {
           </div>
         ))
       )}
-    </HomeCard>
-  );
+  </>
 };
 
 
