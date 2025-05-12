@@ -113,22 +113,21 @@ function generatePoMatches(teams){
 }
 
 
-function generateR16matches(teams) {
+function generateR16matches(pot1 , pot2) {
   let matches = [];
-  let sortedTeams = teams.map(team => ({
+  let sortedTeams = pot2.map(team => ({
       ...team,
       pts: (Number(team.wins) * 3) + (Number(team.draws) * 1) + (Number(team.losses) * 0)
     })).sort((a, b) => b.pts - a.pts || (b.GF - b.GA) - (a.GF - a.GA));
 
-  let pot1 = sortedTeams.slice(8, 24).filter(team => team.qualified === 1);
-  let pot2 = sortedTeams.slice(0, 8);
+  let pot2teams = sortedTeams.slice(0, 8);
 
   for (let i = 0; i < 8; i++) {
     let homeTeamIndex = Math.floor(Math.random() * pot1.length);
     let homeTeam = pot1.splice(homeTeamIndex, 1)[0];
 
-    let awayTeamIndex = Math.floor(Math.random() * pot2.length);
-    let awayTeam = pot2.splice(awayTeamIndex, 1)[0];
+    let awayTeamIndex = Math.floor(Math.random() * pot2teams.length);
+    let awayTeam = pot2teams.splice(awayTeamIndex, 1)[0];
 
     matches.push({
       id_match: `M${String(i + 1).padStart(3, '0')}-R16`,
@@ -624,8 +623,21 @@ app.post('/generate-matches', (req, res) => {
                 });
               }
 
-              const teams = results;
-              if (teams.length === 0) {
+              let pot1 , pot2;
+              if (round != 'LP'){
+                connection.execute('SELECT * FROM teams WHERE userName IN (SELECT qualified FROM matches WHERE round = ? )' ,[round], (err, results) => {
+                  if (err) {
+                    console.error('Teams query error:', err.message);
+                    return res.status(500).json({
+                      error: 'Match generation failed',
+                      message: 'Could not retrieve team list. No changes were made.'
+                    });
+                  }})
+                  pot1 = results 
+              }
+
+              pot2 = results
+              if (pot1.length === 0 && pot2.length === 0) {
                 return res.status(400).json({
                   error: 'No teams available',
                   message: 'Cannot generate matches without any registered teams'
@@ -637,16 +649,16 @@ app.post('/generate-matches', (req, res) => {
               const gws = 8;
               switch (round) {
                 case 'LP':
-                  matches = generateMatches(teams, gws);
+                  matches = generateMatches(pot2, gws);
                   break;
                 case 'PO':
-                  matches = generatePoMatches(teams);
+                  matches = generatePoMatches(pot2);
                   break;
                 case 'R16':
-                  matches = generateR16matches(teams);
+                  matches = generateR16matches(pot1 , pot2);
                   break;
                 case 'QF' :
-                  matches = generateQFmatches(teams);
+                  matches = generateQFmatches(pot1);
               }
 
               if (!matches || matches.length === 0) {
