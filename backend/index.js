@@ -189,29 +189,29 @@ app.post('/register', (req, res) => {
   //   });
   // }
 
-  connection.execute(
-    'INSERT INTO teams (userName, teamName, phoneNum) VALUES (?, ?, ?)', 
-    [userName, teamName, phoneNum], 
-    (err, results) => {
-      if (err) {
-        if (err.code === 'ER_DUP_ENTRY') {
-          return res.status(409).json({ 
-            error: 'Duplicate entry',
-            message: 'This username is already registered'
-          });
-        }
-        console.error('Database insertion error:', err.message);
-        return res.status(500).json({ 
-          error: 'Database operation failed',
-          message: 'Could not register the team. Please try again later.'
-        });
-      }
-      res.json({ 
-        message: 'Team registered successfully!', 
-        teamId: results.insertId 
-      });
-    }
-  );
+  // connection.execute(
+  //   'INSERT INTO teams (userName, teamName, phoneNum) VALUES (?, ?, ?)', 
+  //   [userName, teamName, phoneNum], 
+  //   (err, results) => {
+  //     if (err) {
+  //       if (err.code === 'ER_DUP_ENTRY') {
+  //         return res.status(409).json({ 
+  //           error: 'Duplicate entry',
+  //           message: 'This username is already registered'
+  //         });
+  //       }
+  //       console.error('Database insertion error:', err.message);
+  //       return res.status(500).json({ 
+  //         error: 'Database operation failed',
+  //         message: 'Could not register the team. Please try again later.'
+  //       });
+  //     }
+  //     res.json({ 
+  //       message: 'Team registered successfully!', 
+  //       teamId: results.insertId 
+  //     });
+  //   }
+  // );
   res.status(500).json({
     message : 'register form is closed please try again later'
   })
