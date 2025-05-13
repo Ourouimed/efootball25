@@ -7,7 +7,7 @@ const TopDeff = ({teams})=>{
                       <span className="text-xl">{index + 1}</span>
                       <span className="text-xl">{team.teamName}</span>
                     </div>
-                    <p className="bg-primary/10 rounded py-2 px-5 text-primary">{team.GF + team.KOGF }</p>
+                    <p className="bg-primary/10 rounded py-2 px-5 text-primary">{team.GA + team.KOGA }</p>
                   </div>
                 ))}
     </>
