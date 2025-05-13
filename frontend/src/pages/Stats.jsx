@@ -62,16 +62,7 @@ const Stats = () => {
               )}
             </div>
             <div>
-            <HomeCard title="matches">
-              {matchesLoading ? (
-                <p className="text-white">Loading matches...</p>
-              ) : matchesError ? (
-                <p className="text-red-400">Error: {matchesError}</p>
-              ) : 
-                <Matches matches={matches} teams={teams} />
-                
-              }</HomeCard>
-              <HomeCard title='top scorer'>{teamsLoading ? (
+            <HomeCard title='top scorer'>{teamsLoading ? (
                 <p className="text-white">Loading teams...</p>
               ) : teamsError ? (
                 <p className="text-red-400">Error: {teamsError}</p>
@@ -86,6 +77,16 @@ const Stats = () => {
               ) : (
                 <TopDeff teams={teams} />
               )}</HomeCard>
+            <HomeCard title="matches">
+              {matchesLoading ? (
+                <p className="text-white">Loading matches...</p>
+              ) : matchesError ? (
+                <p className="text-red-400">Error: {matchesError}</p>
+              ) : 
+                <Matches matches={matches} teams={teams} />
+                
+              }</HomeCard>
+              
             </div>
           </div>
         </div>
