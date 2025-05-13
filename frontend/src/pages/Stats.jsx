@@ -5,6 +5,7 @@ import Matches from '../components/Matches';
 import axios from 'axios';
 import HomeCard from '../components/HomeCard';
 import TopScorer from '../components/TopScorer';
+import TopDeff from '../components/TopDeff';
 
 const Stats = () => {
   const [teams, setTeams] = useState([]);
@@ -76,6 +77,14 @@ const Stats = () => {
                 <p className="text-red-400">Error: {teamsError}</p>
               ) : (
                 <TopScorer teams={teams} />
+              )}</HomeCard>
+
+              <HomeCard title='best deffence'>{teamsLoading ? (
+                <p className="text-white">Loading teams...</p>
+              ) : teamsError ? (
+                <p className="text-red-400">Error: {teamsError}</p>
+              ) : (
+                <TopDeff teams={teams} />
               )}</HomeCard>
             </div>
           </div>
