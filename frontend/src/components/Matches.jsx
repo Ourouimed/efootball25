@@ -3,7 +3,7 @@ import HomeCard from "./HomeCard";
 import { useState } from "react";
 
 const Matches = ({ matches, teams }) => {
-  const [currentRound, setCurrentRound] = useState(0);
+  const [currentRound, setCurrentRound] = useState(8);
   const [selectedTeam, setSelectedTeam] = useState("ALL");
 
   const rounds = [
