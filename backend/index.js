@@ -530,11 +530,11 @@ app.post('/matches/:id', async (req, res) => {
       } else {
         await Promise.all([
           connection.promise().execute(
-            `UPDATE teams SET KOGF = KOGF + ?, KOFA = KOFA + ? WHERE userName = ?`,
+            `UPDATE teams SET KOGF = KOGF + ?, KOGA = KOGA + ? WHERE userName = ?`,
             [home_score, away_score, home_team]
           ),
           connection.promise().execute(
-            `UPDATE teams SET KOGF = KOGF + ?, KOFA = KOFA + ? WHERE userName = ?`,
+            `UPDATE teams SET KOGF = KOGF + ?, KOGA = KOGA + ? WHERE userName = ?`,
             [away_score, home_score, away_team]
           )
         ]);

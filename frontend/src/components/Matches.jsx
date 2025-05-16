@@ -1,5 +1,4 @@
 import { ChevronLeftRounded, ChevronRightRounded } from "@mui/icons-material";
-import HomeCard from "./HomeCard";
 import { useState } from "react";
 
 const Matches = ({ matches, teams }) => {
@@ -19,7 +18,7 @@ const Matches = ({ matches, teams }) => {
 
   const prevGw = () => {
     if (currentRound > 0) {
-      setCurrentRound((prev) => prev - 1);
+                                        setCurrentRound((prev) => prev - 1);
     }
   };
 
