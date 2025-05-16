@@ -608,22 +608,24 @@ app.post('/generate-matches', async (req, res) => {
     // 3. Fetch teams
     let pot1 = [], pot2 = [];
 
-    if (round !== 'LP') {
-      // Get teams that qualified for this round
-      pot1 = await dbQuery(
-        'SELECT * FROM teams WHERE userName IN (SELECT qualified FROM matches WHERE round = ?)',
-        [round]
-      );
-
-      pot2 = await dbQuery(
-        'SELECT * FROM teams',
-      );
-    }
+    // if (round !== 'LP') {
+    //   // Get teams that qualified for this round
+    //   pot1 = await dbQuery(
+    //     'SELECT * FROM teams WHERE userName IN (SELECT qualified FROM matches WHERE round = ?)',
+    //     [round]
+    //   );
+    // }
 
     // Get all teams for LP, or the ones that qualified for knockout rounds
     if (round === 'LP' || pot1.length === 0) {
       pot2 = await dbQuery('SELECT * FROM teams');
     } 
+    
+
+    if (round === 'R16'){
+      pot1 = await dbQuery("SELECT * FROM teams WHERE userName in (SELECT qualified from matches where round ='PO'");
+      pot2 = await dbQuery("SELECT * FROM teams");
+    }
 
     if (pot1.length === 0 && pot2.length === 0) {
       return res.status(400).json({
@@ -631,7 +633,6 @@ app.post('/generate-matches', async (req, res) => {
         message: 'Cannot generate matches without any registered teams'
       });
     }
-    
 
     // 4. Generate matches
     let matches;
