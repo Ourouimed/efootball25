@@ -12,16 +12,18 @@ const Navbar = () => {
   const { toggleSidenav } = useContext(SideNavContext);
 
   const handleLogoutSession = async () => {
-    let user = JSON.parse(localStorage.getItem('user'));
-    localStorage.removeItem('user');
-    navigate('/login');
+    console.log('API_URL:', API_URL);
     try {
+      const user = JSON.parse(localStorage.getItem('user'));
       await axios.delete(`${API_URL}/logout`, { data: user });
+      localStorage.removeItem('user');
+      navigate('/login');
     } catch (err) {
       console.error(err);
       alert('Cannot log out');
     }
   };
+  
 
   return (
     <>
