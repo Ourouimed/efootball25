@@ -3,7 +3,7 @@ import Header from "../components/Header"
 const Home = () => {
     return (
         <>
-            <Header />
+            <Header fixed={true}/>
             <div className="bg-primary">
                 <div className="container flex items-center justify-center min-h-screen flex-col">
                     <div className="text-center">

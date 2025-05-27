@@ -86,7 +86,7 @@ const Teams = () => {
 
         if (confirm('Are you sure you want to delete this team?')) {
             try {
-                await axios.delete(`${API_URL}/teams/${userName}`);
+                await axios.delete(`${API_URL}/teams/delete/${userName}`);
                 setTeams(prev => prev.filter(t => t.userName !== userName));
                 setStatusMsg('Team deleted successfully!');
                 setStatus(true);
@@ -118,7 +118,7 @@ const Teams = () => {
 
         try {
             if (isEditing) {
-                await axios.post(`${API_URL}/teams/${userName}`, currentTeam);
+                await axios.post(`${API_URL}/teams/update/${userName}`, currentTeam);
                 setTeams(prev => prev.map(t => t.userName === userName ? { ...t, ...currentTeam } : t));
                 setStatusMsg('Team updated successfully!');
             } else {

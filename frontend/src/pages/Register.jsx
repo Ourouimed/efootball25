@@ -4,13 +4,13 @@ import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 
 const Register = () => {
-  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001"
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
   const navigate = useNavigate();
 
   const [inscription, setInscription] = useState({
     teamName: "",
     phoneNum: "",
-    userName: ""
+    userName: "",
   });
 
   const [statusMsg, setStatusMsg] = useState(null);
@@ -19,9 +19,14 @@ const Register = () => {
   const handleRegisterTeam = async (e) => {
     e.preventDefault();
     const { teamName, phoneNum, userName } = inscription;
-
     if (!teamName || !phoneNum || !userName) {
-      setStatusMsg("Please, fill all fields!!");
+      setStatusMsg("Please fill all fields!");
+      setStatus(false);
+      return;
+    }
+
+    if (teamName.length < 3) {
+      setStatusMsg("Team name must be at least 3 characters long");
       setStatus(false);
       return;
     }
@@ -32,7 +37,6 @@ const Register = () => {
       setStatus(true);
       setTimeout(() => navigate("/stats"), 1000);
     } catch (err) {
-      console.error(err);
       const errorMsg =
         typeof err.response?.data === "string"
           ? err.response.data
@@ -42,66 +46,75 @@ const Register = () => {
     }
   };
 
+  const inputStyle = 'w-full px-4 py-3 bg-gray-800/50 text-white placeholder-gray-400 focus:outline-none focus:border-indigo-500 transition-all duration-300'
   return (
     <>
-      <Header />
-      <div className="bg-secondary">
-        <div className="container flex items-center justify-center min-h-screen flex-col">
-          <div>
-            <form
-              className="bg-primary p-4 rounded-lg w-[400px] max-w-[90%] m-auto"
-              onSubmit={handleRegisterTeam}
-            >
-              <h3 className="text-fourth text-2xl">Register Now</h3>
-              <p className="text-white">
-                T9yd db f <span className="text-fourth">Saison 2</span> ahsan Tournoi d efootball
-              </p>
-              <div className="divide-y-1 divide-[#ededed] rounded border border-[#ededed] mt-2">
+      <Header fixed={true} />
+      <div className="min-h-screen flex items-center justify-center bg-secondary px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl">
+          <form
+            className="bg-primary backdrop-blur-sm p-8 rounded-2xl shadow-2xl border border-gray-700"
+            onSubmit={handleRegisterTeam}
+          >
+            <h3 className="text-3xl font-bold text-fourth mb-2">Register Now</h3>
+            <p className="text-gray-300 mb-4">
+              Ready for <span className="text-third font-semibold">Saison 6</span>? Compete in the ultimate{" "}
+              <span className="text-fourth font-semibold">eFootball</span> tournament!
+            </p>
+
+            <div className="divide-y divide-gray-600 border border-gray-600 rounded-lg overflow-hidden">
+              
                 <input
                   type="text"
-                  placeholder="Smiya d fr9tk hna"
-                  className="register-input"
+                  placeholder="Team Name"
+                  className={inputStyle}
                   value={inscription.teamName}
                   onChange={(e) =>
-                    setInscription({ ...inscription, teamName: e.target.value })
+                    setInscription({ ...inscription, teamName: e.target.value.trim() })
                   }
                 />
+              
+              
                 <input
                   type="text"
-                  placeholder="Smitk f Pes"
-                  className="register-input"
+                  placeholder="Username in PES"
+                  className={inputStyle}
                   value={inscription.userName}
                   onChange={(e) =>
-                    setInscription({ ...inscription, userName: e.target.value })
+                    setInscription({ ...inscription, userName: e.target.value.trim() })
                   }
                 />
+
+              
                 <input
-                  type="text"
-                  placeholder="Nmra d tel 06(7)..."
-                  className="register-input"
+                  type="tel"
+                  placeholder="Phone Number"
+                  className={inputStyle}
                   value={inscription.phoneNum}
                   onChange={(e) =>
-                    setInscription({ ...inscription, phoneNum: e.target.value })
+                    setInscription({ ...inscription, phoneNum: e.target.value.trim() })
                   }
                 />
-              </div>
-              <button
-                type="submit"
-                className="bg-third rounded w-full cursor-pointer mt-2 p-2 text-white"
-              >
-                T9yd db
-              </button>
-            </form>
-            {statusMsg && (
-              <div
-                className={`mt-2 text-center ${
-                  status ? "success-msg" : "error-msg"
-                }`}
-              >
-                {statusMsg}
-              </div>
-            )}
-          </div>
+              
+            </div>
+
+            <button
+              type="submit"
+              className="cursor-pointer w-full py-3 bg-third text-white rounded-lg translate-y-2 transition-all duration-300"
+            >
+              Register Now
+            </button>
+          </form>
+
+          {statusMsg && (
+            <div
+              className={`mt-4 p-3 rounded-lg text-center text-sm font-medium transition-all duration-300 ${
+                status ? "success-msg" : "error-msg"
+              }`}
+            >
+              {statusMsg}
+            </div>
+          )}
         </div>
       </div>
     </>

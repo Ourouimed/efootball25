@@ -3,32 +3,31 @@ import { useState , useEffect } from 'react'
 import { GitHub, Instagram, Menu, WhatsApp } from '@mui/icons-material'
 import MenuHome from './MenuHome'
 import { SideNavContext } from '../contexts/Sidenavontext'
-const Header = ()=>{
+import { links } from '../utils/links'
+const Header = ({fixed = false})=>{
     const location = useLocation()
     const [currLocation , setCurrLocation] = useState('/')
     const [MenuIsOpen , setMenuIsOpen]= useState(false) 
+    
     useEffect(()=>{
         setCurrLocation(location.pathname)
     } , [location.pathname])
 
-    return <header>
-        <Link to='/' className='home-link'>
+    const navLink = 'py-2 px-4 md:px-8 rounded-full block text-sm sm:text-lg md:text-xl;'
+
+    return <header className={`bg-primary px-4 md:px-[10%] py-4 text-white flex justify-between items-center ${fixed? 'fixed w-full' : 'sticky'} top-0 z-20`}>
+        <Link to='/' className='text-fourth text-2xl md:text-3xl uppercase'>
             efootball
             <p className='text-sm'>By ourouimed</p>
         </Link>
         <nav className='hidden md:flex items-center gap-4 '>
-            <ul className='nav-links'>
-                <li>
-                    <Link to='/' className={currLocation === '/' ? 'bg-fourth text-primary' : 'text-fourth'}>
-                    Home
+            <ul className='bg-secondary rounded-full flex gap-2 justify-between items-center px-2 py-1'>
+                {links.map(link => <li key={link.name}>
+                    <Link to={link.location} className={`${currLocation === link.location ? 'bg-fourth text-primary' : 'text-fourth'} ${navLink}`}>
+                    {link.name}
                     </Link>
-                </li>
-                <li>
-                    <Link to='/stats' className={currLocation === '/stats' ? 'bg-fourth text-primary' : 'text-fourth'}>Stats</Link>
-                </li>
-                <li>
-                    <Link to='/register' className={currLocation === '/register' ? 'bg-fourth text-primary' : 'text-fourth'}>Register</Link>
-                </li>
+                </li>)}
+                
             </ul>
             <Link to='/dashboard' className='py-2 px-8 rounded-full block text-xl bg-third'>Admin</Link>
             <div className='hidden lg:flex items-center gap-1'>

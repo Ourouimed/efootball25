@@ -15,45 +15,15 @@ body {
   font-family: "efootballStencil", sans-serif;
 }
 
-header {
-  @apply bg-primary px-4 md:px-[10%] py-4 text-white flex justify-between items-center sticky top-0 z-20;
-}
-
-header > a.home-link {
-  @apply text-fourth text-2xl md:text-3xl uppercase;
-}
-
-header .nav-links {
-  @apply bg-secondary rounded-full flex gap-2 justify-between items-center px-2 py-1;
-}
-
-header .nav-links li a {
-  @apply py-2 px-4 md:px-8 rounded-full block text-sm sm:text-lg md:text-xl;
-}
-.menu-home {
-  @apply fixed top-0 left-0 bg-white h-screen max-w-[90%] z-20 shadow-md overflow-hidden md:hidden;
-  transition: .4s ease;
-}
-
-.menu-home ul li a {
-  @apply flex items-center py-2 px-4 rounded-md text-base md:text-xl hover:bg-third hover:text-white;
-  transition: .4s ease;
-}
-.menu-home ul li:not(:last-child) {
-  @apply mb-1
-}
 .container {
   @apply w-full max-w-screen-xl m-auto px-4 md:px-[10%] py-4;
 }
 
-.register-input {
-  @apply py-2 px-4 w-full outline-none text-white;
-}
 
 .success-msg, .admin-alert, .error-msg {
   @apply w-full p-4 rounded-md text-sm md:text-base;
 }
-.success-msg, .admin-alert {
+.success-msg {
   @apply bg-green-100 border-2 border-green-500;
 }
 .error-msg {

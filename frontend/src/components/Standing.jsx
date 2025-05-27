@@ -18,12 +18,12 @@ const Standing = ({teams})=>{
       </tr>
     </thead>
     <tbody>
-      {sortedTeams.length === 0 ? <div className="text-center text-gray-500 py-4">
-          No registred teams yet.
-        </div> :sortedTeams.map((team, index) => {
+      {sortedTeams.length === 0 ? <tr className="text-center text-gray-500 py-4">
+        <td colSpan="10">No registred teams yet.</td>
+        </tr> :sortedTeams.map((team, index) => {
         const { teamName, userName, wins, losses, draws, GF, GA, pts } = team;
         const GP = wins + draws + losses;
-        const rowClass =
+        const rowClass = 
           index < 8 ? "best-8" : index < 24 ? "playoffs" : "";
 
         return (
