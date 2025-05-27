@@ -13,5 +13,7 @@ exports.getAllteams =  (req , res)=>{
 
 
 exports.registerTeam = (req , res) =>{
-    
+  const { teamName, phoneNum, userName } = req.body
+  res.send('hello')
+  console.log(req.body)
 }

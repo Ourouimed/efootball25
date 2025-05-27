@@ -21,13 +21,13 @@ const Register = () => {
     const { teamName, phoneNum, userName } = inscription;
 
     if (!teamName || !phoneNum || !userName) {
-      setStatusMsg("Please, 3mr Ga3 lma3lomat la Jat ela khatrk");
+      setStatusMsg("Please, fill all fields!!");
       setStatus(false);
       return;
     }
 
     try {
-      const response = await axios.post(`${API_URL}/register`, inscription);
+      const response = await axios.post(`${API_URL}/teams/register`, inscription);
       setStatusMsg(response.data.message);
       setStatus(true);
       setTimeout(() => navigate("/stats"), 1000);
