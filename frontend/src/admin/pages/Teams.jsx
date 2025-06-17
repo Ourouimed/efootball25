@@ -122,7 +122,7 @@ const Teams = () => {
                 setTeams(prev => prev.map(t => t.userName === userName ? { ...t, ...currentTeam } : t));
                 setStatusMsg('Team updated successfully!');
             } else {
-                await axios.post(`${API_URL}/register`, currentTeam);
+                await axios.post(`${API_URL}/teams/register`, currentTeam);
                 setTeams(prev => [...prev, currentTeam]);
                 setStatusMsg('Team added successfully!');
             }

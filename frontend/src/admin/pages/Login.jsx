@@ -70,7 +70,7 @@ const Login = () => {
               setUser({ ...user, password: e.target.value })
             }
           />
-          <div className="admin-alert mb-1">
+          <div className="bg-green-400/30 border-2 border-green-400 mb-1 rounded p-4">
             To Connect to admin Panel as a guest use <br></br>username : guest <br></br> password : guest
           </div>
 

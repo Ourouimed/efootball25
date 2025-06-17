@@ -53,9 +53,10 @@ const Matches = () => {
         if (!sessionValid) return;
 
         try {
-            await axios.post(`${API_URL}/generate-matches` , {
+            let a = await axios.post(`${API_URL}/generate-matches` , {
                 round : drawRound
             });
+            console.log(a.data)
             fetchMatches();
             setStatusMsg('Matches generated successfully.');
             setStatus(true);

@@ -1,7 +1,8 @@
 const db = require('../config/db');
+const Team = require('../models/Team');
 
 exports.getAllteams =  (req , res)=>{
-    db.query('SELECT * FROM teams', (err, results) => {
+    Team.getTeamsAll((err, results) => {
         if (err) {
           console.error('Error executing query:', err);
           res.status(500).json({ error: 'Internal Server Error' });
@@ -20,6 +21,7 @@ exports.registerTeam = (req , res) =>{
       res.status(500).json({ error: 'Internal Server Error' });
       return
     }
+    
       res.json({ message: 'Team registered successfully' });
     
   })
