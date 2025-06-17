@@ -157,7 +157,7 @@ const Matches = () => {
                             <button
                                 type="submit"
                                 disabled={loading}
-                                className={`bg-primary py-2 px-4 rounded text-white cursor-pointer flex items-center hover:bg-primary-dark ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                className={`cursor-pointer bg-primary py-2 px-4 rounded text-white cursor-pointer flex items-center hover:bg-primary-dark ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
                             >
                                 Save
                             </button>
@@ -187,7 +187,7 @@ const Matches = () => {
                         <div className="flex justify-end gap-2">
                             <button
                                 onClick={() => setShowDrawPopup(false)}
-                                className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400"
+                                className="cursor-pointer bg-gray-300 px-4 py-2 rounded"
                             >
                                 Cancel
                             </button>
@@ -196,7 +196,7 @@ const Matches = () => {
                                     await handleStartDraw();
                                     setShowDrawPopup(false);
                                 }}
-                                className="bg-primary px-4 py-2 rounded text-white hover:bg-primary-dark"
+                                className="cursor-pointer bg-primary px-4 py-2 rounded text-white hover:bg-primary-dark"
                             >
                                 Confirm
                             </button>

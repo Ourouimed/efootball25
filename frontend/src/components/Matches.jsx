@@ -2,7 +2,7 @@ import { ChevronLeftRounded, ChevronRightRounded } from "@mui/icons-material";
 import { useState } from "react";
 
 const Matches = ({ matches, teams }) => {
-  const [currentRound, setCurrentRound] = useState(8);
+  const [currentRound, setCurrentRound] = useState(0);
   const [selectedTeam, setSelectedTeam] = useState("ALL");
 
   const rounds = [

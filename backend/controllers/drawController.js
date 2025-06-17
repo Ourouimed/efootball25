@@ -9,14 +9,18 @@ exports.generateDraw = (req, res) => {
         case 'LP':
             Team.getTeamsAll((err, result) => {
                 if (err) {
+                    console.log('err 0')
                     return res.status(500).json({ error: 'Server Error (teams)' });
+                    
                 }
 
                 const matches = generateLPmatches(result);
+                
 
                 
                 Match.deleteMatchByRound(round , (err) => {
                     if (err) {
+                        console.log('err 1 ')
                         return res.status(500).json({ error: 'Server Error (delete)' });
                     }
 
@@ -30,8 +34,9 @@ exports.generateDraw = (req, res) => {
                         match.round
                     ]);
 
-                    Match.insertMatches([values], (err) => {
+                    Match.insertMatches(values, (err) => {
                         if (err) {
+                            console.log(err)
                             return res.status(500).json({ error: 'Server Error (insert)' });
                         }
                         res.json(matches);
@@ -41,6 +46,7 @@ exports.generateDraw = (req, res) => {
             break;
 
         default:
+            console.log('err 3')
             res.status(400).json({ error: 'Unknown Round' });
     }
 };
