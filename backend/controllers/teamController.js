@@ -15,7 +15,8 @@ exports.getAllteams =  (req , res)=>{
 
 exports.registerTeam = (req , res) =>{
   const { teamName, phoneNum, userName } = req.body
-  db.query('INSERT INTO teams (teamName, phoneNum, userName) VALUES (?, ?, ?)', [teamName, phoneNum, userName], (err, results) => {
+
+  Team.register([teamName, phoneNum, userName] ,(err, results) => {
     if(err){
       console.error('Error executing query:', err);
       res.status(500).json({ error: 'Internal Server Error' });
@@ -29,7 +30,7 @@ exports.registerTeam = (req , res) =>{
 
 exports.DeleteTeam = (req ,res) =>{
   const {userName} = req.params
-  db.query('delete from teams where userName = ?', [userName], (err, results) => {
+  Team.delete(userName ,(err, results) => {
     if(err){
       console.error('Error executing query:', err);
       res.status(500).json({ error: 'Internal Server Error' });
@@ -48,7 +49,9 @@ exports.DeleteTeam = (req ,res) =>{
 exports.UpdateTeam = (req ,res) =>{
   const {userName} = req.params
   const {teamName , phoneNum} = req.body
-  db.query('update teams set	teamName = ? , phoneNum = ? where userName = ?', [teamName , phoneNum , userName], (err, results) => {
+
+
+  Team.update([teamName , phoneNum , userName] , (err, results) => {
     if(err){
       console.error('Error executing query:', err);
       res.status(500).json({ error: 'Internal Server Error' });

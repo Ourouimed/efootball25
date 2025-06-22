@@ -85,11 +85,11 @@ const Matches = () => {
         if (!sessionValid) return;
 
         try {
-            await axios.post(`${API_URL}/matches/${selectedMatch.id_match}`, {
+            let a = await axios.post(`${API_URL}/matches/update/${selectedMatch.id_match}`, {
                 home_score: homeScore,
                 away_score: awayScore
             });
-            setStatusMsg('Match updated successfully.');
+            setStatusMsg(a.message);
             setStatus(true);
             fetchMatches();
             handleClosePopup();
@@ -244,6 +244,8 @@ const Matches = () => {
                             <th>Score</th>
                             <th>Action</th>
                         </tr>
+
+                        
                     </thead>
                     <tbody>
                         {(currentRound === 'ALL' ? matches : matches.filter(match => match.round === currentRound)).map(match => (

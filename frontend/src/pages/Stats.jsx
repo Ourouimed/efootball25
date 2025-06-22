@@ -6,6 +6,7 @@ import axios from 'axios';
 import HomeCard from '../components/HomeCard';
 import TopScorer from '../components/TopScorer';
 import TopDeff from '../components/TopDeff';
+import Countdown from '../components/Countdown';
 
 const Stats = () => {
   const [teams, setTeams] = useState([]);
@@ -62,12 +63,19 @@ const Stats = () => {
               )}
             </div>
             <div>
+            <HomeCard title='countdown'>
+              <Countdown targetDate='2025-06-25' round='League Phase'/>
+            </HomeCard>
             <HomeCard title='top scorer'>{teamsLoading ? (
                 <p className="text-white">Loading teams...</p>
               ) : teamsError ? (
                 <p className="text-red-400">Error: {teamsError}</p>
               ) : (
-                <TopScorer teams={teams} />
+                <div className='divide-y divide-[#ededed]'>
+
+                    <TopScorer teams={teams} />
+                </div>
+                
               )}</HomeCard>
 
               <HomeCard title='best deffence'>{teamsLoading ? (
@@ -75,7 +83,9 @@ const Stats = () => {
               ) : teamsError ? (
                 <p className="text-red-400">Error: {teamsError}</p>
               ) : (
+                <div className='divide-y divide-[#ededed]'>
                 <TopDeff teams={teams} />
+                </div>
               )}</HomeCard>
             <HomeCard title="matches">
               {matchesLoading ? (

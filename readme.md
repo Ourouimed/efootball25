@@ -95,8 +95,27 @@ npm start
 ```bash
 efootball25/
 ├── backend/                       # Backend-related files and logic
+│   ├── config/db.js               # Mysql Database configuration
+│   ├── middelware/corsOptions.js  # Cors Configuration
+│   ├── controllers/               # App Controllers
+│   │   ├── authController.js      # Authentication-related controllers
+│   │   ├── teamController.js      # Team-related controllers
+│   │   ├── matchController.js     # Match-related controllers
+│   │   └── drawController.js      # Draw-related controllers
+│   ├── models/                    # Models 
+│   │   ├── Auth.js                # Authentication-related Model
+│   │   ├── Match.js               # Team-related Model
+│   │   └── Team.js                # Draw-related Model
+│   ├── routes/                    # Routes
+│   │   ├── auth.js                # Authentication route
+│   │   ├── draw.js                # Team route
+│   │   ├── matches.js             # Match route
+│   │   └── teams.js               # Draw route
+│   ├── utils/                     # utils functions 
+│   │   ├── matchGenerator.js      # Random draw function
+│   │   └── sessionCodeGenerator.js  # Random Session code function
 │   ├── .env                       # Environment variables for backend (e.g., database credentials)
-│   ├── index.js                   # Main entry point for the Express app
+│   ├── server.js                   # Main entry point for the Express app
 │   ├── package-lock.json          # Automatically generated lock file for backend dependencies
 │   ├── package.json               # Backend dependencies, scripts, and metadata
 │   └── vercel.json                # Vercel deployment configuration for backend

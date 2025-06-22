@@ -186,14 +186,14 @@ const Teams = () => {
                             <div className="flex justify-end gap-2 pt-2">
                                 <button
                                     type="button"
-                                    className="bg-primary/10 text-primary py-2 px-6 rounded"
+                                    className="bg-primary/10 text-primary py-2 px-6 rounded cursor-pointer"
                                     onClick={handleClosePopup}
                                 >
                                     Cancel
                                 </button>
                                 <button
                                     type="submit"
-                                    className="bg-primary py-2 px-6 rounded text-white hover:bg-primary-dark disabled:opacity-50"
+                                    className="cursor-pointer  bg-primary py-2 px-6 rounded text-white hover:bg-primary-dark disabled:opacity-50"
                                     disabled={submitting}
                                 >
                                     {submitting ? 'Processing...' : isEditing ? 'Update Team' : 'Add Team'}
@@ -207,7 +207,7 @@ const Teams = () => {
             <div className="flex items-center justify-between flex-wrap gap-4">
                 <h1 className="text-3xl">Team Management</h1>
                 <button
-                    className="bg-primary py-2 px-4 rounded text-white flex items-center hover:bg-primary-dark"
+                    className="bg-primary py-2 px-4 rounded text-white flex items-center hover:bg-primary-dark cursor-pointer"
                     onClick={handleOpenAddPopup}
                 >
                     <Add className="mr-1" />Add New Team
@@ -243,13 +243,13 @@ const Teams = () => {
                                 <td className="flex gap-2">
                                     <button
                                         onClick={() => handleOpenEditPopup(team)}
-                                        className="text-blue-500 hover:text-blue-700"
+                                        className="text-blue-500 hover:text-blue-700 cursor-pointer"
                                     >
                                         <Edit fontSize="small" />
                                     </button>
                                     <button
                                         onClick={() => handleDeleteTeam(team.userName)}
-                                        className="text-red-500"
+                                        className="text-red-500 cursor-pointer"
                                     >
                                         <Delete fontSize="small" />
                                     </button>
