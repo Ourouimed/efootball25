@@ -132,8 +132,8 @@ function generatePomatches (teams){
 
 
 function generateR16matches (pot1 , pot2){
-
-    for (let i = 1; i <= 16;i++){
+    let matches = []
+    for (let i = 1; i <= 8;i++){
         let homeTeamIndex = Math.floor(Math.random() * pot1.length)
         const homeTeam = pot1[homeTeamIndex]
         pot1.splice(homeTeamIndex, 1)
@@ -141,6 +141,9 @@ function generateR16matches (pot1 , pot2){
         let awayTeamIndex = Math.floor(Math.random() * pot2.length)
         const awayTeam = pot2[awayTeamIndex]
         pot2.splice(awayTeamIndex, 1)
+
+        console.log(homeTeam.userName)
+        console.log(awayTeam.userName)
     
         matches.push({
           id_match: `M${
@@ -161,4 +164,76 @@ function generateR16matches (pot1 , pot2){
       return matches
 
 }
-module.exports = { generateLPmatches , generatePomatches , generateR16matches};
+
+
+function generateQFmatches (teams){
+
+    const teamsToDraw = [...teams]
+    const matches = []
+    const numTeams = teams.length;
+    const totalMatches = numTeams / 2
+  
+    for (let i = 1; i <= totalMatches;i++){
+      let homeTeamIndex = Math.floor(Math.random() * teamsToDraw.length)
+      const homeTeam = teamsToDraw[homeTeamIndex]
+      teamsToDraw.splice(homeTeamIndex, 1)
+  
+      let awayTeamIndex = Math.floor(Math.random() * teamsToDraw.length)
+      const awayTeam = teamsToDraw[awayTeamIndex]
+      teamsToDraw.splice(awayTeamIndex, 1)
+  
+      matches.push({
+        id_match: `M${
+          i < 10 ? `00${i}` : 
+          i < 100 ? `0${i}` :
+          i 
+  
+        }-QF`,
+        home_team: homeTeam.userName,
+        hometeam_name: homeTeam.teamName,
+        away_team: awayTeam.userName,
+        awayteam_name: awayTeam.teamName,
+        round: `QF`,
+    })
+  
+  
+    }
+    return matches
+  }
+
+  function generateSFmatches (teams){
+
+    const teamsToDraw = [...teams]
+    const matches = []
+    const numTeams = teams.length;
+    const totalMatches = numTeams / 2
+  
+    for (let i = 1; i <= totalMatches;i++){
+      let homeTeamIndex = Math.floor(Math.random() * teamsToDraw.length)
+      const homeTeam = teamsToDraw[homeTeamIndex]
+      teamsToDraw.splice(homeTeamIndex, 1)
+  
+      let awayTeamIndex = Math.floor(Math.random() * teamsToDraw.length)
+      const awayTeam = teamsToDraw[awayTeamIndex]
+      teamsToDraw.splice(awayTeamIndex, 1)
+  
+      matches.push({
+        id_match: `M${
+          i < 10 ? `00${i}` : 
+          i < 100 ? `0${i}` :
+          i 
+  
+        }-SF`,
+        home_team: homeTeam.userName,
+        hometeam_name: homeTeam.teamName,
+        away_team: awayTeam.userName,
+        awayteam_name: awayTeam.teamName,
+        round: `SF`,
+    })
+  
+  
+    }
+    return matches
+  }
+  
+module.exports = { generateLPmatches , generatePomatches , generateR16matches ,  generateQFmatches , generateSFmatches};

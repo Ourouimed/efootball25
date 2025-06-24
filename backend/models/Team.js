@@ -4,7 +4,12 @@ const Team = {
   getTeamsAll: (callback) => {
     db.query('SELECT * FROM teams ORDER BY teamName ASC', callback);
   },
-
+  getQualfiedTeamsFrom : (round , callback)=>{
+    db.query('SELECT * FROM teams where userName in (select qualified from matches where round = ?)',[round],callback)
+  },
+  getTeams: (callback) => {
+    db.query('SELECT * FROM teams', callback);
+  },
   register: (values, callback) => {
     db.query('INSERT INTO teams (teamName, phoneNum, userName) VALUES (?, ?, ?)', values, callback);
   },
