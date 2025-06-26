@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Standing from "../components/Standing";
 import Header from "../components/Header";
 import Matches from '../components/Matches';
@@ -7,8 +7,10 @@ import HomeCard from '../components/HomeCard';
 import TopScorer from '../components/TopScorer';
 import TopDeff from '../components/TopDeff';
 import Countdown from '../components/Countdown';
+import { SettingsContext } from '../contexts/SettingsContext';
 
 const Stats = () => {
+  const {settings} = useContext(SettingsContext)
   const [teams, setTeams] = useState([]);
   const [matches, setMatches] = useState([]);
   const [teamsError, setTeamsError] = useState(null);
@@ -17,33 +19,39 @@ const Stats = () => {
   const [matchesLoading, setMatchesLoading] = useState(true);
 
   const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
+  const fetchTeams = async () => {
+    try {
+      const res = await axios.get(`${API_URL}/teams`);
+      setTeams(res.data);
+    } catch (err) {
+      setTeamsError(err.response?.data?.message || 'Failed to fetch teams');
+    } finally {
+      setTeamsLoading(false);
+    }
+  };
 
+  const fetchMatches = async () => {
+    try {
+      const res = await axios.get(`${API_URL}/matches`);
+      setMatches(res.data);
+    } catch (err) {
+      setMatchesError(err.response?.data?.message || 'Failed to fetch matches');
+    } finally {
+      setMatchesLoading(false);
+    }
+  };
   useEffect(() => {
-    const fetchTeams = async () => {
-      try {
-        const res = await axios.get(`${API_URL}/teams`);
-        setTeams(res.data);
-      } catch (err) {
-        setTeamsError(err.response?.data?.message || 'Failed to fetch teams');
-      } finally {
-        setTeamsLoading(false);
-      }
-    };
-
-    const fetchMatches = async () => {
-      try {
-        const res = await axios.get(`${API_URL}/matches`);
-        setMatches(res.data);
-      } catch (err) {
-        setMatchesError(err.response?.data?.message || 'Failed to fetch matches');
-      } finally {
-        setMatchesLoading(false);
-      }
-    };
+    
 
     fetchTeams();
     fetchMatches();
   }, [API_URL]);
+
+
+  const formatDatetimeLocal = (dateTime) => {
+    if (!dateTime) return '';
+    return dateTime.replace(' ', 'T').substring(0, 16);
+  };
 
   const renderTeamSection = (Component) => (
     teamsLoading ? (
@@ -78,7 +86,7 @@ const Stats = () => {
               </div>
               <div>
                 <HomeCard title="countdown">
-                  <Countdown targetDate="2025-06-25" round="League Phase" />
+                  <Countdown targetDate={formatDatetimeLocal(settings.deadlineDate)} round="League Phase" />
                 </HomeCard>
 
                 <HomeCard title="top scorer">

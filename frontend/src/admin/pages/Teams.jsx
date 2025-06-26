@@ -109,6 +109,22 @@ const Teams = () => {
             setSubmitting(false);
             return;
         }
+        
+
+        
+    if (teamName.length < 3) {
+        setStatusMsg("Team name must be at least 3 characters long");
+        setStatus(false);
+        setSubmitting(false);
+        return;
+      }
+  
+      if (!/^\d{8,15}$/.test(phoneNum)) {
+        setStatusMsg("Enter a valid phone number (8–15 digits)");
+        setStatus(false);
+        setSubmitting(false);
+        return;
+      }
 
         const sessionValid = await verifySession();
         if (!sessionValid) {

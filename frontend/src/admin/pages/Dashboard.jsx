@@ -16,9 +16,8 @@ const Dashboard = () => {
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
 
-  // Fetch teams data using the API URL
+  
   const fetchTeams = async () => {
     setLoading(true);
     try {

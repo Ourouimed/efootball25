@@ -1,4 +1,4 @@
-const db = require('../config/db');
+const Settings = require('../models/Settings');
 const Team = require('../models/Team');
 
 exports.getAllteams =  (req , res)=>{
@@ -15,17 +15,27 @@ exports.getAllteams =  (req , res)=>{
 
 exports.registerTeam = (req , res) =>{
   const { teamName, phoneNum, userName } = req.body
-
-  Team.register([teamName, phoneNum, userName] ,(err, results) => {
-    if(err){
-      console.error('Error executing query:', err);
+  Settings.getAllSettings((err, results)=>{
+    if (err){
       res.status(500).json({ error: 'Internal Server Error' });
       return
     }
-    
-      res.json({ message: 'Team registered successfully' });
-    
+
+    const {registerIsOpen } = results[0]
+    if (!registerIsOpen){
+      res.status(400).json({ error: 'Registration is closed' });
+      return
+    }
+    Team.register([teamName, phoneNum, userName] ,(err, results) => {
+      if(err){
+        
+      }
+      
+        res.json({ message: 'Team registered successfully' });
+      
+    })
   })
+  
 }
 
 exports.DeleteTeam = (req ,res) =>{

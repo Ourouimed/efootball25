@@ -63,12 +63,12 @@ const Register = () => {
         className="bg-cover bg-center bg-no-repeat min-h-screen"
         style={{ backgroundImage: "url('../../assets/images/main_page_1.png')" }} 
       >
-        <div className="bg-primary/50 min-h-screen flex items-center justify-center w-full">
-        <div className="w-full max-w-xl bg-primary/90 rounded-2xl p-8 shadow-xl backdrop-blur-md">
-          <form onSubmit={handleRegisterTeam} className="space-y-4">
+        <div className="bg-primary/50 p-4 min-h-screen flex items-center justify-center w-full">
+        <div className="w-full max-w-xl bg-primary/90 rounded-2xl p-4 md:p-8 shadow-xl backdrop-blur-md">
+          <form onSubmit={handleRegisterTeam} className="space-y-2 md:space-y-4">
             <div className="text-center">
-              <h3 className="text-3xl font-bold text-fourth">Register Now</h3>
-              <p className="text-white mt-2">
+              <h3 className="text-2xl md:text-3xl font-bold text-fourth">Register Now</h3>
+              <p className="text-sm md:text-base text-white mt-2">
                 Ready for <span className="text-third font-semibold">Saison 6</span>? Join the{" "}
                 <span className="text-fourth font-semibold">eFootball</span> tournament!
               </p>
