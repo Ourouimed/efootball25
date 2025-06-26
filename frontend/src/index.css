@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @font-face {
   font-family: "efootballStencil"; 
-  src: url("./assets/fonts/efootballStencil/eFootballStencil-Regular.ttf") format("truetype"); 
+  src: url("../assets/fonts/efootballStencil/eFootballStencil-Regular.ttf") format("truetype"); 
 }
 
 @theme {

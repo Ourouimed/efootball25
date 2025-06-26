@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { SideNavContext } from '../../contexts/Sidenavontext';
 import axios from 'axios';
 
-// Get API URL from environment variables
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
 const Navbar = () => {
@@ -12,7 +11,6 @@ const Navbar = () => {
   const { toggleSidenav } = useContext(SideNavContext);
 
   const handleLogoutSession = async () => {
-    console.log('API_URL:', API_URL);
     try {
       const user = JSON.parse(localStorage.getItem('user'));
       await axios.delete(`${API_URL}/logout`, { data: user });

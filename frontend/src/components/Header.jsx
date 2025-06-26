@@ -15,7 +15,7 @@ const Header = ({fixed = false})=>{
 
     const navLink = 'py-2 px-4 md:px-8 rounded-full block text-sm sm:text-lg md:text-xl;'
 
-    return <header className={`bg-primary px-4 md:px-[10%] py-4 text-white flex justify-between items-center ${fixed? 'fixed w-full' : 'sticky'} top-0 z-20`}>
+    return <header className={` px-4 md:px-[10%] py-4 text-white flex justify-between items-center ${fixed? 'fixed w-full bg-transparent' : 'sticky bg-primary'} top-0 z-20`}>
         <Link to='/' className='text-fourth text-2xl md:text-3xl uppercase'>
             efootball
             <p className='text-sm'>By ourouimed</p>

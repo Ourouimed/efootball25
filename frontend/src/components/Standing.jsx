@@ -1,7 +1,7 @@
 const Standing = ({teams})=>{
     let sortedTeams = teams.map(team => ({...team , pts : (Number(team.wins) * 3) + (Number(team.draws) * 1) + (Number(team.losses) * 0)})).sort((a, b) => b.pts - a.pts || (b.GF - b.GA) - (a.GF - a.GA));
     return <>
-        <div className="bg-white rounded-md overflow-auto shadow-md h-[max-content]">
+        <div className="bg-white rounded-md overflow-auto shadow-md h-[max-content] sticky top-20">
   <table className="standing-table min-w-full text-sm sm:text-base">
     <thead className="bg-third text-white">
       <tr>

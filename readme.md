@@ -149,17 +149,17 @@ efootball25/
 #### Home Pages Overview
 Below are the screenshots showing the general view of the homepage:
 
-![Home Page 1](frontend/src/assets/images/screen1.png)
-![Home Page 2](frontend/src/assets/images/screen2.png)
-![Home Page 3](frontend/src/assets/images/screen3.png)
+![Home Page 1](frontend/public/assets/images/screen1.png)
+![Home Page 2](frontend/public/assets/images/screen2.png)
+![Home Page 3](frontend/public/assets/images/screen3.png)
 
 #### Admin Dashboard Overview
 Here are the screenshots showcasing the admin dashboard interface:
 
-![Admin Dashboard 1](frontend/src/assets/images/screen4.png)
-![Admin Dashboard 2](frontend/src/assets/images/screen5.png)
-![Admin Dashboard 3](frontend/src/assets/images/screen6.png)
-![Admin Dashboard 4](frontend/src/assets/images/screen7.png)
+![Admin Dashboard 1](frontend/public/assets/images/screen4.png)
+![Admin Dashboard 2](frontend/public/assets/images/screen5.png)
+![Admin Dashboard 3](frontend/public/assets/images/screen6.png)
+![Admin Dashboard 4](frontend/public/assets/images/screen7.png)
 
 ---
 

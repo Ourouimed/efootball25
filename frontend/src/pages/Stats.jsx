@@ -11,10 +11,8 @@ import Countdown from '../components/Countdown';
 const Stats = () => {
   const [teams, setTeams] = useState([]);
   const [matches, setMatches] = useState([]);
-
   const [teamsError, setTeamsError] = useState(null);
   const [matchesError, setMatchesError] = useState(null);
-
   const [teamsLoading, setTeamsLoading] = useState(true);
   const [matchesLoading, setMatchesLoading] = useState(true);
 
@@ -47,56 +45,60 @@ const Stats = () => {
     fetchMatches();
   }, [API_URL]);
 
+  const renderTeamSection = (Component) => (
+    teamsLoading ? (
+      <p className="text-white">Loading teams...</p>
+    ) : teamsError ? (
+      <p className="text-red-400">Error: {teamsError}</p>
+    ) : (
+      <div className='divide-y divide-[#ededed]'>
+        <Component teams={teams} />
+      </div>
+    )
+  );
+
   return (
     <>
       <Header />
-      <div className="bg-secondary min-h-screen py-8 px-4 md:px-[10%]">
-        <div className="max-w-screen-xl mx-auto flex flex-col gap-6">
-          <div className="grid grid-cols-1 md:grid-cols-[7fr_3fr] gap-4">
-            <div>
-              {teamsLoading ? (
-                <p className="text-white">Loading teams...</p>
-              ) : teamsError ? (
-                <p className="text-red-400">Error: {teamsError}</p>
-              ) : (
-                <Standing teams={teams} />
-              )}
-            </div>
-            <div>
-            <HomeCard title='countdown'>
-              <Countdown targetDate='2025-06-25' round='League Phase'/>
-            </HomeCard>
-            <HomeCard title='top scorer'>{teamsLoading ? (
-                <p className="text-white">Loading teams...</p>
-              ) : teamsError ? (
-                <p className="text-red-400">Error: {teamsError}</p>
-              ) : (
-                <div className='divide-y divide-[#ededed]'>
+      <div
+        className="bg-fixed bg-cover bg-center bg-no-repeat min-h-screen"
+        style={{ backgroundImage: "url('../../assets/images/main_page_1.png')" }}
+      >
+        <div className="bg-primary/50 min-h-screen flex items-center justify-center w-full">
+          <div className="w-6xl max-w-screen-xl mx-auto flex flex-col gap-6 px-4 py-2">
+            <div className="grid grid-cols-1 md:grid-cols-[7fr_3fr] gap-4 relative">
+              <div>
+                {teamsLoading ? (
+                  <p className="text-white">Loading teams...</p>
+                ) : teamsError ? (
+                  <p className="text-red-400">Error: {teamsError}</p>
+                ) : (
+                  <Standing teams={teams} />
+                )}
+              </div>
+              <div>
+                <HomeCard title="countdown">
+                  <Countdown targetDate="2025-06-25" round="League Phase" />
+                </HomeCard>
 
-                    <TopScorer teams={teams} />
-                </div>
-                
-              )}</HomeCard>
+                <HomeCard title="top scorer">
+                  {renderTeamSection(TopScorer)}
+                </HomeCard>
 
-              <HomeCard title='best deffence'>{teamsLoading ? (
-                <p className="text-white">Loading teams...</p>
-              ) : teamsError ? (
-                <p className="text-red-400">Error: {teamsError}</p>
-              ) : (
-                <div className='divide-y divide-[#ededed]'>
-                <TopDeff teams={teams} />
-                </div>
-              )}</HomeCard>
-            <HomeCard title="matches">
-              {matchesLoading ? (
-                <p className="text-white">Loading matches...</p>
-              ) : matchesError ? (
-                <p className="text-red-400">Error: {matchesError}</p>
-              ) : 
-                <Matches matches={matches} teams={teams} />
-                
-              }</HomeCard>
-              
+                <HomeCard title="best defence">
+                  {renderTeamSection(TopDeff)}
+                </HomeCard>
+
+                <HomeCard title="matches">
+                  {matchesLoading ? (
+                    <p className="text-white">Loading matches...</p>
+                  ) : matchesError ? (
+                    <p className="text-red-400">Error: {matchesError}</p>
+                  ) : (
+                    <Matches matches={matches} teams={teams} />
+                  )}
+                </HomeCard>
+              </div>
             </div>
           </div>
         </div>

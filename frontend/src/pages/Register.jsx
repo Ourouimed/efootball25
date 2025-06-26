@@ -19,6 +19,7 @@ const Register = () => {
   const handleRegisterTeam = async (e) => {
     e.preventDefault();
     const { teamName, phoneNum, userName } = inscription;
+
     if (!teamName || !phoneNum || !userName) {
       setStatusMsg("Please fill all fields!");
       setStatus(false);
@@ -27,6 +28,12 @@ const Register = () => {
 
     if (teamName.length < 3) {
       setStatusMsg("Team name must be at least 3 characters long");
+      setStatus(false);
+      return;
+    }
+
+    if (!/^\d{8,15}$/.test(phoneNum)) {
+      setStatusMsg("Enter a valid phone number (8–15 digits)");
       setStatus(false);
       return;
     }
@@ -46,75 +53,77 @@ const Register = () => {
     }
   };
 
-  const inputStyle = 'w-full px-4 py-3 bg-gray-800/50 text-white placeholder-gray-400 focus:outline-none focus:border-indigo-500 transition-all duration-300'
+  const inputStyle =
+    "w-full px-4 py-3 bg-white/10 text-white placeholder-white/60 rounded-md border border-gray-600 focus:ring-2 focus:ring-third focus:outline-none transition duration-200";
+
   return (
     <>
-      <Header fixed={true} />
-      <div className="min-h-screen flex items-center justify-center bg-secondary px-4 sm:px-6 lg:px-8">
-        <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl">
-          <form
-            className="bg-primary backdrop-blur-sm p-8 rounded-2xl shadow-2xl border border-gray-700"
-            onSubmit={handleRegisterTeam}
-          >
-            <h3 className="text-3xl font-bold text-fourth mb-2">Register Now</h3>
-            <p className="text-gray-300 mb-4">
-              Ready for <span className="text-third font-semibold">Saison 6</span>? Compete in the ultimate{" "}
-              <span className="text-fourth font-semibold">eFootball</span> tournament!
-            </p>
+      <Header fixed />
+      <div
+        className="bg-cover bg-center bg-no-repeat min-h-screen"
+        style={{ backgroundImage: "url('../../assets/images/main_page_1.png')" }} 
+      >
+        <div className="bg-primary/50 min-h-screen flex items-center justify-center w-full">
+        <div className="w-full max-w-xl bg-primary/90 rounded-2xl p-8 shadow-xl backdrop-blur-md">
+          <form onSubmit={handleRegisterTeam} className="space-y-4">
+            <div className="text-center">
+              <h3 className="text-3xl font-bold text-fourth">Register Now</h3>
+              <p className="text-white mt-2">
+                Ready for <span className="text-third font-semibold">Saison 6</span>? Join the{" "}
+                <span className="text-fourth font-semibold">eFootball</span> tournament!
+              </p>
+            </div>
 
-            <div className="divide-y divide-gray-600 border border-gray-600 rounded-lg overflow-hidden">
-              
-                <input
-                  type="text"
-                  placeholder="Team Name"
-                  className={inputStyle}
-                  value={inscription.teamName}
-                  onChange={(e) =>
-                    setInscription({ ...inscription, teamName: e.target.value.trim() })
-                  }
-                />
-              
-              
-                <input
-                  type="text"
-                  placeholder="Username in PES"
-                  className={inputStyle}
-                  value={inscription.userName}
-                  onChange={(e) =>
-                    setInscription({ ...inscription, userName: e.target.value.trim() })
-                  }
-                />
+            <div className="space-y-4">
+              <input
+                type="text"
+                placeholder="Team Name"
+                className={inputStyle}
+                value={inscription.teamName}
+                onChange={(e) =>
+                  setInscription({ ...inscription, teamName: e.target.value.trimStart() })
+                }
+              />
 
-              
-                <input
-                  type="tel"
-                  placeholder="Phone Number"
-                  className={inputStyle}
-                  value={inscription.phoneNum}
-                  onChange={(e) =>
-                    setInscription({ ...inscription, phoneNum: e.target.value.trim() })
-                  }
-                />
-              
+              <input
+                type="text"
+                placeholder="Username in PES"
+                className={inputStyle}
+                value={inscription.userName}
+                onChange={(e) =>
+                  setInscription({ ...inscription, userName: e.target.value.trimStart() })
+                }
+              />
+
+              <input
+                type="tel"
+                placeholder="Phone Number"
+                className={inputStyle}
+                value={inscription.phoneNum}
+                onChange={(e) =>
+                  setInscription({ ...inscription, phoneNum: e.target.value.trimStart() })
+                }
+              />
             </div>
 
             <button
               type="submit"
-              className="cursor-pointer w-full py-3 bg-third text-white rounded-lg translate-y-2 transition-all duration-300"
+              className="cursor-pointer w-full py-3 bg-third text-white font-semibold rounded-lg hover:bg-third/90 transition duration-200"
             >
               Register Now
             </button>
-          </form>
 
-          {statusMsg && (
-            <div
-              className={`mt-4 p-3 rounded-lg text-center text-sm font-medium transition-all duration-300 ${
-                status ? "success-msg" : "error-msg"
-              }`}
-            >
-              {statusMsg}
-            </div>
-          )}
+            {statusMsg && (
+              <div
+                className={`text-sm font-medium text-center p-3 rounded-md transition-all ${
+                  status ? "bg-green-600 text-white" : "bg-red-600 text-white"
+                }`}
+              >
+                {statusMsg}
+              </div>
+            )}
+          </form>
+        </div>
         </div>
       </div>
     </>
