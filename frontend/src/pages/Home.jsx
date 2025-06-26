@@ -7,7 +7,7 @@ const Home = () => {
       <Header fixed />
       <div
         className="bg-cover bg-center bg-no-repeat min-h-screen"
-        style={{ backgroundImage: "url('../../public/assets/images/main_page_1.png')" }} // Ensure the image exists in public/images
+        style={{ backgroundImage: "url('../../assets/images/main_page_1.png')" }} // Ensure the image exists in public/images
       >
         <div className="bg-primary/50  min-h-screen flex items-center justify-center flex-col">
           <div className="text-center px-4">

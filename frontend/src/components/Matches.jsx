@@ -18,7 +18,7 @@ const Matches = ({ matches, teams }) => {
 
   const prevGw = () => {
     if (currentRound > 0) {
-                                        setCurrentRound((prev) => prev - 1);
+          setCurrentRound((prev) => prev - 1);
     }
   };
 
