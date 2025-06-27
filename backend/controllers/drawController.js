@@ -1,4 +1,5 @@
 const Match = require('../models/Match');
+const Settings = require('../models/Settings');
 const Team = require('../models/Team');
 const { generateLPmatches  , generatePomatches, generateR16matches, generateQFmatches} = require('../utils/matchGenerator');
 
@@ -12,34 +13,40 @@ exports.generateDraw = (req, res) => {
                     return res.status(500).json({ error: 'Server Error (teams)' });
                     
                 }
-
-                const matches = generateLPmatches(result);
+                
+               
                 
 
-                
-                Match.deleteMatchesByRound(round , (err) => {
-                    if (err) {
-                        return res.status(500).json({ error: 'Server Error (delete)' });
+                Settings.getAllSettings((err , settRes)=>{
+                    if (err){
+                        return res.status(500).json({ error: 'Server Error' });
                     }
-
-
-                    const values = matches.map(match => [
-                        match.id_match,
-                        match.home_team,
-                        match.hometeam_name,
-                        match.away_team,
-                        match.awayteam_name,
-                        match.round
-                    ]);
-
-                    Match.insertMatches(values, (err) => {
+                    const {totalGws} = settRes[0]
+                    const matches = generateLPmatches(result ,totalGws);
+                    Match.deleteMatchesByRound(round , (err) => {
                         if (err) {
-                            console.log(err)
-                            return res.status(500).json({ error: 'Server Error (insert)' });
+                            return res.status(500).json({ error: 'Server Error (delete)' });
                         }
-                        res.json(matches);
-                    });
+
+
+                        const values = matches.map(match => [
+                            match.id_match,
+                            match.home_team,
+                            match.hometeam_name,
+                            match.away_team,
+                            match.awayteam_name,
+                            match.round
+                        ]);
+
+                        Match.insertMatches(values, (err) => {
+                            if (err) {
+                                console.log(err)
+                                return res.status(500).json({ error: 'Server Error (insert)' });
+                            }
+                            res.json(matches);
+                        });
                 });
+            })
             });
             break;
         case 'PO':

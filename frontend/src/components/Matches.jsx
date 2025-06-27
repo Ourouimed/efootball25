@@ -1,32 +1,43 @@
 import { ChevronLeftRounded, ChevronRightRounded } from "@mui/icons-material";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { SettingsContext } from "../contexts/SettingsContext";
 
 const Matches = ({ matches, teams }) => {
-  const [currentRound, setCurrentRound] = useState(0);
-  const [selectedTeam, setSelectedTeam] = useState("ALL");
+  const {settings :{ currentRound , totalGws}} = useContext(SettingsContext)
+  let gwRounds = []
+  for (let i =0 ; i < totalGws ; i++){
+    gwRounds.push(`GW${i+1}`)
 
+  }
   const rounds = [
-    "GW1", "GW2", "GW3", "GW4", "GW5", "GW6", "GW7", "GW8",
+    ...gwRounds,
     "PO", "R16", "QF", "SF", "Final"
   ];
+  const [currRound, setcurrRound] = useState(rounds.indexOf(currentRound));
+  const [selectedTeam, setSelectedTeam] = useState("ALL");
+  
+  
+
+  
+
 
   const nextGw = () => {
-    if (currentRound < rounds.length - 1) {
-      setCurrentRound((prev) => prev + 1);
+    if (currRound < rounds.length - 1) {
+      setcurrRound((prev) => prev + 1);
     }
   };
 
   const prevGw = () => {
-    if (currentRound > 0) {
-          setCurrentRound((prev) => prev - 1);
+    if (currRound > 0) {
+          setcurrRound((prev) => prev - 1);
     }
   };
 
-  const currentRoundName = rounds[currentRound];
+  const currRoundName = rounds[currRound];
 
   const displayedMatches =
     selectedTeam === "ALL"
-      ? matches.filter((match) => match.round === currentRoundName)
+      ? matches.filter((match) => match.round === currRoundName)
       : matches.filter(
           (match) =>
             (match.home_team === selectedTeam ||
@@ -55,17 +66,17 @@ const Matches = ({ matches, teams }) => {
         <div className="flex items-center justify-between mb-2">
           <button
             onClick={prevGw}
-            disabled={currentRound === 0}
+            disabled={currRound === 0}
             className={NavBtnsStyle}
           >
             <ChevronLeftRounded />
           </button>
           <span className="font-semibold text-sm">
-            {currentRoundName}
+            {currRoundName}
           </span>
           <button
             onClick={nextGw}
-            disabled={currentRound === rounds.length - 1}
+            disabled={currRound === rounds.length - 1}
             className={NavBtnsStyle}
           >
             <ChevronRightRounded />

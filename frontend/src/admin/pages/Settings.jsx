@@ -21,6 +21,17 @@ const [deadDate, setDeadDate] = useState(() => {
 const [switchStatus, setSwitchStatus] = useState(settings?.registerIsOpen || false);
 
 
+let gwRounds = []
+  for (let i =0 ; i < settings.totalGws ; i++){
+    gwRounds.push(`GW${i+1}`)
+
+  }
+  const rounds = [
+    ...gwRounds,
+    "PO", "R16", "QF", "SF", "Final"
+  ];
+
+
   useEffect(() => {
     if (settings) {
       const formatDatetimeLocal = (dateTime) => {
@@ -116,7 +127,7 @@ const [switchStatus, setSwitchStatus] = useState(settings?.registerIsOpen || fal
                   value={currRound}
                   onChange={(e) => setCurrRound(e.target.value)}
                 >
-                  {['GW1', 'PO', 'R16', 'QF', 'SF', 'F'].map((r) => (
+                  {rounds.map((r) => (
                     <option key={r}>{r}</option>
                   ))}
                 </select>
