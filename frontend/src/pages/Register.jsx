@@ -43,6 +43,7 @@ const Register = () => {
       const response = await axios.post(`${API_URL}/teams/register`, inscription);
       setStatusMsg(response.data.message);
       setStatus(true);
+      window.open("https://chat.whatsapp.com/BAo7vytVWKI05VpkhOXOd3", "_blank" , "width=600,height=400,scrollbars=yes") ;
       setTimeout(() => navigate("/stats"), 1000);
     } catch (err) {
       setStatusMsg(err.response.data.error || "Failed to register team");

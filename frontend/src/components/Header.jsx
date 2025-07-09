@@ -33,7 +33,7 @@ const Header = ({fixed = false})=>{
             <div className='hidden lg:flex items-center gap-1'>
                 <a className='flex items-center justify-center rounded-full w-[40px] h-[40px] bg-[#181717]' href='https://github.com/Ourouimed' target='_blank'><GitHub/></a>
                 <a className='flex items-center justify-center rounded-full w-[40px] h-[40px] bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-600' href='https://instagram.com/Ourouimed' target='_blank'><Instagram/></a>
-                <a className='flex items-center justify-center rounded-full w-[40px] h-[40px] bg-[#25D366]' href='' target='_blank'><WhatsApp/></a>
+                <a className='flex items-center justify-center rounded-full w-[40px] h-[40px] bg-[#25D366]' href='https://chat.whatsapp.com/BAo7vytVWKI05VpkhOXOd3' target='_blank'><WhatsApp/></a>
             </div>
         </nav>
         <button className='bg-third p-2 rounded flex items-center justify-center cursor-pointer md:hidden' onClick={()=> {setMenuIsOpen(!MenuIsOpen)}}><Menu fontSize='medium'/></button>
