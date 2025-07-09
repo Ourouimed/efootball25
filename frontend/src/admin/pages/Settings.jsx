@@ -128,7 +128,7 @@ let gwRounds = []
                   onChange={(e) => setCurrRound(e.target.value)}
                 >
                   {rounds.map((r) => (
-                    <option key={r}>{r}</option>
+                    <option key={r} value={r}>{r}</option>
                   ))}
                 </select>
               </div>

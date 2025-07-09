@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
+import { CheckCircle, AlertCircle } from "lucide-react";
 
 const Register = () => {
   const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
@@ -44,11 +45,7 @@ const Register = () => {
       setStatus(true);
       setTimeout(() => navigate("/stats"), 1000);
     } catch (err) {
-      const errorMsg =
-        typeof err.response?.data === "string"
-          ? err.response.data
-          : err.response?.data?.message || "Something went wrong. Please try again.";
-      setStatusMsg(errorMsg);
+      setStatusMsg(err.response.data.error || "Failed to register team");
       setStatus(false);
     }
   };
@@ -63,7 +60,7 @@ const Register = () => {
         className="bg-cover bg-center bg-no-repeat min-h-screen"
         style={{ backgroundImage: "url('../../assets/images/main_page_1.png')" }} 
       >
-        <div className="bg-primary/50 p-4 min-h-screen flex items-center justify-center w-full">
+        <div className="bg-primary/60 p-4 min-h-screen flex items-center justify-center w-full">
         <div className="w-full max-w-xl bg-primary/90 rounded-2xl p-4 md:p-8 shadow-xl backdrop-blur-md">
           <form onSubmit={handleRegisterTeam} className="space-y-2 md:space-y-4">
             <div className="text-center">
@@ -114,14 +111,18 @@ const Register = () => {
             </button>
 
             {statusMsg && (
-              <div
-                className={`text-sm font-medium text-center p-3 rounded-md transition-all ${
-                  status ? "bg-green-600 text-white" : "bg-red-600 text-white"
-                }`}
-              >
-                {statusMsg}
-              </div>
-            )}
+  <div
+    className={`flex items-center gap-2 text-sm sm:text-base font-medium text-center px-4 py-3 rounded-md border transition-all duration-300
+      ${status 
+        ? "bg-green-100 text-green-700 border-green-700" 
+        : "bg-red-100 text-red-700 border-red-500"
+      }`}
+  >
+    {status ? <CheckCircle size={18} /> : <AlertCircle size={18} />}
+    <span>{statusMsg}</span>
+  </div>
+)}
+
           </form>
         </div>
         </div>

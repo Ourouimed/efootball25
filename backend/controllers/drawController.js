@@ -1,7 +1,7 @@
 const Match = require('../models/Match');
 const Settings = require('../models/Settings');
 const Team = require('../models/Team');
-const { generateLPmatches  , generatePomatches, generateR16matches, generateQFmatches} = require('../utils/matchGenerator');
+const { generateLPmatches  , generateR16matches, generateKoMatches} = require('../utils/matchGenerator');
 
 exports.generateDraw = (req, res) => {
     const { round } = req.body;
@@ -10,23 +10,23 @@ exports.generateDraw = (req, res) => {
         case 'LP':
             Team.getTeamsAll((err, result) => {
                 if (err) {
-                    return res.status(500).json({ error: 'Server Error (teams)' });
+                    return res.status(500).json({ error: 'Server Error ' , message :  'Failed to fetch teams'});
                     
                 }
-                
-               
-                
 
                 Settings.getAllSettings((err , settRes)=>{
                     if (err){
-                        return res.status(500).json({ error: 'Server Error' });
+                        return res.status(500).json({ error: 'Server Error' , message : 'Failed to get settings'});
                     }
                     const {totalGws} = settRes[0]
+                    console.log(settRes)
                     const matches = generateLPmatches(result ,totalGws);
                     Match.deleteMatchesByRound(round , (err) => {
                         if (err) {
-                            return res.status(500).json({ error: 'Server Error (delete)' });
+                            return res.status(500).json({ error: 'Server Error ' , message : 'Failed to delete matches' });
                         }
+
+                        
 
 
                         const values = matches.map(match => [
@@ -41,7 +41,7 @@ exports.generateDraw = (req, res) => {
                         Match.insertMatches(values, (err) => {
                             if (err) {
                                 console.log(err)
-                                return res.status(500).json({ error: 'Server Error (insert)' });
+                                return res.status(500).json({ error: 'Server Error' , message : 'Failed to save matches'});
                             }
                             res.json(matches);
                         });
@@ -52,17 +52,17 @@ exports.generateDraw = (req, res) => {
         case 'PO':
             Team.getTeamsAll((err, result) => {
                 if (err) {
-                    return res.status(500).json({ error: 'Server Error (teams)' });    
+                    return res.status(500).json({ error: 'Server Error ' , message :  'Failed to fetch teams'});
                 }
 
                 let poTeams = result.slice(8,24)
-                const matches = generatePomatches(poTeams);
+                const matches = generateKoMatches(poTeams , 'PO');
                 
 
                 
                 Match.deleteMatchesByRound(round , (err) => {
                     if (err) {
-                        return res.status(500).json({ error: 'Server Error (delete)' });
+                        return res.status(500).json({ error: 'Server Error ' , message : 'Failed to delete matches' });
                     }
 
 
@@ -78,7 +78,7 @@ exports.generateDraw = (req, res) => {
                     Match.insertMatches(values, (err) => {
                         if (err) {
                             console.log(err)
-                            return res.status(500).json({ error: 'Server Error (insert)' });
+                            return res.status(500).json({ error: 'Server Error' , message : 'Failed to save matches'});
                         }
                         res.json(matches);
                     });
@@ -133,7 +133,7 @@ exports.generateDraw = (req, res) => {
                 if (err) {
                     return res.status(500).json({ error: 'Server Error (teams)' });    
                 }
-                const matches = generateQFmatches(result);
+                const matches = generateKoMatches(result , 'QF');
 
 
                 Match.deleteMatchesByRound(round , (err) => {
@@ -160,12 +160,12 @@ exports.generateDraw = (req, res) => {
                 });
             })
             break
-            case  'SF' :
+        case  'SF' :
                 Team.getQualfiedTeamsFrom('QF' , (err , result)=>{
                     if (err) {
                         return res.status(500).json({ error: 'Server Error (teams)' });    
                     }
-                    const matches = generateQFmatches(result);
+                    const matches = generateKoMatches(result , 'SF');
     
     
                     Match.deleteMatchesByRound(round , (err) => {

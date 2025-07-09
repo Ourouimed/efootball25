@@ -9,7 +9,6 @@ const drawRouter = require('./routes/draw');
 const settingsRouter = require('./routes/settings')
 const authRouter = require('./routes/auth')
 
-
 const PORT = process.env.PORT || 3001;
 
 app.use(cors(corsOptions));

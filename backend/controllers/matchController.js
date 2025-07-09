@@ -2,16 +2,16 @@ const db = require('../config/db');
 const Match = require('../models/Match');
 const Team = require('../models/Team');
 
-exports.getAllMatches =  (req , res)=>{
+exports.getAllMatches = (req, res) => {
   Match.getMatchesAll((err, results) => {
-      if (err) {
-        console.error('Error executing query:', err);
-        res.status(500).json({ error: 'Internal Server Error' });
-      } else {
-        res.json(results);
-      }
-  })
-}
+    if (err) {
+      console.error('Error executing query:', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+    } else {
+      res.json(results);
+    }
+  });
+};
 
 exports.updateMatch = (req, res) => {
   const { id } = req.params;
@@ -23,11 +23,14 @@ exports.updateMatch = (req, res) => {
 
     const { round, home_team, away_team } = match[0];
 
-    Match.updateMatch(id, [home_score, away_score], (err) => {
-      if (err) return res.status(500).json({ error: 'Internal Server Error' });
+    // Determine if it's League Phase or Knockout Phase
+    const isLeaguePhase = round.toLowerCase().startsWith('gw');
 
-      if (round.startsWith('GW')) {
-        // League Phase (LP)
+    if (isLeaguePhase) {
+      // LP: Update match without 'qualified'
+      Match.updateMatch(id, [home_score, away_score], (err) => {
+        if (err) return res.status(500).json({ error: 'Internal Server Error' });
+
         Match.getMatchesByRound('LP', (err, matches) => {
           if (err) return res.status(500).json({ error: 'Internal Server Error' });
 
@@ -35,9 +38,11 @@ exports.updateMatch = (req, res) => {
             if (err) return res.status(500).json({ error: 'Failed to initialize team stats' });
 
             let completed = 0;
+
             matches.forEach(({ home_score, away_score, home_team, away_team }) => {
               if (home_score !== null && away_score !== null) {
                 let homeStat, awayStat;
+
                 if (home_score > away_score) {
                   homeStat = ['w', [home_score, away_score, home_team]];
                   awayStat = ['l', [away_score, home_score, away_team]];
@@ -70,10 +75,19 @@ exports.updateMatch = (req, res) => {
             });
           });
         });
-      } else {
-        // Knockout Phase
-        const homeValues = [home_score, away_score, home_team];
-        const awayValues = [away_score, home_score, away_team];
+      });
+
+    } else {
+      const homeValues = [home_score, away_score, home_team];
+      const awayValues = [away_score, home_score, away_team];
+
+      let qualified = null;
+      if (home_score > away_score) qualified = home_team;
+      else if (away_score > home_score) qualified = away_team;
+
+      
+      Match.updateMatch(id, [home_score, away_score, qualified], (err) => {
+        if (err) return res.status(500).json({ error: 'Failed to update match' });
 
         Team.updateTeamStats(round, null, homeValues, (err) => {
           if (err) return res.status(500).json({ error: 'Failed updating KO stats (home)' });
@@ -81,18 +95,10 @@ exports.updateMatch = (req, res) => {
           Team.updateTeamStats(round, null, awayValues, (err) => {
             if (err) return res.status(500).json({ error: 'Failed updating KO stats (away)' });
 
-            // Determine qualification
-            let qualified = home_score > away_score ? home_team :
-                            away_score > home_score ? away_team : null;
-
-            db.query('UPDATE matches SET played = 1, qualified = ? WHERE id_match = ?', [qualified, id], (err) => {
-              if (err) return res.status(500).json({ error: 'Failed to update qualified team' });
-
-              return res.json({ message: 'Match updated (KO phase), stats and qualification set' });
-            });
+            return res.json({ message: 'Match updated (KO), stats and qualification set' });
           });
         });
-      }
-    });
+      });
+    }
   });
 };

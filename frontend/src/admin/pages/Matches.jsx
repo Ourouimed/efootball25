@@ -1,8 +1,9 @@
 import { Edit, SportsSoccer } from "@mui/icons-material";
 import PopUpWindow from "../components/PopUpWindow";
-import { useState, useEffect } from "react";
+import { useState, useEffect , useContext} from "react";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import { SettingsContext } from "../../contexts/SettingsContext";
 
 const Matches = () => {
     const [showPopup, setShowPopup] = useState(false);
@@ -17,8 +18,22 @@ const Matches = () => {
     const [status, setStatus] = useState(true);
     const [drawRound , setDrawRound] = useState('LP')
     const navigate = useNavigate();
+    const { settings } = useContext(SettingsContext);
 
     const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001'
+
+
+    
+let gwRounds = []
+for (let i =0 ; i < settings.totalGws ; i++){
+  gwRounds.push(`GW${i+1}`)
+
+}
+const rounds = [
+  ...gwRounds,
+  "PO", "R16", "QF", "SF", "Final"
+];
+
 
     const verifySession = async () => {
         const user = JSON.parse(localStorage.getItem('user'));
@@ -61,6 +76,7 @@ const Matches = () => {
             setStatusMsg('Matches generated successfully.');
             setStatus(true);
         } catch (err) {
+            console.log(err)
             setStatusMsg('Failed to generate matches.');
             setStatus(false);
         }
@@ -129,6 +145,7 @@ const Matches = () => {
                 <PopUpWindow onClose={handleClosePopup} title={`Edit Match ${selectedMatch.id_match}`}>
                     <form onSubmit={handleUpdateMatch} className="space-y-3">
                         <div>
+                            {selectedMatch.round}
                             <label className="block mb-1">Home Score</label>
                             <input
                                 type="number"
@@ -210,13 +227,10 @@ const Matches = () => {
                 <div className="flex items-center gap-2 flex-col md:flex-row w-full md:w-auto">
                     <select className="w-full md:w-auto select w-auto" onChange={selectRound}>
                         <option value="ALL">All matches</option>
-                        {[...Array(8)].map((_, i) => (
-                            <option key={i} value={`GW${i + 1}`}>Gameweek {i + 1}</option>
+                        {rounds.map((r) => (
+                            <option key={r} value={r}>{r}</option>
                         ))}
-                        <option value="PO">Playoffs</option>
-                        <option value="R16">Round of 16</option>
-                        <option value="QF">Quarter Final</option>
-                        <option value="SF">Semi Final</option>
+                        
                     </select>
                     <button
                         disabled={loading}

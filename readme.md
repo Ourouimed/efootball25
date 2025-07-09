@@ -72,8 +72,9 @@ npm run dev
 cd backend
 npm install
 ```
+1 - Create your database and use `efootball.sql` script to create the tables:
 
-Create a `.env` file in the `backend` directory and fil it with your Mysql database credentials:
+2 - Create a `.env` file in the `backend` directory and fil it with your Mysql database credentials:
 ```env
 PORT=3001
 DB_HOST=your_mysql_host
@@ -82,6 +83,9 @@ DB_PASSWORD=your_mysql_password
 DB_NAME=your_database_name
 ALLOW_CORS_URL = your_frontend_url #default http://localhost:5173
 ```
+
+
+
 Then start the server:
 ```bash
 npm start

@@ -1,5 +1,6 @@
 const Settings = require('../models/Settings');
 const Team = require('../models/Team');
+const axios = require('axios');
 
 exports.getAllteams =  (req , res)=>{
     Team.getTeamsAll((err, results) => {
@@ -12,31 +13,32 @@ exports.getAllteams =  (req , res)=>{
     })
 }
 
+exports.registerTeam = (req , res) => {
+  const { teamName, phoneNum, userName } = req.body;
 
-exports.registerTeam = (req , res) =>{
-  const { teamName, phoneNum, userName } = req.body
-  Settings.getAllSettings((err, results)=>{
+  Settings.getAllSettings((err, results) => {
     if (err){
-      res.status(500).json({ error: 'Internal Server Error' });
-      return
+      return res.status(500).json({ error: 'Internal Server Error' });
     }
 
-    const {registerIsOpen } = results[0]
+    const { registerIsOpen } = results[0];
     if (!registerIsOpen){
-      res.status(400).json({ error: 'Registration is closed' });
-      return
+      return res.status(400).json({ error: 'Registration form is closed' });
     }
-    Team.register([teamName, phoneNum, userName] ,(err, results) => {
-      if(err){
-        
+
+    Team.register([teamName, phoneNum, userName], async (err, results) => {
+      if (err){
+        console.error('Error executing query:', err);
+        return res.status(500).json({ error: 'Internal Server Error' });
       }
+
       
-        res.json({ message: 'Team registered successfully' });
-      
-    })
-  })
-  
-}
+
+      res.json({ message: 'Team registered successfully' });
+    });
+  });
+};
+
 
 exports.DeleteTeam = (req ,res) =>{
   const {userName} = req.params

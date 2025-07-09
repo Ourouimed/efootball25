@@ -72,7 +72,7 @@ const Stats = () => {
         className="bg-fixed bg-cover bg-center bg-no-repeat min-h-screen"
         style={{ backgroundImage: "url('../../assets/images/main_page_1.png')" }}
       >
-        <div className="bg-primary/50 min-h-screen flex items-center justify-center w-full">
+        <div className="bg-primary/60 min-h-screen flex items-center justify-center w-full">
           <div className="w-6xl max-w-screen-xl mx-auto flex flex-col gap-6 px-4 py-2">
             <div className="grid grid-cols-1 md:grid-cols-[7fr_3fr] gap-4 relative">
               <div>

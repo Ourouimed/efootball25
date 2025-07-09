@@ -1,7 +1,7 @@
 {
   "name": "frontend",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -23,6 +23,7 @@
     "luxon": "^3.6.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-phone-input-2": "^2.15.1",
     "react-router-dom": "^7.5.1",
     "rollup": "^4.40.0",
     "tailwindcss": "^4.1.4"
