@@ -52,8 +52,7 @@ const Dashboard = () => {
   if (error) return <div className="text-center text-white py-8">Error: {error}</div>;
 
   const topscorer = [...teams].sort((a, b) => (b.GF + b.KOGF) - (a.GF + a.KOGF));
-  const sortedTeams = teams
-    .map(team => ({ ...team, pts: (team.wins * 3) + team.draws }))
+  const sortedTeams = teams.map(team => ({...team , pts : (Number(team.wins) * 3) + (Number(team.draws) * 1) + (Number(team.losses) * 0) - team.sanction}))
     .sort((a, b) => b.pts - a.pts || (b.GF + b.KOGF) - (a.GF + a.KOGF));
 
   const goals = teams.reduce((acc, curr) => acc + curr.GF + curr.KOGF, 0);

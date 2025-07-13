@@ -76,4 +76,25 @@ exports.UpdateTeam = (req ,res) =>{
       res.json({ message: 'Team updated successfully' });
     }
   })
-}
+}   
+
+
+exports.setSanction = (req, res) => {
+  const { userName } = req.params;
+  const { points } = req.body;
+
+  if (!userName || typeof points !== 'number' || points <= 0) {
+    return res.status(400).json({ error: 'Bad request: invalid userName or points' });
+  }
+
+  Team.applySanction(userName, points, (err, results) => {
+    if (err) {
+      console.error('Error applying sanction:', err);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
+    if (results.affectedRows === 0) {
+      return res.status(404).json({ error: 'Team not found' });
+    }
+    res.json({ message: 'Sanction applied successfully' });
+  });
+};

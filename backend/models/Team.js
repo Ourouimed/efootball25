@@ -51,6 +51,10 @@ const Team = {
       callback
     );
   },
+
+  applySanction : (team , pts , callback)=>{
+    db.query('UPDATE teams set sanction = sanction + ? where userName = ?' ,  [pts , team] ,  callback)
+  }
 };
 
 module.exports = Team;

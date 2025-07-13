@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./color.css";
 @font-face {
   font-family: "efootballStencil"; 
   src: url("../assets/fonts/efootballStencil/eFootballStencil-Regular.ttf") format("truetype"); 
