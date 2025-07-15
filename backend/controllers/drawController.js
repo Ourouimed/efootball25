@@ -98,8 +98,6 @@ exports.generateDraw = (req, res) => {
                     let pot1 = result
                     let pot2 = allTeams.map(team => ({...team , pts : (Number(team.wins) * 3) + (Number(team.draws) * 1) + (Number(team.losses) * 0) - team.sanction})).sort((a, b) => b.pts - a.pts || (b.GF - b.GA) - (a.GF - a.GA)).slice(0,8)
 
-e
-
                     const matches = generateR16matches(pot1 , pot2);
 
                     Match.deleteMatchesByRound(round , (err) => {
