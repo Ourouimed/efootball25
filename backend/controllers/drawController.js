@@ -55,7 +55,7 @@ exports.generateDraw = (req, res) => {
                     return res.status(500).json({ error: 'Server Error ' , message :  'Failed to fetch teams'});
                 }
 
-                let poTeams = result.slice(8,24)
+                let poTeams = result.map(team => ({...team , pts : (Number(team.wins) * 3) + (Number(team.draws) * 1) + (Number(team.losses) * 0) - team.sanction})).sort((a, b) => b.pts - a.pts || (b.GF - b.GA) - (a.GF - a.GA)).slice(8,24)
                 const matches = generateKoMatches(poTeams , 'PO');
                 
 
@@ -96,9 +96,9 @@ exports.generateDraw = (req, res) => {
                     }
                    
                     let pot1 = result
-                    let pot2 = allTeams.slice(0,8)
+                    let pot2 = allTeams.map(team => ({...team , pts : (Number(team.wins) * 3) + (Number(team.draws) * 1) + (Number(team.losses) * 0) - team.sanction})).sort((a, b) => b.pts - a.pts || (b.GF - b.GA) - (a.GF - a.GA)).slice(0,8)
 
-
+e
 
                     const matches = generateR16matches(pot1 , pot2);
 
