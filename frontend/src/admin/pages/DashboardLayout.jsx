@@ -8,23 +8,23 @@ import { SideNavContext } from "../../contexts/Sidenavontext";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
 
+axios.defaults.withCredentials = true; // Ensure cookies are sent
+
 const DashboardLayout = () => {
   const [sidenavIsOpen, setSidenavIsOpen] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [user , setUser] = useState(null)
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
-
-  // Send cookies with each request
-  axios.defaults.withCredentials = true;
 
   const verifySession = async () => {
     try {
       const res = await axios.post(`${API_URL}/verify-session`);
-      setUser(res.data)
-      setLoading(false);
+      setUser(res.data); // Assuming res.data is the user object
     } catch (error) {
-      console.error("Session verification failed", error);
+      console.error("Session verification failed:", error);
       navigate("/login");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -44,8 +44,8 @@ const DashboardLayout = () => {
     <SideNavContext.Provider
       value={{
         currentState: sidenavIsOpen,
-        user ,
         toggleSidenav: () => setSidenavIsOpen(!sidenavIsOpen),
+        user,
       }}
     >
       <div className="bg-[#ededed] min-h-screen">
