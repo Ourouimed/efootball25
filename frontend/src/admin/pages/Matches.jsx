@@ -35,33 +35,25 @@ const rounds = [
 ];
 
 
-    const verifySession = async () => {
-        const user = JSON.parse(localStorage.getItem('user'));
-        if (!user) {
-            navigate('/login');
-            return false;
-        }
-
-        try {
-            const res = await axios.post(`${API_URL}/verify-session`, {
-                id: user.id,
-                sessionCode: user.sessionCode
-            });
-            const { id_session, role } = res.data;
-            if (id_session === user.sessionCode && role === 'admin') {
-                return true;
-            } else {
-                setStatusMsg('You do not have the necessary permissions.');
-                setStatus(false);
-                return false;
-            }
-        } catch (err) {
-            console.error(err);
-            setStatusMsg('Session verification failed.');
-            setStatus(false);
-            return false;
-        }
-    };
+const verifySession = async () => {
+    try {
+      const res = await axios.post(
+        `${API_URL}/verify-session`,
+        {}, // empty body
+        { withCredentials: true } // force credentials
+      );
+      const { role } = res.data;
+      if (role !== 'admin') {
+        setStatusMsg('You do not have the necessary permissions.');
+        setStatus(false);
+        return false;
+      }
+      return true;
+    } catch {
+      navigate('/login');
+      return false;
+    }
+  };
 
     const handleStartDraw = async () => {
         const sessionValid = await verifySession();

@@ -15,6 +15,7 @@ exports.setSettings = (req , res)=>{
     console.log(req.body)
     Settings.setAllSettings([deadlineDate , currentRound  , registerIsOpen , totalGws] ,(err , results)=>{
         if (err){
+            console.log(err)
             return res.status(500).json({ message: 'Server Error' });  
         }
         

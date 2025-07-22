@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import SwitchBtn from '../components/SwitchBtn';
 import { SettingsContext } from '../../contexts/SettingsContext';
 import axios from 'axios';
-import { SideNavContext } from '../../contexts/Sidenavontext';
 
 const Settings = () => {
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
@@ -14,24 +13,18 @@ const Settings = () => {
   const [status, setStatus] = useState(null);
 
   const [currRound, setCurrRound] = useState(settings?.currentRound || 'GW1');
-const [numOfGws, setNumOfGws] = useState(settings?.totalGws || 8);
-const [deadDate, setDeadDate] = useState(() => {
-  if (!settings?.deadlineDate) return new Date().toISOString().slice(0, 16);
-  return settings.deadlineDate.replace(' ', 'T').substring(0, 16);
-});
-const [switchStatus, setSwitchStatus] = useState(settings?.registerIsOpen || false);
+  const [numOfGws, setNumOfGws] = useState(settings?.totalGws || 8);
+  const [deadDate, setDeadDate] = useState(() => {
+    if (!settings?.deadlineDate) return new Date().toISOString().slice(0, 16);
+    return settings.deadlineDate.replace(' ', 'T').substring(0, 16);
+  });
+  const [switchStatus, setSwitchStatus] = useState(settings?.registerIsOpen || false);
 
-
-let gwRounds = []
-  for (let i =0 ; i < settings.totalGws ; i++){
-    gwRounds.push(`GW${i+1}`)
-
+  let gwRounds = [];
+  for (let i = 0; i < settings.totalGws; i++) {
+    gwRounds.push(`GW${i + 1}`);
   }
-  const rounds = [
-    ...gwRounds,
-    "PO", "R16", "QF", "SF", "Final"
-  ];
-
+  const rounds = [...gwRounds, 'PO', 'R16', 'QF', 'SF', 'Final'];
 
   useEffect(() => {
     if (settings) {
@@ -47,35 +40,27 @@ let gwRounds = []
     }
   }, [settings]);
 
-  const verifySession = async () => {
-    const { user } = useContext(SideNavContext)
-    console.log(user)
-    if (!user) {
-      navigate('/login');
-      return false;
-    }
+  axios.defaults.withCredentials = true;
 
+  const verifySession = async () => {
     try {
-      const res = await axios.post(`${API_URL}/verify-session`, {
-        id: user.id,
-        sessionCode: user.sessionCode,
-      });
-      const { id_session, role } = res.data;
-      if (id_session === user.sessionCode && role === 'admin') {
-        return true;
-      } else {
+      const res = await axios.post(
+        `${API_URL}/verify-session`,
+        {}, // empty body
+        { withCredentials: true } // force credentials
+      );
+      const { role } = res.data;
+      if (role !== 'admin') {
         setStatusMsg('You do not have the necessary permissions.');
         setStatus(false);
         return false;
       }
-    } catch (err) {
-      console.error(err);
-      setStatusMsg('Session verification failed.');
-      setStatus(false);
+      return true;
+    } catch {
+      navigate('/login');
       return false;
     }
   };
-
 
   const formatDatetimeToMySQL = (datetimeLocal) => {
     if (!datetimeLocal) return null;
@@ -87,12 +72,16 @@ let gwRounds = []
     if (!validSession) return;
 
     try {
-      await axios.post(`${API_URL}/settings/set`, {
-        currentRound: currRound,
-        totalGws: Number(numOfGws),
-        deadlineDate: formatDatetimeToMySQL(deadDate),
-        registerIsOpen: switchStatus,
-      });
+      await axios.post(
+        `${API_URL}/settings/set`,
+        {
+          currentRound: currRound,
+          totalGws: Number(numOfGws),
+          deadlineDate: formatDatetimeToMySQL(deadDate),
+          registerIsOpen: switchStatus,
+        },
+        { withCredentials: true }
+      );
       setStatus(true);
       setStatusMsg('Settings Updated Successfully');
     } catch (error) {
@@ -130,7 +119,9 @@ let gwRounds = []
                   onChange={(e) => setCurrRound(e.target.value)}
                 >
                   {rounds.map((r) => (
-                    <option key={r} value={r}>{r}</option>
+                    <option key={r} value={r}>
+                      {r}
+                    </option>
                   ))}
                 </select>
               </div>
