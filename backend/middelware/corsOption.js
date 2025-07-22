@@ -1,5 +1,5 @@
 const corsOptions = {
-    origin: process.env.ALLOW_CORS_URL || 'http://localhost:5173',
+    origin: process.env.ALLOW_CORS_URL ,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], 
     allowedHeaders: ['Content-Type', 'Authorization']
   };
