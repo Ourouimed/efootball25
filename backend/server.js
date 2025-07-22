@@ -8,11 +8,11 @@ const teamsRouter = require('./routes/teams');
 const drawRouter = require('./routes/draw');
 const settingsRouter = require('./routes/settings')
 const authRouter = require('./routes/auth')
+const cookieParser = require('cookie-parser');
 
 const PORT = process.env.PORT || 3001;
 
 app.use(cors(corsOptions));
-const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 app.use(express.json());
 
