@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { SportsSoccer, Group } from '@mui/icons-material';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
@@ -7,6 +7,7 @@ import Card from '../components/Card';
 import TopScorer from "../components/TopScorer";
 import Standing from "../components/Standing";
 import Matches from "../components/Matches";
+import { SideNavContext } from "../../contexts/Sidenavontext";
 
 // Get API URL from environment variables
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
@@ -16,6 +17,8 @@ const Dashboard = () => {
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const { user } = useContext(SideNavContext)
 
   
   const fetchTeams = async () => {
@@ -59,9 +62,11 @@ const Dashboard = () => {
   const matchesPlayed = matches.filter(match => match.played === 1).length
   const totalTeams = teams.length;
 
+
+ 
   return (
     <>
-      <h1 className="text-3xl">Welcome {JSON.parse(localStorage.getItem('user')).name}</h1>
+      <h1 className="text-3xl">Welcome {user.name}</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 mt-2">
         <StatsCard label="Total Goals" value={goals} icon={<SportsSoccer fontSize="large" className="text-primary" />} />
         <StatsCard label="Total Teams" value={totalTeams} icon={<Group fontSize="large" className="text-primary" />} />

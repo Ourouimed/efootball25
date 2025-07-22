@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import SwitchBtn from '../components/SwitchBtn';
 import { SettingsContext } from '../../contexts/SettingsContext';
 import axios from 'axios';
+import { SideNavContext } from '../../contexts/Sidenavontext';
 
 const Settings = () => {
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
@@ -47,7 +48,8 @@ let gwRounds = []
   }, [settings]);
 
   const verifySession = async () => {
-    const user = JSON.parse(localStorage.getItem('user'));
+    const { user } = useContext(SideNavContext)
+    console.log(user)
     if (!user) {
       navigate('/login');
       return false;

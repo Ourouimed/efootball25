@@ -21,21 +21,21 @@ const Teams = () => {
   const navigate = useNavigate();
 
   const verifySession = async () => {
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (!user) { navigate('/login'); return false; }
     try {
-      const res = await axios.post(`${API_URL}/verify-session`, { id: user.id, sessionCode: user.sessionCode });
-      const { id_session, role } = res.data;
-      if (id_session === user.sessionCode && role === 'admin') return true;
-      setStatusMsg('You do not have the necessary permissions.');
-      setStatus(false);
-      return false;
+      const res = await axios.post(`${API_URL}/verify-session`);
+      const { role } = res.data;
+      if (role !== 'admin') {
+        setStatusMsg('You do not have the necessary permissions.');
+        setStatus(false);
+        return false;
+      }
+      return true;
     } catch {
       navigate('/login');
       return false;
     }
   };
-
+  
   const fetchTeams = async () => {
     setLoading(true);
     try {

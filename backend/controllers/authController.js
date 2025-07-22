@@ -1,124 +1,89 @@
-const Auth = require('../models/Auth')
-const { generateRandomCode } = require('../utils/sessionCodeGenerator');
+const Auth = require('../models/Auth');
+const jwt = require('jsonwebtoken');
 
-exports.login = (req , res)=>{
+const JWT_SECRET = process.env.JWT_SECRET || 'your_secret_key';
+const JWT_EXPIRES_IN = '7d'; // Customize if needed
+
+// === Login ===
+exports.login = (req, res) => {
   const { id, password } = req.body;
-  
+
   if (!id || !password) {
-    return res.status(400).json({ 
+    return res.status(400).json({
       error: 'Validation failed',
-      message: 'Both ID and password are required'
+      message: 'Both ID and password are required',
     });
   }
 
-  Auth.login([id, password] , (err, results) => {
+  Auth.login([id, password], (err, results) => {
     if (err) {
       console.error('Database query error:', err.message);
-      return res.status(500).json({ 
+      return res.status(500).json({
         error: 'Authentication failed',
-        message: 'Could not verify credentials. Please try again later.'
+        message: 'Could not verify credentials. Please try again later.',
       });
     }
 
     if (results.length === 0) {
-      return res.status(401).json({ 
+      return res.status(401).json({
         error: 'Authentication failed',
-        message: 'Invalid ID or password'
+        message: 'Invalid ID or password',
       });
     }
 
     const user = results[0];
-    const randomSessionId = generateRandomCode(50);
 
-    Auth.createSession([user.id, randomSessionId] , (err, results) => {
-      if (err) {
-        console.error('Session creation error:', err.message);
-        return res.status(500).json({ 
-          error: 'Session creation failed',
-          message: 'Could not create user session. Please try again later.'
-        });
-      }
+    const token = jwt.sign(
+      { id: user.id, name: user.name, role: user.role },
+      JWT_SECRET,
+      { expiresIn: JWT_EXPIRES_IN }
+    );
 
-      res.json({ 
+    res
+      .cookie('token', token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'Strict',
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      })
+      .json({
         id: user.id,
-        name : user.name, 
-        sessionCode: randomSessionId,
-        message: 'Login successful'
+        name: user.name,
+        role: user.role,
+        message: 'Login successful',
       });
-    })
+  });
+};
 
-      
-  
-  })
+// === Verify Token (used by frontend to check session) ===
+exports.verifySession = (req, res) => {
+  const token = req.cookies.token;
 
-    
-  
-}
-
-
-exports.verifySession = (req , res)=>{
-    const { id, sessionCode } = req.body;
-  
-  if (!id || !sessionCode) {
-    return res.status(400).json({ 
-      error: 'Validation failed',
-      message: 'Both user ID and session code are required'
+  if (!token) {
+    return res.status(401).json({
+      error: 'Unauthorized',
+      message: 'No session token provided',
     });
   }
 
-  Auth.verifysess([id, sessionCode] , (err, results) => {
-    if (err) {
-      console.error('Session verification error:', err.message);
-      return res.status(500).json({ 
-        error: 'Session verification failed',
-        message: 'Could not verify session. Please try again later.'
-      });
-    }
-    
-    if (results.length === 0) {
-      return res.status(401).json({ 
-        error: 'Session invalid',
-        message: 'The provided session is invalid or expired. Please log in again.'
-      });
-    }
-    
-    res.json(results[0]);
-  })
-    
-  
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET);
+    res.json({ id: decoded.id, name: decoded.name, role: decoded.role });
+  } catch (err) {
+    return res.status(401).json({
+      error: 'Invalid session',
+      message: 'Session expired or invalid. Please login again.',
+    });
   }
+};
 
-
+// === Logout ===
 exports.logout = (req, res) => {
-  const { id, sessionCode } = req.body;
+  res.clearCookie('token', {
+    httpOnly: true,
+    sameSite: 'Strict',
+    secure: process.env.NODE_ENV === 'production',
+  });
+  res.json({ message: 'Logged out successfully' });
+};
 
-  if (!id || !sessionCode) {
-    return res.status(400).json({ 
-      error: 'Validation failed',
-      message: 'Both user ID and session code are required'
-    });
-  }
-
-  Auth.logout([id, sessionCode],(err, results) => {
-      if (err) {
-        console.error('Logout error:', err.message);
-        return res.status(500).json({ 
-          error: 'Logout failed',
-          message: 'Could not terminate the session. Please try again later.'
-        });
-      }
-
-      if (results.affectedRows === 0) {
-        return res.status(404).json({ 
-          error: 'Session not found',
-          message: 'No active session found with the provided credentials'
-        });
-      }
-
-      res.json({ 
-        message: 'Logged out successfully',
-        terminatedSessions: results.affectedRows
-      });
-    }
-  );
-}
