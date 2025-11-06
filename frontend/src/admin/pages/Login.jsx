@@ -2,9 +2,9 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+const API_URL = process.env.NODE_ENV === 'production' ? import.meta.env.VITE_API_URL : 'http://localhost:3001';
 
-axios.defaults.withCredentials = true; // include cookies in requests
+axios.defaults.withCredentials = true;
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -12,7 +12,6 @@ const Login = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  // ✅ Auto-login if session already active
   const verifySession = async () => {
     try {
       await axios.get(`${API_URL}/verify-session`);
@@ -26,7 +25,7 @@ const Login = () => {
     verifySession();
   }, []);
 
-  // ✅ Handle login
+  // Handle login
   const login = async () => {
     setLoading(true);
     setError(null);

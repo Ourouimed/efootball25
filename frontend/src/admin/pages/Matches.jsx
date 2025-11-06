@@ -24,7 +24,7 @@ const Matches = () => {
   const navigate = useNavigate();
   const { settings } = useContext(SettingsContext);
 
-  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
+  const API_URL = process.env.NODE_ENV === 'production' ? import.meta.env.VITE_API_URL : 'http://localhost:3001';
 
   // build rounds
   let gwRounds = [];

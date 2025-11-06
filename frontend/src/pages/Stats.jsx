@@ -18,7 +18,7 @@ const Stats = () => {
   const [teamsLoading, setTeamsLoading] = useState(true);
   const [matchesLoading, setMatchesLoading] = useState(true);
 
-  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
+  const API_URL = process.env.NODE_ENV === 'production' ? import.meta.env.VITE_API_URL : 'http://localhost:3001';
   const fetchTeams = async () => {
     try {
       const res = await axios.get(`${API_URL}/teams`);

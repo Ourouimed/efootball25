@@ -1,3 +1,4 @@
 .vscode/*
 .idx/*
 .env
+node_modules

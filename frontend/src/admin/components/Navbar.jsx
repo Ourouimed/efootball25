@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { SideNavContext } from '../../contexts/Sidenavontext';
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+const API_URL = process.env.NODE_ENV === 'production' ? import.meta.env.VITE_API_URL : 'http://localhost:3001';
 
 const Navbar = () => {
   const navigate = useNavigate();

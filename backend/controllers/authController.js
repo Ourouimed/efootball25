@@ -2,7 +2,7 @@ const Auth = require('../models/Auth');
 const jwt = require('jsonwebtoken');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your_secret_key';
-const JWT_EXPIRES_IN = '7d'; // Customize if needed
+const JWT_EXPIRES_IN = '7d';
 
 // === Login ===
 exports.login = (req, res) => {
@@ -43,8 +43,8 @@ exports.login = (req, res) => {
       .cookie('token', token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
-        sameSite: 'None',
-        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+        sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'lax',
+        maxAge: 7 * 24 * 60 * 60 * 1000, 
       })
       .json({
         id: user.id,
@@ -58,6 +58,8 @@ exports.login = (req, res) => {
 // === Verify Token (used by frontend to check session) ===
 exports.verifySession = (req, res) => {
   const token = req.cookies.token;
+
+  console.log(token)
 
   if (!token) {
     return res.status(401).json({
@@ -76,6 +78,7 @@ exports.verifySession = (req, res) => {
     });
   }
 };
+
 
 // === Logout ===
 exports.logout = (req, res) => {

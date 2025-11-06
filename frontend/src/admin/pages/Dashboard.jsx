@@ -9,7 +9,7 @@ import Standing from "../components/Standing";
 import Matches from "../components/Matches";
 import { SideNavContext } from "../../contexts/Sidenavontext";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
+const API_URL = process.env.NODE_ENV === 'production' ? import.meta.env.VITE_API_URL : 'http://localhost:3001';
 
 const Dashboard = () => {
   const [teams, setTeams] = useState([]);

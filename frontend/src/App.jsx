@@ -16,7 +16,7 @@ const App = () => {
   const [settings , setSettings] = useState([])
   const [error , setError] = useState(null)
 
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+  const API_URL = process.env.NODE_ENV === 'production' ? import.meta.env.VITE_API_URL : 'http://localhost:3001';
 
   const getSettings = async ()=>{
     try {

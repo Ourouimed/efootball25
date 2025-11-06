@@ -5,7 +5,7 @@ import { SettingsContext } from '../../contexts/SettingsContext';
 import axios from 'axios';
 
 const Settings = () => {
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+  const API_URL = process.env.NODE_ENV === 'production' ? import.meta.env.VITE_API_URL : 'http://localhost:3001';
   const navigate = useNavigate();
   const { settings } = useContext(SettingsContext);
 
@@ -46,8 +46,8 @@ const Settings = () => {
     try {
       const res = await axios.post(
         `${API_URL}/verify-session`,
-        {}, // empty body
-        { withCredentials: true } // force credentials
+        {}, 
+        { withCredentials: true } 
       );
       const { role } = res.data;
       if (role !== 'admin') {

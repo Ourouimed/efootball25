@@ -6,9 +6,9 @@ import Navbar from "../components/Navbar";
 import Sidenav from "../components/Sidenav";
 import { SideNavContext } from "../../contexts/Sidenavontext";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
+const API_URL = process.env.NODE_ENV === 'production' ? import.meta.env.VITE_API_URL : 'http://localhost:3001';
 
-axios.defaults.withCredentials = true; // Ensure cookies are sent
+axios.defaults.withCredentials = true;
 
 const DashboardLayout = () => {
   const [sidenavIsOpen, setSidenavIsOpen] = useState(false);

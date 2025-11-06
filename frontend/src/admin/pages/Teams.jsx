@@ -4,7 +4,7 @@ import { Add, Edit, Delete, ErrorOutline } from "@mui/icons-material";
 import PopUpWindow from "../components/PopUpWindow";
 import { useNavigate } from "react-router-dom";
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+const API_URL = process.env.NODE_ENV === 'production' ? import.meta.env.VITE_API_URL : 'http://localhost:3001';
 
 const Teams = () => {
   const [teams, setTeams] = useState([]);
