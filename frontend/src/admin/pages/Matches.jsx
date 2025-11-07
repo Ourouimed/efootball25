@@ -1,9 +1,10 @@
-import { Edit, SportsSoccer } from "@mui/icons-material";
+import { Edit, SportsSoccer , List } from "@mui/icons-material";
 import PopUpWindow from "../components/PopUpWindow";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { SettingsContext } from "../../contexts/SettingsContext";
+import { exportAsCsv } from "../../utils/exportAsCsv";
 
 const Matches = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -141,6 +142,10 @@ const Matches = () => {
     setCurrentRound(e.target.value);
   };
 
+  const handleExportAsCsv = () => {
+      exportAsCsv(matches)
+  };
+
   return (
     <>
       {/* Match Edit Popup */}
@@ -273,6 +278,11 @@ const Matches = () => {
               </option>
             ))}
           </select>
+          <button 
+                    onClick={handleExportAsCsv}
+                    className="bg-blue-500 py-2 px-4 rounded text-white flex items-center hover:bg-blue-600 cursor-pointer">
+                        Export matches <List/>
+          </button>
           <button
             disabled={generatingMatches}
             className={`justify-center w-full md:w-auto bg-green-500 py-2 px-4 rounded text-white cursor-pointer flex items-center 

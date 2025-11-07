@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Add, Edit, Delete, ErrorOutline } from "@mui/icons-material";
+import { Add, Edit, Delete, ErrorOutline , List } from "@mui/icons-material";
 import PopUpWindow from "../components/PopUpWindow";
 import { useNavigate } from "react-router-dom";
+import { exportAsCsv } from '../../utils/exportAsCsv'
 
 const API_URL = process.env.NODE_ENV === 'production' ? import.meta.env.VITE_API_URL : 'http://localhost:3001';
 
@@ -19,6 +20,7 @@ const Teams = () => {
   const [statusMsg, setStatusMsg] = useState('');
   const [status, setStatus] = useState(true);
   const navigate = useNavigate();
+
 
   const verifySession = async () => {
     try {
@@ -173,6 +175,11 @@ const Teams = () => {
     }
   };
 
+
+  const handleExportAsCsv = () => {
+    exportAsCsv(teams)
+  };
+
   if (loading) return <div className="text-center py-8">Loading teams...</div>;
   if (error) return <div className="text-center py-8">Error: {error}</div>;
 
@@ -289,6 +296,11 @@ const Teams = () => {
       <div className="flex items-center justify-between flex-wrap gap-4">
         <h1 className="text-3xl">Team Management</h1>
         <div className="flex items-center gap-3">
+          <button 
+          onClick={handleExportAsCsv}
+          className="bg-blue-500 py-2 px-4 rounded text-white flex items-center hover:bg-blue-600 cursor-pointer">
+              Export teams <List/>
+          </button>
           <button
             className="bg-red-500 py-2 px-4 rounded text-white flex items-center hover:bg-red-600 cursor-pointer"
             onClick={() => handleOpenSanctionsPopup()}
