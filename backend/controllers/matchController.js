@@ -1,106 +1,84 @@
 import Match from '../models/Match.js';
 import Team from '../models/Team.js';
 
-const getAllMatches = (req, res) => {
-  Match.getMatchesAll((err, results) => {
-    if (err) {
-      console.error('Error executing query:', err);
-      res.status(500).json({ error: 'Internal Server Error' });
-    } else {
-      res.json(results);
-    }
-  });
+const getAllMatches = async (req, res) => {
+  try {
+    const results = await Match.getMatchesAll();
+    res.json(results);
+  } catch (err) {
+    console.error('getAllMatches error:', err);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 };
 
-const updateMatch = (req, res) => {
+const updateMatch = async (req, res) => {
   const { id } = req.params;
   const { home_score, away_score } = req.body;
 
-  Match.getMatchByid(id, (err, match) => {
-    if (err) return res.status(500).json({ error: 'Internal Server Error' });
-    if (!match || match.length === 0) return res.status(404).json({ error: 'Match not found' });
+  try {
+    const match = await Match.getMatchById(id);
 
-    const { round, home_team, away_team } = match[0];
+    if (!match) {
+      return res.status(404).json({ error: 'Match not found' });
+    }
 
-    // Determine if it's League Phase or Knockout Phase
+    const { round, home_team, away_team } = match;
+
+    // Determine if it's League Phase (LP) or Knockout Phase
     const isLeaguePhase = round.toLowerCase().startsWith('gw');
 
     if (isLeaguePhase) {
-      // LP: Update match without 'qualified'
-      Match.updateMatch(id, [home_score, away_score], (err) => {
-        if (err) return res.status(500).json({ error: 'Internal Server Error' });
+      // Update match without 'qualified'
+      await Match.updateMatch(id, { home_score, away_score });
 
-        Match.getMatchesByRound('LP', (err, matches) => {
-          if (err) return res.status(500).json({ error: 'Internal Server Error' });
+      const matches = await Match.getMatchesByRound('LP');
 
-          Team.initializeTeamStats((err) => {
-            if (err) return res.status(500).json({ error: 'Failed to initialize team stats' });
+      // Reset team stats
+      await Team.initializeTeamStats();
 
-            let completed = 0;
+      // Update stats for each played match
+      for (const m of matches) {
+        if (m.home_score !== null && m.away_score !== null) {
+          const homeStat =
+            m.home_score > m.away_score
+              ? ['w', [m.home_score, m.away_score, m.home_team]]
+              : m.home_score < m.away_score
+              ? ['l', [m.home_score, m.away_score, m.home_team]]
+              : ['d', [m.home_score, m.away_score, m.home_team]];
 
-            matches.forEach(({ home_score, away_score, home_team, away_team }) => {
-              if (home_score !== null && away_score !== null) {
-                let homeStat, awayStat;
+          const awayStat =
+            m.home_score > m.away_score
+              ? ['l', [m.away_score, m.home_score, m.away_team]]
+              : m.home_score < m.away_score
+              ? ['w', [m.away_score, m.home_score, m.away_team]]
+              : ['d', [m.away_score, m.home_score, m.away_team]];
 
-                if (home_score > away_score) {
-                  homeStat = ['w', [home_score, away_score, home_team]];
-                  awayStat = ['l', [away_score, home_score, away_team]];
-                } else if (home_score < away_score) {
-                  homeStat = ['l', [home_score, away_score, home_team]];
-                  awayStat = ['w', [away_score, home_score, away_team]];
-                } else {
-                  homeStat = ['d', [home_score, away_score, home_team]];
-                  awayStat = ['d', [away_score, home_score, away_team]];
-                }
+          await Team.updateTeamStats('LP', homeStat[0], homeStat[1]);
+          await Team.updateTeamStats('LP', awayStat[0], awayStat[1]);
+        }
+      }
 
-                Team.updateTeamStats('LP', homeStat[0], homeStat[1], (err) => {
-                  if (err) return res.status(500).json({ error: 'Error updating home team' });
-
-                  Team.updateTeamStats('LP', awayStat[0], awayStat[1], (err) => {
-                    if (err) return res.status(500).json({ error: 'Error updating away team' });
-
-                    completed++;
-                    if (completed === matches.length) {
-                      return res.json({ message: 'Match updated (LP) and team stats recalculated' });
-                    }
-                  });
-                });
-              } else {
-                completed++;
-                if (completed === matches.length) {
-                  return res.json({ message: 'Match updated (LP) with some unplayed matches' });
-                }
-              }
-            });
-          });
-        });
-      });
-
+      return res.json({ message: 'Match updated (LP) and team stats recalculated' });
     } else {
-      const homeValues = [home_score, away_score, home_team];
-      const awayValues = [away_score, home_score, away_team];
-
+      // Knockout phase: calculate qualified team
       let qualified = null;
       if (home_score > away_score) qualified = home_team;
       else if (away_score > home_score) qualified = away_team;
 
-      
-      Match.updateMatch(id, [home_score, away_score, qualified], (err) => {
-        if (err) return res.status(500).json({ error: 'Failed to update match' });
+      await Match.updateMatch(id, { home_score, away_score, qualified });
 
-        Team.updateTeamStats(round, null, homeValues, (err) => {
-          if (err) return res.status(500).json({ error: 'Failed updating KO stats (home)' });
+      const homeValues = [home_score, away_score, home_team];
+      const awayValues = [away_score, home_score, away_team];
 
-          Team.updateTeamStats(round, null, awayValues, (err) => {
-            if (err) return res.status(500).json({ error: 'Failed updating KO stats (away)' });
+      await Team.updateTeamStats(round, null, homeValues);
+      await Team.updateTeamStats(round, null, awayValues);
 
-            return res.json({ message: 'Match updated (KO), stats and qualification set' });
-          });
-        });
-      });
+      return res.json({ message: 'Match updated (KO), stats and qualification set' });
     }
-  });
+  } catch (err) {
+    console.error('updateMatch error:', err);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 };
 
-
-export { getAllMatches , updateMatch}
+export { getAllMatches, updateMatch };

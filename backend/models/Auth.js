@@ -9,10 +9,10 @@ const Auth = {
     return result;
   },
 
-  login: async (id, password) => {
+  getUser: async (id) => {
     const [rows] = await db.query(
-      'SELECT * FROM users WHERE id = ? AND password = ?',
-      [id, password]
+      'SELECT * FROM users WHERE id = ?',
+      [id]
     );
     return rows[0] || null;
   },

@@ -1,28 +1,28 @@
-import Settings from '../models/Settings.js'
+import Settings from '../models/Settings.js';
 
+// === Get settings ===
+const getSettings = async (req, res) => {
+  try {
+    const [settings] = await Settings.getAllSettings();
+    res.json(settings);
+  } catch (err) {
+    console.error('getSettings error:', err);
+    res.status(500).json({ error: 'Server Error' });
+  }
+};
 
-const getSettings = (req  , res)=>{
-    Settings.getAllSettings((err, settings) => {
-        if (err) {
-            return res.status(500).json({ error: 'Server Error' });    
-        }
-        res.json(settings[0])
-    })
-}
+// === Update settings ===
+const setSettings = async (req, res) => {
+  try {
+    const { currentRound, totalGws, deadlineDate, registerIsOpen } = req.body;
+    console.log('Updating settings:', req.body);
 
-const setSettings = (req , res)=>{
-    const {currentRound , totalGws , deadlineDate , registerIsOpen} = req.body
-    console.log(req.body)
-    Settings.setAllSettings([deadlineDate , currentRound  , registerIsOpen , totalGws] ,(err , results)=>{
-        if (err){
-            console.log(err)
-            return res.status(500).json({ message: 'Server Error' });  
-        }
-        
-        res.json({message : 'Settings Updated Succefully'})
-    })
+    await Settings.setAllSettings(deadlineDate, currentRound, registerIsOpen, totalGws);
+    res.json({ message: 'Settings updated successfully' });
+  } catch (err) {
+    console.error('setSettings error:', err);
+    res.status(500).json({ message: 'Server Error' });
+  }
+};
 
-
-}
-
-export { getSettings , setSettings}
+export { getSettings, setSettings };

@@ -1,196 +1,138 @@
-import Match from '../models/Match.js'
-import Settings from '../models/Settings.js'
-import Team from '../models/Team.js'
-import { generateLPmatches  , generateR16matches, generateKoMatches} from '../utils/matchGenerator.js';
+import Match from '../models/Match.js';
+import Settings from '../models/Settings.js';
+import Team from '../models/Team.js';
+import { generateLPmatches, generateR16matches, generateKoMatches } from '../utils/matchGenerator.js';
 
-export const generateDraw = (req, res) => {
-    const { round } = req.body;
-    console.log(round)
+export const generateDraw = async (req, res) => {
+  const { round } = req.body;
+  console.log('Round:', round);
+
+  try {
+    let teams, matches, values;
+
     switch (round) {
-        case 'LP':
-            Team.getTeamsAll((err, result) => {
-                if (err) {
-                    return res.status(500).json({ error: 'Server Error ' , message :  'Failed to fetch teams'});
-                    
-                }
+      case 'LP':
+        teams = await Team.getTeamsAll();
+        const settRes = await Settings.getAllSettings();
+        const { totalGws } = settRes[0];
 
-                Settings.getAllSettings((err , settRes)=>{
-                    if (err){
-                        return res.status(500).json({ error: 'Server Error' , message : 'Failed to get settings'});
-                    }
-                    const {totalGws} = settRes[0]
-                    console.log(settRes)
-                    const matches = generateLPmatches(result ,totalGws);
-                    Match.deleteMatchesByRound(round , (err) => {
-                        if (err) {
-                            return res.status(500).json({ error: 'Server Error ' , message : 'Failed to delete matches' });
-                        }
+        matches = generateLPmatches(teams, totalGws);
 
-                        
+        await Match.deleteMatchesByRound(round);
 
+        values = matches.map(match => [
+          match.id_match,
+          match.home_team,
+          match.hometeam_name,
+          match.away_team,
+          match.awayteam_name,
+          match.round,
+        ]);
 
-                        const values = matches.map(match => [
-                            match.id_match,
-                            match.home_team,
-                            match.hometeam_name,
-                            match.away_team,
-                            match.awayteam_name,
-                            match.round
-                        ]);
+        await Match.insertMatches(values);
+        return res.json(matches);
 
-                        Match.insertMatches(values, (err) => {
-                            if (err) {
-                                console.log(err)
-                                return res.status(500).json({ error: 'Server Error' , message : 'Failed to save matches'});
-                            }
-                            res.json(matches);
-                        });
-                });
-            })
-            });
-            break;
-        case 'PO':
-            Team.getTeamsAll((err, result) => {
-                if (err) {
-                    return res.status(500).json({ error: 'Server Error ' , message :  'Failed to fetch teams'});
-                }
+      case 'PO':
+        teams = await Team.getTeamsAll();
 
-                let poTeams = result.map(team => ({...team , pts : (Number(team.wins) * 3) + (Number(team.draws) * 1) + (Number(team.losses) * 0) - team.sanction})).sort((a, b) => b.pts - a.pts || (b.GF - b.GA) - (a.GF - a.GA)).slice(8,24)
-                const matches = generateKoMatches(poTeams , 'PO');
-                
+        // Calculate points and sort
+        const poTeams = teams
+          .map(team => ({
+            ...team,
+            pts: Number(team.wins) * 3 + Number(team.draws) * 1 - team.sanction,
+          }))
+          .sort((a, b) => b.pts - a.pts || b.GF - b.GA - (a.GF - a.GA))
+          .slice(8, 24);
 
-                
-                Match.deleteMatchesByRound(round , (err) => {
-                    if (err) {
-                        return res.status(500).json({ error: 'Server Error ' , message : 'Failed to delete matches' });
-                    }
+        matches = generateKoMatches(poTeams, 'PO');
 
+        await Match.deleteMatchesByRound(round);
 
-                    const values = matches.map(match => [
-                        match.id_match,
-                        match.home_team,
-                        match.hometeam_name,
-                        match.away_team,
-                        match.awayteam_name,
-                        match.round
-                    ]);
+        values = matches.map(match => [
+          match.id_match,
+          match.home_team,
+          match.hometeam_name,
+          match.away_team,
+          match.awayteam_name,
+          match.round,
+        ]);
 
-                    Match.insertMatches(values, (err) => {
-                        if (err) {
-                            console.log(err)
-                            return res.status(500).json({ error: 'Server Error' , message : 'Failed to save matches'});
-                        }
-                        res.json(matches);
-                    });
-                });
-            });
-            break;
-        case 'R16' : 
-            Team.getTeamsAll((err , allTeams)=>{
-                if (err) {
-                    return res.status(500).json({ error: 'Server Error (teams)' });    
-                }
-                Team.getQualfiedTeamsFrom('PO' ,(err, result)=>{
-                    if (err) {
-                        return res.status(500).json({ error: 'Server Error (teams)' });    
-                    }
-                   
-                    let pot1 = result
-                    let pot2 = allTeams.map(team => ({...team , pts : (Number(team.wins) * 3) + (Number(team.draws) * 1) + (Number(team.losses) * 0) - team.sanction})).sort((a, b) => b.pts - a.pts || (b.GF - b.GA) - (a.GF - a.GA)).slice(0,8)
+        await Match.insertMatches(values);
+        return res.json(matches);
 
-                    const matches = generateR16matches(pot1 , pot2);
+      case 'R16':
+        const allTeams = await Team.getTeamsAll();
+        const qualifiedR16 = await Team.getQualfiedTeamsFrom('PO');
 
-                    Match.deleteMatchesByRound(round , (err) => {
-                        if (err) {
-                            return res.status(500).json({ error: 'Server Error (delete)' });
-                        }
-    
-    
-                        const values = matches.map(match => [
-                            match.id_match,
-                            match.home_team,
-                            match.hometeam_name,
-                            match.away_team,
-                            match.awayteam_name,
-                            match.round
-                        ]);
-    
-                        Match.insertMatches(values, (err) => {
-                            if (err) {
-                                return res.status(500).json({ error: 'Server Error (insert)' });
-                            }
-                            res.json(matches);
-                        });
-                    });
-                })
-                
-            })
-            break;
-        case  'QF' :
-            Team.getQualfiedTeamsFrom('R16' , (err , result)=>{
-                if (err) {
-                    return res.status(500).json({ error: 'Server Error (teams)' });    
-                }
-                const matches = generateKoMatches(result , 'QF');
+        const pot1 = qualifiedR16;
+        const pot2 = allTeams
+          .map(team => ({
+            ...team,
+            pts: Number(team.wins) * 3 + Number(team.draws) * 1 - team.sanction,
+          }))
+          .sort((a, b) => b.pts - a.pts || b.GF - b.GA - (a.GF - a.GA))
+          .slice(0, 8);
 
+        matches = generateR16matches(pot1, pot2);
 
-                Match.deleteMatchesByRound(round , (err) => {
-                    if (err) {
-                        return res.status(500).json({ error: 'Server Error (delete)' });
-                    }
+        await Match.deleteMatchesByRound(round);
 
+        values = matches.map(match => [
+          match.id_match,
+          match.home_team,
+          match.hometeam_name,
+          match.away_team,
+          match.awayteam_name,
+          match.round,
+        ]);
 
-                    const values = matches.map(match => [
-                        match.id_match,
-                        match.home_team,
-                        match.hometeam_name,
-                        match.away_team,
-                        match.awayteam_name,
-                        match.round
-                    ]);
+        await Match.insertMatches(values);
+        return res.json(matches);
 
-                    Match.insertMatches(values, (err) => {
-                        if (err) {
-                            return res.status(500).json({ error: 'Server Error (insert)' });
-                        }
-                        res.json(matches);
-                    });
-                });
-            })
-            break
-        case  'SF' :
-                Team.getQualfiedTeamsFrom('QF' , (err , result)=>{
-                    if (err) {
-                        return res.status(500).json({ error: 'Server Error (teams)' });    
-                    }
-                    const matches = generateKoMatches(result , 'SF');
-    
-    
-                    Match.deleteMatchesByRound(round , (err) => {
-                        if (err) {
-                            return res.status(500).json({ error: 'Server Error (delete)' });
-                        }
-    
-    
-                        const values = matches.map(match => [
-                            match.id_match,
-                            match.home_team,
-                            match.hometeam_name,
-                            match.away_team,
-                            match.awayteam_name,
-                            match.round
-                        ]);
-    
-                        Match.insertMatches(values, (err) => {
-                            if (err) {
-                                return res.status(500).json({ error: 'Server Error (insert)' });
-                            }
-                            res.json(matches);
-                        });
-                    });
-                })
-                break
-        default:
-            res.status(400).json({ error: 'Unknown Round' });
+      case 'QF':
+        teams = await Team.getQualfiedTeamsFrom('R16');
+        matches = generateKoMatches(teams, 'QF');
+
+        await Match.deleteMatchesByRound(round);
+
+        values = matches.map(match => [
+          match.id_match,
+          match.home_team,
+          match.hometeam_name,
+          match.away_team,
+          match.awayteam_name,
+          match.round,
+        ]);
+
+        await Match.insertMatches(values);
+        return res.json(matches);
+
+      case 'SF':
+        teams = await Team.getQualfiedTeamsFrom('QF');
+        matches = generateKoMatches(teams, 'SF');
+
+        await Match.deleteMatchesByRound(round);
+
+        values = matches.map(match => [
+          match.id_match,
+          match.home_team,
+          match.hometeam_name,
+          match.away_team,
+          match.awayteam_name,
+          match.round,
+        ]);
+
+        await Match.insertMatches(values);
+        return res.json(matches);
+
+      default:
+        return res.status(400).json({ error: 'Unknown Round' });
     }
+  } catch (err) {
+    console.error('generateDraw error:', err);
+    return res.status(500).json({
+      error: 'Server Error',
+      message: err.message || 'Failed to generate matches',
+    });
+  }
 };
