@@ -1,7 +1,7 @@
-const Settings = require('../models/Settings')
+import Settings from '../models/Settings.js'
 
 
-exports.getSettings = (req  , res)=>{
+const getSettings = (req  , res)=>{
     Settings.getAllSettings((err, settings) => {
         if (err) {
             return res.status(500).json({ error: 'Server Error' });    
@@ -10,7 +10,7 @@ exports.getSettings = (req  , res)=>{
     })
 }
 
-exports.setSettings = (req , res)=>{
+const setSettings = (req , res)=>{
     const {currentRound , totalGws , deadlineDate , registerIsOpen} = req.body
     console.log(req.body)
     Settings.setAllSettings([deadlineDate , currentRound  , registerIsOpen , totalGws] ,(err , results)=>{
@@ -24,3 +24,5 @@ exports.setSettings = (req , res)=>{
 
 
 }
+
+export { getSettings , setSettings}

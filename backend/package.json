@@ -1,6 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
+  "type": "module",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js"
@@ -16,7 +17,7 @@
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
-    "mysql2": "^3.14.0",
+    "mysql2": "^3.17.1",
     "nodemon": "^3.1.10",
     "serverless-http": "^3.2.0",
     "twilio": "^5.7.1"

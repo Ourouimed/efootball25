@@ -1,11 +1,11 @@
-const Auth = require('../models/Auth');
-const jwt = require('jsonwebtoken');
+import Auth from '../models/Auth.js'
+import jwt from 'jsonwebtoken'
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your_secret_key';
 const JWT_EXPIRES_IN = '7d';
 
 // === Login ===
-exports.login = (req, res) => {
+const login = (req, res) => {
   const { id, password } = req.body;
 
   if (!id || !password) {
@@ -56,7 +56,7 @@ exports.login = (req, res) => {
 };
 
 // === Verify Token (used by frontend to check session) ===
-exports.verifySession = (req, res) => {
+const verifySession = (req, res) => {
   const token = req.cookies.token;
 
   console.log(token)
@@ -81,7 +81,7 @@ exports.verifySession = (req, res) => {
 
 
 // === Logout ===
-exports.logout = (req, res) => {
+const logout = (req, res) => {
   res.clearCookie('token', {
     httpOnly: true,
     sameSite: 'None',
@@ -90,3 +90,6 @@ exports.logout = (req, res) => {
   res.json({ message: 'Logged out successfully' });
 };
 
+
+
+export { login  , logout , verifySession}

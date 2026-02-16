@@ -1,8 +1,9 @@
-const express = require('express');
+import express from 'express';
+import { getSettings, setSettings } from '../controllers/settingsController.js';
+
 const router = express.Router();
-const settingsController = require('../controllers/settingsController');
 
-router.get('/', settingsController.getSettings);
-router.post('/set', settingsController.setSettings);
+router.get('/', getSettings);
+router.post('/set', setSettings);
 
-module.exports = router;
+export default router;

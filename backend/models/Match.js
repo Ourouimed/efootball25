@@ -1,58 +1,72 @@
-const db = require('../config/db');
+import db from '../config/db.js';
 
 const Match = {
-  getMatchesAll: (callback) => {
-    db.query('SELECT * FROM matches', callback);
+  getMatchesAll: async () => {
+    const [rows] = await db.query('SELECT * FROM matches');
+    return rows;
   },
 
-  deleteMatchesByRound: (round, callback) => {
+  deleteMatchesByRound: async (round) => {
     if (round === 'LP') {
-      db.query("DELETE FROM matches", callback);
+      const [result] = await db.query('DELETE FROM matches');
+      return result;
     } else {
-      db.query('DELETE FROM matches WHERE round = ?', [round], callback);
+      const [result] = await db.query(
+        'DELETE FROM matches WHERE round = ?',
+        [round]
+      );
+      return result;
     }
   },
 
-  getMatchesByRound: (round, callback) => {
+  getMatchesByRound: async (round) => {
     if (round === 'LP') {
-      db.query("SELECT * FROM matches WHERE round LIKE 'gw%'", callback);
+      const [rows] = await db.query(
+        "SELECT * FROM matches WHERE round LIKE 'gw%'"
+      );
+      return rows;
     } else {
-      db.query('SELECT * FROM matches WHERE round = ?', [round], callback);
+      const [rows] = await db.query(
+        'SELECT * FROM matches WHERE round = ?',
+        [round]
+      );
+      return rows;
     }
   },
 
-  insertMatches: (values, callback) => {
-    db.query(
+  insertMatches: async (values) => {
+    const [result] = await db.query(
       'INSERT INTO matches (id_match, home_team, hometeam_name, away_team, awayteam_name, round) VALUES ?',
-      [values],
-      callback
+      [values]
     );
+    return result;
   },
 
-  getMatchByid: (id, callback) => {
-    db.query('SELECT * FROM matches WHERE id_match = ?', [id], callback);
+  getMatchById: async (id) => {
+    const [rows] = await db.query(
+      'SELECT * FROM matches WHERE id_match = ?',
+      [id]
+    );
+    return rows[0] || null;
   },
 
-  // Updated version: supports optional 'qualified'
-  updateMatch: (id, values, callback) => {
+  updateMatch: async (id, values) => {
     const [home_score, away_score, qualified] = values;
 
     if (qualified !== undefined) {
-      // If 'qualified' is provided, include it in the query
-      db.query(
+      const [result] = await db.query(
         'UPDATE matches SET home_score = ?, away_score = ?, qualified = ?, played = 1 WHERE id_match = ?',
-        [home_score, away_score, qualified, id],
-        callback
+        [home_score, away_score, qualified, id]
       );
+      return result;
     } else {
-      // Standard update without qualified
-      db.query(
+      const [result] = await db.query(
         'UPDATE matches SET home_score = ?, away_score = ?, played = 1 WHERE id_match = ?',
-        [home_score, away_score, id],
-        callback
+        [home_score, away_score, id]
       );
+      return result;
     }
   },
 };
 
-module.exports = Match;
+export default Match;

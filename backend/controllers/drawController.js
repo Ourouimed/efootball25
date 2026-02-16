@@ -1,9 +1,9 @@
-const Match = require('../models/Match');
-const Settings = require('../models/Settings');
-const Team = require('../models/Team');
-const { generateLPmatches  , generateR16matches, generateKoMatches} = require('../utils/matchGenerator');
+import Match from '../models/Match.js'
+import Settings from '../models/Settings.js'
+import Team from '../models/Team.js'
+import { generateLPmatches  , generateR16matches, generateKoMatches} from '../utils/matchGenerator.js';
 
-exports.generateDraw = (req, res) => {
+export const generateDraw = (req, res) => {
     const { round } = req.body;
     console.log(round)
     switch (round) {

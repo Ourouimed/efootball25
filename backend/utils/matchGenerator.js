@@ -117,4 +117,4 @@ function generateR16matches (pot1 , pot2){
 }
 
   
-module.exports = { generateLPmatches , generateKoMatches , generateR16matches };
+export { generateLPmatches , generateKoMatches , generateR16matches };

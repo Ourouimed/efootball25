@@ -1,8 +1,7 @@
-const Settings = require('../models/Settings');
-const Team = require('../models/Team');
-const axios = require('axios');
+import Settings from '../models/Settings.js';
+import Team from '../models/Team.js';
 
-exports.getAllteams =  (req , res)=>{
+const getAllteams =  (req , res)=>{
     Team.getTeamsAll((err, results) => {
         if (err) {
           console.error('Error executing query:', err);
@@ -13,7 +12,7 @@ exports.getAllteams =  (req , res)=>{
     })
 }
 
-exports.registerTeam = (req , res) => {
+const registerTeam = (req , res) => {
   const { teamName, phoneNum, userName } = req.body;
 
   Settings.getAllSettings((err, results) => {
@@ -40,7 +39,7 @@ exports.registerTeam = (req , res) => {
 };
 
 
-exports.DeleteTeam = (req ,res) =>{
+const DeleteTeam = (req ,res) =>{
   const {userName} = req.params
   Team.delete(userName ,(err, results) => {
     if(err){
@@ -58,7 +57,7 @@ exports.DeleteTeam = (req ,res) =>{
 }
 
 
-exports.UpdateTeam = (req ,res) =>{
+const UpdateTeam = (req ,res) =>{
   const {userName} = req.params
   const {teamName , phoneNum} = req.body
 
@@ -79,7 +78,7 @@ exports.UpdateTeam = (req ,res) =>{
 }   
 
 
-exports.setSanction = (req, res) => {
+const setSanction = (req, res) => {
   const { userName } = req.params;
   const { points } = req.body;
 
@@ -98,3 +97,6 @@ exports.setSanction = (req, res) => {
     res.json({ message: 'Sanction applied successfully' });
   });
 };
+
+
+export { registerTeam , UpdateTeam , getAllteams , setSanction , DeleteTeam}

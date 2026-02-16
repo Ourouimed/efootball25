@@ -1,11 +1,12 @@
-const express = require('express');
+import express from 'express';
+import { DeleteTeam, getAllteams, registerTeam, setSanction, UpdateTeam } from '../controllers/teamController.js';
+
 const router = express.Router();
-const teamController = require('../controllers/teamController');
 
-router.get('/', teamController.getAllteams);
-router.post('/sanction/:userName' , teamController.setSanction)
-router.post('/register', teamController.registerTeam);
-router.delete('/delete/:userName', teamController.DeleteTeam);
-router.post('/update/:userName', teamController.UpdateTeam);
+router.get('/', getAllteams);
+router.post('/sanction/:userName', setSanction);
+router.post('/register', registerTeam);
+router.delete('/delete/:userName', DeleteTeam);
+router.post('/update/:userName', UpdateTeam);
 
-module.exports = router;
+export default router;

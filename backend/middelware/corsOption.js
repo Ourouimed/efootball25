@@ -6,4 +6,4 @@ const corsOptions = {
   };
 
 
-module.exports = corsOptions
+export default corsOptions

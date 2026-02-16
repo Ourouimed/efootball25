@@ -1,7 +1,8 @@
-const express = require('express');
+import express from 'express';
+import { generateDraw } from '../controllers/drawController.js';
+
 const router = express.Router();
-const drawController = require('../controllers/drawController');
 
-router.post('/', drawController.generateDraw);
+router.post('/', generateDraw);
 
-module.exports = router;
+export default router;

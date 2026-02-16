@@ -1,23 +1,27 @@
-require('dotenv').config();
-const express = require('express');
-const app = express();
-const cors = require('cors');
-const corsOptions = require('./middelware/corsOption');
-const matchesRouter = require('./routes/matches');
-const teamsRouter = require('./routes/teams');
-const drawRouter = require('./routes/draw');
-const settingsRouter = require('./routes/settings')
-const authRouter = require('./routes/auth')
-const cookieParser = require('cookie-parser');
+import { config } from 'dotenv';
+import express from 'express';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
+// routes imports
+import corsOptions from './middelware/corsOption.js';
+import matchesRouter from './routes/matches.js';
+import teamsRouter from './routes/teams.js';
+import drawRouter from './routes/draw.js';
+import settingsRouter from './routes/settings.js'
+import authRouter from './routes/auth.js'
 
+// dotenv config
+config()
 const PORT = process.env.PORT || 3001;
+
+const app = express();
 
 app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(express.json());
 
 
-
+// configure routes
 app.use('/matches' , matchesRouter)
 app.use('/teams' , teamsRouter)
 app.use('/generate-matches' , drawRouter)

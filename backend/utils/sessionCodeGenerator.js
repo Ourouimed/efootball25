@@ -10,4 +10,4 @@ function generateRandomCode(length = 12) {
     return result;
   }
 
-module.exports = { generateRandomCode }
+export { generateRandomCode }

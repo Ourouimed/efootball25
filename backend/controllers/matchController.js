@@ -1,8 +1,7 @@
-const db = require('../config/db');
-const Match = require('../models/Match');
-const Team = require('../models/Team');
+import Match from '../models/Match.js';
+import Team from '../models/Team.js';
 
-exports.getAllMatches = (req, res) => {
+const getAllMatches = (req, res) => {
   Match.getMatchesAll((err, results) => {
     if (err) {
       console.error('Error executing query:', err);
@@ -13,7 +12,7 @@ exports.getAllMatches = (req, res) => {
   });
 };
 
-exports.updateMatch = (req, res) => {
+const updateMatch = (req, res) => {
   const { id } = req.params;
   const { home_score, away_score } = req.body;
 
@@ -102,3 +101,6 @@ exports.updateMatch = (req, res) => {
     }
   });
 };
+
+
+export { getAllMatches , updateMatch}

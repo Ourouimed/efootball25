@@ -1,12 +1,18 @@
-const db = require("../config/db")
+import db from "../config/db.js";
 
 const Settings = {
-    getAllSettings : (callback)=>{
-        db.query('select * from settings' , callback)
-    },
-    setAllSettings : (values , callback)=>{
-        db.query('UPDATE settings set deadlineDate = ? , currentRound = ? , registerIsOpen = ? ,  totalGws = ?' , values , callback)
-    }
-}
+  getAllSettings: async () => {
+    const [rows] = await db.query("SELECT * FROM settings");
+    return rows;
+  },
 
-module.exports = Settings
+  setAllSettings: async (values) => {
+    const [result] = await db.query(
+      "UPDATE settings SET deadlineDate = ?, currentRound = ?, registerIsOpen = ?, totalGws = ?",
+      values
+    );
+    return result;
+  },
+};
+
+export default Settings;

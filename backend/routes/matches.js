@@ -1,7 +1,9 @@
-const express = require('express');
-const router = express.Router();
-const matchController = require('../controllers/matchController');
+import express from 'express';
+import { getAllMatches, updateMatch } from '../controllers/matchController.js';
 
-router.get('/', matchController.getAllMatches);
-router.post('/update/:id', matchController.updateMatch);
-module.exports = router;
+const router = express.Router();
+
+router.get('/', getAllMatches);
+router.post('/update/:id', updateMatch);
+
+export default router;
