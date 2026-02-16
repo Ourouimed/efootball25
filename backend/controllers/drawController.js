@@ -23,11 +23,14 @@ export const generateDraw = async (req, res) => {
         values = matches.map(match => [
           match.id_match,
           match.home_team,
-          match.hometeam_name,
           match.away_team,
-          match.awayteam_name,
           match.round,
         ]);
+
+
+        await Team.inistializeStanding(teams);
+
+
 
         await Match.insertMatches(values);
         return res.json(matches);

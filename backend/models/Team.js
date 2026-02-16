@@ -8,6 +8,22 @@ const Team = {
     return rows;
   },
 
+
+  inistializeStanding : async (teams)=>{
+      await db.query('DELETE FROM standing');
+
+      const values = teams.map(team => [
+        team.userName, 0, 0, 0, 0, 0,0 
+      ]);
+
+
+      const sql = `INSERT INTO standing
+          (id_team, wins, draws, losses, GF, GA, sanction) VALUES ?`;
+
+      const result =db.query(sql , [values])
+      return result
+  }, 
+
   getStanding: async () => {
     const [rows] = await db.query(
       `SELECT s.* , t.teamName FROM standing s 

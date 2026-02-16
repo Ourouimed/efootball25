@@ -2,7 +2,9 @@ import db from '../config/db.js';
 
 const Match = {
   getMatchesAll: async () => {
-    const [rows] = await db.query('SELECT * FROM matches');
+    const [rows] = await db.query(`SELECT m.* , t1.teamName as hometeam_name , t2.teamName as awayteam_name FROM matches m 
+                                  inner join teams t1 on m.home_team = t1.userName
+                                  inner join teams t2 on m.away_team = t2.userName`);
     return rows;
   },
 
@@ -36,7 +38,7 @@ const Match = {
 
   insertMatches: async (values) => {
     const [result] = await db.query(
-      'INSERT INTO matches (id_match, home_team, hometeam_name, away_team, awayteam_name, round) VALUES ?',
+      'INSERT INTO matches (id_match, home_team, away_team, round) VALUES ?',
       [values]
     );
     return result;
