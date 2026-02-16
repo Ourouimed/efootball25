@@ -5,6 +5,7 @@ const getAllMatches = async (req, res) => {
   try {
     const results = await Match.getMatchesAll();
     res.json(results);
+
   } catch (err) {
     console.error('getAllMatches error:', err);
     res.status(500).json({ error: 'Internal Server Error' });

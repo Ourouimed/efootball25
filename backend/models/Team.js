@@ -77,15 +77,15 @@ const Team = {
       switch (matchStat) {
         case 'w':
           query =
-            'UPDATE teams SET wins = wins + 1, GF = GF + ?, GA = GA + ? WHERE userName = ?';
+            'UPDATE standing SET wins = wins + 1, GF = GF + ?, GA = GA + ? WHERE id_team = ?';
           break;
         case 'l':
           query =
-            'UPDATE teams SET losses = losses + 1, GF = GF + ?, GA = GA + ? WHERE userName = ?';
+            'UPDATE standing SET losses = losses + 1, GF = GF + ?, GA = GA + ? WHERE id_team = ?';
           break;
         case 'd':
           query =
-            'UPDATE teams SET draws = draws + 1, GF = GF + ?, GA = GA + ? WHERE userName = ?';
+            'UPDATE standing SET draws = draws + 1, GF = GF + ?, GA = GA + ? WHERE id_team = ?';
           break;
         default:
           return null;
@@ -104,7 +104,7 @@ const Team = {
 
   initializeTeamStats: async () => {
     const [result] = await db.query(
-      'UPDATE teams SET wins = 0, losses = 0, draws = 0, GF = 0, GA = 0, KOGF = 0, KOGA = 0'
+      'UPDATE standing SET wins = 0, losses = 0, draws = 0, GF = 0, GA = 0, KOGF = 0, KOGA = 0'
     );
     return result;
   },

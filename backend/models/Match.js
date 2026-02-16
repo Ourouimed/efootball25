@@ -53,7 +53,7 @@ const Match = {
   },
 
   updateMatch: async (id, values) => {
-    const [home_score, away_score, qualified] = values;
+    const { home_score, away_score, qualified} = values;
 
     if (qualified !== undefined) {
       const [result] = await db.query(
