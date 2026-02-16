@@ -1,9 +1,10 @@
 import express from 'express';
-import { DeleteTeam, getAllteams, registerTeam, setSanction, UpdateTeam } from '../controllers/teamController.js';
+import { DeleteTeam, getAllteams, getStanding, registerTeam, setSanction, UpdateTeam } from '../controllers/teamController.js';
 
 const router = express.Router();
 
 router.get('/', getAllteams);
+router.get('/standings' , getStanding)
 router.post('/sanction/:userName', setSanction);
 router.post('/register', registerTeam);
 router.delete('/delete/:userName', DeleteTeam);

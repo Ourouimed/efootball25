@@ -8,6 +8,15 @@ const Team = {
     return rows;
   },
 
+  getStanding: async () => {
+    const [rows] = await db.query(
+      `SELECT s.* , t.teamName FROM standing s 
+      inner join teams t on s.id_team = t.userName 
+      ORDER BY teamName ASC`
+    );
+    return rows;
+  },
+
   getQualfiedTeamsFrom: async (round) => {
     const [rows] = await db.query(
       'SELECT * FROM teams WHERE userName IN (SELECT qualified FROM matches WHERE round = ?)',

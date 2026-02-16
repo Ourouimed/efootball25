@@ -93,4 +93,17 @@ const setSanction = async (req, res) => {
   }
 };
 
-export { registerTeam, UpdateTeam, getAllteams, setSanction, DeleteTeam };
+
+// Get Standing 
+
+const getStanding = async (req, res) => {
+  try {
+    const results = await Team.getStanding();
+    res.json(results);
+  } catch (err) {
+    console.error('getAllteams error:', err);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+export { registerTeam, UpdateTeam, getAllteams, setSanction, DeleteTeam , getStanding};
