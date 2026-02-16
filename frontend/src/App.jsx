@@ -12,6 +12,7 @@ import Settings from './admin/pages/Settings'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { SettingsContext } from './contexts/SettingsContext'
+import StandingsPage from './admin/pages/StandingPage'
 const App = () => {
   const [settings , setSettings] = useState([])
   const [error , setError] = useState(null)
@@ -45,6 +46,7 @@ const App = () => {
         <Route path='/dashboard' element={<DashboardLayout />}>
           <Route index element={<Dashboard />} />
           <Route path='teams' element={<Teams />} />
+          <Route path='standings' element={<StandingsPage />} />
           <Route path='matches' element={<Matches/>} />
           <Route path='settings' element={<Settings/>} />
         </Route>

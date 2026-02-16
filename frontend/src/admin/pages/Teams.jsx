@@ -185,7 +185,7 @@ const Teams = () => {
 
   return (
     <>
-      {showSanctionsPopup && (
+      {/* {showSanctionsPopup && (
         <PopUpWindow onClose={handleCloseSanctionsPopup} title="Add Sanction">
           <form onSubmit={handleSubmitSanction} className="space-y-4">
             <div>
@@ -228,7 +228,7 @@ const Teams = () => {
             </div>
           </form>
         </PopUpWindow>
-      )}
+      )} */}
 
       {showPopup && (
         <PopUpWindow onClose={handleClosePopup} title={isEditing ? 'Edit Team' : 'Add New Team'}>
@@ -301,12 +301,12 @@ const Teams = () => {
           className="bg-blue-500 py-2 px-4 rounded text-white flex items-center hover:bg-blue-600 cursor-pointer">
               Export teams <List/>
           </button>
-          <button
+          {/* <button
             className="bg-red-500 py-2 px-4 rounded text-white flex items-center hover:bg-red-600 cursor-pointer"
             onClick={() => handleOpenSanctionsPopup()}
           >
             <ErrorOutline className="mr-1"/> Add sanction
-          </button>
+          </button> */}
           <button
             className="bg-primary py-2 px-4 rounded text-white flex items-center hover:bg-primary-dark cursor-pointer"
             onClick={handleOpenAddPopup}
@@ -327,27 +327,23 @@ const Teams = () => {
           <thead>
             <tr>
               <td>Actions</td><td>UserName</td><td>TeamName</td><td>Phone Number</td>
-              <td>W</td><td>L</td><td>D</td><td>GF</td><td>GA</td><td>KOGF</td><td>KOGA</td><td>Sanctions</td>
             </tr>
           </thead>
           <tbody>
             {teams.map((team) => (
               <tr key={team.userName}>
-                <td className="flex gap-2">
-                  <button onClick={() => handleOpenEditPopup(team)} className="text-blue-500 hover:text-blue-700">
+                <td className="flex gap-2 justify-center">
+                  <button onClick={() => handleOpenEditPopup(team)} className="text-blue-500 hover:text-blue-700 cursor-pointer">
                     <Edit fontSize="small"/>
                   </button>
-                  <button onClick={() => handleDeleteTeam(team.userName)} className="text-red-500">
+                  <button onClick={() => handleDeleteTeam(team.userName)} className="text-red-500 cursor-pointer">
                     <Delete fontSize="small"/>
                   </button>
-                  <button onClick={() => handleOpenSanctionsPopup(team)} className="text-orange-500">
+                  {/* <button onClick={() => handleOpenSanctionsPopup(team)} className="text-orange-500">
                     <ErrorOutline fontSize="small"/>
-                  </button>
+                  </button> */}
                 </td>
                 <td>{team.userName}</td><td>{team.teamName}</td><td>{team.phoneNum}</td>
-                <td>{team.wins}</td><td>{team.losses}</td><td>{team.draws}</td>
-                <td>{team.GF}</td><td>{team.GA}</td><td>{team.KOGF}</td><td>{team.KOGA}</td>
-                <td>{team.pointsDeducted || 0}</td>
               </tr>
             ))}
           </tbody>
