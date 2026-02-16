@@ -21,7 +21,7 @@ const Stats = () => {
   const API_URL = process.env.NODE_ENV === 'production' ? import.meta.env.VITE_API_URL : 'http://localhost:3001';
   const fetchTeams = async () => {
     try {
-      const res = await axios.get(`${API_URL}/teams`);
+      const res = await axios.get(`${API_URL}/teams/standings`);
       setTeams(res.data);
     } catch (err) {
       setTeamsError(err.response?.data?.message || 'Failed to fetch teams');

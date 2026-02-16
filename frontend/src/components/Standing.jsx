@@ -21,7 +21,7 @@ const Standing = ({teams})=>{
       {sortedTeams.length === 0 ? <tr className="text-center text-gray-500 py-4">
         <td colSpan="10">No registred teams yet.</td>
         </tr> :sortedTeams.map((team, index) => {
-        const { teamName, userName, wins, losses, draws, GF, GA, pts } = team;
+        const { teamName, id_team, wins, losses, draws, GF, GA, pts } = team;
         const GP = wins + draws + losses;
         const rowClass = 
           index < 8 ? "best-8" : index < 24 ? "playoffs" : "";
@@ -30,7 +30,7 @@ const Standing = ({teams})=>{
           <tr className={`${rowClass} text-center`} key={team.userName}>
             <td className="px-2 py-2">{index + 1}</td>
             <td className="px-2 py-2">{teamName}</td>
-            <td className="px-2 py-2">{userName}</td>
+            <td className="px-2 py-2">{id_team}</td>
             <td className="px-2 py-2">{GP}</td>
             <td className="px-2 py-2">{wins}</td>
             <td className="px-2 py-2">{draws}</td>

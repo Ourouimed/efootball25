@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { EmojiEvents } from "@mui/icons-material";
 
 const API_URL = process.env.NODE_ENV === 'production' ? import.meta.env.VITE_API_URL : 'http://localhost:3001';
 
@@ -13,7 +12,6 @@ const StandingsPage = () => {
     const fetchStandings = async () => {
       try {
         const res = await axios.get(`${API_URL}/teams/standings`);
-        
         // Sorting Logic: 
         // 1. Points (desc) 2. Goal Difference (desc) 3. Goals For (desc)
         const sortedData = res.data.sort((a, b) => {
@@ -64,9 +62,10 @@ const StandingsPage = () => {
               const goalsAgainst = team.GA + team.KOGA;
               const gd = goalsFor - goalsAgainst;
               const pts = (team.wins * 3) + team.draws - team.sanction;
+              const rowClass = index < 8 ? "best-8" : index < 24 ? "playoffs" : "";
 
               return (
-                <tr key={team.id_team} className="border-b hover:bg-gray-50 transition-colors">
+                <tr key={team.id_team} className={`border-b hover:bg-gray-50 transition-colors ${rowClass}`}>
                   <td className="font-bold text-gray-500">{index + 1}</td>
                   <td className="text-left font-semibold px-4">{team.teamName}</td>
                   <td>{team.wins + team.draws + team.losses}</td>
