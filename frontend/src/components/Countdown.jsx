@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { DateTime } from 'luxon';
 
-const Countdown = ({ targetDate, round = null, timeZone = 'UTC+1' }) => {
+const Countdown = ({ targetDate, round = null, timeZone = 'UTC+0' }) => {
   const calculateTimeLeft = () => {
     const now = DateTime.now().setZone(timeZone);
     const target = DateTime.fromISO(targetDate, { zone: timeZone });
