@@ -15,10 +15,10 @@ const Home = () => {
               Welcome everyone
             </h1>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mt-2 drop-shadow-lg">
-              Join the <span className="text-fourth">ourouimed</span> efootball Tournament
+              <span className="text-fourth">ourouimed</span> Ramadan Tournament 2026
             </h2>
             <p className="text-gray-300 mt-4 max-w-xl mx-auto text-sm sm:text-lg">
-            Register now and join Season 6 of the tournament. Play matches, check your stats, and have fun with other players!
+            Register now and join The second edition of the tournament. Play matches, check your stats, and have fun with other players!
             </p>
 
             <div className="flex items-center gap-4 justify-center mt-8 flex-wrap">
