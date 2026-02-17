@@ -32,7 +32,7 @@ const Matches = () => {
   for (let i = 0; i < settings.totalGws; i++) {
     gwRounds.push(`GW${i + 1}`);
   }
-  const rounds = [...gwRounds, "PO", "R16", "QF", "SF", "Final"];
+  const rounds = [...gwRounds, "PO", "R16", "QF", "SF", "FINAL"];
 
   // Verify session
   const verifySession = async () => {
@@ -223,6 +223,7 @@ const Matches = () => {
               <option value="R16">Round of 16</option>
               <option value="QF">Quarter Final</option>
               <option value="SF">Semi Final</option>
+              <option value="FINAL">Final</option>
             </select>
             <p>Are you sure you want to generate matches?</p>
             {statusMsg && (
