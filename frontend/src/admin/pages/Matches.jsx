@@ -266,7 +266,7 @@ const Matches = () => {
       )}
 
       <div className="flex items-center justify-between flex-col md:flex-row gap-1">
-        <h1 className="text-2xl md:text-3xl">Match Management</h1>
+        <h1 className="text-3xl font-bold">Match Management</h1>
         <div className="flex items-center gap-2 flex-col md:flex-row w-full md:w-auto">
           <select
             className="w-full md:w-auto select w-auto"

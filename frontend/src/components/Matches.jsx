@@ -56,7 +56,7 @@ const Matches = ({ matches, teams }) => {
       >
         <option value="ALL">ALL</option>
         {teams.map((team) => (
-          <option key={team.userName} value={team.userName}>
+          <option key={team.id_team} value={team.id_team}>
             {team.teamName}
           </option>
         ))}

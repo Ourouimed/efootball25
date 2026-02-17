@@ -2,7 +2,6 @@ import { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import { Add, Edit, Delete, List, Search } from "@mui/icons-material";
 import PopUpWindow from "../components/PopUpWindow";
-import { useNavigate } from "react-router-dom";
 import { exportAsCsv } from '../../utils/exportAsCsv';
 
 const API_URL = process.env.NODE_ENV === 'production' ? import.meta.env.VITE_API_URL : 'http://localhost:3001';
@@ -257,13 +256,13 @@ const Teams = () => {
 
       {/* Teams Table */}
       <div className="overflow-x-auto mt-6">
-        <table className="dashb-table min-w-full">
+        <table className="dashb-table">
           <thead>
             <tr>
-              <td>Actions</td>
-              <td>UserName</td>
-              <td>TeamName</td>
-              <td>Phone Number</td>
+              <th>Actions</th>
+              <th>UserName</th>
+              <th>TeamName</th>
+              <th>Phone Number</th>
             </tr>
           </thead>
           <tbody>
