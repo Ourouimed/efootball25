@@ -12,6 +12,7 @@ import { SideNavContext } from "../../contexts/Sidenavontext";
 const API_URL = process.env.NODE_ENV === 'production' ? import.meta.env.VITE_API_URL : 'http://localhost:3001';
 
 const Dashboard = () => {
+  const [standing, setStandings] = useState([]);
   const [teams, setTeams] = useState([]);
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -19,9 +20,18 @@ const Dashboard = () => {
 
   const { user } = useContext(SideNavContext);
 
-  const fetchTeams = async () => {
+  const fetchStandings = async () => {
     try {
       const res = await axios.get(`${API_URL}/teams/standings`);
+      setStandings(res.data);
+    } catch (err) {
+      setError("Failed to fetch teams");
+    }
+  };
+
+  const fetchTeams = async () => {
+    try {
+      const res = await axios.get(`${API_URL}/teams`);
       setTeams(res.data);
     } catch (err) {
       setError("Failed to fetch teams");
@@ -40,7 +50,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      await Promise.all([fetchTeams(), fetchMatches()]);
+      await Promise.all([fetchStandings(), fetchMatches() , fetchTeams()]);
       setLoading(false);
     };
     fetchData();
@@ -51,11 +61,11 @@ const Dashboard = () => {
   if (error)
     return <div className="text-center text-white py-8">Error: {error}</div>;
 
-  const topscorer = [...teams].sort(
+  const topscorer = [...standing].sort(
     (a, b) => b.GF + b.KOGF - (a.GF + a.KOGF)
   );
 
-  const sortedTeams = teams
+  const sortedTeams = standing
     .map((team) => ({
       ...team,
       pts:
@@ -68,7 +78,7 @@ const Dashboard = () => {
         b.pts - a.pts || b.GF + b.KOGF - (a.GF + a.KOGF)
     );
 
-  const goals = teams.reduce((acc, team) => acc + team.GF + team.KOGF, 0);
+  const goals = standing.reduce((acc, team) => acc + team.GF + team.KOGF, 0);
   const matchesPlayed = matches.filter((m) => m.played === 1).length;
   const totalTeams = teams.length;
 
