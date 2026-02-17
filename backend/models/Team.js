@@ -95,7 +95,7 @@ const Team = {
       return result;
     } else {
       const [result] = await db.query(
-        'UPDATE teams SET KOGF = KOGF + ?, KOGA = KOGA + ? WHERE userName = ?',
+        'UPDATE standing SET KOGF = KOGF + ?, KOGA = KOGA + ? WHERE id_team = ?',
         values
       );
       return result;
@@ -111,7 +111,7 @@ const Team = {
 
   applySanction: async (team, pts) => {
     const [result] = await db.query(
-      'UPDATE teams SET sanction = sanction + ? WHERE userName = ?',
+      'UPDATE standing SET sanction = sanction + ? WHERE id_team = ?',
       [pts, team]
     );
     return result;

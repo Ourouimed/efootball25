@@ -51,7 +51,7 @@ function generateKoMatches (teams , round){
     throw new Error('Number of teams must be even');
   }
 
-  if (!['PO' , 'QF'  , 'SF'].includes(round)){
+  if (!['PO' , 'QF'  , 'SF' , 'FINAL'].includes(round)){
     throw new Error('Unknown round');
   }
   const teamsToDraw = [...teams]

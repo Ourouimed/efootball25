@@ -5,7 +5,7 @@ import { generateLPmatches, generateR16matches, generateKoMatches } from '../uti
 
 export const generateDraw = async (req, res) => {
   const { round } = req.body;
-  console.log('Round:', round);
+  console.log(round);
 
   try {
     let teams, matches, values;
@@ -54,9 +54,7 @@ export const generateDraw = async (req, res) => {
         values = matches.map(match => [
           match.id_match,
           match.home_team,
-          match.hometeam_name,
           match.away_team,
-          match.awayteam_name,
           match.round,
         ]);
 
@@ -83,9 +81,7 @@ export const generateDraw = async (req, res) => {
         values = matches.map(match => [
           match.id_match,
           match.home_team,
-          match.hometeam_name,
           match.away_team,
-          match.awayteam_name,
           match.round,
         ]);
 
@@ -101,9 +97,7 @@ export const generateDraw = async (req, res) => {
         values = matches.map(match => [
           match.id_match,
           match.home_team,
-          match.hometeam_name,
           match.away_team,
-          match.awayteam_name,
           match.round,
         ]);
 
@@ -119,15 +113,28 @@ export const generateDraw = async (req, res) => {
         values = matches.map(match => [
           match.id_match,
           match.home_team,
-          match.hometeam_name,
           match.away_team,
-          match.awayteam_name,
           match.round,
         ]);
 
         await Match.insertMatches(values);
         return res.json(matches);
 
+      case 'FINAL':
+        teams = await Team.getQualfiedTeamsFrom('SF');
+        matches = generateKoMatches(teams, 'FINAL');
+
+        await Match.deleteMatchesByRound(round);
+
+        values = matches.map(match => [
+          match.id_match,
+          match.home_team,
+          match.away_team,
+          match.round,
+        ]);
+
+        await Match.insertMatches(values);
+        return res.json(matches);
       default:
         return res.status(400).json({ error: 'Unknown Round' });
     }
