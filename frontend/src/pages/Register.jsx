@@ -67,7 +67,7 @@ const Register = () => {
             <div className="text-center">
               <h3 className="text-2xl md:text-3xl font-bold text-fourth">Register Now</h3>
               <p className="text-sm md:text-base text-white mt-2">
-                Ready for <span className="text-third font-semibold">Saison 6</span>? Join the{" "}
+                Ready for <span className="text-third font-semibold">Second edition</span>? Join the{" "}
                 <span className="text-fourth font-semibold">eFootball</span> tournament!
               </p>
             </div>
