@@ -51,7 +51,7 @@ function generateKoMatches (teams , round){
     throw new Error('Number of teams must be even');
   }
 
-  if (!['PO' , 'QF'  , 'SF' , 'FINAL'].includes(round)){
+  if (!['PO' , 'R16', 'QF'  , 'SF' , 'FINAL'].includes(round)){
     throw new Error('Unknown round');
   }
   const teamsToDraw = [...teams]
@@ -85,9 +85,9 @@ function generateKoMatches (teams , round){
   return matches
 }
 
-function generateR16matches (pot1 , pot2){
+function generateR32matches (pot1 , pot2){
     let matches = []
-    for (let i = 1; i <= 8;i++){
+    for (let i = 1; i <= 16;i++){
         let homeTeamIndex = Math.floor(Math.random() * pot1.length)
         const homeTeam = pot1.splice(homeTeamIndex, 1)[0]
     
@@ -102,12 +102,12 @@ function generateR16matches (pot1 , pot2){
             i < 100 ? `0${i}` :
             i 
     
-          }-R16`,
+          }-R32`,
           home_team: homeTeam.userName,
           hometeam_name: homeTeam.teamName,
           away_team: awayTeam.userName,
           awayteam_name: awayTeam.teamName,
-          round: `R16`,
+          round: `R32`,
       })
     
     
@@ -117,4 +117,4 @@ function generateR16matches (pot1 , pot2){
 }
 
   
-export { generateLPmatches , generateKoMatches , generateR16matches };
+export { generateLPmatches , generateKoMatches , generateR32matches };
