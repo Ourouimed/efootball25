@@ -24,7 +24,7 @@ const Standing = ({teams})=>{
         const { teamName, id_team, wins, losses, draws, GF, GA, pts } = team;
         const GP = wins + draws + losses;
         const rowClass = 
-          index < 8 ? "best-8" : index < 24 ? "playoffs" : "";
+          index < 16 ? "best-8" : index < 48 ? "playoffs" : "";
 
         return (
           <tr className={`${rowClass} text-center`} key={team.userName}>
