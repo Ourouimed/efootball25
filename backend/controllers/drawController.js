@@ -36,7 +36,7 @@ export const generateDraw = async (req, res) => {
         return res.json(matches);
 
       case 'PO':
-        teams = await Team.getTeamsAll();
+        teams = await Team.getStanding();
 
         // Calculate points and sort
         const poTeams = teams
@@ -46,6 +46,7 @@ export const generateDraw = async (req, res) => {
           }))
           .sort((a, b) => b.pts - a.pts || b.GF - b.GA - (a.GF - a.GA))
           .slice(16, 48);
+
 
         matches = generateKoMatches(poTeams, 'PO');
 
@@ -62,7 +63,7 @@ export const generateDraw = async (req, res) => {
         return res.json(matches);
 
       case 'R32':
-        const allTeams = await Team.getTeamsAll();
+        const allTeams = await Team.getStanding();
         const qualifiedR32 = await Team.getQualfiedTeamsFrom('PO');
 
         const pot1 = qualifiedR32;
@@ -74,8 +75,6 @@ export const generateDraw = async (req, res) => {
           .sort((a, b) => b.pts - a.pts || b.GF - b.GA - (a.GF - a.GA))
           .slice(0, 16);
 
-        console.log(pot1.length)
-        console.log(pot2.length)
 
         matches = generateR32matches(pot1, pot2);
 

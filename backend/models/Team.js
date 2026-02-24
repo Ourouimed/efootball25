@@ -35,7 +35,7 @@ const Team = {
 
   getQualfiedTeamsFrom: async (round) => {
     const [rows] = await db.query(
-      'SELECT * FROM teams WHERE userName IN (SELECT qualified FROM matches WHERE round = ?)',
+      'SELECT * FROM standing WHERE id_team IN (SELECT qualified FROM matches WHERE round = ?)',
       [round]
     );
     return rows;

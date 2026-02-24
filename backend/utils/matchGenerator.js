@@ -62,6 +62,7 @@ function generateKoMatches (teams , round){
   for (let i = 1; i <= totalMatches;i++){
     let homeTeamIndex = Math.floor(Math.random() * teamsToDraw.length)
     const homeTeam = teamsToDraw.splice(homeTeamIndex, 1)[0]
+    
 
     let awayTeamIndex = Math.floor(Math.random() * teamsToDraw.length)
     const awayTeam = teamsToDraw.splice(awayTeamIndex, 1)[0]
@@ -73,9 +74,9 @@ function generateKoMatches (teams , round){
         i 
 
       }-${round}`,
-      home_team: homeTeam.userName,
+      home_team: homeTeam.id_team,
       hometeam_name: homeTeam.teamName,
-      away_team: awayTeam.userName,
+      away_team: awayTeam.id_team,
       awayteam_name: awayTeam.teamName,
       round: round,
   })
@@ -103,9 +104,9 @@ function generateR32matches (pot1 , pot2){
             i 
     
           }-R32`,
-          home_team: homeTeam.userName,
+          home_team: homeTeam.id_team,
           hometeam_name: homeTeam.teamName,
-          away_team: awayTeam.userName,
+          away_team: awayTeam.id_team,
           awayteam_name: awayTeam.teamName,
           round: `R32`,
       })
