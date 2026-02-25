@@ -11,7 +11,7 @@ const Matches = ({ matches, teams }) => {
   }
   const rounds = [
     ...gwRounds,
-    "PO", "R16", "QF", "SF", "FINAL"
+    "PO", "R32" , "R16", "QF", "SF", "FINAL"
   ];
   const [currRound, setcurrRound] = useState(rounds.indexOf(currentRound));
   const [selectedTeam, setSelectedTeam] = useState("ALL");
