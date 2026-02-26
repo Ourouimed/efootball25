@@ -75,7 +75,7 @@ const Dashboard = () => {
     }))
     .sort(
       (a, b) =>
-        b.pts - a.pts || b.GF + b.KOGF - (a.GF + a.KOGF)
+        b.pts - a.pts || (b.GF - b.GA) - (a.GF - a.GA)
     );
 
   const goals = standing.reduce((acc, team) => acc + team.GF + team.KOGF, 0);

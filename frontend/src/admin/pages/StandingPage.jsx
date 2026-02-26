@@ -46,11 +46,11 @@ const StandingsPage = () => {
       const ptsB = (b.wins * 3) + b.draws - b.sanction;
       if (ptsB !== ptsA) return ptsB - ptsA;
 
-      const gdA = (a.GF + a.KOGF) - (a.GA + a.KOGA);
-      const gdB = (b.GF + b.KOGF) - (b.GA + b.KOGA);
+      const gdA = a.GF - a.GA;
+      const gdB = b.GF - b.GA;
       if (gdB !== gdA) return gdB - gdA;
 
-      return (b.GF + b.KOGF) - (a.GF + a.KOGF);
+      return b.GF - a.GF;
     });
   }, [standings, searchQuery]);
 
@@ -156,8 +156,8 @@ const StandingsPage = () => {
           </thead>
           <tbody>
             {filteredAndSortedData.map((team, index) => {
-              const goalsFor = team.GF + team.KOGF;
-              const goalsAgainst = team.GA + team.KOGA;
+              const goalsFor = team.GF;
+              const goalsAgainst = team.GA;
               const gd = goalsFor - goalsAgainst;
               const pts = (team.wins * 3) + team.draws - team.sanction;
 

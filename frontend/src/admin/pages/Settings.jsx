@@ -24,7 +24,7 @@ const Settings = () => {
   for (let i = 0; i < settings.totalGws; i++) {
     gwRounds.push(`GW${i + 1}`);
   }
-  const rounds = [...gwRounds, 'PO', , 'R32' , 'R16', 'QF', 'SF', 'Final'];
+  const rounds = [...gwRounds, 'PO', 'R32' , 'R16', 'QF', 'SF', 'Final'];
 
   useEffect(() => {
     if (settings) {
