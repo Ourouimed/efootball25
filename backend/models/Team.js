@@ -100,6 +100,39 @@ const Team = {
       );
       return result;
     }
+  }, 
+
+
+  resetMatchFromTeamStats: async (round, matchStat, values) => {
+    if (round === 'LP') {
+      let query = '';
+
+      switch (matchStat) {
+        case 'w':
+          query =
+            'UPDATE standing SET wins = wins - 1, GF = GF - ?, GA = GA - ? WHERE id_team = ?';
+          break;
+        case 'l':
+          query =
+            'UPDATE standing SET losses = losses - 1, GF = GF - ?, GA = GA - ? WHERE id_team = ?';
+          break;
+        case 'd':
+          query =
+            'UPDATE standing SET draws = draws - 1, GF = GF - ?, GA = GA - ? WHERE id_team = ?';
+          break;
+        default:
+          return null;
+      }
+
+      const [result] = await db.query(query, values);
+      return result;
+    } else {
+      const [result] = await db.query(
+        'UPDATE standing SET KOGF = KOGF - ?, KOGA = KOGA - ? WHERE id_team = ?',
+        values
+      );
+      return result;
+    }
   },
 
   initializeTeamStats: async () => {
