@@ -14,6 +14,7 @@ const Settings = () => {
 
   const [currRound, setCurrRound] = useState(settings?.currentRound || 'GW1');
   const [numOfGws, setNumOfGws] = useState(settings?.totalGws || 8);
+  const [wtspLink , setWtspLink] = useState(settings?.whatsapp_url || "")
   const [deadDate, setDeadDate] = useState(() => {
     if (!settings?.deadlineDate) return new Date().toISOString().slice(0, 16);
     return settings.deadlineDate.replace(' ', 'T').substring(0, 16);
@@ -37,6 +38,7 @@ const Settings = () => {
       setNumOfGws(settings.totalGws);
       setDeadDate(formatDatetimeLocal(settings.deadlineDate));
       setSwitchStatus(settings.registerIsOpen);
+      setWtspLink(settings.whatsapp_url)
     }
   }, [settings]);
 
@@ -78,7 +80,8 @@ const Settings = () => {
           currentRound: currRound,
           totalGws: Number(numOfGws),
           deadlineDate: formatDatetimeToMySQL(deadDate),
-          registerIsOpen: switchStatus,
+          registerIsOpen: switchStatus, 
+          whatsapp_url : wtspLink
         },
         { withCredentials: true }
       );
@@ -142,6 +145,15 @@ const Settings = () => {
                   className={inputStyle}
                   value={deadDate}
                   onChange={(e) => setDeadDate(e.target.value)}
+                />
+              </div>
+                <div>
+                <label>Whatsapp link</label>
+                <input
+                  type="text"
+                  className={inputStyle}
+                  value={wtspLink}
+                  onChange={(e) => setWtspLink(e.target.value)}
                 />
               </div>
               <div className="flex items-center justify-between">
