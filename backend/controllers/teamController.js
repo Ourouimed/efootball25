@@ -111,11 +111,13 @@ const getStanding = async (req, res) => {
 
 const calculatePoints = async (req , res)=>{
   try {
-      const matches = await Match.getMatchesByRound('LP')
+      const matches = await Match.getMatchesAll()
+      const LPmatches = matches.filter(m => m.round.startsWith('GW'))
+      const KOmatches = matches.filter(m => !m.round.startsWith('GW'))
       // reset all team stats to 0
       await Team.initializeTeamStats()
 
-      for (const m of matches){
+      for (const m of LPmatches){
           // get each team match res (W , L , D)
           if (m.home_score !== null && m.away_score !== null) {
             const homeResult = getMatchResult(m.home_score , m.away_score)
@@ -123,6 +125,14 @@ const calculatePoints = async (req , res)=>{
 
             await Team.updateTeamStats('LP' , homeResult , [m.home_score , m.away_score , m.home_team])
             await Team.updateTeamStats('LP' , awayResult , [m.away_score , m.home_score , m.away_team])
+          }
+      }
+
+      for (const m of KOmatches){
+          // get each team match res (W , L , D)
+          if (m.home_score !== null && m.away_score !== null) {
+            await Team.updateTeamStats('KO' , null , [m.home_score , m.away_score , m.home_team])
+            await Team.updateTeamStats('KO' , null , [m.away_score , m.home_score , m.away_team])
           }
       }
       
