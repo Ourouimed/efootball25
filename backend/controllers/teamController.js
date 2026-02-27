@@ -2,6 +2,7 @@ import Match from '../models/Match.js';
 import Settings from '../models/Settings.js';
 import Team from '../models/Team.js';
 import { getMatchResult } from '../utils/getMatchResult.js';
+import { sendWtsp } from '../utils/sendWhatsapp.js';
 
 // === Get all teams ===
 const getAllteams = async (req, res) => {
@@ -20,14 +21,41 @@ const registerTeam = async (req, res) => {
 
   try {
     const settings = await Settings.getAllSettings();
-    console.log(settings)
-    const { registerIsOpen } = settings[0];
+    const { registerIsOpen , whatsapp_url} = settings[0];
 
     if (!registerIsOpen) {
       return res.status(400).json({ error: 'Registration form is closed' });
     }
 
+const messageToSend = `
+🎮 *eFootball Tournament 2026*
+
+🇲🇦 مرحباً ${teamName}!
+
+تم تسجيل فريقكم بنجاح ✅  
+للانضمام إلى مجموعة واتساب الرسمية للبطولة اضغط على الرابط التالي 👇
+${whatsapp_url}
+
+📊 تتبعوا الإحصائيات والنتائج من هنا:
+https://efootball26-league.vercel.app/stats
+
+نتمنى لكم التوفيق في المنافسة 🔥⚽
+
+🇬🇧 Welcome ${teamName}!
+
+Your team has been successfully registered ✅  
+Join the official WhatsApp group here 👇
+${whatsapp_url}
+
+📊 Check stats and results here:
+https://efootball26-league.vercel.app/stats
+
+Good luck in the competition 🔥⚽
+`;
+
+
     await Team.register([teamName, phoneNum, userName]);
+    await sendWtsp(phoneNum , messageToSend)
     res.json({ message: 'Team registered successfully' });
   } catch (err) {
     console.error('registerTeam error:', err);

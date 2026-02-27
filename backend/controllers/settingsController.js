@@ -14,10 +14,9 @@ const getSettings = async (req, res) => {
 // === Update settings ===
 const setSettings = async (req, res) => {
   try {
-    const { currentRound, totalGws, deadlineDate, registerIsOpen } = req.body;
-    console.log('Updating settings:', req.body);
+    const { currentRound, totalGws, deadlineDate, registerIsOpen , whatsapp_url} = req.body;
 
-    await Settings.setAllSettings(deadlineDate, currentRound, registerIsOpen, totalGws);
+    await Settings.setAllSettings(deadlineDate, currentRound, registerIsOpen, totalGws , whatsapp_url);
     res.json({ message: 'Settings updated successfully' });
   } catch (err) {
     console.error('setSettings error:', err);

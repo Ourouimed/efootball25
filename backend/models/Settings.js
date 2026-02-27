@@ -13,19 +13,19 @@ const Settings = {
   },
 
   // === Insert or update settings ===
-  setAllSettings: async (deadlineDate, currentRound, registerIsOpen, totalGws) => {
+  setAllSettings: async (deadlineDate, currentRound, registerIsOpen, totalGws , whatsapp_url) => {
     try {
-      const settings = await Settings.getAllSettings(); // <- proper await
+      const settings = await Settings.getAllSettings();
       if (!settings || settings.length === 0) {
         const [result] = await db.query(
-          "INSERT INTO settings (deadlineDate, currentRound, registerIsOpen, totalGws) VALUES (?, ?, ?, ?)",
-          [deadlineDate, currentRound, registerIsOpen, totalGws]
+          "INSERT INTO settings (deadlineDate, currentRound, registerIsOpen, totalGws , whatsapp_url) VALUES (?, ?, ?, ? , ?)",
+          [deadlineDate, currentRound, registerIsOpen, totalGws , whatsapp_url]
         );
         return result;
       } else {
         const [result] = await db.query(
-          "UPDATE settings SET deadlineDate = ?, currentRound = ?, registerIsOpen = ?, totalGws = ?",
-          [deadlineDate, currentRound, registerIsOpen, totalGws]
+          "UPDATE settings SET deadlineDate = ?, currentRound = ?, registerIsOpen = ?, totalGws = ? , whatsapp_url = ?",
+          [deadlineDate, currentRound, registerIsOpen, totalGws , whatsapp_url]
         );
         return result;
       }
