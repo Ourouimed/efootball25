@@ -10,6 +10,9 @@ const StandingsPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
+
+  // calculating points state
+  const [calculating, setCalculating] = useState(false);
   
   // Sanction states
   const [showSanctionsPopup, setShowSanctionsPopup] = useState(false);
@@ -93,6 +96,22 @@ const StandingsPage = () => {
     }
   };
 
+
+  const handleCalculatePoints = async ()=>{
+      setCalculating(true)
+      try {
+          await axios.post(`${API_URL}/teams/calculatepoints`)
+      }
+
+      catch (err){
+          setStatusMsg("Failed to calculte points");
+          setStatus(false);
+      }
+      finally{
+        setCalculating(false)
+      }
+  }
+
   if (loading) return <div className="text-center py-8">Loading Standings...</div>;
   if (error) return <div className="text-center py-8 text-red-500">{error}</div>;
 
@@ -129,16 +148,24 @@ const StandingsPage = () => {
 
       <div className="flex flex-col md:flex-row justify-between  md:items-center gap-4 mb-6">
         <h1 className="text-3xl font-bold">Tournament Standings</h1>
-        <div className="flex items-center bg-white border border-gray-300 rounded-lg px-3 py-2 max-w-md focus-within:ring-2 focus-within:ring-primary/50">
-        <Search className="text-gray-400 mr-2" />
-        <input 
-          type="text" 
-          placeholder="Search by team name..." 
-          className="outline-none w-full bg-transparent"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-      </div>
+        <div className="flex items-center flex-wrap gap-3">
+            <button className={`${calculating ? 'opacity-50': 'opacity-100'} cursor-pointer bg-primary text-white px-4 py-2 rounded`} 
+                    onClick={handleCalculatePoints}
+                    disabled={calculating}>
+                {calculating ? 'Calculating...' : 'Calculate points'}
+              </button>
+            <div className="flex items-center bg-white border border-gray-300 rounded-lg px-3 py-2 max-w-md focus-within:ring-2 focus-within:ring-primary/50">
+              <Search className="text-gray-400 mr-2" />
+              <input 
+                type="text" 
+                placeholder="Search by team name..." 
+                className="outline-none w-full bg-transparent"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
+        </div>
+        
       </div>
 
       <div className="dashb-table-wrapper mt-6">
