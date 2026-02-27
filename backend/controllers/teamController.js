@@ -1,5 +1,7 @@
+import Match from '../models/Match.js';
 import Settings from '../models/Settings.js';
 import Team from '../models/Team.js';
+import { getMatchResult } from '../utils/getMatchResult.js';
 
 // === Get all teams ===
 const getAllteams = async (req, res) => {
@@ -106,4 +108,29 @@ const getStanding = async (req, res) => {
   }
 };
 
-export { registerTeam, UpdateTeam, getAllteams, setSanction, DeleteTeam , getStanding};
+
+const calculatePoints = async (req , res)=>{
+  try {
+      const matches = await Match.getMatchesByRound('LP')
+      // reset all team stats to 0
+      await Team.initializeTeamStats()
+
+      for (const m of matches){
+          // get each team match res (W , L , D)
+          if (m.home_score !== null && m.away_score !== null) {
+            const homeResult = getMatchResult(m.home_score , m.away_score)
+            const awayResult = getMatchResult(m.away_score , m.home_score)
+
+            await Team.updateTeamStats('LP' , homeResult , [m.home_score , m.away_score , m.home_team])
+            await Team.updateTeamStats('LP' , awayResult , [m.away_score , m.home_score , m.away_team])
+          }
+      }
+      
+      return res.json({message : 'Team stats recalculated successfully'})
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+} 
+
+export { registerTeam, UpdateTeam, getAllteams, setSanction, DeleteTeam , getStanding , calculatePoints};
