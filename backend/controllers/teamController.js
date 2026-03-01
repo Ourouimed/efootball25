@@ -37,7 +37,7 @@ const messageToSend = `
 ${whatsapp_url}
 
 📊 تتبعوا الإحصائيات والنتائج من هنا:
-https://efootball26-league.vercel.app/stats
+${process.env.ALLOW_CORS_URL}/stats
 
 نتمنى لكم التوفيق في المنافسة 🔥⚽
 
@@ -48,7 +48,7 @@ Join the official WhatsApp group here 👇
 ${whatsapp_url}
 
 📊 Check stats and results here:
-https://efootball26-league.vercel.app/stats
+${process.env.ALLOW_CORS_URL}/stats
 
 Good luck in the competition 🔥⚽
 `;
