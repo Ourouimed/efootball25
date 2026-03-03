@@ -189,7 +189,7 @@ const StandingsPage = () => {
               const pts = (team.wins * 3) + team.draws - team.sanction;
 
               const rowClass = 
-              index < 16 ? "best-8" : index < 48 ? "playoffs" : "";
+              index < 8 ? "best-8" : index < 24 ? "playoffs" : "";
 
               return (
                 <tr key={team.id_team} className={`border-b hover:bg-gray-50 transition-colors ${rowClass}`}>
