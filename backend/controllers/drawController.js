@@ -1,7 +1,7 @@
 import Match from '../models/Match.js';
 import Settings from '../models/Settings.js';
 import Team from '../models/Team.js';
-import { generateLPmatches, generateR32matches, generateKoMatches } from '../utils/matchGenerator.js';
+import { generateLPmatches, generate2potsMatches, generateKoMatches } from '../utils/matchGenerator.js';
 
 export const generateDraw = async (req, res) => {
   const { round } = req.body;
@@ -45,7 +45,7 @@ export const generateDraw = async (req, res) => {
             pts: Number(team.wins) * 3 + Number(team.draws) * 1 - team.sanction,
           }))
           .sort((a, b) => b.pts - a.pts || b.GF - b.GA - (a.GF - a.GA))
-          .slice(16, 48);
+          .slice(8, 24);
 
 
         matches = generateKoMatches(poTeams, 'PO');
@@ -62,22 +62,48 @@ export const generateDraw = async (req, res) => {
         await Match.insertMatches(values);
         return res.json(matches);
 
-      case 'R32':
-        const allTeams = await Team.getStanding();
-        const qualifiedR32 = await Team.getQualfiedTeamsFrom('PO');
+      // case 'R32':
+        // const allTeams = await Team.getStanding();
+        // const qualifiedR32 = await Team.getQualfiedTeamsFrom('PO');
 
-        const pot1 = qualifiedR32;
-        const pot2 = allTeams
-          .map(team => ({
-            ...team,
-            pts: Number(team.wins) * 3 + Number(team.draws) * 1 - team.sanction,
-          }))
-          .sort((a, b) => b.pts - a.pts || b.GF - b.GA - (a.GF - a.GA))
-          .slice(0, 16);
+        // const pot1 = qualifiedR32;
+        // const pot2 = allTeams
+        //   .map(team => ({
+        //     ...team,
+        //     pts: Number(team.wins) * 3 + Number(team.draws) * 1 - team.sanction,
+        //   }))
+        //   .sort((a, b) => b.pts - a.pts || b.GF - b.GA - (a.GF - a.GA))
+        //   .slice(0, 16);
 
 
-        matches = generateR32matches(pot1, pot2);
+        // matches = generateR32matches(pot1, pot2);
 
+        await Match.deleteMatchesByRound(round);
+
+        values = matches.map(match => [
+          match.id_match,
+          match.home_team,
+          match.away_team,
+          match.round,
+        ]);
+
+        await Match.insertMatches(values);
+        return res.json(matches);
+        case 'R16':
+          const allTeams = await Team.getStanding();
+          const qualifiedR16 = await Team.getQualfiedTeamsFrom('PO');
+
+          const pot1 = qualifiedR16;
+          const pot2 = allTeams
+            .map(team => ({
+              ...team,
+              pts: Number(team.wins) * 3 + Number(team.draws) * 1 - team.sanction,
+            }))
+            .sort((a, b) => b.pts - a.pts || b.GF - b.GA - (a.GF - a.GA))
+            .slice(0, 8);
+
+
+          matches = generate2potsMatches(pot1, pot2 , 'R16');
         await Match.deleteMatchesByRound(round);
 
         values = matches.map(match => [
@@ -91,21 +117,21 @@ export const generateDraw = async (req, res) => {
         return res.json(matches);
 
       
-      case 'R16':
-        teams = await Team.getQualfiedTeamsFrom('R32');
-        matches = generateKoMatches(teams, 'R16');
+      // case 'R16':
+      //   teams = await Team.getQualfiedTeamsFrom('R32');
+      //   matches = generateKoMatches(teams, 'R16');
 
-        await Match.deleteMatchesByRound(round);
+      //   await Match.deleteMatchesByRound(round);
 
-        values = matches.map(match => [
-          match.id_match,
-          match.home_team,
-          match.away_team,
-          match.round,
-        ]);
+      //   values = matches.map(match => [
+      //     match.id_match,
+      //     match.home_team,
+      //     match.away_team,
+      //     match.round,
+      //   ]);
 
-        await Match.insertMatches(values);
-        return res.json(matches);
+      //   await Match.insertMatches(values);
+      //   return res.json(matches);
       
 
       case 'QF':

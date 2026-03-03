@@ -86,9 +86,10 @@ function generateKoMatches (teams , round){
   return matches
 }
 
-function generateR32matches (pot1 , pot2){
+function generate2potsMatches (pot1 , pot2 , round){
+    const total_matches = (pot1.length + pot2.length )/2 || 8
     let matches = []
-    for (let i = 1; i <= 16;i++){
+    for (let i = 1; i <= total_matches;i++){
         let homeTeamIndex = Math.floor(Math.random() * pot1.length)
         const homeTeam = pot1.splice(homeTeamIndex, 1)[0]
     
@@ -96,19 +97,18 @@ function generateR32matches (pot1 , pot2){
         const awayTeam = pot2.splice(awayTeamIndex, 1)[0]
 
         
-    
         matches.push({
           id_match: `M${
             i < 10 ? `00${i}` : 
             i < 100 ? `0${i}` :
             i 
     
-          }-R32`,
+          }-${round}`,
           home_team: homeTeam.id_team,
           hometeam_name: homeTeam.teamName,
           away_team: awayTeam.id_team,
           awayteam_name: awayTeam.teamName,
-          round: `R32`,
+          round: round,
       })
     
     
@@ -118,4 +118,4 @@ function generateR32matches (pot1 , pot2){
 }
 
   
-export { generateLPmatches , generateKoMatches , generateR32matches };
+export { generateLPmatches , generateKoMatches , generate2potsMatches };
